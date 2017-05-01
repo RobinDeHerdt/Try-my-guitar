@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\User;
 
 class UsersTableSeeder extends Seeder
 {
@@ -16,5 +17,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'admin@trymyguitar.com',
             'password' => bcrypt('admin'),
         ]);
+
+        factory(User::class, 50)->create();
     }
 }
