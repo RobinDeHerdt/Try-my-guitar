@@ -1,0 +1,47 @@
+.header-image {
+  width: 100%;
+  height: 620px;
+  background-size: cover;
+  opacity: 0.9;
+  filter: brightness(60%);
+}
+
+.header-content {
+  position: absolute;
+  width: 35%;
+  margin-left: 32.5%;
+  height: 620px;
+  z-index: 1;
+
+  h1 {
+    color: #fff;
+    font-size: 4vw;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 250px;
+  }
+
+  input {
+    border: none;
+    border-radius: 0;
+    height: 40px;
+  }
+
+  .header-search {
+    margin-top: 25px;
+
+    .search-input {
+      width: 77.5%;
+      float: left;
+    }
+
+    .search-submit {
+      width: 22.5%;
+      float: right;
+      background-color: #2a88bd;
+      color: white;
+      font-weight: 600;
+    }
+  }
+}
