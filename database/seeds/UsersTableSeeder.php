@@ -18,6 +18,16 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('admin'),
         ]);
 
-        factory(User::class, 50)->create();
+        factory(App\User::class, 50)->create()->each(function ($u) {
+            // Assign 'user' role to every user.
+            $u->roles()->attach(3);
+
+            // Assign remaining roles randomly to each user.
+            for ($i = 1; $i < 3; $i++) {
+                if (rand(1, 3) > 2) {
+                    $u->roles()->attach($i);
+                }
+            }
+        });
     }
 }
