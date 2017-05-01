@@ -20,26 +20,60 @@
             <div class="cta-item">
                 <i class="fa fa-music fa-4x" aria-hidden="true"></i>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae consectetur ex. Donec non sollicitudin erat. Aenean libero massa, lobortis eu consequat non, sollicitudin nec diam</p>
-                <a href="#">Read more</a>
+                <a href="#" class="cta-button">Read more</a>
             </div>
         </div>
         <div class="col-md-4">
             <div class="cta-item">
                 <i class="fa fa-music fa-4x" aria-hidden="true"></i>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae consectetur ex. Donec non sollicitudin erat. Aenean libero massa, lobortis eu consequat non, sollicitudin nec diam</p>
-                <a href="#">Read more</a>
+                <a href="#" class="cta-button">Read more</a>
             </div>
         </div>
         <div class="col-md-4 ">
             <div class="cta-item">
                 <i class="fa fa-music fa-4x" aria-hidden="true"></i>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae consectetur ex. Donec non sollicitudin erat. Aenean libero massa, lobortis eu consequat non, sollicitudin nec diam</p>
-                <a href="#">Read more</a>
+                <a href="#" class="cta-button">Read more</a>
             </div>
         </div>
     </div>
     <div class="row row-padding-top">
-        <h2>Articles</h2>
+        <h2>News</h2>
+        <div class="col-md-4">
+            <div class="article">
+                <div class="article-teaser-image" style="background-image: url('/images/matt-heafy.jpg')"></div>
+                <div class="article-teaser">
+                    <h4>Article</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae consectetur ex. Donec non sollicitudin erat. Aenean libero massa, lobortis eu consequat non, sollicitudin nec diam</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="article">
+                <div class="article-teaser-image" style="background-image: url('/images/matt-heafy.jpg')"></div>
+                <div class="article-teaser">
+                    <h4>Article</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae consectetur ex. Donec non sollicitudin erat. Aenean libero massa, lobortis eu consequat non, sollicitudin nec diam</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="article">
+                <div class="article-teaser-image" style="background-image: url('/images/matt-heafy.jpg')"></div>
+                <div class="article-teaser">
+                    <h4>Article</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae consectetur ex. Donec non sollicitudin erat. Aenean libero massa, lobortis eu consequat non, sollicitudin nec diam</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row row-padding-top">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="big-cta-button">
+                <a href="#">Read more</a>
+            </div>
+        </div>
     </div>
 </div>
 @endsection

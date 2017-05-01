@@ -12,15 +12,29 @@
     margin-top: 30px;
     margin-bottom: 30px;
   }
-
-  a {
-    color: white;
-    background-color: $primary-component-color;
-    padding: 10px 30px;
-    border-radius: 2.5px;
-  }
 }
 
 h2 {
   text-align: center;
+}
+
+a.cta-button {
+  color: white;
+  background-color: $primary-component-color;
+  padding: 10px 30px;
+  border-radius: 2.5px;
+}
+
+.big-cta-button {
+  text-align: center;
+
+  a {
+    color: white;
+    background-color: $primary-component-color;
+    padding-left: 40%;
+    padding-right: 40%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 2.5px;
+  }
 }

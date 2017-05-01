@@ -26,11 +26,20 @@
 }
 
 .nav-highlighted {
-  border: solid 2px $primary-font-color;
+  border: solid 1.5px $primary-font-color;
   border-radius: 2.5px;
-  padding: 0 15px;
+
+  a {
+    padding: 0 15px;
+
+    &:hover {
+      color: white !important;
+      background-color: $primary-font-color !important;
+    }
+  }
 }
 
 .navbar-default .navbar-nav > li > a {
   color: $primary-font-color;
+  text-transform: uppercase;
 }
