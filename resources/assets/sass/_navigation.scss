@@ -26,7 +26,11 @@
 }
 
 .nav-highlighted {
-  border: solid 2px #777;
+  border: solid 2px $primary-font-color;
   border-radius: 2.5px;
   padding: 0 15px;
+}
+
+.navbar-default .navbar-nav > li > a {
+  color: $primary-font-color;
 }

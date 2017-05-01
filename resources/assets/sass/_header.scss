@@ -15,7 +15,7 @@
 
   h1 {
     color: #fff;
-    font-size: 4vw;
+    font-size: 4.5vw;
     text-transform: uppercase;
     font-weight: 700;
     text-align: center;
@@ -39,9 +39,10 @@
     .search-submit {
       width: 22.5%;
       float: right;
-      background-color: #2a88bd;
+      background-color: $primary-component-color;
       color: white;
       font-weight: 600;
+      text-transform: uppercase;
     }
   }
 }

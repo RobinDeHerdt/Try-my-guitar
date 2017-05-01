@@ -7,7 +7,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Try my guitar</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
     <script>
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
