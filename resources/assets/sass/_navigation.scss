@@ -1,0 +1,45 @@
+@media (min-width: 768px) {
+  .navbar-nav > li > a {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
+  .navbar-nav > li {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+}
+
+.navbar-nav {
+  margin: 5px 0;
+
+  li {
+    margin-right: 75px;
+    font-family: "Raleway", sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+.nav-highlighted {
+  border: solid 1.5px $primary-font-color;
+  border-radius: 2.5px;
+
+  a {
+    padding: 0 15px;
+
+    &:hover {
+      color: white !important;
+      background-color: $primary-font-color !important;
+    }
+  }
+}
+
+.navbar-default .navbar-nav > li > a {
+  color: $primary-font-color;
+  text-transform: uppercase;
+}
