@@ -1,16 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="header-image" style="background-image: url('/images/electric-guitars.jpg');"></div>
 <div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
-
-                <div class="panel-body">
-                    You are logged in!
-                </div>
-            </div>
+    <div class="row row-padding-top">
+        <div class="col-md-12">
+            <h1>Hello world!</h1>
         </div>
     </div>
 </div>
