@@ -68,5 +68,7 @@
 @endsection
 
 @section('footer')
+<div class="footer-full-bg">
     @include('partials.footer')
+</div>
 @endsection
