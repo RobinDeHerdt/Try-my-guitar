@@ -13,7 +13,7 @@
 <div class="header-image" style="background-image: url('/images/electric-guitars.jpg');"></div>
 <div class="container">
     <div class="row row-padding-top">
-        <h2>How does it work?</h2>
+        <h2>@lang('titles.how-does-it-work')</h2>
     </div>
     <div class="row">
         <div class="col-md-4">
@@ -39,7 +39,7 @@
         </div>
     </div>
     <div class="row row-padding-top">
-        <h2>News</h2>
+        <h2>@lang('titles.latest-news')</h2>
         @foreach ($articles as $article)
         <div class="col-md-4">
             <div class="article">

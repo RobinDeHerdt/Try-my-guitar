@@ -35,19 +35,19 @@
         <nav class="navbar-default">
             <div class="container">
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ route('home') }}">Home</a></li>
-                    <li><a href="#">About</a></li>
+                    <li><a href="{{ route('home') }}">@lang('navigation.home')</a></li>
+                    <li><a href="#">@lang('navigation.about')</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     @if (Auth::guest())
                         {{-- Not authenticated --}}
-                        <li class="nav-highlighted"><a href="{{ route('register') }}">Register</a></li>
-                        <li><a href="{{ route('login') }}">Login</a></li>
+                        <li class="nav-highlighted"><a href="{{ route('register') }}">@lang('navigation.register')</a></li>
+                        <li><a href="{{ route('login') }}">@lang('navigation.login')</a></li>
                     @else
                         {{-- Authenticated --}}
-                        <li><a href="#">Profile</a></li>
+                        <li><a href="#">@lang('navigation.profile')</a></li>
                         <li>
-                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">@lang('navigation.logout')</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 {{ csrf_field() }}
                             </form>
@@ -61,17 +61,14 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-4 footer-item footer-item-left">
-                        <a href="#">
-                            <span>NL</span>
-                            <span> | </span>
-                        </a>
-                        <a href="#">
-                            <span><strong>EN</strong></span>
-                        </a>
-                        <a href="#">
-                            <span> | </span>
-                            <span>FR</span>
-                        </a>
+                        @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                            <a rel="alternate" hreflang="{{ $localeCode }}" href="{{LaravelLocalization::getLocalizedURL($localeCode) }}">
+                                <span class="{{ LaravelLocalization::getCurrentLocale() === $localeCode ? 'selected-locale locale' : 'locale' }}">{{ strtoupper($localeCode) }}</span>
+                                @if(!$loop->last)
+                                    <span> | </span>
+                                @endif
+                            </a>
+                        @endforeach
                     </div>
                     <div class="col-md-4 footer-item footer-item-center">
                         <a href="#"><i class="fa fa-youtube-play fa-2x" aria-hidden="true"></i></a>

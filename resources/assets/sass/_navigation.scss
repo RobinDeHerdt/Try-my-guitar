@@ -26,15 +26,14 @@
 }
 
 .nav-highlighted {
-  border: solid 1.5px $primary-font-color;
+  border: solid 1px $primary-font-color;
   border-radius: 2.5px;
 
   a {
     padding: 0 15px;
 
     &:hover {
-      color: white !important;
-      background-color: $primary-font-color !important;
+      color: $primary-font-color !important;
     }
   }
 }
@@ -42,4 +41,5 @@
 .navbar-default .navbar-nav > li > a {
   color: $primary-font-color;
   text-transform: uppercase;
+  font-weight: 500;
 }
