@@ -50,6 +50,9 @@
                     <li><a href="{{ route('home') }}">@lang('navigation.home')</a></li>
                     <li><a href="#">@lang('navigation.about')</a></li>
                 </ul>
+                <div class="site-logo" style="background-image: url('/images/logo.jpg');">
+
+                </div>
                 <ul class="nav navbar-nav navbar-right">
                     @if (Auth::guest())
                         {{-- Not authenticated --}}

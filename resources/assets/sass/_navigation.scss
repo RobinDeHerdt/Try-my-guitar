@@ -1,23 +1,16 @@
-@media (min-width: 768px) {
-  .navbar-nav > li > a {
-    padding-top: 5px;
-    padding-bottom: 5px;
-  }
-
-  .navbar-nav > li {
-    margin-top: 5px;
-    margin-bottom: 5px;
-  }
-}
-
 .navbar-nav {
   margin: 5px 0;
 
   li {
-    margin-right: 75px;
+    margin: 5px 75px 5px 0;
     font-family: "Raleway", sans-serif;
     font-weight: 600;
     font-size: 18px;
+
+    a {
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
 
     &:last-child {
       margin-right: 0;
@@ -60,4 +53,14 @@
       color: #fff;
     }
   }
+}
+
+.site-logo {
+  position: absolute;
+  top: 5px;
+  left: 47.5%;
+  height: 42.5px;
+  width: 42.5px;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
