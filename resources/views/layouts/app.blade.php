@@ -57,6 +57,33 @@
             </div>
         </nav>
         @yield('content')
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 footer-item footer-item-left">
+                        <a href="#">
+                            <span>NL</span>
+                            <span> | </span>
+                        </a>
+                        <a href="#">
+                            <span><strong>EN</strong></span>
+                        </a>
+                        <a href="#">
+                            <span> | </span>
+                            <span>FR</span>
+                        </a>
+                    </div>
+                    <div class="col-md-4 footer-item footer-item-center">
+                        <a href="#"><i class="fa fa-youtube-play fa-2x" aria-hidden="true"></i></a>
+                        <a href="#"><i class="fa fa-facebook-official fa-2x" aria-hidden="true"></i></a>
+                        <a href="#"><i class="fa fa-twitter fa-2x "aria-hidden="true"></i></a>
+                    </div>
+                    <div class="col-md-4 footer-item footer-item-right">
+                        <a href="#"><span>Disclaimer</span></a>
+                    </div>
+                </div>
+            </div>
+        </footer>
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
 </body>

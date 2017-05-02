@@ -59,8 +59,5 @@
             </div>
         </div>
     </div>
-    <div class="row row-padding-top">
-
-    </div>
 </div>
 @endsection

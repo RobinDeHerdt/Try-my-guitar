@@ -1,0 +1,36 @@
+footer {
+  background-color: rgba(0, 0, 0, 0.8);
+  width: 100%;
+  margin-top: 50px;
+
+  .footer-item-left a span {
+    margin: 0 7.5px;
+    float: left;
+  }
+
+  .footer-item-center {
+    text-align: center;
+
+    i {
+      margin: 0 10px;
+    }
+  }
+
+  .footer-item-right span {
+    float: right;
+  }
+
+  i {
+    top: 12px;
+    color: #fff;
+  }
+
+  .footer-item {
+    margin: 40px 0;
+
+    span {
+      color: #fff;
+      font-size: 18px;
+    }
+  }
+}
