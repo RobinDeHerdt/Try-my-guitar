@@ -92,3 +92,27 @@ a.cta-button {
 .no-bg-color {
   background-color: inherit;
 }
+
+.center-icon {
+  text-align: center;
+}
+
+.admin-heading {
+  margin: 0;
+
+  h1 {
+    float: left;
+  }
+
+  .icon-text {
+    font-size: 16px;
+    position: relative;
+    top: 30px;
+    margin-left: 35px;
+    float: right;
+
+    span {
+      margin-right: 10px;
+    }
+  }
+}

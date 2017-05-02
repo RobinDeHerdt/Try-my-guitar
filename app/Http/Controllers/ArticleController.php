@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Article;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -14,7 +15,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::all();
+        $articles = Article::paginate(15);
 
         return view('admin.article.index', [
             'articles' => $articles,
@@ -84,6 +85,10 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        //
+        $article->delete();
+
+        Session::flash('success-message', 'Article deleted successfully!');
+
+        return redirect(route('articles.index'));
     }
 }

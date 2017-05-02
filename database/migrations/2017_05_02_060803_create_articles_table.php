@@ -3,9 +3,12 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CreateArticlesTable extends Migration
 {
+    use SoftDeletes;
+
     /**
      * Run the migrations.
      *
@@ -20,6 +23,7 @@ class CreateArticlesTable extends Migration
             $table->longText('body');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
