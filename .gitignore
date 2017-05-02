@@ -5,6 +5,11 @@
 /public/fonts
 /public/css
 /public/js
+/public/a*
+/public/f*
+/public/ms*
+/public/browserconfig.xml
+/public/manifest.json
 /storage/*.key
 /vendor
 /.idea
