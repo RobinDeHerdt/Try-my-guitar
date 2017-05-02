@@ -34,4 +34,12 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Role');
     }
+
+    /**
+     * The articles that belong to the user.
+     */
+    public function articles()
+    {
+        return $this->hasMany('App\Article');
+    }
 }

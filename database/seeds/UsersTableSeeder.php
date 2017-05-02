@@ -22,10 +22,15 @@ class UsersTableSeeder extends Seeder
             // Assign 'user' role to every user.
             $u->roles()->attach(3);
 
-            // Assign remaining roles randomly to each user.
             for ($i = 1; $i < 3; $i++) {
+                // Assign remaining roles randomly to each user.
                 if (rand(1, 3) > 2) {
                     $u->roles()->attach($i);
+
+                    // Give every user with the editor role an article.
+                    if ($i === 2) {
+                        $u->articles()->save(factory(App\Article::class)->make());
+                    }
                 }
             }
         });
