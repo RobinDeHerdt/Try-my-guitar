@@ -32,7 +32,7 @@
 </head>
 <body>
     <div id="app">
-        @if (Auth::user() && Auth::user()->roles->contains(1))
+        @if (Auth::user() && Auth::user()->isAdmin())
         <nav class="navbar-default">
             <ul class="custom-navbar-top">
                 <li class="custom-navbar-title"><a href="#">Administrator dashboard</a></li>
