@@ -8,8 +8,11 @@
             <div class="site-logo" style="background-image: url('/images/logo.jpg');"></div>
         </a>
         <ul class="nav navbar-nav navbar-right">
-            <li class="nav-highlighted"><a href="{{ route('register') }}">@lang('navigation.register')</a></li>
-            <li><a href="{{ route('login') }}">@lang('navigation.login')</a></li>
+            @if (Route::currentRouteName() !== 'register')
+                <li class="nav-highlighted"><a href="{{ route('register') }}">@lang('navigation.register')</a></li>
+            @else
+                <li class="nav-highlighted"><a href="{{ route('login') }}">@lang('navigation.login')</a></li>
+            @endif
         </ul>
     </div>
 </nav>

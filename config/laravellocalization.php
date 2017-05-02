@@ -10,12 +10,6 @@ return [
             'native'    => 'English',
             'regional'  => 'en_GB'
         ],
-        'fr' => [
-            'name'      => 'French',
-            'script'    => 'Latn',
-            'native'    => 'français',
-            'regional'  => 'fr_FR'
-        ],
         'nl' => [
             'name'      => 'Dutch',
             'script'    => 'Latn',
