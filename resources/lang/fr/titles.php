@@ -3,7 +3,7 @@
 return [
 
     /*
-    * French title and subtitle translations.
+    * French translations for titles and subtitles.
     */
 
     'how-does-it-work'      => 'Comment ça marche?',

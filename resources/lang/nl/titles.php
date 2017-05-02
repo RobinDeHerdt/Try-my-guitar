@@ -3,7 +3,7 @@
 return [
 
     /*
-    * Dutch title and subtitle translations.
+    * Dutch translations for titles and subtitles.
     */
 
     'how-does-it-work'      => 'Hoe werkt het?',

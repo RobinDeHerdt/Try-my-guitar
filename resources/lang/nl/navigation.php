@@ -3,14 +3,15 @@
 return [
 
     /*
-    * Dutch navigation translations.
+    * Dutch translations for navigation.
     */
 
-    'home'      => 'home',
-    'login'     => 'aanmelden',
-    'register'  => 'registreren',
-    'about'     => 'over',
-    'logout'    => 'afmelden',
-    'profile'   => 'profiel'
+    'home'          => 'home',
+    'login'         => 'aanmelden',
+    'register'      => 'registreren',
+    'about'         => 'over',
+    'logout'        => 'afmelden',
+    'profile'       => 'profiel',
+    'disclaimer'    => 'Disclaimer'
 
 ];

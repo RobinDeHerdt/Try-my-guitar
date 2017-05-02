@@ -3,7 +3,7 @@
 return [
 
     /*
-    * English title and subtitle translations.
+    * English translations for titles and subtitles.
     */
 
     'how-does-it-work'      => 'How does it work?',
