@@ -1,3 +1,13 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  // Footer height
+  margin-bottom: 120px;
+}
+
 .row-padding-top {
   padding-top: 50px;
 }
@@ -42,4 +52,9 @@ a.cta-button {
     padding-bottom: 10px;
     border-radius: 2.5px;
   }
+}
+
+.content {
+  // Footer height
+  padding-bottom: 120px;
 }

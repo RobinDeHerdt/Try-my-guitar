@@ -68,7 +68,9 @@
                 </ul>
             </div>
         </nav>
-        @yield('content')
+        <div class="content">
+            @yield('content')
+        </div>
         <footer>
             <div class="container">
                 <div class="row">
