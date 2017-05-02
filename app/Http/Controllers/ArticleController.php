@@ -78,7 +78,37 @@ class ArticleController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Display a listing of trashed articles.
+     *
+     * @param  \App\Article  $article
+     * @return \Illuminate\Http\Response
+     */
+    public function trashed()
+    {
+        $articles = Article::onlyTrashed()->paginate(15);
+
+        return view('admin.article.trashed', [
+            'articles' => $articles,
+        ]);
+    }
+
+    /**
+     * Restore a trashed article.
+     *
+     * @param  \App\Article  $article
+     * @return \Illuminate\Http\Response
+     */
+    public function restore($id)
+    {
+        Article::onlyTrashed()->find($id)->restore();
+
+        Session::flash('success-message', 'Article restored successfully.');
+
+        return back();
+    }
+
+    /**
+     * Move article to trash (soft delete).
      *
      * @param  \App\Article  $article
      * @return \Illuminate\Http\Response
@@ -87,7 +117,7 @@ class ArticleController extends Controller
     {
         $article->delete();
 
-        Session::flash('success-message', 'Article deleted successfully!');
+        Session::flash('info-message', 'Article was moved to trash.');
 
         return redirect(route('articles.index'));
     }

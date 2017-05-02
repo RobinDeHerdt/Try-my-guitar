@@ -98,7 +98,7 @@ a.cta-button {
 }
 
 .admin-heading {
-  margin: 0;
+  margin: 20px 0;
 
   h1 {
     float: left;
@@ -115,4 +115,8 @@ a.cta-button {
       margin-right: 10px;
     }
   }
+}
+
+.no-results {
+  margin: 50px 0;
 }
