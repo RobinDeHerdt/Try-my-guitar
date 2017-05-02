@@ -18,6 +18,11 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('admin'),
         ]);
 
+        DB::table('role_user')->insert([
+            'user_id' => 1,
+            'role_id' => 1,
+        ]);
+
         factory(App\User::class, 50)->create()->each(function ($u) {
             // Assign 'user' role to every user.
             $u->roles()->attach(3);

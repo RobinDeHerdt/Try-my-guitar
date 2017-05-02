@@ -43,3 +43,21 @@
   text-transform: uppercase;
   font-weight: 500;
 }
+
+.custom-navbar-top {
+  background-color: $primary-font-color;
+  margin: 0;
+
+  .custom-navbar-title {
+    font-weight: 600;
+  }
+
+  li {
+    display: inline-block;
+    margin: 5px 15px;
+
+    a {
+      color: #fff;
+    }
+  }
+}

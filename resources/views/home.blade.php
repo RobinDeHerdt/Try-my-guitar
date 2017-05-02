@@ -41,15 +41,15 @@
     <div class="row row-padding-top">
         <h2>@lang('titles.latest-news')</h2>
         @foreach ($articles as $article)
-        <div class="col-md-4">
-            <div class="article">
-                <div class="article-teaser-image" style="background-image: url('{{ $article->image_uri }}')"></div>
-                <div class="article-teaser">
-                    <h4>{{ $article->title }}</h4>
-                    <p>{{ $article->body }}</p>
+            <div class="col-md-4">
+                <div class="article">
+                    <div class="article-teaser-image" style="background-image: url('{{ $article->image_uri }}')"></div>
+                    <div class="article-teaser">
+                        <h4>{{ $article->title }}</h4>
+                        <p>{{ $article->body }}</p>
+                    </div>
                 </div>
             </div>
-        </div>
         @endforeach
     </div>
     <div class="row row-padding-top">

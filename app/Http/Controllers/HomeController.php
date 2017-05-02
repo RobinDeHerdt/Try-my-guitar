@@ -14,7 +14,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $articles = Article::all()->take(6);
+        $articles = Article::all()->take(3);
 
         return view('home', [
             'articles' => $articles
