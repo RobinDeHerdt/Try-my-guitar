@@ -6,6 +6,7 @@ html {
 body {
   // Footer height
   margin-bottom: 120px;
+  min-height: 100%;
 }
 
 .row-padding-top {
@@ -57,4 +58,37 @@ a.cta-button {
 .content {
   // Footer height
   padding-bottom: 120px;
+
+}
+
+.full-page-bg {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background-size: cover;
+  width: 100%;
+  z-index: -10;
+}
+
+.authentication-block {
+  margin-top: 25%;
+}
+
+.btn-primary {
+  background-color: $primary-component-color;
+  color: #fff;
+  border:none;
+
+  &:hover {
+    background-color: $primary-component-color;
+    color: #fff;
+  }
+}
+
+.btn-link {
+  color: $primary-component-color;
+}
+
+.no-bg-color {
+  background-color: inherit;
 }
