@@ -32,6 +32,7 @@
 </head>
 <body>
     <div id="app">
+        @include('partials.navigation-admin');
         @yield('navigation')
         @yield('content')
         @yield('footer')

@@ -1,15 +1,3 @@
-@if (Auth::user() && Auth::user()->isAdmin())
-    <nav class="navbar-default">
-        <ul class="custom-navbar-top">
-            <li class="custom-navbar-title"><a href="#">Administrator dashboard</a></li>
-            <li><a href="#">Admin item</a></li>
-            <li><a href="#">Admin item</a></li>
-            <li><a href="#">Admin item</a></li>
-            <li><a href="#">Admin item</a></li>
-            <li><a href="#">Admin item</a></li>
-        </ul>
-    </nav>
-@endif
 <nav class="navbar-default">
     <div class="container">
         <ul class="nav navbar-nav">

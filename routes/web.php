@@ -11,8 +11,6 @@
 |
 */
 
-
-
 Route::group([
     'prefix' => LaravelLocalization::setLocale(),
     'middleware' => [ 'localeSessionRedirect', 'localizationRedirect' ]
@@ -21,3 +19,8 @@ Route::group([
 
     Route::get('/', 'HomeController@index')->name('home');
 });
+
+// @todo Add middleware for admin routes
+Route::get('/admin/dashboard', 'AdminController@index')->name('dashboard');
+Route::resource('articles', 'ArticleController');
+// Route::get('/admin/article/index', 'ArticleController@index')->name('article.index');
