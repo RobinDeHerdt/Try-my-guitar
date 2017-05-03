@@ -46,8 +46,8 @@ class User extends Authenticatable
     /**
      * Check if the user has the administrator role.
      */
-    public function isAdmin()
+    public function hasRole($role)
     {
-        return $this->roles->contains(1);
+        return $this->roles->contains($role);
     }
 }

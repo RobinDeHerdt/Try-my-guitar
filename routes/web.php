@@ -20,8 +20,9 @@ Route::group([
     Route::get('/', 'HomeController@index')->name('home');
 });
 
-// @todo Add middleware for admin routes
-Route::get('/admin/dashboard', 'AdminController@index')->name('dashboard');
-Route::get('/admin/articles/trashed', 'ArticleController@trashed')->name('articles.trashed');
-Route::post('/admin/articles/{id}/restore', 'ArticleController@restore')->name('articles.restore');
-Route::resource('/admin/articles', 'ArticleController');
+Route::group(['middleware' => ['role:1']], function () {
+    Route::get('/admin/dashboard', 'AdminController@index')->name('dashboard');
+    Route::get('/admin/articles/trashed', 'ArticleController@trashed')->name('articles.trashed');
+    Route::post('/admin/articles/{id}/restore', 'ArticleController@restore')->name('articles.restore');
+    Route::resource('/admin/articles', 'ArticleController');
+});
