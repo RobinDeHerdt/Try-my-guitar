@@ -42,16 +42,16 @@ a.cta-button {
 }
 
 .big-cta-button {
+
+  width: 100%;
+  padding: 10px 0;
   text-align: center;
+  border-radius: 2.5px;
+  background-color: $primary-component-color;
 
   a {
     color: white;
-    background-color: $primary-component-color;
-    padding-left: 40%;
-    padding-right: 40%;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border-radius: 2.5px;
+    font-size: 16px;
   }
 }
 

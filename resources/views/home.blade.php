@@ -61,7 +61,7 @@
         <div class="row row-padding-top">
             <div class="col-md-4 col-md-offset-4">
                 <div class="big-cta-button">
-                    <a href="#">Read more</a>
+                    <a href="#" class="text-uppercase">Read more</a>
                 </div>
             </div>
         </div>
