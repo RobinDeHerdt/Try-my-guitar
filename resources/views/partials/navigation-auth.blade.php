@@ -5,7 +5,7 @@
             <li><a href="#">@lang('navigation.about')</a></li>
         </ul>
         <a href="/{{ LaravelLocalization::getCurrentLocale() }}">
-            <div class="site-logo" style="background-image: url('/images/logo.jpg');"></div>
+            <div class="site-logo" style="background-image: url('/images/logo-transparent.png');"></div>
         </a>
         <ul class="nav navbar-nav navbar-right">
             @if (Route::currentRouteName() !== 'register')

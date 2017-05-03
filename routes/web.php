@@ -23,5 +23,5 @@ Route::group([
 // @todo Add middleware for admin routes
 Route::get('/admin/dashboard', 'AdminController@index')->name('dashboard');
 Route::get('/admin/articles/trashed', 'ArticleController@trashed')->name('articles.trashed');
-Route::get('/admin/articles/{id}/restore', 'ArticleController@restore')->name('articles.restore');
+Route::post('/admin/articles/{id}/restore', 'ArticleController@restore')->name('articles.restore');
 Route::resource('/admin/articles', 'ArticleController');

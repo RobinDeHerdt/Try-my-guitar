@@ -7,9 +7,11 @@
 /public/js
 /public/a*
 /public/f*
-/public/ms*
+/public/favicon.ico
 /public/browserconfig.xml
 /public/manifest.json
+/public/ms*
+/public/safari-pinned-tab.svg
 /storage/*.key
 /vendor
 /.idea

@@ -34,7 +34,11 @@
                         <td><a href="{{ $article->image_uri }}">View image</a></td>
                         <td class="center-icon"><a href="{{ route('articles.show', ['id' => $article->id]) }}"><span class="glyphicon glyphicon-search"></span></a></td>
                         <td class="center-icon"><a href="{{ route('articles.edit', ['id' => $article->id]) }}"><span class="glyphicon glyphicon-pencil"></span></a></td>
-                        <td class="center-icon"><a href="{{ route('articles.restore', ['id' => $article->id]) }}"><span class="glyphicon glyphicon-repeat"></span></a></td>
+                        <td class="center-icon"><a href="{{ route('articles.restore', ['id' => $article->id]) }}" onclick="event.preventDefault(); document.getElementById('restore-article-{{ $article->id }}-form').submit();"><span class="glyphicon glyphicon-repeat"></span></a>
+                            <form id="restore-article-{{ $article->id }}-form" action="{{ route('articles.restore', ['id' => $article->id]) }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>
