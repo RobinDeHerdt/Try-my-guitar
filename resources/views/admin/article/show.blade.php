@@ -8,6 +8,12 @@
             <a href="{{ route('articles.index') }}" class="icon-text"><span class="glyphicon glyphicon-home"></span>Back to overview</a>
             </div>
         </div>
+        @if (Session::has('success-message'))
+            <div class="alert alert-success">{{ Session::get('success-message') }}</div>
+        @endif
+        @if (Session::has('info-message'))
+            <div class="alert alert-info">{{ Session::get('info-message') }}</div>
+        @endif
         <div class="row">
             <div class="col-md-6">
                 <p>{!! nl2br(e($article->body)) !!}</p>
