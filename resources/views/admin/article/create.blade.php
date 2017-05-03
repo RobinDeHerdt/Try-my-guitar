@@ -3,8 +3,10 @@
 @section('content')
     <div class="container">
         <div class="row admin-heading">
-            <h1>Create article</h1>
-            <a href="{{ route('articles.index') }}" class="icon-text"><span class="glyphicon glyphicon-home"></span>Back to overview</a>
+            <div class="col-md-12">
+                <h1>Create article</h1>
+                <a href="{{ route('articles.index') }}" class="icon-text"><span class="glyphicon glyphicon-home"></span>Back to overview</a>
+            </div>
         </div>
         @if (Session::has('success-message'))
             <div class="alert alert-success">{{ Session::get('success-message') }}</div>
@@ -19,12 +21,12 @@
                 <input type="text" name="title" class="form-control">
             </div>
             <div class="form-group">
-                <label for="image">Content</label>
+                <label for="image">Image</label>
                 <input type="file" name="image" class="form-control">
             </div>
             <div class="form-group">
                 <label for="body">Content</label>
-                <textarea name="body" class="form-control" rows="6"></textarea>
+                <textarea name="body" class="form-control" rows="8"></textarea>
             </div>
             <button type="submit" class="btn btn-default">Publish</button>
         </form>

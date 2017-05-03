@@ -77,7 +77,9 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        //
+        return view('admin.article.edit', [
+            'article' => $article,
+        ]);
     }
 
     /**
@@ -89,7 +91,20 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
-        //
+        $article->user_id   = Auth::user()->id;
+
+        $article->title     = $request->title;
+        $article->body      = $request->body;
+
+        if (isset($request->image)) {
+            $article->image_uri = $request->image->store('images', 'public');
+        }
+
+        $article->save();
+
+        Session::flash('success-message', 'Article updated successfully.');
+
+        return redirect(route('articles.show', ['id' => $article->id]));
     }
 
     /**

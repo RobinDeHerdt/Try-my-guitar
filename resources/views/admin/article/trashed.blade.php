@@ -3,8 +3,10 @@
 @section('content')
     <div class="container">
         <div class="row admin-heading">
-            <h1>Trashed articles</h1>
-            <a href="{{ route('articles.index') }}" class="icon-text"><span class="glyphicon glyphicon-home"></span>Back to overview</a>
+            <div class="col-md-12">
+                <h1>Trashed articles</h1>
+                <a href="{{ route('articles.index') }}" class="icon-text"><span class="glyphicon glyphicon-home"></span>Back to overview</a>
+            </div>
         </div>
         @if (Session::has('success-message'))
             <div class="alert alert-success">{{ Session::get('success-message') }}</div>
@@ -20,7 +22,7 @@
                     <th>Author</th>
                     <th>Content</th>
                     <th>Image</th>
-                    <th>Restore</th>
+                    <th class="center">Restore</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -30,7 +32,7 @@
                         <td>{{ $article->user->name }}</td>
                         <td>{{ str_limit($article->body, 65)}}</td>
                         <td><a href="{{ Storage::disk('public')->url($article->image_uri) }}">View image</a></td>
-                        <td class="center-icon"><a href="{{ route('articles.restore', ['id' => $article->id]) }}" onclick="event.preventDefault(); document.getElementById('restore-article-{{ $article->id }}-form').submit();"><span class="glyphicon glyphicon-repeat"></span></a>
+                        <td class="center"><a href="{{ route('articles.restore', ['id' => $article->id]) }}" onclick="event.preventDefault(); document.getElementById('restore-article-{{ $article->id }}-form').submit();"><span class="glyphicon glyphicon-repeat"></span></a>
                             <form id="restore-article-{{ $article->id }}-form" action="{{ route('articles.restore', ['id' => $article->id]) }}" method="POST" style="display: none;">
                                 {{ csrf_field() }}
                             </form>
