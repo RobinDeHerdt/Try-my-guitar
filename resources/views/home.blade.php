@@ -48,7 +48,7 @@
             @foreach ($articles as $article)
                 <div class="col-md-4">
                     <div class="article">
-                        <div class="article-teaser-image" style="background-image: url('{{ $article->image_uri }}')"></div>
+                        <div class="article-teaser-image" style="background-image: url({{ Storage::disk('public')->url($article->image_uri) }})"></div>
                         <div class="article-teaser">
                             <h4>{{ $article->title }}</h4>
                             <p>{{ $article->body }}</p>

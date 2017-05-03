@@ -28,7 +28,7 @@ $factory->define(App\Article::class, function (Faker\Generator $faker) {
 
     return [
         'title' => $faker->word,
-        'image_uri' => '/images/matt-heafy.jpg',
+        'image_uri' => 'images/matt-heafy.jpg',
         'body' => $faker->text,
     ];
 });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Article;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 
@@ -23,35 +24,49 @@ class ArticleController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new article.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-
+        return view('admin.article.create');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created article in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $article = new Article();
+
+        $article->user_id   = Auth::user()->id;
+
+        $article->title     = $request->title;
+        $article->body      = $request->body;
+        $article->image_uri = $request->image->store('images', 'public');
+
+        $article->save();
+
+        Session::flash('success-message', 'Article created successfully.');
+
+        return redirect(route('articles.index'));
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified article.
      *
      * @param  \App\Article  $article
      * @return \Illuminate\Http\Response
      */
     public function show(Article $article)
     {
-        //
+        return view('admin.article.show', [
+            'article' => $article,
+        ]);
     }
 
     /**

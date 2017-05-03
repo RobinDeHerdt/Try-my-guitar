@@ -20,20 +20,16 @@
                     <th>Author</th>
                     <th>Content</th>
                     <th>Image</th>
-                    <th>View</th>
-                    <th>Edit</th>
                     <th>Restore</th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($articles as $article)
                     <tr>
-                        <td>{{ $article->title }}</td>
+                        <td>{{ str_limit($article->title, 30) }}</td>
                         <td>{{ $article->user->name }}</td>
-                        <td>{{ str_limit($article->body, 75)}}</td>
-                        <td><a href="{{ $article->image_uri }}">View image</a></td>
-                        <td class="center-icon"><a href="{{ route('articles.show', ['id' => $article->id]) }}"><span class="glyphicon glyphicon-search"></span></a></td>
-                        <td class="center-icon"><a href="{{ route('articles.edit', ['id' => $article->id]) }}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+                        <td>{{ str_limit($article->body, 65)}}</td>
+                        <td><a href="{{ Storage::disk('public')->url($article->image_uri) }}">View image</a></td>
                         <td class="center-icon"><a href="{{ route('articles.restore', ['id' => $article->id]) }}" onclick="event.preventDefault(); document.getElementById('restore-article-{{ $article->id }}-form').submit();"><span class="glyphicon glyphicon-repeat"></span></a>
                             <form id="restore-article-{{ $article->id }}-form" action="{{ route('articles.restore', ['id' => $article->id]) }}" method="POST" style="display: none;">
                                 {{ csrf_field() }}
