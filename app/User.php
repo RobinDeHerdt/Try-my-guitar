@@ -48,6 +48,13 @@ class User extends Authenticatable
      */
     public function hasRole($role)
     {
-        return $this->roles->contains($role);
+        $user_roles = $this->roles()->get();
+
+        foreach ($user_roles as $user_role) {
+            if ($user_role->name === $role) {
+                return true;
+            }
+        }
+        return false;
     }
 }

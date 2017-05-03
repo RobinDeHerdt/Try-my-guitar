@@ -18,9 +18,11 @@ Route::group([
     Auth::routes();
 
     Route::get('/', 'HomeController@index')->name('home');
+    Route::get('/profile', 'ProfileController@index')->name('profile');
 });
 
-Route::group(['middleware' => ['role:1']], function () {
+// Administrator only.
+Route::group(['middleware' => ['role:administrator']], function () {
     Route::get('/admin/dashboard', 'AdminController@index')->name('dashboard');
     Route::get('/admin/articles/trashed', 'ArticleController@trashed')->name('articles.trashed');
     Route::post('/admin/articles/{id}/restore', 'ArticleController@restore')->name('articles.restore');

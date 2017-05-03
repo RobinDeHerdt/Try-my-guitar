@@ -23,6 +23,16 @@ class UsersTableSeeder extends Seeder
             'role_id' => 1,
         ]);
 
+        DB::table('role_user')->insert([
+            'user_id' => 1,
+            'role_id' => 2,
+        ]);
+
+        DB::table('role_user')->insert([
+            'user_id' => 1,
+            'role_id' => 3,
+        ]);
+
         factory(App\User::class, 50)->create()->each(function ($u) {
             // Assign 'user' role to every user.
             $u->roles()->attach(3);
