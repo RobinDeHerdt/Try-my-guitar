@@ -3,8 +3,8 @@
         <div class="row">
             <div class="col-md-4 footer-item footer-item-left">
                 @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                    <a rel="alternate" hreflang="{{ $localeCode }}" href="{{LaravelLocalization::getLocalizedURL($localeCode) }}">
-                        <span class="{{ LaravelLocalization::getCurrentLocale() === $localeCode ? 'selected-locale locale' : 'locale' }}">{{ strtoupper($localeCode) }}</span>
+                    <a hreflang="{{ $localeCode }}" href="{{LaravelLocalization::getLocalizedURL($localeCode) }}">
+                        <span class="{{ LaravelLocalization::getCurrentLocale() === $localeCode ? 'selected-locale' : '' }}">{{ strtoupper($localeCode) }}</span>
                         @if(!$loop->last)
                             <span> | </span>
                         @endif

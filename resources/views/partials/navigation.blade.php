@@ -1,6 +1,4 @@
 <nav class="navbar-default">
-    <img src="" alt="">
-    <!-- Collapsed Hamburger -->
     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
         <span class="sr-only">Toggle Navigation</span>
         <span class="icon-bar"></span>
@@ -10,7 +8,7 @@
     <div class="container">
         <div class="row">
             <a href="{{ route('home') }}">
-                <div class="site-logo" style="background-image: url('/images/logo-transparent.png');"></div>
+                <img src="/images/logo-transparent.png" alt="site logo" class="site-logo">
             </a>
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <ul class="nav navbar-nav">

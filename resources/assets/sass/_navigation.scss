@@ -10,6 +10,9 @@
     a {
       padding-top: 5px;
       padding-bottom: 5px;
+      color: $primary-font-color;
+      text-transform: uppercase;
+      font-weight: 500;
     }
 
     &:last-child {
@@ -31,12 +34,6 @@
   }
 }
 
-.navbar-default .navbar-nav > li > a {
-  color: $primary-font-color;
-  text-transform: uppercase;
-  font-weight: 500;
-}
-
 .custom-navbar-top {
   background-color: $primary-font-color;
   margin: 0;
@@ -55,39 +52,69 @@
   }
 }
 
+.site-logo {
+  float:left;
+  position: relative;
+  top: 8px;
+  left: 48.5%;
+  width: 3%;
+}
+
 #search-submit-mobile {
   display: none;
 }
 
-.site-logo {
-  float:left;
-  position: relative;
-  top: 6.5px;
-  left: 45%;
-  height: 37.5px;
-  width: 37.5px;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
+// Media queries
 @media (max-width: 768px) {
-  .site-logo {
-    height: 35px;
-    width: 35px;
-  }
-
   .navbar-nav {
     margin: 15px -15px;
-
   }
 
   .navbar-collapse {
-    margin-top: 30px;
-    padding-left: 0;
-    border: none;
+    margin-top: 50px;
 
     .nav-highlighted {
       border: none;
     }
+  }
+
+  .custom-navbar-top {
+    padding: 0;
+
+    li {
+      width: 100%;
+      padding: 10px 0 10px 20px;
+      margin: 0;
+      border-bottom: solid 1px #fff;
+    }
+  }
+}
+
+// @todo:: clean up this mess
+@media (min-width: 769px) and (max-width: 992px) {
+  .site-logo {
+    width: 4%;
+    left: 48%;
+  }
+}
+
+@media (min-width: 551px) and (max-width: 768px) {
+  .site-logo {
+    width: 5%;
+    left: 47.5%;
+  }
+}
+
+@media (min-width: 401px) and (max-width: 550px) {
+  .site-logo {
+    width: 7%;
+    left: 45%;
+  }
+}
+
+@media (max-width: 400px) {
+  .site-logo {
+    width: 10%;
+    left: 45%;
   }
 }
