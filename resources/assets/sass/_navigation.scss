@@ -34,6 +34,10 @@
   }
 }
 
+.navbar-left {
+  margin-left: -35px;
+}
+
 .custom-navbar-top {
   background-color: $primary-font-color;
   margin: 0;
@@ -57,7 +61,8 @@
   position: relative;
   top: 8px;
   left: 48.5%;
-  width: 3%;
+  width: 35px;
+  height: 35px;
 }
 
 #search-submit-mobile {
@@ -66,12 +71,14 @@
 
 // Media queries
 @media (max-width: 768px) {
-  .navbar-nav {
-    margin: 15px -15px;
+  .navbar-nav li {
+      width: 100%;
+      padding: 5px 0;
   }
 
   .navbar-collapse {
     margin-top: 50px;
+    border: none;
 
     .nav-highlighted {
       border: none;
@@ -90,31 +97,17 @@
   }
 }
 
-// @todo:: clean up this mess
-@media (min-width: 769px) and (max-width: 992px) {
-  .site-logo {
-    width: 4%;
-    left: 48%;
+@media (max-width: 768px) {
+  .navbar-collapse {
+    margin-left: 0px;
+    padding-left: 0px;
   }
-}
 
-@media (min-width: 551px) and (max-width: 768px) {
-  .site-logo {
-    width: 5%;
-    left: 47.5%;
+  .navbar-left {
+    margin-left: 0;
   }
-}
 
-@media (min-width: 401px) and (max-width: 550px) {
   .site-logo {
-    width: 7%;
-    left: 45%;
-  }
-}
-
-@media (max-width: 400px) {
-  .site-logo {
-    width: 10%;
-    left: 45%;
+    left: 15px;
   }
 }

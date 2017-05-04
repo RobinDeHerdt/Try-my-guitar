@@ -36,5 +36,18 @@ body {
 }
 
 .authentication-block {
-  margin-top: 25%;
+  margin-top: 250px;
+  margin-bottom: 250px;
+}
+
+@media (max-width: 992px) {
+  .authentication-block {
+    margin-top: 25px;
+    margin-bottom: 100px;
+  }
+
+  .full-page-bg {
+    background-image: none !important;
+    background-color: #fff;
+  }
 }

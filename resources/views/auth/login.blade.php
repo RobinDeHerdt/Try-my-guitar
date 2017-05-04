@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<div class="full-page-bg" style="background-image: url('/images/login-bg.jpg')">
+    <div class="full-page-bg" style="background-image: url('/images/login-bg.jpg')"></div>
     <div class="container">
         <div class="row authentication-block">
             <div class="col-md-6 col-md-offset-6">
@@ -56,7 +56,6 @@
             </div>
         </div>
     </div>
-</div>
 @endsection
 
 @section('footer')
