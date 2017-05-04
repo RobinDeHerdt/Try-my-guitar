@@ -11,7 +11,8 @@
         <div class="header-search">
             <form class="form-inline">
                 <input type="text" class="form-control search-input" name="search-term" placeholder="Search for a guitar">
-                <input type="submit" class="btn btn-default search-submit" value="Search">
+                <a href="#" class="btn btn-default search-submit" id="search-submit">Search</a>
+                <a href="#" class="btn btn-default search-submit" id="search-submit-mobile"><i class="fa fa-search" aria-hidden="true"></i></a>
             </form>
         </div>
     </div>

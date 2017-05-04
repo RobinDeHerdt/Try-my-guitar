@@ -55,13 +55,39 @@
   }
 }
 
+#search-submit-mobile {
+  display: none;
+}
+
 .site-logo {
   float:left;
   position: relative;
   top: 6.5px;
-  left: 25%;
+  left: 45%;
   height: 37.5px;
   width: 37.5px;
   background-size: contain;
   background-repeat: no-repeat;
+}
+
+@media (max-width: 768px) {
+  .site-logo {
+    height: 35px;
+    width: 35px;
+  }
+
+  .navbar-nav {
+    margin: 15px -15px;
+
+  }
+
+  .navbar-collapse {
+    margin-top: 30px;
+    padding-left: 0;
+    border: none;
+
+    .nav-highlighted {
+      border: none;
+    }
+  }
 }

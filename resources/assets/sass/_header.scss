@@ -38,12 +38,40 @@
     }
 
     .search-submit {
+      border: none;
+      border-radius: 0;
+      height: 40px;
       width: 22.5%;
       float: right;
       background-color: $primary-component-color;
       color: white;
       font-weight: 600;
       text-transform: uppercase;
+      padding: 9px 12px;
     }
+  }
+}
+
+@media (max-width: 768px) {
+  .header-content {
+    width: 60%;
+    margin-left: 20%;
+    height: 20px;
+
+    h1 {
+      font-size: 7vw;
+    }
+
+    #search-submit {
+      display: none;
+    }
+
+    #search-submit-mobile {
+      display: inline;
+    }
+  }
+
+  .header-image {
+    height: 400px;
   }
 }
