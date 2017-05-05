@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Message;
 use Auth;
 
-class ChatsController extends Controller
+class MessageController extends Controller
 {
     public function __construct()
     {
@@ -26,7 +26,9 @@ class ChatsController extends Controller
     */
     public function show()
     {
-        $messages = Message::with('user')->get();
+        $user = Auth::user();
+
+        $messages = Message::with('user')->where('receiver_id', $user->id)->get();
 
         return $messages;
     }
@@ -44,7 +46,8 @@ class ChatsController extends Controller
         $message = new Message();
 
         $message->message = $request->message;
-        $message->user_id = $user->id;
+        $message->sender_id = $user->id;
+        $message->receiver_id = 1;
 
         $message->save();
 
