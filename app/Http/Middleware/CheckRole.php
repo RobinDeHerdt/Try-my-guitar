@@ -17,7 +17,7 @@ class CheckRole
     {
         // If the user is not authenticated or doesn't have sufficient permissions, redirect home.
         if (!$request->user() || !$request->user()->hasRole($role)) {
-            return redirect(route('home'));
+            return redirect(route('login'));
         }
 
         return $next($request);

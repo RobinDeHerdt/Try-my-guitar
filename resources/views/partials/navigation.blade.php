@@ -11,7 +11,7 @@
                 <img src="/images/logo-transparent.png" alt="site logo" class="site-logo">
             </a>
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav navbar-left">
                     <li><a href="{{ route('home') }}">@lang('navigation.home')</a></li>
                     <li><a href="#">@lang('navigation.about')</a></li>
                 </ul>

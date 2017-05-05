@@ -44,6 +44,16 @@ class User extends Authenticatable
     }
 
     /**
+     * A user can have many messages
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
+
+    /**
      * Check if the user has the administrator role.
      */
     public function hasRole($role)
