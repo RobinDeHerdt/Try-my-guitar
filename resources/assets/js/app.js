@@ -28,34 +28,26 @@ const app = new Vue({
     created() {
         this.fetchMessages();
 
-        axios.get('/user').then(response => {
-            this.user = response.data;
-
-            Echo.private(`user.` + this.user)
-                .listen('MessageSent', (e) => {
-                    console.log(e);
-                    this.messages.push({
-                        message: e.message.message,
-                        user: e.user
-                    });
+        Echo.private('channel.1')
+            .listen('MessageSent', (e) => {
+                this.messages.push({
+                    message: e.message.message,
+                    user: e.user
                 });
-        });
+            });
     },
 
     methods: {
         fetchMessages() {
-            axios.get('/messages').then(response => {
+            axios.get('/channel/1/messages').then(response => {
                 this.messages = response.data;
-                console.log(this.messages);
             });
         },
 
         addMessage(message) {
             this.messages.push(message);
 
-            axios.post('/messages', message).then(response => {
-                console.log(response.data);
-            });
+            axios.post('/channel/1/messages', message);
         }
     }
 });

@@ -44,13 +44,21 @@ class User extends Authenticatable
     }
 
     /**
-     * A user can have many messages
+     * A user has many messages
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function messages()
     {
         return $this->hasMany('App\Message');
+    }
+
+    /**
+     * The channels that belong to the user.
+     */
+    public function channels()
+    {
+        return $this->belongsToMany('App\Channel');
     }
 
     /**

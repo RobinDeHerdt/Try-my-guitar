@@ -18,12 +18,13 @@ Route::group([
     Auth::routes();
 
     Route::get('/', 'HomeController@index')->name('home');
-    Route::get('profile', 'MessageController@index')->name('profile');
 });
 
-Route::get('user', 'UserController@show');
-Route::get('messages', 'MessageController@show');
-Route::post('messages', 'MessageController@store');
+Route::get('profile', 'MessageController@index')->name('profile');
+
+Route::get('channel/{id}', 'ChannelController@show')->name('channels.show');
+Route::get('channel/{id}/messages', 'ChannelController@messages');
+Route::post('channel/{id}/messages', 'MessageController@store');
 
 // Administrator only.
 Route::group(['middleware' => ['role:administrator']], function () {

@@ -11,10 +11,6 @@
 |
 */
 
-Broadcast::channel('user.{id}', function ($user, $id) {
-    return $user->id === (int) $id;
+Broadcast::channel('channel.{id}', function ($user, $channel_id) {
+    return $user->channels->contains($channel_id);
 });
-
-//Broadcast::channel('chat', function ($user) {
-//    return Auth::check();
-//});
