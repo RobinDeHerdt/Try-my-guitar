@@ -9,16 +9,23 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h1>Active chats:</h1>
+                <div class="chats-overview">
                 @foreach($channels as $channel)
-                    <a href="{{ route('channels.show', ['id' => $channel->id]) }}">{{ $channel->name }}</a>
-                    <br>
-                    <span>Participants: </span>
-                    <ul>
-                        @foreach($channel->users as $user)
-                            <li>{{ $user->first_name }}</li>
-                        @endforeach
-                    </ul>
+                    <div class="channel">
+                        <div class="channel-name">
+                            <a href="{{ route('channels.show', ['id' => $channel->id]) }}">{{ $channel->name }}</a>
+                        </div>
+                        <div class="channel-participants">
+                            @foreach($channel->users as $user)
+                            <div class="profile-teaser">
+                                <div class="profile-picture" style="background-image: url('/{{ $user->image_uri }}')"></div>
+                                {{--<span>{{ $user->first_name }}</span>--}}
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
                 @endforeach
+                </div>
 
                 <h1>Personal data</h1>
                 <form role="form" method="POST" action="{{ route('register') }}">

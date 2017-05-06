@@ -39,7 +39,7 @@ const app = new Vue({
 
     methods: {
         fetchMessages() {
-            var uri = window.location.pathname
+            var uri = window.location.pathname;
 
             axios.get(`${uri}/messages`).then(response => {
                 this.messages = response.data;
@@ -49,7 +49,9 @@ const app = new Vue({
         addMessage(message) {
             this.messages.push(message);
 
-            axios.post('/channel/1/messages', message);
+            var uri = window.location.pathname;
+
+            axios.post(`${uri}/messages`, message);
         }
     }
 });
