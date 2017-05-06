@@ -21,7 +21,9 @@ Route::group([
 });
 
 Route::get('profile', 'ProfileController@index')->name('profile');
-Route::get('messages', 'MessageController@index')->name('messages');
+Route::get('profile/edit', 'ProfileController@edit')->name('profile.edit');
+
+Route::get('conversations', 'MessageController@index')->name('conversations');
 
 Route::get('channel/{id}', 'ChannelController@show')->name('channels.show');
 Route::get('channel/{id}/messages', 'ChannelController@messages');

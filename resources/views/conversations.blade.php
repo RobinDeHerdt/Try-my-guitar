@@ -7,14 +7,9 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                <nav class="profile-nav">
-                    <ul>
-                        <li><a href="{{ route('profile') }}">Personal info</a></li>
-                        <li><a href="#">My collection</a></li>
-                        <li><a href="{{ route('messages') }}">Messages</a></li>
-                    </ul>
-                </nav>
+            <div class="col-md-8 col-md-offset-2">
+                <h2>Conversations</h2>
+                <a href="{{ route('profile') }}">Back to profile</a>
                 <div class="chats-overview">
                     @foreach($channels as $channel)
                         <div class="channel">
@@ -24,7 +19,9 @@
                             <div class="channel-participants">
                                 @foreach($channel->users as $user)
                                 <div class="profile-teaser">
-                                    <div class="profile-picture" style="background-image: url('/{{ $user->image_uri }}')"></div>
+                                    <a href="#">
+                                        <div class="profile-picture" style="background-image: url('/{{ $user->image_uri }}')"></div>
+                                    </a>
                                 </div>
                                 @endforeach
                             </div>

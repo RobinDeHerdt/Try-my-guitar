@@ -7,14 +7,8 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <nav class="profile-nav">
-                <ul>
-                    <li><a href="{{ route('profile') }}">Personal info</a></li>
-                    <li><a href="#">My collection</a></li>
-                    <li><a href="{{ route('messages') }}">Messages</a></li>
-                </ul>
-            </nav>
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-12">
+                <a href="{{ route('conversations') }}">Back to conversations</a>
                 <div class="panel panel-default">
                     <div class="panel-heading">Chats</div>
                     <div class="panel-body">

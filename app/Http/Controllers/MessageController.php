@@ -20,7 +20,7 @@ class MessageController extends Controller
         $user       = Auth::user();
         $channels   = $user->channels()->get();
 
-        return view('messages', [
+        return view('conversations', [
             'channels' => $channels,
             'user' => $user,
         ]);
