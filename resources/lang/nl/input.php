@@ -10,6 +10,8 @@ return [
 
     'email'             => 'E-mailadres',
     'name'              => 'Naam',
+    'first-name'        => 'Voornaam',
+    'last-name'         => 'Achternaam',
     'password'          => 'Wachtwoord',
     'confirm-password'  => 'Bevestig wachtwoord',
     'login'             => 'Inloggen',

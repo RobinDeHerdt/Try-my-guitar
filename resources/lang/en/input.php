@@ -10,6 +10,8 @@ return [
 
     'email'             => 'E-Mail address',
     'name'              => 'Name',
+    'first-name'        => 'First name',
+    'last-name'         => 'Last name',
     'password'          => 'Password',
     'confirm-password'  => 'Confirm password',
     'login'             => 'Login',

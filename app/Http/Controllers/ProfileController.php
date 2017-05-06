@@ -14,11 +14,9 @@ class ProfileController extends Controller
 
     public function index()
     {
-        $user       = Auth::user();
-        $channels   = $user->channels()->get();
+        $user = Auth::user();
 
         return view('profile', [
-            'channels' => $channels,
             'user' => $user,
         ]);
     }
