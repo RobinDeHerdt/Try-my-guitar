@@ -39,7 +39,9 @@ const app = new Vue({
 
     methods: {
         fetchMessages() {
-            axios.get('/channel/1/messages').then(response => {
+            var uri = window.location.pathname
+
+            axios.get(`${uri}/messages`).then(response => {
                 this.messages = response.data;
             });
         },

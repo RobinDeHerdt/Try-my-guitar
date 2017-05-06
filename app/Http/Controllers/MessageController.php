@@ -15,16 +15,6 @@ class MessageController extends Controller
         $this->middleware('role:user');
     }
 
-    public function index()
-    {
-        $user = Auth::user();
-        $channels = $user->channels()->get();
-
-        return view('profile', [
-            'channels' => $channels,
-        ]);
-    }
-
     /**
      * Store message in database
      *

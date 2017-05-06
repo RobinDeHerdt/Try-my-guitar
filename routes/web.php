@@ -20,7 +20,7 @@ Route::group([
     Route::get('/', 'HomeController@index')->name('home');
 });
 
-Route::get('profile', 'MessageController@index')->name('profile');
+Route::get('profile', 'ProfileController@index')->name('profile');
 
 Route::get('channel/{id}', 'ChannelController@show')->name('channels.show');
 Route::get('channel/{id}/messages', 'ChannelController@messages');
