@@ -12,6 +12,7 @@ return [
     'about'         => 'about',
     'logout'        => 'logout',
     'profile'       => 'profile',
-    'disclaimer'    => 'Disclaimer'
+    'disclaimer'    => 'Disclaimer',
+    'dashboard'     => 'Dashboard'
 
 ];

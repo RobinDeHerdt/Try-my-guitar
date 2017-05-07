@@ -18,20 +18,28 @@ Route::group([
     Auth::routes();
 
     Route::get('/', 'HomeController@index')->name('home');
+
+    // Dashboard
+    Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+
+    // Profile
+    Route::get('profile/edit', 'ProfileController@edit')->name('profile.edit');
+    Route::get('profile/{id}', 'ProfileController@show')->name('profile.show');
 });
 
-Route::get('profile', 'ProfileController@index')->name('profile');
-Route::get('profile/edit', 'ProfileController@edit')->name('profile.edit');
+Route::post('profile/update', 'ProfileController@update')->name('profile.update');
 
-Route::get('conversations', 'MessageController@index')->name('conversations');
+// Conversation overview
+Route::get('conversations', 'ConversationController@index')->name('conversation.index');
+Route::get('conversations/{id}', 'ConversationController@show')->name('conversation.show');
 
-Route::get('channel/{id}', 'ChannelController@show')->name('channels.show');
-Route::get('channel/{id}/messages', 'ChannelController@messages');
-Route::post('channel/{id}/messages', 'MessageController@store');
+// Api routes @todo move these to api.php
+Route::get('conversations/{id}/messages', 'ConversationController@messages');
+Route::post('conversations/{id}/messages', 'ConversationController@store');
 
 // Administrator only.
 Route::group(['middleware' => ['role:administrator']], function () {
-    Route::get('admin/dashboard', 'AdminController@index')->name('dashboard');
+    Route::get('admin/dashboard', 'AdminController@index')->name('admin.dashboard');
     Route::get('admin/articles/trashed', 'ArticleController@trashed')->name('articles.trashed');
     Route::post('admin/articles/{id}/restore', 'ArticleController@restore')->name('articles.restore');
     Route::resource('admin/articles', 'ArticleController');

@@ -8,7 +8,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <a href="{{ route('conversations') }}">Back to conversations</a>
+                <a href="{{ route('conversation.index') }}">Back to conversations</a>
                 <div class="panel panel-default">
                     <div class="panel-heading">Chats</div>
                     <div class="panel-body">

@@ -9,12 +9,12 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h2>Conversations</h2>
-                <a href="{{ route('profile') }}">Back to profile</a>
+                <a href="{{ route('dashboard') }}">Back to dashboard</a>
                 <div class="chats-overview">
                     @foreach($channels as $channel)
                         <div class="channel">
                             <div class="channel-name">
-                                <a href="{{ route('channels.show', ['id' => $channel->id]) }}">{{ $channel->name }}</a>
+                                <a href="{{ route('conversation.show', ['id' => $channel->id]) }}">{{ $channel->name }}</a>
                             </div>
                             <div class="channel-participants">
                                 @foreach($channel->users as $user)

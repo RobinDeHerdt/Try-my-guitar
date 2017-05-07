@@ -22,7 +22,7 @@
                         <li><a href="{{ route('login') }}">@lang('navigation.login')</a></li>
                     @else
                         {{-- Authenticated --}}
-                        <li><a href="{{ route('profile') }}">@lang('navigation.profile')</a></li>
+                        <li><a href="{{ route('dashboard') }}">@lang('navigation.dashboard')</a></li>
                         <li>
                             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">@lang('navigation.logout')</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
