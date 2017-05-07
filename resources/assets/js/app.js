@@ -43,6 +43,7 @@ const app = new Vue({
 
             axios.get(`${uri}/messages`).then(response => {
                 this.messages = response.data;
+
             });
         },
 
@@ -52,6 +53,6 @@ const app = new Vue({
             var uri = window.location.pathname;
 
             axios.post(`${uri}/messages`, message);
-        }
+        },
     }
 });

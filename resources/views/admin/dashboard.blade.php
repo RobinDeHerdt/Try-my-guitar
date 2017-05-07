@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <div class="row admin-heading">
+        <div class="row heading">
             <div class="col-md-12">
                 <h1>Administrator dashboard</h1>
             </div>

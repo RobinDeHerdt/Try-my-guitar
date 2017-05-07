@@ -6,10 +6,14 @@
 
 @section('content')
     <div class="container">
+        <div class="row heading">
+            <div class="col-md-8 col-md-offset-2">
+                <h1>Conversations</h1>
+                <a href="{{ route('dashboard') }}" class="icon-text"><span class="glyphicon glyphicon-home"></span>Back to dashboard</a>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <h2>Conversations</h2>
-                <a href="{{ route('dashboard') }}">Back to dashboard</a>
                 <div class="chats-overview">
                     @foreach($channels as $channel)
                         <div class="channel">
@@ -18,11 +22,11 @@
                             </div>
                             <div class="channel-participants">
                                 @foreach($channel->users as $user)
-                                <div class="profile-teaser">
-                                    <a href="#">
-                                        <div class="profile-picture" style="background-image: url('/{{ $user->image_uri }}')"></div>
-                                    </a>
-                                </div>
+                                    <div class="profile-teaser">
+                                        <a href="#">
+                                            <div class="profile-picture" style="background-image: url('{{ Storage::disk('public')->url($user->image_uri) }}')"></div>
+                                        </a>
+                                    </div>
                                 @endforeach
                             </div>
                         </div>

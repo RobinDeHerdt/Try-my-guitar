@@ -6,7 +6,7 @@
 
 @section('content')
 <div class="container">
-    <div class="row admin-heading">
+    <div class="row heading">
         <div class="col-md-12">
             <h1>Personal information</h1>
             <a href="{{ route('dashboard') }}" class="icon-text"><span class="glyphicon glyphicon-home"></span>Back to dashboard</a>

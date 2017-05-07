@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Events\MessageSent;
 use App\Channel;
+use App\Message;
 use Auth;
 
 class ConversationController extends Controller
@@ -56,12 +58,14 @@ class ConversationController extends Controller
 
         if ($user->channels->contains($id)) {
             $messages = Channel::find($id)->messages()->get();
+            $channel = Channel::find($id);
         } else {
             abort(403);
         }
 
         return view('conversation.show', [
             'messages' => $messages,
+            'channel' => $channel,
         ]);
     }
 

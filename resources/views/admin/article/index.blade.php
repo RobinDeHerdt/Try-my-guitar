@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <div class="row admin-heading">
+        <div class="row heading">
             <div class="col-md-12">
                 <h1>Article overview</h1>
                 <a href="{{ route('articles.create') }}" class="icon-text"><span class="glyphicon glyphicon-plus"></span>Create article</a>
@@ -32,7 +32,7 @@
                     @foreach($articles as $article)
                         <tr>
                             <td>{{ str_limit($article->title, 15) }}</td>
-                            <td>{{ $article->user->name }}</td>
+                            <td>{{ $article->user->first_name . ' ' . $article->user->last_name }}</td>
                             <td>{{ str_limit($article->body, 50)}}</td>
                             <td><a href="{{ Storage::disk('public')->url($article->image_uri) }}">View image</a></td>
                             <td class="center"><a href="{{ route('articles.show', ['id' => $article->id]) }}"><span class="glyphicon glyphicon-search"></span></a></td>

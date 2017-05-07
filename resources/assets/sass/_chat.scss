@@ -7,7 +7,6 @@
 .chat li {
   margin-bottom: 10px;
   padding-bottom: 5px;
-  border-bottom: 1px dotted #B3A9A9;
 }
 
 .chat li .chat-body p {
@@ -15,7 +14,13 @@
   color: #777777;
 }
 
-.panel-body {
+.chat-container {
   overflow-y: scroll;
   height: 350px;
+}
+
+.chat-form {
+  button {
+    padding: 7px 40px;
+  }
 }
