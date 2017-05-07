@@ -22,7 +22,7 @@ class DashboardController extends Controller
         $messages_array = [];
 
         foreach ($channels as $channel) {
-            $message = $channel->messages()->orderBy('created_at', 'asc')->first();
+            $message = $channel->messages()->orderBy('created_at', 'desc')->first();
             if ($message) {
                 array_push($messages_array, $message);
             }

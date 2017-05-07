@@ -42,11 +42,9 @@ class ConversationController extends Controller
 
         $message    = new Message();
 
-        $message->message = $request->message;
-
-        // @todo use associates
-        $message->user()->associate($message);
-        $message->channel()->associate($channel);
+        $message->message       = $request->message;
+        $message->channel_id    = $channel_id;
+        $message->sender_id     = $user->id;
 
         $participants = $channel->users()->get();
 
@@ -60,8 +58,6 @@ class ConversationController extends Controller
         $message->save();
 
         broadcast(new MessageSent($message, $user))->toOthers();
-
-        return ['status' => 'Message saved'];
     }
 
     /**

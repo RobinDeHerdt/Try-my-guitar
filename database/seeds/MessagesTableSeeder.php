@@ -40,5 +40,10 @@ class MessagesTableSeeder extends Seeder
             'user_id' => 1,
             'channel_id' => 2
         ]);
+
+        DB::table('channel_user')->insert([
+            'user_id' => 2,
+            'channel_id' => 2
+        ]);
     }
 }

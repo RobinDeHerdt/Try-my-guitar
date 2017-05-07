@@ -28,7 +28,8 @@ const app = new Vue({
     created() {
         this.fetchMessages();
 
-        Echo.private('channel.1')
+        var args = window.location.pathname.split("/");
+        Echo.private(`channel.${args[2]}`)
             .listen('MessageSent', (e) => {
                 this.messages.push({
                     message: e.message.message,
