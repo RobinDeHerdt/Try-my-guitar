@@ -1,5 +1,5 @@
 <template>
-    <ul class="chat">
+    <ul class="chat" v-chat-scroll>
         <li class="left clearfix" v-for="message in messages">
             <div class="chat-body clearfix">
                 <div class="header">

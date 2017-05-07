@@ -14,7 +14,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <div class="chat-container" id="chat-container">
+                <div class="chat-container">
                     <chat-messages :messages="messages"></chat-messages>
                 </div>
                 <div class="chat-form">
