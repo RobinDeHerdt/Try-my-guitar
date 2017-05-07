@@ -32,17 +32,30 @@ class ConversationController extends Controller
      * Store a message in database and broadcast it to the current channel.
      *
      * @param  Request $request
+     * @param  Channel id
      * @return Response
      */
-    public function store(Request $request, $id)
+    public function store(Request $request, $channel_id)
     {
-        $user = Auth::user();
+        $user       = Auth::user();
+        $channel    = Channel::find($channel_id);
 
-        $message = new Message();
+        $message    = new Message();
 
         $message->message = $request->message;
-        $message->sender_id = $user->id;
-        $message->channel_id = $id;
+
+        // @todo use associates
+        $message->user()->associate($message);
+        $message->channel()->associate($channel);
+
+        $participants = $channel->users()->get();
+
+        // Set channel to unseen for every participant.
+        foreach ($participants as $participant) {
+            if ($participant->id !== $user->id) {
+                $participant->channels()->updateExistingPivot($channel_id, ['seen' => false]);
+            }
+        }
 
         $message->save();
 
@@ -51,28 +64,43 @@ class ConversationController extends Controller
         return ['status' => 'Message saved'];
     }
 
-    // Show channel with messages.
-    public function show($id)
+    /**
+     * Show the initial chat channel and its messages.
+     *
+     * @param  Channel id
+     * @return Response
+     */
+    public function show($channel_id)
     {
         $user = Auth::user();
 
-        if ($user->channels->contains($id)) {
-            $messages = Channel::find($id)->messages()->get();
-            $channel = Channel::find($id);
+        if ($user->channels->contains($channel_id)) {
+            $channel  = Channel::find($channel_id);
+            $messages = $channel->messages()->get();
         } else {
             abort(403);
         }
 
         return view('conversation.show', [
             'messages' => $messages,
-            'channel' => $channel,
+            'channel'  => $channel,
         ]);
     }
 
-    // Api messages.
-    public function messages($id)
+
+    /**
+     * Fetch all messages for the specified channel.
+     *
+     * @param  Channel id
+     * @return Response
+     */
+    public function messages($channel_id)
     {
-        $messages = Channel::find($id)->messages()->with('user')->get();
+        $user = Auth::user();
+
+        $messages = Channel::find($channel_id)->messages()->with('user')->get();
+
+        $user->channels()->updateExistingPivot($channel_id, ['seen' => true]);
 
         return $messages;
     }

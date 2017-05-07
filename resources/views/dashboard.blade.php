@@ -9,8 +9,20 @@
         <div class="row">
             <div class="col-md-6 profile-content">
                 <h3>Messages</h3>
-                <span>Show latest conversations here</span><br>
-                <a href="{{ route('conversation.index') }}">View all conversations</a>
+                @if($messages->isNotEmpty())
+                    @foreach($messages as $message)
+                        <div class="message-teaser-container">
+                            <strong>{{ $message->channel->name }}</strong>
+                            <p>{{ $message->user->first_name }}: {{ $message->message }}</p>
+                            <a href="{{ route('conversation.show', [$message->channel_id]) }}">View  conversation</a>
+                        </div>
+                    @endforeach
+                @else
+                    <div class="message-teaser-container">
+                        <span>There are no unseen messages</span>
+                    </div>
+                @endif
+                <a href="{{ route('conversation.index') }}">Go to conversations</a>
             </div>
             <div class="col-md-6 profile-content">
                 <h3>Collection</h3>

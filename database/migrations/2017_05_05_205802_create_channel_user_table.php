@@ -18,6 +18,7 @@ class CreateChannelUserTable extends Migration
             $table->foreign('channel_id')->references('id')->on('channels');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
+            $table->boolean('seen')->default(false);
         });
     }
 
