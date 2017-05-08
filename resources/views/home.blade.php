@@ -10,7 +10,7 @@
         <h1>Try my guitar</h1>
         <div class="header-search">
             <form class="form-inline">
-                <input type="text" class="form-control search-input" name="search-term" placeholder="Search for a guitar">
+                <input type="text" class="form-control search-input" name="search-term" placeholder="Search for a user or guitar">
                 <a href="#" class="btn btn-default search-submit" id="search-submit">Search</a>
                 <a href="#" class="btn btn-default search-submit" id="search-submit-mobile"><i class="fa fa-search" aria-hidden="true"></i></a>
             </form>

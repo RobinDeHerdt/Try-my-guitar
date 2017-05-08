@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Auth;
+use App\User;
 
 class ProfileController extends Controller
 {
@@ -13,12 +14,12 @@ class ProfileController extends Controller
         $this->middleware('role:user');
     }
 
-    public function index()
+    public function show($id)
     {
-        $user = Auth::user();
+        $user = User::find($id);
 
-        return view('profile.index', [
-            'user' => $user,
+        return view('profile.show', [
+            'user' => $user
         ]);
     }
 

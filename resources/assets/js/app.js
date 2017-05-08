@@ -31,7 +31,7 @@ const app = new Vue({
             this.fetchMessages();
 
             var args = window.location.pathname.split("/");
-            Echo.private(`channel.${args[2]}`)
+            Echo.private(`channel.${args[3]}`)
                 .listen('MessageSent', (e) => {
                     this.messages.push({
                         message: e.message.message,
@@ -47,7 +47,7 @@ const app = new Vue({
 
             axios.get(`${uri}/messages`).then(response => {
                 this.messages = response.data;
-
+                console.log(this.messages);
             });
         },
 

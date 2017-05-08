@@ -10,7 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::group([
     'prefix' => LaravelLocalization::setLocale(),
     'middleware' => [ 'localeSessionRedirect', 'localizationRedirect' ]
@@ -25,17 +24,15 @@ Route::group([
     // Profile
     Route::get('profile/edit', 'ProfileController@edit')->name('profile.edit');
     Route::get('profile/{id}', 'ProfileController@show')->name('profile.show');
+    Route::post('profile/update', 'ProfileController@update')->name('profile.update');
+
+    // Conversation overview
+    Route::get('conversations', 'ConversationController@index')->name('conversation.index');
+    Route::get('conversations/{id}', 'ConversationController@show')->name('conversation.show');
+
+    Route::get('conversations/{id}/messages', 'ConversationController@messages');
+    Route::post('conversations/{id}/messages', 'ConversationController@store');
 });
-
-Route::post('profile/update', 'ProfileController@update')->name('profile.update');
-
-// Conversation overview
-Route::get('conversations', 'ConversationController@index')->name('conversation.index');
-Route::get('conversations/{id}', 'ConversationController@show')->name('conversation.show');
-
-// Api routes @todo move these to api.php
-Route::get('conversations/{id}/messages', 'ConversationController@messages');
-Route::post('conversations/{id}/messages', 'ConversationController@store');
 
 // Administrator only.
 Route::group(['middleware' => ['role:administrator']], function () {
