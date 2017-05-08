@@ -5,44 +5,46 @@
 @endsection
 
 @section('content')
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="profile-content">
-                    <h3>Messages</h3>
-                    <hr>
-                    @if($messages->isNotEmpty())
-                        @foreach($messages as $message)
+    <div class="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="profile-content">
+                        <h3>Messages</h3>
+                        <hr>
+                        @if($messages->isNotEmpty())
+                            @foreach($messages as $message)
+                                <div class="message-teaser-container">
+                                    <strong>{{ $message->channel->name }}</strong><br>
+                                    <span>{{ $message->user->first_name }}: {{ $message->message }}</span><br>
+                                    <a href="{{ route('conversation.show', [$message->channel_id]) }}">View  conversation</a>
+                                </div>
+                                <hr>
+                            @endforeach
+                        @else
                             <div class="message-teaser-container">
-                                <strong>{{ $message->channel->name }}</strong><br>
-                                <span>{{ $message->user->first_name }}: {{ $message->message }}</span><br>
-                                <a href="{{ route('conversation.show', [$message->channel_id]) }}">View  conversation</a>
+                                <span>There are no unseen messages</span>
                             </div>
-                            <hr>
-                        @endforeach
-                    @else
-                        <div class="message-teaser-container">
-                            <span>There are no unseen messages</span>
-                        </div>
-                    @endif
-                    <a href="{{ route('conversation.index') }}">All conversations</a>
+                        @endif
+                        <a href="{{ route('conversation.index') }}">All conversations</a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="profile-content">
+                        <h3>Collection</h3>
+                        <hr>
+                        <a href="#">View full collection</a><br>
+                        <a href="#">Add to collection</a>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="profile-content">
-                    <h3>Collection</h3>
-                    <hr>
-                    <a href="#">View full collection</a><br>
-                    <a href="#">Add to collection</a>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="profile-content">
-                    <h3>Personal information</h3>
-                    <hr>
-                    <a href="{{ route('profile.edit') }}">Edit</a>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="profile-content">
+                        <h3>Personal information</h3>
+                        <hr>
+                        <a href="{{ route('profile.edit') }}">Edit</a>
+                    </div>
                 </div>
             </div>
         </div>

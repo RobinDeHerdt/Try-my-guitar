@@ -2,8 +2,8 @@
   width: 100%;
 
   .channel {
-    border: solid 1px $border-color;
     background-color: $secondary-bg-color;
+    box-shadow: $drop-shadow;
     margin-bottom: 5px;
     height: 95px;
 
@@ -55,10 +55,9 @@
 
 .profile-content {
   background-color: $secondary-bg-color;
-  border: solid 1px $border-color;
   padding: 20px;
   margin-top: 20px;
-  margin-bottom: 75px;
+  box-shadow: $drop-shadow;
 
   h3 {
     text-transform: uppercase;

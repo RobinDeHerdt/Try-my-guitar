@@ -1,6 +1,8 @@
 .article {
-  border: solid 1px $primary-font-color;
   margin-top: 20px;
+  background-color: $secondary-bg-color;
+  box-shadow: $drop-shadow;
+  padding-bottom: 10px;
 
   .article-teaser-image {
     width: 100%;
@@ -15,6 +17,7 @@
     padding-left: 15px;
 
     h4 {
+      margin-top: 15px;
       text-transform: uppercase;
       font-weight: 600;
     }
