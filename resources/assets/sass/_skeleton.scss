@@ -61,6 +61,12 @@ body {
   }
 }
 
+.col-container {
+  background-color: $secondary-bg-color;
+  border: solid 1px $border-color;
+  padding: 25px 0;
+}
+
 @media (max-width: 992px) {
   .authentication-block {
     margin-top: 25px;
