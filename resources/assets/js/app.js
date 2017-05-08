@@ -37,6 +37,7 @@ const app = new Vue({
                         message: e.message.message,
                         user: e.user
                     });
+                    this.messageSeen();
                 });
         }
     },
@@ -47,7 +48,6 @@ const app = new Vue({
 
             axios.get(`${uri}/messages`).then(response => {
                 this.messages = response.data;
-                console.log(this.messages);
             });
         },
 
@@ -57,6 +57,12 @@ const app = new Vue({
             var uri = window.location.pathname;
 
             axios.post(`${uri}/messages`, message);
+        },
+
+        messageSeen() {
+            var uri = window.location.pathname;
+
+            axios.post(`${uri}/messages/seen`);
         },
     }
 });

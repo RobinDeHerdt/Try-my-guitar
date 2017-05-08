@@ -2,6 +2,7 @@
   background-color: $secondary-bg-color;
   padding: 25px;
   margin: 20px 0;
+  box-shadow: $drop-shadow;
 }
 
 .chat {
@@ -27,11 +28,14 @@
 
 .chat-form {
   input {
+    box-shadow: $drop-shadow;
     border-radius: 0;
+    border: none;
     height: 52px;
   }
 
   button {
+    box-shadow: $drop-shadow;
     padding: 15px 60px;
     border-radius: 0;
   }

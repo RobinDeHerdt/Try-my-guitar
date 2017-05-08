@@ -100,4 +100,13 @@ class ConversationController extends Controller
 
         return $messages;
     }
+
+    public function seen($channel_id)
+    {
+        $user = Auth::user();
+
+        $user->channels()->updateExistingPivot($channel_id, ['seen' => true]);
+
+        return response('success', 200);
+    }
 }

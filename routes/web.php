@@ -32,6 +32,8 @@ Route::group([
 
     Route::get('conversations/{id}/messages', 'ConversationController@messages');
     Route::post('conversations/{id}/messages', 'ConversationController@store');
+
+    Route::post('conversations/{id}/messages/seen', 'ConversationController@seen');
 });
 
 // Administrator only.
