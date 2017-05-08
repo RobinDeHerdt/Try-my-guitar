@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div class="container">
+    <div class="container" id="chat-page">
         <div class="row heading">
             <div class="col-md-12">
                 <h1>{{ $channel->name }}</h1>

@@ -26,16 +26,19 @@ const app = new Vue({
     },
 
     created() {
-        this.fetchMessages();
+        // There should be a better way to do this. @todo later. maybe.
+        if(document.getElementById('chat-page')) {
+            this.fetchMessages();
 
-        var args = window.location.pathname.split("/");
-        Echo.private(`channel.${args[2]}`)
-            .listen('MessageSent', (e) => {
-                this.messages.push({
-                    message: e.message.message,
-                    user: e.user
+            var args = window.location.pathname.split("/");
+            Echo.private(`channel.${args[2]}`)
+                .listen('MessageSent', (e) => {
+                    this.messages.push({
+                        message: e.message.message,
+                        user: e.user
+                    });
                 });
-            });
+        }
     },
 
     methods: {
