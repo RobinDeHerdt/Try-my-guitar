@@ -21,9 +21,6 @@
 </head>
 <body>
     <div id="app">
-        @if (Auth::user() && Auth::user()->hasRole('administrator'))
-            @include('partials.navigation-admin')
-        @endif
         @yield('navigation')
         @yield('content')
         @yield('footer')
