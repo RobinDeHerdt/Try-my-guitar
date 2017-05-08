@@ -4,7 +4,7 @@
   .channel {
     background-color: $secondary-bg-color;
     box-shadow: $drop-shadow;
-    margin-bottom: 5px;
+    margin-bottom: 20px;
     height: 95px;
 
     .channel-participants {
@@ -18,7 +18,7 @@
     .channel-name {
       display: inline-block;
       position: relative;
-      top: 25px;
+      top: 26px;
       left: 40px;
       font-size: 24px;
       font-weight: 500;
@@ -27,11 +27,15 @@
         color: $primary-font-color;
         text-transform: uppercase;
       }
+
+      a:hover {
+        text-decoration: none;
+      }
     }
 
     .profile-teaser {
       display: inline-block;
-      margin-left: 20px;
+      margin-left: 10px;
 
       .profile-picture {
         height: 75px;
@@ -49,6 +53,20 @@
   }
 }
 
+.profile-image {
+  background-size: cover;
+  background-position: center;
+  height: 300px;
+  border: solid 5px $primary-bg-color;
+  margin-top: -150px;
+  border-radius: 50%;
+}
+
+.profile-header-image {
+  background-position: top;
+  height: 450px;
+}
+
 .edit-profile-picture {
   width: 100%;
 }
@@ -64,6 +82,11 @@
     margin-top: 0;
     margin-bottom: 10px;
   }
+}
+
+.profile-name {
+  position: relative;
+  left: 20px;
 }
 
 .profile-nav {
