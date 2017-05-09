@@ -54,7 +54,9 @@ class ProfileController extends Controller
     public function invite($id)
     {
         $user = User::find($id);
-        $channels = $user->channels()->get();
+
+        $auth_user = Auth::user();
+        $channels = $auth_user->channels()->get();
 
         return view('profile.invite', [
             'user' => $user,

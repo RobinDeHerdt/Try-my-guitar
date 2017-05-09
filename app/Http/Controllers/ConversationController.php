@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Events\MessageSent;
 use App\Channel;
+use App\User;
 use App\Message;
+use Illuminate\Support\Facades\Session;
 use Auth;
 
 class ConversationController extends Controller
@@ -15,12 +17,10 @@ class ConversationController extends Controller
         $this->middleware('role:user');
     }
 
-
-    // Conversation overview
     public function index()
     {
         $user       = Auth::user();
-        $channels   = $user->channels()->get();
+        $channels   = $user->channels()->where('accepted', true)->get();
 
         return view('conversation.index', [
             'channels' => $channels,
@@ -110,8 +110,19 @@ class ConversationController extends Controller
         return response('success', 200);
     }
 
-    public function invite()
+    public function invite(Request $request)
     {
-        // Add person to channel
+        $user = User::find($request->user_id);
+        $channel = Channel::find($request->channel_id);
+
+        if (!$user->channels()->where('channel_id', $channel->id)->exists()) {
+            $user->channels()->attach($channel->id, ['accepted' => false]);
+
+            Session::flash('success-message', 'Invite sent!');
+        } else {
+            Session::flash('info-message', 'This invite was already sent. Please wait for the persons answer.');
+        }
+
+        return back();
     }
 }

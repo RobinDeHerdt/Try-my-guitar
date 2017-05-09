@@ -15,24 +15,30 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <div class="chats-overview">
-                        @foreach($channels as $channel)
-                            <div class="channel">
-                                <div class="channel-name">
-                                    <a href="{{ route('conversation.show', ['id' => $channel->id]) }}">{{ $channel->name }}</a>
+                    @if ($channels->isNotEmpty())
+                        <div class="chats-overview">
+                            @foreach($channels as $channel)
+                                <div class="channel">
+                                    <div class="channel-name">
+                                        <a href="{{ route('conversation.show', ['id' => $channel->id]) }}">{{ $channel->name }}</a>
+                                    </div>
+                                    <div class="channel-participants">
+                                        @foreach($channel->users as $user)
+                                            <div class="profile-teaser {{ $user->pivot->accepted ? '' : 'invited' }}">
+                                                <a href="{{ route('profile.show', ['id' => $user->id]) }}" title="{{ $user->first_name . ' ' . $user->last_name }}">
+                                                    <div class="profile-picture" style="background-image: url('{{ Storage::disk('public')->url($user->image_uri) }}')"></div>
+                                                </a>
+                                            </div>
+                                        @endforeach
+                                    </div>
                                 </div>
-                                <div class="channel-participants">
-                                    @foreach($channel->users as $user)
-                                        <div class="profile-teaser">
-                                            <a href="{{ route('profile.show', ['id' => $user->id]) }}" title="{{ $user->first_name . ' ' . $user->last_name }}">
-                                                <div class="profile-picture" style="background-image: url('{{ Storage::disk('public')->url($user->image_uri) }}')"></div>
-                                            </a>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
+                            @endforeach
+                        </div>
+                    @else
+                        <div class="no-results">
+                            <h4>You don't have open conversations. Yet!</h4>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

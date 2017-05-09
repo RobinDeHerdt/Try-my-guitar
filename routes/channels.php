@@ -12,5 +12,5 @@
 */
 
 Broadcast::channel('channel.{id}', function ($user, $channel_id) {
-    return $user->channels->contains($channel_id);
+    return $user->channels->contains($channel_id) && $user->channels()->wherePivot('accepted', true)->exists();
 });
