@@ -13,14 +13,9 @@
                 <div class="col-md-3">
                     <h1 class="profile-name">{{ $user->first_name . ' ' . $user->last_name }}</h1>
                 </div>
-                <div class="col-md-2 col-md-offset-2">
+                <div class="col-md-2 col-md-offset-4">
                     <div class="big-cta-button">
-                        <a href="#">Invite to chat</a>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="big-cta-button">
-                        <a href="#">Invite to group chat</a>
+                        <a href="{{ route('profile.invite', ['id' => $user->id]) }}">Invite to chat</a>
                     </div>
                 </div>
             </div>

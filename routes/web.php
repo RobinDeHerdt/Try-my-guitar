@@ -26,9 +26,13 @@ Route::group([
     Route::get('profile/{id}', 'ProfileController@show')->name('profile.show');
     Route::post('profile/update', 'ProfileController@update')->name('profile.update');
 
+    Route::get('profile/{id}/invite', 'ProfileController@invite')->name('profile.invite');
+
+
     // Conversation overview
     Route::get('conversations', 'ConversationController@index')->name('conversation.index');
     Route::get('conversations/{id}', 'ConversationController@show')->name('conversation.show');
+    Route::post('conversations/invite', 'ConversationController@invite')->name('conversation.invite');
 
     Route::get('conversations/{id}/messages', 'ConversationController@messages');
     Route::post('conversations/{id}/messages', 'ConversationController@store');

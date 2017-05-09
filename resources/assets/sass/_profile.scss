@@ -18,18 +18,22 @@
     .channel-name {
       display: inline-block;
       position: relative;
-      top: 26px;
+      top: 27px;
       left: 40px;
       font-size: 24px;
       font-weight: 500;
 
       a {
         color: $primary-font-color;
-        text-transform: uppercase;
+
       }
 
       a:hover {
         text-decoration: none;
+      }
+
+      i {
+        margin-right: 20px;
       }
     }
 

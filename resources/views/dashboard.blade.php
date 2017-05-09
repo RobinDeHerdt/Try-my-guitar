@@ -41,6 +41,12 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="profile-content">
+                        <h3>Chat invitations</h3>
+                        <hr>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="profile-content">
                         <h3>Personal information</h3>
                         <hr>
                         <a href="{{ route('profile.edit') }}">Edit</a>

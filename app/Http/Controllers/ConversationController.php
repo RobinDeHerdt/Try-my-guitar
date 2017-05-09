@@ -109,4 +109,9 @@ class ConversationController extends Controller
 
         return response('success', 200);
     }
+
+    public function invite()
+    {
+        // Add person to channel
+    }
 }

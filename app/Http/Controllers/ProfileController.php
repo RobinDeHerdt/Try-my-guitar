@@ -50,4 +50,15 @@ class ProfileController extends Controller
 
         return back();
     }
+
+    public function invite($id)
+    {
+        $user = User::find($id);
+        $channels = $user->channels()->get();
+
+        return view('profile.invite', [
+            'user' => $user,
+            'channels' => $channels,
+        ]);
+    }
 }
