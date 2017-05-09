@@ -12,19 +12,25 @@ use Auth;
 
 class ConversationController extends Controller
 {
+    private $user;
+
     public function __construct()
     {
         $this->middleware('role:user');
+        $this->middleware(function ($request, $next) {
+            $this->user = Auth::user();
+
+            return $next($request);
+        });
     }
 
     public function index()
     {
-        $user       = Auth::user();
-        $channels   = $user->channels()->where('accepted', true)->get();
+        $channels   = $this->user->channels()->where('accepted', true)->get();
 
         return view('conversation.index', [
             'channels' => $channels,
-            'user' => $user,
+            'user' => $this->user,
         ]);
     }
 
@@ -37,27 +43,26 @@ class ConversationController extends Controller
      */
     public function store(Request $request, $channel_id)
     {
-        $user       = Auth::user();
         $channel    = Channel::find($channel_id);
 
         $message    = new Message();
 
         $message->message       = $request->message;
         $message->channel_id    = $channel_id;
-        $message->sender_id     = $user->id;
+        $message->sender_id     = $this->user->id;
 
         $participants = $channel->users()->get();
 
         // Set channel to unseen for every participant.
         foreach ($participants as $participant) {
-            if ($participant->id !== $user->id) {
+            if ($participant->id !== $this->user->id) {
                 $participant->channels()->updateExistingPivot($channel_id, ['seen' => false]);
             }
         }
 
         $message->save();
 
-        broadcast(new MessageSent($message, $user))->toOthers();
+        broadcast(new MessageSent($message, $this->user))->toOthers();
     }
 
     /**
@@ -68,9 +73,7 @@ class ConversationController extends Controller
      */
     public function show($channel_id)
     {
-        $user = Auth::user();
-
-        if ($user->channels->contains($channel_id) && $user->channels()->wherePivot('accepted', true)->exists()) {
+        if ($this->user->channels->contains($channel_id) && $this->user->channels()->wherePivot('accepted', true)->exists()) {
             $channel  = Channel::find($channel_id);
             $messages = $channel->messages()->get();
         } else {
@@ -92,34 +95,32 @@ class ConversationController extends Controller
      */
     public function messages($channel_id)
     {
-        $user = Auth::user();
-
         $messages = Channel::find($channel_id)->messages()->with('user')->get();
 
-        $user->channels()->updateExistingPivot($channel_id, ['seen' => true]);
+        $this->user->channels()->updateExistingPivot($channel_id, ['seen' => true]);
 
         return $messages;
     }
 
     public function seen($channel_id)
     {
-        $user = Auth::user();
-
-        $user->channels()->updateExistingPivot($channel_id, ['seen' => true]);
+        $this->user->channels()->updateExistingPivot($channel_id, ['seen' => true]);
 
         return response('success', 200);
     }
 
     public function invite(Request $request)
     {
-        $user = User::find($request->user_id);
-        $auth_user = Auth::user();
+        $user       = User::find($request->user_id);
 
         if ($request->channel_id) {
             $channel = Channel::find($request->channel_id);
 
             if (!$user->channels()->where('channel_id', $channel->id)->exists()) {
-                $user->channels()->attach($channel->id, ['accepted' => false]);
+                $user->channels()->attach($channel->id, [
+                    'accepted' => false,
+                    'invited_by_id' => $this->user->id
+                ]);
 
                 Session::flash('success-message', 'Invite sent!');
             } else {
@@ -127,13 +128,19 @@ class ConversationController extends Controller
             }
         } else {
             $channel = new Channel();
-            $channel->name = $auth_user->first_name . "'s chat";
+            $channel->name = $this->user->first_name . "'s chat";
             $channel->save();
 
-            $auth_user->channels()->attach($channel->id, ['accepted' => true]);
-            $user->channels()->attach($channel->id, ['accepted' => false]);
+            // The creator of the channel gets the accepted status.
+            $this->user->channels()->attach($channel->id, ['accepted' => true]);
 
-            Session::flash('success-message', 'A new private channel was created and an invite was sent!');
+            // Set up an invite for the invited person.
+            $user->channels()->attach($channel->id, [
+                'accepted' => false,
+                'invited_by_id' => $this->user->id
+            ]);
+
+            Session::flash('success-message', 'Chat created and invite sent!');
         }
 
         return back();

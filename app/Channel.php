@@ -11,7 +11,7 @@ class Channel extends Model
      */
     public function users()
     {
-        return $this->belongsToMany('App\User')->withPivot('seen', 'accepted');
+        return $this->belongsToMany('App\User')->withPivot('seen', 'accepted', 'invited_by_id');
     }
 
     /**
