@@ -119,7 +119,6 @@ class ConversationController extends Controller
             if (!$user->channels()->where('channel_id', $channel->id)->exists()) {
                 $user->channels()->attach($channel->id, [
                     'accepted' => false,
-                    'invited_by_id' => $this->user->id
                 ]);
 
                 Session::flash('success-message', 'Invite sent!');
@@ -137,7 +136,6 @@ class ConversationController extends Controller
             // Set up an invite for the invited person.
             $user->channels()->attach($channel->id, [
                 'accepted' => false,
-                'invited_by_id' => $this->user->id
             ]);
 
             Session::flash('success-message', 'Chat created and invite sent!');

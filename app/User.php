@@ -15,7 +15,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'first_name',
+        'last_name',
+        'email',
+        'password',
     ];
 
     /**
@@ -24,11 +27,14 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
 
     /**
-     * The roles that belong to the user.
+     * A user belongs to many roles.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
      */
     public function roles()
     {
@@ -36,7 +42,9 @@ class User extends Authenticatable
     }
 
     /**
-     * The articles that belong to the user.
+     * A user has many articles.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
      */
     public function articles()
     {
@@ -44,7 +52,7 @@ class User extends Authenticatable
     }
 
     /**
-     * A user has many messages
+     * A user has many messages.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -54,7 +62,9 @@ class User extends Authenticatable
     }
 
     /**
-     * The channels that belong to the user.
+     * A user belongs to many channels.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
      */
     public function channels()
     {
@@ -62,7 +72,9 @@ class User extends Authenticatable
     }
 
     /**
-     * Check if the user has the administrator role.
+     * Check if the authenticated user has the specified role.
+     *
+     * @return boolean
      */
     public function hasRole($role)
     {

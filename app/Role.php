@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Role extends Model
 {
     /**
-     * The users that belong to the role.
+     * A role belongs to many users.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function users()
     {

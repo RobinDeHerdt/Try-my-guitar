@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Message extends Model
 {
     /**
-     * A message belongs to a user
+     * A message belongs to a user.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -17,7 +17,7 @@ class Message extends Model
     }
 
     /**
-     * A message belongs to a channel
+     * A message belongs to a channel.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

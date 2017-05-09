@@ -10,7 +10,9 @@ class Article extends Model
     use SoftDeletes;
 
     /**
-     * The user that belongs to the article.
+     * An article belongs to a user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user()
     {
