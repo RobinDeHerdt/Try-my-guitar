@@ -50,7 +50,7 @@ class UsersTableSeeder extends Seeder
             'first_name' => 'James',
             'last_name' => 'Hetfield',
             'email' => 'james@gmail.com',
-            'image_uri' => 'images/matt-heafy.jpg',
+            'image_uri' => 'images/james.jpg',
             'password' => bcrypt('123456'),
         ]);
 

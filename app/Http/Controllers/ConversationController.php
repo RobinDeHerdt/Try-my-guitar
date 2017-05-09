@@ -70,7 +70,7 @@ class ConversationController extends Controller
     {
         $user = Auth::user();
 
-        if ($user->channels->contains($channel_id)) {
+        if ($user->channels->contains($channel_id) && $user->channels()->wherePivot('accepted', true)->exists()) {
             $channel  = Channel::find($channel_id);
             $messages = $channel->messages()->get();
         } else {
@@ -113,14 +113,27 @@ class ConversationController extends Controller
     public function invite(Request $request)
     {
         $user = User::find($request->user_id);
-        $channel = Channel::find($request->channel_id);
+        $auth_user = Auth::user();
 
-        if (!$user->channels()->where('channel_id', $channel->id)->exists()) {
+        if ($request->channel_id) {
+            $channel = Channel::find($request->channel_id);
+
+            if (!$user->channels()->where('channel_id', $channel->id)->exists()) {
+                $user->channels()->attach($channel->id, ['accepted' => false]);
+
+                Session::flash('success-message', 'Invite sent!');
+            } else {
+                Session::flash('info-message', 'This invite was already sent. Please wait for the persons answer.');
+            }
+        } else {
+            $channel = new Channel();
+            $channel->name = "Private chat";
+            $channel->save();
+
+            $auth_user->channels()->attach($channel->id, ['accepted' => true]);
             $user->channels()->attach($channel->id, ['accepted' => false]);
 
-            Session::flash('success-message', 'Invite sent!');
-        } else {
-            Session::flash('info-message', 'This invite was already sent. Please wait for the persons answer.');
+            Session::flash('success-message', 'A new private channel was created and an invite was sent!');
         }
 
         return back();

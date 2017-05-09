@@ -5,10 +5,12 @@
 @endsection
 
 @section('content')
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h1>Unauthorized</h1>
+    <div class="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Unauthorized</h1>
+                </div>
             </div>
         </div>
     </div>

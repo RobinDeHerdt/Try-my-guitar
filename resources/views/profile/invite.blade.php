@@ -34,10 +34,10 @@
                                         </form>
                                     </div>
                                     <div class="channel-participants">
-                                        @foreach($channel->users as $user)
-                                            <div class="profile-teaser {{ $user->pivot->accepted ? '' : 'invited' }}">
-                                                <a href="{{ route('profile.show', ['id' => $user->id]) }}" title="{{ $user->first_name . ' ' . $user->last_name }}">
-                                                    <div class="profile-picture" style="background-image: url('{{ Storage::disk('public')->url($user->image_uri) }}')"></div>
+                                        @foreach($channel->users as $participant)
+                                            <div class="profile-teaser {{ $participant->pivot->accepted ? '' : 'invited' }}">
+                                                <a href="{{ route('profile.show', ['id' => $participant->id]) }}" title="{{ $participant->first_name . ' ' . $participant->last_name }}{{ $participant->pivot->accepted ? '' : '- Invite pending' }}">
+                                                    <div class="profile-picture" style="background-image: url('{{ Storage::disk('public')->url($participant->image_uri) }}')"></div>
                                                 </a>
                                             </div>
                                         @endforeach
