@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use App\Events\MessageSent;
 use App\Channel;
@@ -12,8 +13,19 @@ use Auth;
 
 class ConversationController extends Controller
 {
+    /**
+     * Contains the authenticated user.
+     *
+     * @var array
+     */
     private $user;
 
+    /**
+     * Constructor.
+     *
+     * Check if the user has the 'user' role.
+     * Get the authenticated user and save it to the $user variable.
+     */
     public function __construct()
     {
         $this->middleware('role:user');
@@ -24,6 +36,11 @@ class ConversationController extends Controller
         });
     }
 
+    /**
+     * Display a listing of conversations.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         $channels   = $this->user->channels()->where('accepted', true)->get();
@@ -37,18 +54,16 @@ class ConversationController extends Controller
     /**
      * Store a message in database and broadcast it to the current channel.
      *
-     * @param  Request $request
-     * @param  Channel id
-     * @return Response
+     * @param  Request  $request
+     * @param  \App\Channel  $channel
+     * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $channel_id)
+    public function store(Request $request, Channel $channel)
     {
-        $channel    = Channel::find($channel_id);
-
         $message    = new Message();
 
         $message->message       = $request->message;
-        $message->channel_id    = $channel_id;
+        $message->channel_id    = $channel->id;
         $message->sender_id     = $this->user->id;
 
         $participants = $channel->users()->get();
@@ -56,25 +71,26 @@ class ConversationController extends Controller
         // Set channel to unseen for every participant.
         foreach ($participants as $participant) {
             if ($participant->id !== $this->user->id) {
-                $participant->channels()->updateExistingPivot($channel_id, ['seen' => false]);
+                $participant->channels()->updateExistingPivot($channel->id, ['seen' => false]);
             }
         }
 
         $message->save();
 
         broadcast(new MessageSent($message, $this->user))->toOthers();
+
+        return response('success');
     }
 
     /**
      * Show the initial chat channel and its messages.
      *
-     * @param  Channel id
-     * @return Response
+     * @param  \App\Channel  $channel
+     * @return \Illuminate\Http\Response
      */
-    public function show($channel_id)
+    public function show(Channel $channel)
     {
-        if ($this->user->channels->contains($channel_id) && $this->user->channels()->wherePivot('accepted', true)->exists()) {
-            $channel  = Channel::find($channel_id);
+        if ($this->user->channels()->wherePivot('accepted', true)->where('channel_id', $channel->id)->exists()) {
             $messages = $channel->messages()->get();
         } else {
             abort(403);
@@ -86,37 +102,57 @@ class ConversationController extends Controller
         ]);
     }
 
-
     /**
      * Fetch all messages for the specified channel.
      *
-     * @param  Channel id
-     * @return Response
+     * @param  \App\Channel  $channel
+     * @return Collection
      */
-    public function messages($channel_id)
+    public function messages(Channel $channel)
     {
-        $messages = Channel::find($channel_id)->messages()->with('user')->get();
+        $messages = $channel->messages()->with('user')->get();
 
-        $this->user->channels()->updateExistingPivot($channel_id, ['seen' => true]);
+        $this->user->channels()->updateExistingPivot($channel->id, ['seen' => true]);
 
         return $messages;
     }
 
-    public function seen($channel_id)
+    /**
+     * Set specified channel to 'seen' for the authenticated user.
+     *
+     * @param  \App\Channel  $channel
+     * @return \Illuminate\Http\Response
+     */
+    public function seen(Channel $channel)
     {
-        $this->user->channels()->updateExistingPivot($channel_id, ['seen' => true]);
+        $this->user->channels()->updateExistingPivot($channel->id, ['seen' => true]);
 
         return response('success', 200);
     }
 
+    /**
+     * Set specified channel to 'seen' for the authenticated user.
+     *
+     * @param  Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function invite(Request $request)
     {
-        $user       = User::find($request->user_id);
+        $user = User::find($request->user_id);
 
+        /**
+         * If the channel id is sent with the request,
+         * add the specified user this channel.
+         *
+         * If not, create a new channel and add the specified user
+         * and the authenticated user to the newly created channel.
+         */
         if ($request->channel_id) {
             $channel = Channel::find($request->channel_id);
 
+            // Check if the user already has an invite for the specified channel.
             if (!$user->channels()->where('channel_id', $channel->id)->exists()) {
+                // Invite the user to the specified channel.
                 $user->channels()->attach($channel->id, [
                     'accepted' => false,
                 ]);
@@ -133,7 +169,7 @@ class ConversationController extends Controller
             // The creator of the channel gets the accepted status.
             $this->user->channels()->attach($channel->id, ['accepted' => true]);
 
-            // Set up an invite for the invited person.
+            // Invite the user to the specified channel.
             $user->channels()->attach($channel->id, [
                 'accepted' => false,
             ]);

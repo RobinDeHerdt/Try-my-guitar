@@ -34,7 +34,7 @@
                     @foreach($articles as $article)
                         <tr>
                             <td>{{ str_limit($article->title, 30) }}</td>
-                            <td>{{ $article->user->name }}</td>
+                            <td>{{ $article->user->first_name . ' ' . $article->user->last_name}}</td>
                             <td>{{ str_limit($article->body, 65)}}</td>
                             <td><a href="{{ Storage::disk('public')->url($article->image_uri) }}">View image</a></td>
                             <td class="center"><a href="{{ route('articles.restore', ['id' => $article->id]) }}" onclick="event.preventDefault(); document.getElementById('restore-article-{{ $article->id }}-form').submit();"><span class="glyphicon glyphicon-repeat"></span></a>

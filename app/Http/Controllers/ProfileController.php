@@ -9,11 +9,34 @@ use App\User;
 
 class ProfileController extends Controller
 {
+    /**
+     * Contains the authenticated user.
+     *
+     * @var array
+     */
+    private $user;
+
+    /**
+     * Constructor.
+     *
+     * Check if the user has the 'user' role.
+     * Get the authenticated user and save it to the $user variable.
+     */
     public function __construct()
     {
         $this->middleware('role:user');
+        $this->middleware(function ($request, $next) {
+            $this->user = Auth::user();
+
+            return $next($request);
+        });
     }
 
+    /**
+     * Show the specified user profile.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function show($id)
     {
         $user = User::find($id);
@@ -23,18 +46,27 @@ class ProfileController extends Controller
         ]);
     }
 
+    /**
+     * Show the edit form for the specified user profile.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function edit()
     {
-        $user = Auth::user();
-
         return view('profile.edit', [
-            'user' => $user,
+            'user' => $this->user,
         ]);
     }
 
+    /**
+     * Update the specified user profile.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function update(Request $request)
     {
-        $user = Auth::user();
+        $user = $this->user;
 
         $user->first_name   = $request->first_name;
         $user->last_name    = $request->last_name;
@@ -51,33 +83,41 @@ class ProfileController extends Controller
         return back();
     }
 
-    public function invite($id)
+    /**
+     * Show the specified user invite page.
+     *
+     * @param  \App\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function invite(User $user)
     {
-        $user = User::find($id);
-
-        $auth_user = Auth::user();
-        $channels = $auth_user->channels()->where('accepted', true)->get();
+        $channels = $this->user->channels()->where('accepted', true)->get();
 
         return view('profile.invite', [
-            'user' => $user,
-            'channels' => $channels,
+            'user'      => $user,
+            'channels'  => $channels,
         ]);
     }
 
+    /**
+     * Handle the user invite response.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function response(Request $request)
     {
-        $user = Auth::user();
-
         if ($request->response) {
-            // Accept
-            $user->channels()->updateExistingPivot($request->channel, ['accepted' => true]);
+            // Accept the invite.
+            $this->user->channels()->updateExistingPivot($request->channel, ['accepted' => true]);
 
             Session::flash('success-message', 'You have joined the chat.');
 
             return redirect(route('conversation.show', ['id' => $request->channel]));
         } else {
-            // Decline
-            $user->channels()->detach($request->channel);
+            // Decline the invite.
+            $this->user->channels()->detach($request->channel);
+
             return back();
         }
     }

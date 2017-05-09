@@ -15,7 +15,7 @@ class CheckRole
      */
     public function handle($request, Closure $next, $role)
     {
-        // If the user is not authenticated or doesn't have sufficient permissions, redirect home.
+        // If the user is not authenticated or doesn't have sufficient permissions, redirect to login.
         if (!$request->user() || !$request->user()->hasRole($role)) {
             return redirect(route('login'));
         }

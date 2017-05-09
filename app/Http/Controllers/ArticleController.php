@@ -34,7 +34,7 @@ class ArticleController extends Controller
     }
 
     /**
-     * Store a newly created article in storage.
+     * Store a newly created article.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -70,7 +70,7 @@ class ArticleController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified article.
      *
      * @param  \App\Article  $article
      * @return \Illuminate\Http\Response
@@ -83,7 +83,7 @@ class ArticleController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified article.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Article  $article
@@ -110,7 +110,6 @@ class ArticleController extends Controller
     /**
      * Display a listing of trashed articles.
      *
-     * @param  \App\Article  $article
      * @return \Illuminate\Http\Response
      */
     public function trashed()
@@ -123,9 +122,9 @@ class ArticleController extends Controller
     }
 
     /**
-     * Restore a trashed article.
+     * Restore a specified trashed article.
      *
-     * @param  \App\Article  $article
+     * @param  integer  $id
      * @return \Illuminate\Http\Response
      */
     public function restore($id)
@@ -138,7 +137,7 @@ class ArticleController extends Controller
     }
 
     /**
-     * Move article to trash (soft delete).
+     * Move specified article to trash.
      *
      * @param  \App\Article  $article
      * @return \Illuminate\Http\Response

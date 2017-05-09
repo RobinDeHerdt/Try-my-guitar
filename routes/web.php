@@ -14,30 +14,31 @@ Route::group([
     'prefix' => LaravelLocalization::setLocale(),
     'middleware' => [ 'localeSessionRedirect', 'localizationRedirect' ]
 ], function () {
+    // Authentication related routes.
     Auth::routes();
 
     Route::get('/', 'HomeController@index')->name('home');
 
-    // Dashboard
+    // Dashboard related routes.
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
 
-    // Profile
+    // Profile related routes.
     Route::get('profile/edit', 'ProfileController@edit')->name('profile.edit');
     Route::get('profile/{id}', 'ProfileController@show')->name('profile.show');
     Route::post('profile/update', 'ProfileController@update')->name('profile.update');
 
-    Route::get('profile/{id}/invite', 'ProfileController@invite')->name('profile.invite');
+    Route::get('profile/{user}/invite', 'ProfileController@invite')->name('profile.invite');
     Route::post('invite/response', 'ProfileController@response')->name('invite.response');
 
-    // Conversation overview
+    // Conversation related routes.
     Route::get('conversations', 'ConversationController@index')->name('conversation.index');
-    Route::get('conversations/{id}', 'ConversationController@show')->name('conversation.show');
+    Route::get('conversations/{channel}', 'ConversationController@show')->name('conversation.show');
     Route::post('conversations/invite', 'ConversationController@invite')->name('conversation.invite');
 
-    Route::get('conversations/{id}/messages', 'ConversationController@messages');
-    Route::post('conversations/{id}/messages', 'ConversationController@store');
-
-    Route::post('conversations/{id}/messages/seen', 'ConversationController@seen');
+    // Conversation API related routes.
+    Route::get('conversations/{channel}/messages', 'ConversationController@messages');
+    Route::post('conversations/{channel}/messages', 'ConversationController@store');
+    Route::post('conversations/{channel}/messages/seen', 'ConversationController@seen');
 });
 
 // Administrator only.
