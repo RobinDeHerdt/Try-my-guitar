@@ -13,6 +13,12 @@
                     <a href="{{ route('conversation.index') }}" class="icon-text"><span class="glyphicon glyphicon-th-list"></span>Back to conversations</a>
                 </div>
             </div>
+            @if (Session::has('success-message'))
+                <div class="alert alert-success">{{ Session::get('success-message') }}</div>
+            @endif
+            @if (Session::has('info-message'))
+                <div class="alert alert-info">{{ Session::get('info-message') }}</div>
+            @endif
             <div class="row">
                 <div class="col-md-12">
                     <div class="chat-container">

@@ -56,11 +56,29 @@ class ProfileController extends Controller
         $user = User::find($id);
 
         $auth_user = Auth::user();
-        $channels = $auth_user->channels()->get();
+        $channels = $auth_user->channels()->where('accepted', true)->get();
 
         return view('profile.invite', [
             'user' => $user,
             'channels' => $channels,
         ]);
+    }
+
+    public function response(Request $request)
+    {
+        $user = Auth::user();
+
+        if ($request->response) {
+            // Accept
+            $user->channels()->updateExistingPivot($request->channel, ['accepted' => true]);
+
+            Session::flash('success-message', 'You have joined the chat.');
+
+            return redirect(route('conversation.show', ['id' => $request->channel]));
+        } else {
+            // Decline
+            $user->channels()->detach($request->channel);
+            return back();
+        }
     }
 }

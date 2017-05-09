@@ -27,7 +27,7 @@ Route::group([
     Route::post('profile/update', 'ProfileController@update')->name('profile.update');
 
     Route::get('profile/{id}/invite', 'ProfileController@invite')->name('profile.invite');
-
+    Route::post('invite/response', 'ProfileController@response')->name('invite.response');
 
     // Conversation overview
     Route::get('conversations', 'ConversationController@index')->name('conversation.index');

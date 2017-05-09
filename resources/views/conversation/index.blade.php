@@ -25,7 +25,7 @@
                                     <div class="channel-participants">
                                         @foreach($channel->users as $user)
                                             <div class="profile-teaser {{ $user->pivot->accepted ? '' : 'invited' }}">
-                                                <a href="{{ route('profile.show', ['id' => $user->id]) }}" title="{{ $user->first_name . ' ' . $user->last_name }}">
+                                                <a href="{{ route('profile.show', ['id' => $user->id]) }}" title="{{ $user->first_name . ' ' . $user->last_name }}{{ $user->pivot->accepted ? '' : ' - Invite pending' }}">
                                                     <div class="profile-picture" style="background-image: url('{{ Storage::disk('public')->url($user->image_uri) }}')"></div>
                                                 </a>
                                             </div>

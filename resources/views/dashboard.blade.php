@@ -46,7 +46,27 @@
                         @if($invitations->isNotEmpty())
                             @foreach($invitations as $invitation)
                                 <div class="message-teaser-container">
-                                    <span>New chat invitation from </span><strong>{{ $invitation->name }}</strong><br>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <span>Invitation: </span><strong>{{ $invitation->name }}</strong>
+                                        </div>
+                                        <div class="col-md-3 text-center">
+                                            <a href="{{ route('invite.response') }}" onclick="event.preventDefault(); document.getElementById('accept-form').submit();"><span><i class="fa fa-check" aria-hidden="true"></i> Accept</span></a>
+                                            <form id="accept-form" action="{{ route('invite.response') }}" method="POST" style="display: none;">
+                                                {{ csrf_field() }}
+                                                <input type="hidden" name="response" value="1">
+                                                <input type="hidden" name="channel" value="{{ $invitation->id }}">
+                                            </form>
+                                        </div>
+                                        <div class="col-md-3 text-center">
+                                            <a href="{{ route('invite.response') }}" onclick="event.preventDefault(); document.getElementById('decline-form').submit();"><span><i class="fa fa-times" aria-hidden="true"></i> Decline</span></a>
+                                            <form id="decline-form" action="{{ route('invite.response') }}" method="POST" style="display: none;">
+                                                {{ csrf_field() }}
+                                                <input type="hidden" name="response" value="0">
+                                                <input type="hidden" name="channel" value="{{ $invitation->id }}">
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
                             @endforeach
                         @else

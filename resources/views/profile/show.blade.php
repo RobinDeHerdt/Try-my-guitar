@@ -20,7 +20,7 @@
                     </div>
                 @else
                     <div class="big-cta-button">
-                        <a href="{{ route('profile.edit', ['id' => $user->id]) }}">Edit profile</a>
+                        <a href="{{ route('profile.edit') }}">Edit profile</a>
                     </div>
                 @endif
                 </div>

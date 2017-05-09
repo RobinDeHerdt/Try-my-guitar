@@ -127,7 +127,7 @@ class ConversationController extends Controller
             }
         } else {
             $channel = new Channel();
-            $channel->name = "Private chat";
+            $channel->name = $auth_user->first_name . "'s chat";
             $channel->save();
 
             $auth_user->channels()->attach($channel->id, ['accepted' => true]);
