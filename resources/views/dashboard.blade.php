@@ -23,7 +23,7 @@
                             @endforeach
                         @else
                             <div class="message-teaser-container">
-                                <span>There are no unseen messages</span>
+                                <span>There are no unseen messages.</span>
                             </div>
                         @endif
                         <a href="{{ route('conversation.index') }}">All conversations</a>
@@ -43,6 +43,17 @@
                     <div class="profile-content">
                         <h3>Chat invitations</h3>
                         <hr>
+                        @if($invitations->isNotEmpty())
+                            @foreach($invitations as $invitation)
+                                <div class="message-teaser-container">
+                                    <span>New chat invitation from </span><strong>{{ $invitation->name }}</strong><br>
+                                </div>
+                            @endforeach
+                        @else
+                            <div class="message-teaser-container">
+                                <span>There are no open invitations.</span>
+                            </div>
+                        @endif
                     </div>
                 </div>
                 <div class="col-md-6">

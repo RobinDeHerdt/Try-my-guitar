@@ -17,7 +17,7 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
 
-        $channels = $user->channels()->where('seen', false)->take(3)->get();
+        $channels = $user->channels()->where('seen', false)->where('accepted', true)->take(3)->get();
 
         $messages_array = [];
 
@@ -33,8 +33,11 @@ class DashboardController extends Controller
 
         $messages = collect($messages_array);
 
+        $invitations = $user->channels()->where('accepted', false)->get();
+
         return view('dashboard', [
             'messages' => $messages,
+            'invitations' => $invitations,
         ]);
     }
 }
