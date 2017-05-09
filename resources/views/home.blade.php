@@ -45,20 +45,24 @@
                 </div>
             </div>
             @if($articles->isNotEmpty())
-            <div class="row row-padding-top">
                 <h2>@lang('titles.latest-news')</h2>
                 @foreach ($articles as $article)
-                    <div class="col-md-4">
-                        <div class="article">
-                            <div class="article-teaser-image" style="background-image: url({{ Storage::disk('public')->url($article->image_uri) }})"></div>
-                            <div class="article-teaser">
-                                <h4>{{ $article->title }}</h4>
-                                <p>{{ $article->body }}</p>
+                    @if($loop->index % 3 == 0)
+                        <div class="row">
+                    @endif
+                        <div class="col-md-4">
+                            <div class="article">
+                                <div class="article-teaser-image" style="background-image: url({{ Storage::disk('public')->url($article->image_uri) }})"></div>
+                                <div class="article-teaser">
+                                    <h4>{{ $article->title }}</h4>
+                                    <p>{{ $article->body }}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @if($loop->index % 3 == 2)
+                        </div>
+                    @endif
                 @endforeach
-            </div>
             <div class="row row-padding-top">
                 <div class="col-md-4 col-md-offset-4">
                     <div class="big-cta-button">
