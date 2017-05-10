@@ -16,6 +16,7 @@ Route::group([
 ], function () {
     // Authentication related routes.
     Auth::routes();
+    Route::get('/verify/{id}/{token}', 'Auth\VerifyController@verify')->name('verify');
 
     Route::get('/', 'HomeController@index')->name('home');
 

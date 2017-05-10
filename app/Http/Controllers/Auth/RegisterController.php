@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Mail\VerifyEmail;
 use App\User;
+use App\Mail\VerifyEmail;
+use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
@@ -66,16 +67,17 @@ class RegisterController extends Controller
     {
         $user = new User();
 
-        $user->first_name = $data['first_name'];
-        $user->last_name = $data['last_name'];
-        $user->email = $data['email'];
-        $user->password = bcrypt($data['password']);
+        $user->first_name           = $data['first_name'];
+        $user->last_name            = $data['last_name'];
+        $user->email                = $data['email'];
+        $user->password             = bcrypt($data['password']);
+        $user->verification_token   = str_random(12);
 
         $user->save();
 
         $user->roles()->attach(3);
 
-        Mail::to($user->email)->send(new VerifyEmail());
+        Mail::to($user->email)->send(new VerifyEmail($user));
 
         return $user;
     }

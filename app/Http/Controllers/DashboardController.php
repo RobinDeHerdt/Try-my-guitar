@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use Session;
 
 class DashboardController extends Controller
 {
@@ -57,6 +58,7 @@ class DashboardController extends Controller
         return view('dashboard', [
             'messages' => $messages,
             'invitations' => $invitations,
+            'user' => $this->user,
         ]);
     }
 }

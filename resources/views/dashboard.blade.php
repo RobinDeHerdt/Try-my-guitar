@@ -7,6 +7,15 @@
 @section('content')
     <div class="content">
         <div class="container">
+            @if (Session::has('success-message'))
+                <div class="alert alert-success">{{ Session::get('success-message') }}</div>
+            @endif
+            @if (Session::has('info-message'))
+                <div class="alert alert-info">{{ Session::get('info-message') }}</div>
+            @endif
+            @if (Session::has('error-message'))
+                <div class="alert alert-danger">{{ Session::get('error-message') }}</div>
+            @endif
             <div class="row">
                 <div class="col-md-6">
                     <div class="profile-content">
@@ -81,6 +90,9 @@
                         <h3>Personal information</h3>
                         <hr>
                         <a href="{{ route('profile.edit') }}">Edit</a>
+                        @if(!$user->verified)
+                            <span>You have not yet verified your e-mail address yet. Click here to send the verification mail again.</span>
+                        @endif
                     </div>
                 </div>
             </div>
