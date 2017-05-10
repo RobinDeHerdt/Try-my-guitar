@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use Auth;
 use App\User;
+use App\Mail\VerifyEmail;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\Controller;
 
 class VerifyController extends Controller
@@ -33,6 +35,22 @@ class VerifyController extends Controller
         } else {
             Session::flash('error-message', 'Verification invalid. Please request another email from the dashboard.');
         }
+
+        return redirect(route('dashboard'));
+    }
+
+    /**
+     * Sends the verification mail once again.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function resend()
+    {
+        $user = Auth::user();
+
+        Mail::to($user->email)->send(new VerifyEmail($user));
+
+        Session::flash('success-message', "We've sent you a verification at " . $user->email . '.');
 
         return redirect(route('dashboard'));
     }

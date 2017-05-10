@@ -57,7 +57,7 @@
                                 <div class="message-teaser-container">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <span>Invitation: </span><strong>{{ $invitation->name }}</strong>
+                                            <span><strong>{{ $invitation->name }}</strong></span>
                                         </div>
                                         <div class="col-md-3 text-center">
                                             <a href="{{ route('invite.response') }}" onclick="event.preventDefault(); document.getElementById('accept-form').submit();"><span><i class="fa fa-check" aria-hidden="true"></i> Accept</span></a>
@@ -92,7 +92,7 @@
                         <a href="{{ route('profile.edit') }}">Edit</a>
                         @if(!$user->verified)
                             <hr>
-                            <span>You have not yet verified your e-mail address yet. Click here to send the verification mail again.</span>
+                            <span>You have not yet verified your e-mail address yet. Click <a href="{{ route('verify.resend') }}">here</a> to send the verification mail again.</span>
                         @endif
                     </div>
                 </div>
