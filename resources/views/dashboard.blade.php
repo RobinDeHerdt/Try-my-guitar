@@ -91,6 +91,7 @@
                         <hr>
                         <a href="{{ route('profile.edit') }}">Edit</a>
                         @if(!$user->verified)
+                            <hr>
                             <span>You have not yet verified your e-mail address yet. Click here to send the verification mail again.</span>
                         @endif
                     </div>

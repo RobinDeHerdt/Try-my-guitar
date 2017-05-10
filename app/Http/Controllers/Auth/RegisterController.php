@@ -30,7 +30,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/dashboard';
 
     /**
      * Create a new controller instance.
@@ -78,6 +78,8 @@ class RegisterController extends Controller
         $user->roles()->attach(3);
 
         Mail::to($user->email)->send(new VerifyEmail($user));
+
+        Session::flash('success-message', "Thanks for registering! We've sent you a verification link via email.");
 
         return $user;
     }
