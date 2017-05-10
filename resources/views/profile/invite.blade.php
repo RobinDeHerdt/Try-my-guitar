@@ -27,8 +27,8 @@
                             @foreach($channels as $channel)
                                 <div class="channel">
                                     <div class="channel-name">
-                                        <a href="{{ route('conversation.invite') }}" onclick="event.preventDefault(); document.getElementById('invite-form-{{ $channel->id }}').submit();"><i class="fa fa-user-plus" aria-hidden="true"></i>{{ $channel->name }}</a>
-                                        <form id="invite-form-{{ $channel->id }}" action="{{ route('conversation.invite') }}" method="POST" style="display: none;">
+                                        <a href="{{ route('invite') }}" onclick="event.preventDefault(); document.getElementById('invite-form-{{ $channel->id }}').submit();"><i class="fa fa-user-plus" aria-hidden="true"></i>{{ $channel->name }}</a>
+                                        <form id="invite-form-{{ $channel->id }}" action="{{ route('invite') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                             <input type="hidden" name="user_id" value="{{ $user->id }}">
                                             <input type="hidden" name="channel_id" value="{{ $channel->id }}">
@@ -47,8 +47,8 @@
                             @endforeach
                             <div class="channel">
                                 <div class="channel-name">
-                                    <a href="{{ route('conversation.invite') }}" onclick="event.preventDefault(); document.getElementById('invite-form-create-new').submit();"><i class="fa fa-user-plus" aria-hidden="true"></i>Create a new conversation</a>
-                                    <form id="invite-form-create-new" action="{{ route('conversation.invite') }}" method="POST" style="display: none;">
+                                    <a href="{{ route('invite') }}" onclick="event.preventDefault(); document.getElementById('invite-form-create-new').submit();"><i class="fa fa-user-plus" aria-hidden="true"></i>Create a new conversation</a>
+                                    <form id="invite-form-create-new" action="{{ route('invite') }}" method="POST" style="display: none;">
                                         {{ csrf_field() }}
                                         <input type="hidden" name="user_id" value="{{ $user->id }}">
                                     </form>

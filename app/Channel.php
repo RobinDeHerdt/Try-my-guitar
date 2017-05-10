@@ -25,4 +25,14 @@ class Channel extends Model
     {
         return $this->hasMany('App\Message');
     }
+
+    /**
+     * A channel has many invites.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function invites()
+    {
+        return $this->hasMany('App\Invite');
+    }
 }

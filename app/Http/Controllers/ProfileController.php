@@ -98,27 +98,4 @@ class ProfileController extends Controller
             'channels'  => $channels,
         ]);
     }
-
-    /**
-     * Handle the user invite response.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function response(Request $request)
-    {
-        if ($request->response) {
-            // Accept the invite.
-            $this->user->channels()->updateExistingPivot($request->channel, ['accepted' => true]);
-
-            Session::flash('success-message', 'You have joined the chat.');
-
-            return redirect(route('conversation.show', ['id' => $request->channel]));
-        } else {
-            // Decline the invite.
-            $this->user->channels()->detach($request->channel);
-
-            return back();
-        }
-    }
 }

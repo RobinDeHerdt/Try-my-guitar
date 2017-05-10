@@ -30,12 +30,12 @@ Route::group([
     Route::post('profile/update', 'ProfileController@update')->name('profile.update');
 
     Route::get('profile/{user}/invite', 'ProfileController@invite')->name('profile.invite');
-    Route::post('invite/response', 'ProfileController@response')->name('invite.response');
 
     // Conversation related routes.
     Route::get('conversations', 'ConversationController@index')->name('conversation.index');
     Route::get('conversations/{channel}', 'ConversationController@show')->name('conversation.show');
-    Route::post('conversations/invite', 'ConversationController@invite')->name('conversation.invite');
+    Route::post('invite', 'ConversationController@invite')->name('invite');
+    Route::post('invite/response', 'ConversationController@inviteResponse')->name('invite.response');
 
     // Conversation API related routes.
     Route::get('conversations/{channel}/messages', 'ConversationController@messages');

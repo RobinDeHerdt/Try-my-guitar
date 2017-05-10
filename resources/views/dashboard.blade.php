@@ -50,29 +50,29 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="profile-content">
-                        <h3>Chat invitations</h3>
+                        <h3>Chat invites</h3>
                         <hr>
-                        @if($invitations->isNotEmpty())
-                            @foreach($invitations as $invitation)
+                        @if($received_invites->isNotEmpty())
+                            @foreach($received_invites as $invite)
                                 <div class="message-teaser-container">
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            <span><strong>{{ $invitation->name }}</strong></span>
+                                        <div class="col-md-8">
+                                            <span>You have been invited by <strong>{{ $invite->sender->first_name }}</strong> to join <strong>{{ $invite->channel->name }}</strong></span>
                                         </div>
-                                        <div class="col-md-3 text-center">
+                                        <div class="col-md-2 text-center">
                                             <a href="{{ route('invite.response') }}" onclick="event.preventDefault(); document.getElementById('accept-form').submit();"><span><i class="fa fa-check" aria-hidden="true"></i> Accept</span></a>
                                             <form id="accept-form" action="{{ route('invite.response') }}" method="POST" style="display: none;">
                                                 {{ csrf_field() }}
                                                 <input type="hidden" name="response" value="1">
-                                                <input type="hidden" name="channel" value="{{ $invitation->id }}">
+                                                <input type="hidden" name="invite_id" value="{{ $invite->id }}">
                                             </form>
                                         </div>
-                                        <div class="col-md-3 text-center">
+                                        <div class="col-md-2 text-center">
                                             <a href="{{ route('invite.response') }}" onclick="event.preventDefault(); document.getElementById('decline-form').submit();"><span><i class="fa fa-times" aria-hidden="true"></i> Decline</span></a>
                                             <form id="decline-form" action="{{ route('invite.response') }}" method="POST" style="display: none;">
                                                 {{ csrf_field() }}
                                                 <input type="hidden" name="response" value="0">
-                                                <input type="hidden" name="channel" value="{{ $invitation->id }}">
+                                                <input type="hidden" name="invite_id" value="{{ $invite->id }}">
                                             </form>
                                         </div>
                                     </div>
@@ -85,6 +85,37 @@
                         @endif
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <div class="profile-content">
+                        <h3>Pending chat invites</h3>
+                        <hr>
+                        @if($sent_invites->isNotEmpty())
+                            @foreach($sent_invites as $invite)
+                                <div class="message-teaser-container">
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <span>You have invited <strong>{{ $invite->receiver->first_name }}</strong> to join <strong>{{ $invite->channel->name }}</strong></span>
+                                        </div>
+                                        <div class="col-md-2 text-center">
+                                            <a href="{{ route('invite.response') }}" onclick="event.preventDefault(); document.getElementById('cancel-form').submit();"><span><i class="fa fa-times" aria-hidden="true"></i> Cancel</span></a>
+                                            <form id="cancel-form" action="{{ route('invite.response') }}" method="POST" style="display: none;">
+                                                {{ csrf_field() }}
+                                                <input type="hidden" name="response" value="0">
+                                                <input type="hidden" name="invite_id" value="{{ $invite->id }}">
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @else
+                            <div class="message-teaser-container">
+                                <span>There are no open invitations.</span>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-md-6">
                     <div class="profile-content">
                         <h3>Personal information</h3>

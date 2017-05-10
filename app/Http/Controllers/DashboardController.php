@@ -37,7 +37,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $channels = $this->user->channels()->where('seen', false)->where('accepted', true)->take(3)->get();
+        $channels = $this->user->channels()->where('seen', false)->where('accepted', true)->get();
 
         $messages_array = [];
 
@@ -53,12 +53,14 @@ class DashboardController extends Controller
 
         $messages = collect($messages_array);
 
-        $invitations = $this->user->channels()->where('accepted', false)->get();
+        $received_invites   = $this->user->receivedInvites()->get();
+        $sent_invites       = $this->user->sentInvites()->get();
 
         return view('dashboard', [
-            'messages' => $messages,
-            'invitations' => $invitations,
-            'user' => $this->user,
+            'received_invites'  => $received_invites,
+            'sent_invites'      => $sent_invites,
+            'messages'          => $messages,
+            'user'              => $this->user,
         ]);
     }
 }

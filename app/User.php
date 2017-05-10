@@ -64,6 +64,26 @@ class User extends Authenticatable
     }
 
     /**
+     * A user has many invites.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function sentInvites()
+    {
+        return $this->hasMany('App\Invite', 'sender_id');
+    }
+
+    /**
+     * A user has many invites.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function receivedInvites()
+    {
+        return $this->hasMany('App\Invite', 'receiver_id');
+    }
+
+    /**
      * A user belongs to many channels.
      *
      * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
