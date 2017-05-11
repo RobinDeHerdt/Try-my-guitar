@@ -9,16 +9,25 @@ class SearchController extends Controller
 {
     public function search(Request $request)
     {
-        $search_term = strip_tags($request->term);
+        $input = strip_tags($request->term);
 
-        $users = User::where('first_name', 'LIKE', $search_term)
-            ->orWhere('last_name', 'LIKE', $search_term)
-            ->take(6)
-            ->get();
+        // Check if the input is not empty.
+        if (!empty($input) && !ctype_space($input)) {
+            // Remove whitespace from both sides of the string.
+            $term = trim($input);
+
+            $users = User::where('first_name', 'LIKE', $term)
+                ->orWhere('last_name', 'LIKE', $term)
+                ->take(6)
+                ->get();
+            
+        } else {
+            return back();
+        }
 
         return view('results', [
             'users' => $users,
-            'search_term' => $search_term,
+            'search_term' => $term,
         ]);
     }
 }
