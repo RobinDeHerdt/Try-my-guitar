@@ -72,7 +72,7 @@ class ConversationController extends Controller
         // Set channel to unseen for every participant.
         foreach ($participants as $participant) {
             if ($participant->id !== $this->user->id) {
-                $participant->channels()->updateExistingPivot($channel->id, ['seen' => false]);
+                $participant->setChannelUnseen($channel->id);
             }
         }
 
@@ -113,7 +113,7 @@ class ConversationController extends Controller
     {
         $messages = $channel->messages()->with('user')->get();
 
-        $this->user->channels()->updateExistingPivot($channel->id, ['seen' => true]);
+        $this->user->setChannelSeen($channel->id);
 
         return $messages;
     }
@@ -126,7 +126,7 @@ class ConversationController extends Controller
      */
     public function seen(Channel $channel)
     {
-        $this->user->channels()->updateExistingPivot($channel->id, ['seen' => true]);
+        $this->user->setChannelSeen($channel->id);
 
         return response('success', 200);
     }
@@ -156,20 +156,20 @@ class ConversationController extends Controller
                 Session::flash('success-message', 'Invite sent!');
             } else {
                 Session::flash('info-message', 'This invite was already sent. Please wait for the persons answer.');
+
+                return back();
             }
         } else {
-            // @Todo this logic should be executed after the user accepts the invite.
             $channel = new Channel();
             $channel->name = $this->user->first_name . "'s chat";
             $channel->save();
 
-            // The creator of the channel gets the accepted status.
-            $this->user->channels()->attach($channel->id, ['accepted' => true]);
+            // The creator of the channel gets the 'accepted' status.
+            $this->user->addAcceptedUserToChannel($channel->id);
 
             Session::flash('success-message', 'Chat created and invite sent!');
         }
 
-        // Create a new invite.
         $invite = new Invite();
 
         $invite->sender_id      = $this->user->id;
@@ -178,11 +178,8 @@ class ConversationController extends Controller
 
         $invite->save();
 
-        // Invite the user to the specified channel.
-        // @todo move this logic to model.
-        $user->channels()->attach($channel->id, [
-            'accepted' => false,
-        ]);
+        // The user invited to the channel gets the 'not accepted' status.
+        $user->addUnacceptedUserToChannel($channel->id);
 
         return back();
     }
@@ -196,26 +193,22 @@ class ConversationController extends Controller
     public function inviteResponse(Request $request)
     {
         $invite         = Invite::find($request->invite_id);
-        $channel_id     = $invite->channel->id;
+        $channel        = $invite->channel;
+        $channel_id     = $channel->id;
 
         if ($request->response) {
-            // Set the user as accepted in the chat channel.
-            $this->user->channels()->updateExistingPivot($channel_id, ['accepted' => true]);
-
-            // Delete the invite.
-            $this->user->receivedInvites()->where('channel_id', $channel_id)->delete();
+            $this->user->acceptUserToChannel($channel_id);
+            $this->user->removeChannelInvites($channel_id);
 
             Session::flash('success-message', 'You have joined the chat.');
 
             return redirect(route('conversation.show', ['id' => $channel_id]));
         } else {
-            // Decline the invite.
             $receiver = $invite->receiver;
             
-            $receiver->channels()->detach($channel_id);
-
-            // Delete the invite.
-            $receiver->receivedInvites()->where('channel_id', $channel_id)->delete();
+            $receiver->removeUserFromChannel($channel_id);
+            $receiver->removeChannelInvites($channel_id);
+            $channel->removeChannelIfEmpty();
 
             return back();
         }

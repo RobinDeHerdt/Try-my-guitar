@@ -27,6 +27,17 @@ class Channel extends Model
     }
 
     /**
+     * Remove the channel if only one person is in the channel and no invites are sent.
+     */
+    public function removeChannelIfEmpty()
+    {
+        if ($this->users()->count() === 1) {
+            $this->users()->detach();
+            $this->delete();
+        }
+    }
+
+    /**
      * A channel has many invites.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

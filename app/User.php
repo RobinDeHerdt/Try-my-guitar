@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\App;
 
 class User extends Authenticatable
 {
@@ -91,6 +92,62 @@ class User extends Authenticatable
     public function channels()
     {
         return $this->belongsToMany('App\Channel');
+    }
+
+    /**
+     * Add the user to a channel and set the 'not accepted' status.
+     */
+    public function addUnacceptedUserToChannel($channel_id)
+    {
+        $this->channels()->attach($channel_id, ['accepted' => false]);
+    }
+
+    /**
+     * Add the user to a channel and set the 'accepted' status.
+     */
+    public function addAcceptedUserToChannel($channel_id)
+    {
+        $this->channels()->attach($channel_id, ['accepted' => true]);
+    }
+
+    /**
+     * Set the 'accepted' status for the user, who was already added to the channeL.
+     */
+    public function acceptUserToChannel($channel_id)
+    {
+        $this->channels()->updateExistingPivot($channel_id, ['accepted' => true]);
+    }
+
+    /**
+     * Add the user to a channel and set the 'accepted' status.
+     */
+    public function removeUserFromChannel($channel_id)
+    {
+        $this->channels()->detach($channel_id);
+    }
+
+    /**
+     * Set the user status to 'seen' for the specified channel.
+     */
+    public function setChannelSeen($channel_id)
+    {
+        $this->channels()->updateExistingPivot($channel_id, ['seen' => true]);
+    }
+
+    /**
+     * Set the user status to 'unseen' for the specified channel.
+     */
+    public function setChannelNotSeen($channel_id)
+    {
+        $this->channels()->detach($channel_id);
+    }
+
+    /**
+     * Remove the user's invites for the specified channel.
+     */
+    public function removeChannelInvites($channel_id)
+    {
+        $this->receivedInvites()->where('channel_id', $channel_id)->delete();
     }
 
     /**
