@@ -40,3 +40,17 @@
     border-radius: 0;
   }
 }
+
+.edit-channel-form {
+  float: left;
+  width: 100%;
+  margin-top: 10px;
+
+  .close-edit-form {
+    float: right;
+    cursor: pointer;
+    position: relative;
+    top: 5px;
+    left: 30px;
+  }
+}

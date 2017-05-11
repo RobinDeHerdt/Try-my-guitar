@@ -6,7 +6,7 @@
   margin-top: 30px;
 
   &:hover .search-result-overlay {
-    opacity: 0.9;
+    opacity: 1;
   }
 
   .search-result-image {
@@ -31,13 +31,14 @@
     right: 15px;
     opacity: 0;
     transition: .5s ease;
-    background-color: $primary-font-color;
+    background-color: $primary-component-color;
 
     .search-result-overlay-text {
       position: relative;
       top: 40%;
       color: #fff;
-      font-size: 24px;
+      font-size: 28px;
+      font-weight: 600;
     }
   }
 }
