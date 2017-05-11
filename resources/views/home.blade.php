@@ -5,14 +5,15 @@
 @endsection
 
 @section('content')
-    <div class="content white-bg">
+    <div class="content">
         <div class="header-content">
             <h1>Try my guitar</h1>
             <div class="header-search">
-                <form class="form-inline">
-                    <input type="text" class="form-control search-input" name="search-term" placeholder="Search for a user or guitar">
-                    <a href="#" class="btn btn-default search-submit" id="search-submit">Search</a>
-                    <a href="#" class="btn btn-default search-submit" id="search-submit-mobile"><i class="fa fa-search" aria-hidden="true"></i></a>
+                <form class="form-inline" id="search-form" method="POST" action="{{ route('search') }}">
+                    {{ csrf_field() }}
+                    <input type="text" class="form-control search-input" name="search_term" placeholder="Search for a user or guitar">
+                    <a href="{{ route('search') }}" class="btn btn-default search-submit" id="search-submit" onclick="event.preventDefault(); document.getElementById('search-form').submit();">Search</a>
+                    <a href="{{ route('search') }}" class="btn btn-default search-submit" id="search-submit-mobile" onclick="event.preventDefault(); document.getElementById('search-form').submit();"><i class="fa fa-search" aria-hidden="true"></i></a>
                 </form>
             </div>
         </div>

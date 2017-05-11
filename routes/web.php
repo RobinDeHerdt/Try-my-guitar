@@ -20,6 +20,7 @@ Route::group([
     Route::get('/verify/resend', 'Auth\VerifyController@resend')->name('verify.resend');
 
     Route::get('/', 'HomeController@index')->name('home');
+    Route::post('search', 'SearchController@search')->name('search');
 
     // Dashboard related routes.
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
