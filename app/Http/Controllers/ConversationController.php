@@ -72,7 +72,7 @@ class ConversationController extends Controller
         // Set channel to unseen for every participant.
         foreach ($participants as $participant) {
             if ($participant->id !== $this->user->id) {
-                $participant->setChannelUnseen($channel->id);
+                $participant->setChannelNotSeen($channel->id);
             }
         }
 
@@ -192,11 +192,21 @@ class ConversationController extends Controller
      */
     public function inviteResponse(Request $request)
     {
-        $invite         = Invite::find($request->invite_id);
-        $channel        = $invite->channel;
-        $channel_id     = $channel->id;
+        $invite = Invite::find($request->invite_id);
+        $response = $request->response;
 
-        if ($request->response) {
+        if (!isset($invite->channel)) {
+            if ($response) {
+                Session::flash('error-message', 'Oops! We can\'t add you to the conversation. The invite was either cancelled or expired.');
+            }
+
+            return back();
+        }
+
+        $channel = $invite->channel;
+        $channel_id = $channel->id;
+
+        if ($response) {
             $this->user->acceptUserToChannel($channel_id);
             $this->user->removeChannelInvites($channel_id);
 

@@ -139,7 +139,7 @@ class User extends Authenticatable
      */
     public function setChannelNotSeen($channel_id)
     {
-        $this->channels()->detach($channel_id);
+        $this->channels()->updateExistingPivot($channel_id, ['seen' => false]);
     }
 
     /**
