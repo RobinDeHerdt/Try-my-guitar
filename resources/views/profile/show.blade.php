@@ -12,14 +12,16 @@
             <h1 class="profile-name">{{ $user->first_name . ' ' . $user->last_name }}</h1>
             <div class="row">
                 <div class="col-md-2 col-md-offset-5">
-                    @if ($user->id !== Auth::user()->id)
-                        <div class="big-cta-button">
-                            <a href="{{ route('profile.invite', ['id' => $user->id]) }}">Invite to chat</a>
-                        </div>
-                    @else
-                        <div class="big-cta-button">
-                            <a href="{{ route('profile.edit') }}">Edit profile</a>
-                        </div>
+                    @if(Auth::check())
+                        @if ($user->id === Auth::user()->id)
+                            <div class="big-cta-button">
+                                <a href="{{ route('profile.edit') }}">Edit profile</a>
+                            </div>
+                        @else
+                            <div class="big-cta-button">
+                                <a href="{{ route('profile.invite', ['id' => $user->id]) }}">Invite to chat</a>
+                            </div>
+                        @endif
                     @endif
                 </div>
             </div>

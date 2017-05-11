@@ -9,9 +9,8 @@
         <div class="header-content">
             <h1>Try my guitar</h1>
             <div class="header-search">
-                <form class="form-inline" id="search-form" method="POST" action="{{ route('search') }}">
-                    {{ csrf_field() }}
-                    <input type="text" class="form-control search-input" name="search_term" placeholder="Search for a user or guitar">
+                <form class="form-inline" id="search-form" method="GET" action="{{ route('search') }}">
+                    <input type="text" class="form-control search-input" name="term" placeholder="Search for a user or guitar">
                     <a href="{{ route('search') }}" class="btn btn-default search-submit" id="search-submit" onclick="event.preventDefault(); document.getElementById('search-form').submit();">Search</a>
                     <a href="{{ route('search') }}" class="btn btn-default search-submit" id="search-submit-mobile" onclick="event.preventDefault(); document.getElementById('search-form').submit();"><i class="fa fa-search" aria-hidden="true"></i></a>
                 </form>

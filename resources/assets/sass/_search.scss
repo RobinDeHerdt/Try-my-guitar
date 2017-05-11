@@ -1,0 +1,49 @@
+.search-result {
+  background-color: $secondary-bg-color;
+  box-shadow: $drop-shadow;
+  text-align: center;
+  padding: 20px;
+  margin-top: 30px;
+
+  &:hover .search-result-overlay {
+    opacity: 0.9;
+  }
+
+  .search-result-image {
+    margin: 0 auto;
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+    background-position: center;
+    background-size: cover;
+  }
+
+  h3 {
+    color: $primary-font-color;
+    font-size: 24px;
+  }
+
+  .search-result-overlay {
+    position: absolute;
+    top: 30px;
+    bottom: 0;
+    left: 15px;
+    right: 15px;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: $primary-font-color;
+
+    .search-result-overlay-text {
+      position: relative;
+      top: 40%;
+      color: #fff;
+      font-size: 24px;
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .search-result .search-result-overlay {
+    top: 0;
+  }
+}

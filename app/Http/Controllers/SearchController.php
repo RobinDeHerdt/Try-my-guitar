@@ -9,13 +9,12 @@ class SearchController extends Controller
 {
     public function search(Request $request)
     {
-        $search_term = strip_tags($request->search_term);
+        $search_term = strip_tags($request->term);
 
         $users = User::where('first_name', 'LIKE', $search_term)
             ->orWhere('last_name', 'LIKE', $search_term)
-            ->paginate(10);
-
-
+            ->take(6)
+            ->get();
 
         return view('results', [
             'users' => $users,
