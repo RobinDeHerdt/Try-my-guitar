@@ -46,11 +46,19 @@
   width: 100%;
   margin-top: 10px;
 
+  form {
+    margin-top: 50px;
+  }
+
   .close-edit-form {
     float: right;
     cursor: pointer;
     position: relative;
     top: 5px;
     left: 30px;
+
+    span:first-child {
+      margin-right: 5px;
+    }
   }
 }
