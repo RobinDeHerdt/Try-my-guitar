@@ -95,6 +95,20 @@ class User extends Authenticatable
     }
 
     /**
+     * Returns the full user name.
+     *
+     * @return string
+     */
+    public function fullName()
+    {
+        if (isset($this->last_name)) {
+            return $this->first_name . ' ' . $this->last_name;
+        } else {
+            return $this->first_name;
+        }
+    }
+
+    /**
      * Add the user to a channel and set the 'not accepted' status.
      */
     public function addUnacceptedUserToChannel($channel_id)

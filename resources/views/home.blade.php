@@ -18,7 +18,7 @@
         </div>
         <div class="header-image" style="background-image: url('/images/register-bg.jpg');"></div>
         <div class="container">
-            <div class="row row-padding-top">
+            <div class="row padding-top">
                 <h2>@lang('titles.how-does-it-work')</h2>
             </div>
             <div class="row">
@@ -45,7 +45,7 @@
                 </div>
             </div>
             @if($articles->isNotEmpty())
-                <h2>@lang('titles.latest-news')</h2>
+                <h2 class="padding-top">@lang('titles.latest-news')</h2>
                 @foreach ($articles as $article)
                     @if($loop->index % 3 == 0)
                         <div class="row">
@@ -63,7 +63,7 @@
                         </div>
                     @endif
                 @endforeach
-                <div class="row row-padding-top">
+                <div class="row padding-top">
                     <div class="col-md-4 col-md-offset-4">
                         <div class="big-cta-button">
                             <a href="#" class="text-uppercase">Read more</a>

@@ -218,7 +218,6 @@ class ConversationController extends Controller
             
             $receiver->removeUserFromChannel($channel_id);
             $receiver->removeChannelInvites($channel_id);
-            $channel->removeChannelIfEmpty();
 
             return back();
         }
@@ -232,10 +231,7 @@ class ConversationController extends Controller
      */
     public function leave(Request $request)
     {
-        $channel = Channel::find($request->channel_id);
-
-        $this->user->removeUserFromChannel($channel->id);
-        $channel->removeChannelIfEmpty();
+        $this->user->removeUserFromChannel($request->channel_id);
 
         Session::flash('success-message', 'You have left the conversation.');
 
