@@ -35,6 +35,7 @@ Route::group([
     // Conversation related routes.
     Route::get('conversations', 'ConversationController@index')->name('conversation.index');
     Route::get('conversations/{channel}', 'ConversationController@show')->name('conversation.show');
+    Route::post('conversations/edit', 'ConversationController@update')->name('conversation.update');
     Route::post('conversations/leave', 'ConversationController@leave')->name('conversation.leave');
 
     Route::post('invite', 'ConversationController@sendInvite')->name('invite');

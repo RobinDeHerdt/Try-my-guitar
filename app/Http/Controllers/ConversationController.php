@@ -53,6 +53,22 @@ class ConversationController extends Controller
     }
 
     /**
+     * Edit the specified channel name.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request)
+    {
+        $channel = Channel::find($request->channel_id);
+
+        $channel->name = $request->channel_name;
+
+        $channel->save();
+
+        return back();
+    }
+
+    /**
      * Store a message in database and broadcast it to the current channel.
      *
      * @param  Request  $request
