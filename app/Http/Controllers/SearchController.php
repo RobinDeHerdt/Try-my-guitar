@@ -20,7 +20,7 @@ class SearchController extends Controller
                 ->orWhere('last_name', 'LIKE', $term)
                 ->take(6)
                 ->get();
-            
+
         } else {
             return back();
         }

@@ -9,6 +9,11 @@
         <div class="header-image profile-header-image" style="background-image: url('/images/electric-guitars.jpg');"></div>
         <div class="container profile-container">
             <div class="profile-image" style="background-image: url({{ Storage::disk('public')->url($user->image_uri) }})"></div>
+            @if($user->verified)
+            <span title="Verified e-mail address">
+                <div class="verified-mark"><i class="fa fa-check fa-2x" aria-hidden="true"></i></div>
+            </span>
+            @endif
             <h1 class="profile-name">{{ $user->first_name . ' ' . $user->last_name }}</h1>
             <div class="row">
                 <div class="col-md-2 col-md-offset-5">

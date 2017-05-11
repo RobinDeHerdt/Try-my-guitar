@@ -69,6 +69,24 @@
 .profile-container {
   text-align: center;
 
+  .verified-mark {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    margin: 0 auto;
+    background-color: green;
+    border: solid 2px $primary-bg-color;
+    color: white;
+    position: relative;
+    top: -55px;
+    right: -80px;
+
+    i {
+      position: relative;
+      top: 9px;
+    }
+  }
+
   .profile-image {
     position: relative;
     margin: 0 auto;
