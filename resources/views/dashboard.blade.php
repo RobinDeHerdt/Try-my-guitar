@@ -18,7 +18,7 @@
             @endif
             <div class="row">
                 <div class="col-md-6">
-                    <div class="profile-content">
+                    <div class="dashboard-content">
                         <h3>Messages</h3>
                         <hr>
                         @if($messages->isNotEmpty())
@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="profile-content">
+                    <div class="dashboard-content">
                         <h3>Collection</h3>
                         <hr>
                         <a href="#">View full collection</a><br>
@@ -49,7 +49,7 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <div class="profile-content">
+                    <div class="dashboard-content">
                         <h3>Chat invites</h3>
                         <hr>
                         @if($received_invites->isNotEmpty())
@@ -86,7 +86,7 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="profile-content">
+                    <div class="dashboard-content">
                         <h3>Pending chat invites</h3>
                         <hr>
                         @if($sent_invites->isNotEmpty())
@@ -117,10 +117,11 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <div class="profile-content">
+                    <div class="dashboard-content">
                         <h3>Personal information</h3>
                         <hr>
-                        <a href="{{ route('profile.edit') }}">Edit</a>
+                        <a href="{{ route('profile.edit') }}">Edit personal information</a><br>
+                        <a href="{{ route('profile.show', ['id' => $user->id]) }}">View profile</a>
                         @if(!$user->verified)
                             <hr>
                             <span>You have not yet verified your e-mail address yet. Click <a href="{{ route('verify.resend') }}">here</a> to send the verification mail again.</span>

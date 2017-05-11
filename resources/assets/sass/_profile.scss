@@ -61,40 +61,34 @@
   }
 }
 
-.profile-image {
-  background-size: cover;
-  background-position: center;
-  height: 300px;
-  border: solid 5px $primary-bg-color;
-  margin-top: -150px;
-  border-radius: 50%;
-}
-
 .profile-header-image {
   background-position: top;
   height: 450px;
 }
 
-.edit-profile-picture {
-  width: 100%;
-}
+.profile-container {
+  text-align: center;
 
-.profile-content {
-  background-color: $secondary-bg-color;
-  padding: 20px;
-  margin-top: 35px;
-  box-shadow: $drop-shadow;
+  .profile-image {
+    position: relative;
+    margin: 0 auto;
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+    width: 300px;
+    border: solid 5px $primary-bg-color;
+    margin-top: -150px;
+    border-radius: 50%;
+  }
 
-  h3 {
-    text-transform: uppercase;
-    margin-top: 0;
-    margin-bottom: 10px;
+  .profile-name {
+    margin-top: 40px;
+    font-size: 48px;
   }
 }
 
-.profile-name {
-  position: relative;
-  left: 30px;
+.edit-profile-picture {
+  width: 100%;
 }
 
 .profile-nav {
