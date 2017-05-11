@@ -137,7 +137,7 @@ class ConversationController extends Controller
      * @param  Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function invite(Request $request)
+    public function sendInvite(Request $request)
     {
         $user = User::find($request->user_id);
 
@@ -222,5 +222,23 @@ class ConversationController extends Controller
 
             return back();
         }
+    }
+
+    /**
+     * Leave the specified channel.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function leave(Request $request)
+    {
+        $channel = Channel::find($request->channel_id);
+
+        $this->user->removeUserFromChannel($channel->id);
+        $channel->removeChannelIfEmpty();
+
+        Session::flash('success-message', 'You have left the conversation.');
+
+        return redirect(route('conversation.index'));
     }
 }

@@ -34,7 +34,9 @@ Route::group([
     // Conversation related routes.
     Route::get('conversations', 'ConversationController@index')->name('conversation.index');
     Route::get('conversations/{channel}', 'ConversationController@show')->name('conversation.show');
-    Route::post('invite', 'ConversationController@invite')->name('invite');
+    Route::post('conversations/leave', 'ConversationController@leave')->name('conversation.leave');
+
+    Route::post('invite', 'ConversationController@sendInvite')->name('invite');
     Route::post('invite/response', 'ConversationController@inviteResponse')->name('invite.response');
 
     // Conversation API related routes.

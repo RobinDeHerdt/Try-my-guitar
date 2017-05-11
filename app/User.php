@@ -119,7 +119,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Add the user to a channel and set the 'accepted' status.
+     * Remove the user from the specified channel.
      */
     public function removeUserFromChannel($channel_id)
     {

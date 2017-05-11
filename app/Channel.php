@@ -33,7 +33,6 @@ class Channel extends Model
     {
         if ($this->users()->count() === 1) {
             $this->users()->detach();
-            $this->delete();
         }
     }
 
