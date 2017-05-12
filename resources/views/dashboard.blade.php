@@ -120,7 +120,9 @@
                     <div class="dashboard-content">
                         <h3>Personal information</h3>
                         <hr>
-                        <a href="{{ route('profile.edit') }}">Edit personal information</a><br>
+                        <a href="{{ route('profile.edit') }}">Personal information</a><br>
+                        <a href="{{ route('profile.appearance.edit') }}">Profile appearance</a>
+                        <hr>
                         <a href="{{ route('profile.show', ['id' => $user->id]) }}">View profile</a>
                         @if(!$user->verified)
                             <hr>

@@ -27,6 +27,8 @@ Route::group([
 
     // Profile related routes.
     Route::get('profile/edit', 'ProfileController@edit')->name('profile.edit');
+    Route::get('profile/appearance/edit', 'ProfileController@editAppearance')->name('profile.appearance.edit');
+
     Route::get('profile/{id}', 'ProfileController@show')->name('profile.show');
     Route::post('profile/update', 'ProfileController@update')->name('profile.update');
 

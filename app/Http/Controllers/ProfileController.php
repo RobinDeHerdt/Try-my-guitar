@@ -59,6 +59,18 @@ class ProfileController extends Controller
     }
 
     /**
+     * Show the appeatance edit form for the specified user profile.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function editAppearance()
+    {
+        return view('profile.edit-appearance', [
+            'user' => $this->user,
+        ]);
+    }
+
+    /**
      * Update the specified user profile.
      *
      * @param  \Illuminate\Http\Request  $request
