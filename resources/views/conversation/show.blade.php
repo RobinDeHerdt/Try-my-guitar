@@ -7,9 +7,22 @@
 @section('content')
     <div class="content" id="chat-page">
         <div class="container">
-            <div class="row heading">
+            <div class="row">
                 <div class="col-md-12">
                     <h2>{{ $channel->name }}</h2>
+                </div>
+            </div>
+            <div class="conversation-participants">
+                @foreach($channel->users as $user)
+                    <div class="profile-teaser {{ $user->pivot->accepted ? '' : 'invited' }}">
+                        <a href="{{ route('profile.show', ['id' => $user->id]) }}" title="{{ $user->fullName() }}{{ $user->pivot->accepted ? '' : ' - Invite pending' }}">
+                            <div class="profile-picture" style="background-image: url('{{ Storage::disk('public')->url($user->image_uri) }}')"></div>
+                        </a>
+                    </div>
+                @endforeach
+            </div>
+            <div class="row heading">
+                <div class="col-md-12">
                     <a href="{{ route('conversation.leave') }}" class="icon-text" onclick="event.preventDefault(); document.getElementById('leave-form').submit();"><span class="glyphicon glyphicon-log-out"></span>Leave this conversation</a>
                     <a href="{{ route('conversation.index') }}" class="icon-text"><span class="glyphicon glyphicon-th-list"></span>Back to conversations</a>
                     <a href="{{ route('conversation.update') }}" class="icon-text" onclick="event.preventDefault(); document.getElementById('edit-channel-form').style.display = 'inherit'"><span class="glyphicon glyphicon-pencil"></span>Edit conversation name</a>
