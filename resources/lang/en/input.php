@@ -12,6 +12,7 @@ return [
     'name'              => 'Name',
     'first-name'        => 'First name',
     'last-name'         => 'Last name',
+    'location'          => 'Location',
     'password'          => 'Password',
     'confirm-password'  => 'Confirm password',
     'login'             => 'Login',

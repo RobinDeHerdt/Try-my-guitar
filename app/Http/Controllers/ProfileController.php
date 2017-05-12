@@ -71,6 +71,7 @@ class ProfileController extends Controller
         $user->first_name   = $request->first_name;
         $user->last_name    = $request->last_name;
         $user->email        = $request->email;
+        $user->location     = $request->location;
 
         if (isset($request->image)) {
             $user->image_uri = $request->image->store('images', 'public');

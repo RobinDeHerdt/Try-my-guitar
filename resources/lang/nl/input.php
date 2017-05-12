@@ -12,6 +12,7 @@ return [
     'name'              => 'Naam',
     'first-name'        => 'Voornaam',
     'last-name'         => 'Achternaam',
+    'location'          => 'Locatie',
     'password'          => 'Wachtwoord',
     'confirm-password'  => 'Bevestig wachtwoord',
     'login'             => 'Inloggen',

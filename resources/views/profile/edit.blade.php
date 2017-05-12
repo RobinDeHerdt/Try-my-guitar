@@ -36,6 +36,10 @@
                                 <label for="email">@lang('input.email') *</label>
                                 <input type="email" class="form-control" name="email" value="{{ $user->email }}" required>
                             </div>
+                            <div class="form-group">
+                                <label for="location">@lang('input.location')</label>
+                                <input type="text" class="form-control" name="location" value="{{ $user->location }}" required>
+                            </div>
                         </div>
                         <div class="col-md-4 col-md-offset-1">
                             <div class="form-group">

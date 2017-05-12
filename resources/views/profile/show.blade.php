@@ -15,6 +15,7 @@
             </span>
             @endif
             <h1 class="profile-name">{{ $user->first_name . ' ' . $user->last_name }}</h1>
+            <h4><i class="fa fa-map-marker" aria-hidden="true"></i> {{ $user->location }}</h4>
             <div class="row">
                 <div class="col-md-2 col-md-offset-5">
                     @if(Auth::check())
