@@ -16,53 +16,62 @@ window.VueChatScroll = require('vue-chat-scroll');
  */
 
 Vue.component('chat-messages', require('./components/ChatMessages.vue'));
+Vue.component('chat-heading', require('./components/ChatHeading.vue'));
 Vue.component('chat-form', require('./components/ChatForm.vue'));
 
 const app = new Vue({
     el: '#app',
 
     data: {
-        messages: []
+        messages: [],
+        channel: []
     },
 
     created() {
         // There should be a better way to do this. @todo later. maybe.
-        if(document.getElementById('chat-page')) {
-            this.fetchMessages();
+        if(document.getElementById('chat-page') && document.getElementById('channel-id')) {
+            var channel_id = document.getElementById('channel-id').value;
 
-            var args = window.location.pathname.split("/");
-            Echo.private(`channel.${args[3]}`)
+            this.fetchMessages(channel_id);
+            this.fetchChannel(channel_id);
+
+            Echo.private(`channel.${channel_id}`)
                 .listen('MessageSent', (e) => {
                     this.messages.push({
                         message: e.message.message,
                         user: e.user
                     });
-                    this.messageSeen();
+                    this.messageSeen(channel_id);
+                })
+                .listen('ChatJoined', (e) => {
+                    console.log(e);
                 });
         }
     },
 
     methods: {
-        fetchMessages() {
-            var uri = window.location.pathname;
-
-            axios.get(`${uri}/messages`).then(response => {
+        fetchMessages(channel_id) {
+            axios.get(`/api/chat/channel/${channel_id}/messages`).then(response => {
                 this.messages = response.data;
+            });
+        },
+
+        fetchChannel(channel_id) {
+            axios.get(`/api/chat/channel/${channel_id}`).then(response => {
+                this.channel = response.data[0];
             });
         },
 
         addMessage(message) {
             this.messages.push(message);
 
-            var uri = window.location.pathname;
+            var channel_id = document.getElementById('channel-id').value;
 
-            axios.post(`${uri}/messages`, message);
+            axios.post(`/api/chat/channel/${channel_id}/messages/send`, message);
         },
 
-        messageSeen() {
-            var uri = window.location.pathname;
-
-            axios.post(`${uri}/messages/seen`);
+        messageSeen(channel_id) {
+            axios.post(`/api/chat/channel/${channel_id}/messages/seen`);
         },
     }
 });

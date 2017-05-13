@@ -26,7 +26,7 @@
                                 <div class="message-teaser-container">
                                     <strong>{{ $message->channel->name }}</strong><br>
                                     <span>{{ $message->user->first_name }}: {{ $message->message }}</span><br>
-                                    <a href="{{ route('conversation.show', [$message->channel_id]) }}">View  conversation</a>
+                                    <a href="{{ route('chat.show', [$message->channel_id]) }}">View  chat</a>
                                 </div>
                                 <hr>
                             @endforeach
@@ -35,7 +35,7 @@
                                 <span>There are no unseen messages.</span>
                             </div>
                         @endif
-                        <a href="{{ route('conversation.index') }}">All conversations</a>
+                        <a href="{{ route('chat.index') }}">All chats</a>
                     </div>
                 </div>
                 <div class="col-md-6">

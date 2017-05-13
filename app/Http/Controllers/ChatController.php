@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Database\Eloquent\Collection;
+use App\Events\ChatJoined;
 use Illuminate\Http\Request;
 use App\Events\MessageSent;
 use App\Channel;
@@ -12,7 +12,7 @@ use App\Message;
 use Illuminate\Support\Facades\Session;
 use Auth;
 
-class ConversationController extends Controller
+class ChatController extends Controller
 {
     /**
      * Contains the authenticated user.
@@ -46,7 +46,7 @@ class ConversationController extends Controller
     {
         $channels   = $this->user->channels()->where('accepted', true)->get();
 
-        return view('conversation.index', [
+        return view('chat.index', [
             'channels' => $channels,
             'user' => $this->user,
         ]);
@@ -113,7 +113,7 @@ class ConversationController extends Controller
             abort(403);
         }
 
-        return view('conversation.show', [
+        return view('chat.show', [
             'messages' => $messages,
             'channel'  => $channel,
         ]);
@@ -123,7 +123,7 @@ class ConversationController extends Controller
      * Fetch all messages for the specified channel.
      *
      * @param  \App\Channel  $channel
-     * @return Collection
+     * @return Message
      */
     public function messages(Channel $channel)
     {
@@ -132,6 +132,19 @@ class ConversationController extends Controller
         $this->user->setChannelSeen($channel->id);
 
         return $messages;
+    }
+
+    /**
+     * Fetch all channel information.
+     *
+     * @param  \App\Channel  $channel
+     * @return Channel
+     */
+    public function channel(Channel $channel)
+    {
+        $channel = $channel->with('users')->get();
+
+        return $channel;
     }
 
     /**
@@ -213,7 +226,7 @@ class ConversationController extends Controller
 
         if (!isset($invite->channel)) {
             if ($response) {
-                Session::flash('error-message', 'Oops! We can\'t add you to the conversation. The invite was either cancelled or expired.');
+                Session::flash('error-message', 'Oops! We can\'t add you to the chat. The invite was either cancelled or expired.');
             }
 
             return back();
@@ -226,9 +239,11 @@ class ConversationController extends Controller
             $this->user->acceptUserToChannel($channel_id);
             $this->user->removeChannelInvites($channel_id);
 
+            broadcast(new ChatJoined($channel, $this->user))->toOthers();
+
             Session::flash('success-message', 'You have joined the chat.');
 
-            return redirect(route('conversation.show', ['id' => $channel_id]));
+            return redirect(route('chat.show', ['id' => $channel_id]));
         } else {
             $receiver = $invite->receiver;
             
@@ -249,8 +264,8 @@ class ConversationController extends Controller
     {
         $this->user->removeUserFromChannel($request->channel_id);
 
-        Session::flash('success-message', 'You have left the conversation.');
+        Session::flash('success-message', 'You have left the chat.');
 
-        return redirect(route('conversation.index'));
+        return redirect(route('chat.index'));
     }
 }

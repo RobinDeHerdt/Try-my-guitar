@@ -33,19 +33,19 @@ Route::group([
 
     Route::get('profile/{user}/invite', 'ProfileController@invite')->name('profile.invite');
 
-    // Conversation related routes.
-    Route::get('conversations', 'ConversationController@index')->name('conversation.index');
-    Route::get('conversations/{channel}', 'ConversationController@show')->name('conversation.show');
-    Route::post('conversations/edit', 'ConversationController@update')->name('conversation.update');
-    Route::post('conversations/leave', 'ConversationController@leave')->name('conversation.leave');
-    Route::post('invite', 'ConversationController@sendInvite')->name('invite');
-    Route::post('invite/response', 'ConversationController@inviteResponse')->name('invite.response');
-
-    // Conversation API related routes.
-    Route::get('conversations/{channel}/messages', 'ConversationController@messages');
-    Route::post('conversations/{channel}/messages', 'ConversationController@store');
-    Route::post('conversations/{channel}/messages/seen', 'ConversationController@seen');
+    // Chat related routes.
+    Route::get('chat/channels', 'ChatController@index')->name('chat.index');
+    Route::get('chat/channel/{channel}', 'ChatController@show')->name('chat.show');
+    Route::post('chat/channel/edit', 'ChatController@update')->name('chat.update');
+    Route::post('chat/channel/{channel}/leave', 'ChatController@leave')->name('chat.leave');
+    Route::post('chat/channel/invite', 'ChatController@sendInvite')->name('invite');
+    Route::post('chat/channel/invite/response', 'ChatController@inviteResponse')->name('invite.response');
 });
+
+Route::get('api/chat/channel/{channel}/messages', 'ChatController@messages');
+Route::get('api/chat/channel/{channel}', 'ChatController@channel');
+Route::post('api/chat/channel/{channel}/messages/send', 'ChatController@store');
+Route::post('api/chat/channel/{channel}/messages/seen', 'ChatController@seen');
 
 // Administrator only.
 Route::group(['middleware' => ['role:administrator']], function () {

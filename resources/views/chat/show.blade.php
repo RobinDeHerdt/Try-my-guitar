@@ -6,6 +6,7 @@
 
 @section('content')
     <div class="content" id="chat-page">
+        <input type="hidden" value="{{ $channel->id }}" id="channel-id">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -13,23 +14,16 @@
                 </div>
             </div>
             <div class="conversation-participants">
-                @foreach($channel->users as $user)
-                    <div class="profile-teaser {{ $user->pivot->accepted ? '' : 'invited' }}">
-                        <a href="{{ route('profile.show', ['id' => $user->id]) }}" title="{{ $user->fullName() }}{{ $user->pivot->accepted ? '' : ' - Invite pending' }}">
-                            <div class="profile-picture" style="background-image: url('{{ Storage::disk('public')->url($user->image_uri) }}')"></div>
-                        </a>
-                    </div>
-                @endforeach
+                <chat-heading :channel="channel"></chat-heading>
             </div>
             <div class="row heading">
                 <div class="col-md-12">
-                    <a href="{{ route('conversation.leave') }}" class="icon-text" onclick="event.preventDefault(); document.getElementById('leave-form').submit();"><span class="glyphicon glyphicon-log-out"></span>Leave this conversation</a>
-                    <a href="{{ route('conversation.index') }}" class="icon-text"><span class="glyphicon glyphicon-th-list"></span>Back to conversations</a>
-                    <a href="{{ route('conversation.update') }}" class="icon-text" onclick="event.preventDefault(); document.getElementById('edit-channel-form').style.display = 'inherit'"><span class="glyphicon glyphicon-pencil"></span>Edit conversation name</a>
+                    <a href="{{ route('chat.leave', ['channel' => $channel->id]) }}" class="icon-text" onclick="event.preventDefault(); document.getElementById('leave-form').submit();"><span class="glyphicon glyphicon-log-out"></span>Leave this conversation</a>
+                    <a href="{{ route('chat.index') }}" class="icon-text"><span class="glyphicon glyphicon-th-list"></span>Back to conversations</a>
+                    <a href="{{ route('chat.update', ['channel' => $channel->id]) }}" class="icon-text" onclick="event.preventDefault(); document.getElementById('edit-channel-form').style.display = 'inherit'"><span class="glyphicon glyphicon-pencil"></span>Edit conversation name</a>
                     <div class="row edit-channel-form">
-                        <form id="edit-channel-form" action="{{ route('conversation.update') }}" method="POST" style="display: none;">
+                        <form id="edit-channel-form" action="{{ route('chat.update', ['channel' => $channel->id]) }}" method="POST" style="display: none;">
                             {{ csrf_field() }}
-                            <input type="hidden" name="channel_id" value="{{ $channel->id }}">
                             <div class="col-md-10">
                                 <input type="text" name="channel_name" class="form-control" value="{{ $channel->name }}">
                             </div>
@@ -41,9 +35,8 @@
                             </div>
                         </form>
                     </div>
-                    <form id="leave-form" action="{{ route('conversation.leave') }}" method="POST" style="display: none;">
+                    <form id="leave-form" action="{{ route('chat.leave', ['channel' => $channel->id]) }}" method="POST" style="display: none;">
                         {{ csrf_field() }}
-                        <input type="hidden" name="channel_id" value="{{ $channel->id }}">
                     </form>
                 </div>
             </div>

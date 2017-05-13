@@ -20,7 +20,7 @@
                             @foreach($channels as $channel)
                                 <div class="channel">
                                     <div class="channel-name">
-                                        <a href="{{ route('conversation.show', ['id' => $channel->id]) }}">{{ $channel->name }}</a>
+                                        <a href="{{ route('chat.show', ['id' => $channel->id]) }}">{{ $channel->name }}</a>
                                     </div>
                                     <div class="channel-participants">
                                         @foreach($channel->users as $user)

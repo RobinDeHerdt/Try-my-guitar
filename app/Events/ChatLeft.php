@@ -3,7 +3,6 @@
 namespace App\Events;
 
 use App\User;
-use App\Message;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -12,16 +11,9 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class MessageSent implements ShouldBroadcast
+class ChatLeft implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-
-    /**
-     * Message object
-     *
-     * @var Message
-     */
-    public $message;
 
     /**
      * Channel id
@@ -42,11 +34,10 @@ class MessageSent implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct(Message $message, User $user)
+    public function __construct(\App\Channel $channel, User $user)
     {
+        $this->channel  = $channel;
         $this->user     = $user;
-        $this->message  = $message;
-        $this->channel  = $message->channel_id;
     }
 
     /**
@@ -56,6 +47,6 @@ class MessageSent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('channel.' . $this->channel);
+        return new PrivateChannel('channel.' . $this->channel->id);
     }
 }
