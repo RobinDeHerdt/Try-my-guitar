@@ -15,8 +15,9 @@ window.VueChatScroll = require('vue-chat-scroll');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+Vue.component('chat-participants', require('./components/ChatParticipants.vue'));
 Vue.component('chat-messages', require('./components/ChatMessages.vue'));
-Vue.component('chat-heading', require('./components/ChatHeading.vue'));
+Vue.component('chat-name', require('./components/ChatName.vue'));
 Vue.component('chat-form', require('./components/ChatForm.vue'));
 
 const app = new Vue({
@@ -24,7 +25,8 @@ const app = new Vue({
 
     data: {
         messages: [],
-        channel: []
+        channel: [],
+        channelname: ''
     },
 
     created() {
@@ -48,11 +50,12 @@ const app = new Vue({
                 .listen('ChatLeft', (e) => {
                     for(var i = 0; i < this.channel.users.length; i++) {
                         if(this.channel.users[i].id === e.user.id){
-                            console.log('test' + e.user.id);
-                            console.log(this.channel.users[i].id);
                             this.channel.users.splice(i,1);
                         }
                     }
+                })
+                .listen('ChatNameChanged', (e) => {
+                    this.channelname = e.channel.name;
                 });
         }
     },
@@ -67,14 +70,13 @@ const app = new Vue({
         fetchChannel(channel_id) {
             axios.get(`/api/chat/channel/${channel_id}`).then(response => {
                 this.channel = response.data[0];
+                this.channelname = this.channel.name;
             });
         },
 
         addMessage(message) {
             this.messages.push(message);
-
             var channel_id = document.getElementById('channel-id').value;
-
             axios.post(`/api/chat/channel/${channel_id}/messages/send`, message);
         },
 

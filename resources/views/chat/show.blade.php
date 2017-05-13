@@ -10,11 +10,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>{{ $channel->name }}</h2>
+                    <chat-name :channelname="channelname"></chat-name>
                 </div>
             </div>
             <div class="conversation-participants">
-                <chat-heading :channel="channel"></chat-heading>
+                <chat-participants :channel="channel"></chat-participants>
             </div>
             <div class="row heading">
                 <div class="col-md-12">

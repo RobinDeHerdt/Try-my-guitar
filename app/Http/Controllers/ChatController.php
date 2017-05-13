@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\ChatJoined;
 use App\Events\ChatLeft;
+use App\Events\ChatNameChanged;
 use Illuminate\Http\Request;
 use App\Events\MessageSent;
 use App\Channel;
@@ -65,6 +66,8 @@ class ChatController extends Controller
         $channel->name = $request->channel_name;
 
         $channel->save();
+
+        broadcast(new ChatNameChanged($channel))->toOthers();
 
         return back();
     }
@@ -244,8 +247,6 @@ class ChatController extends Controller
             $this->user->removeChannelInvites($channel_id);
 
             broadcast(new ChatJoined($channel, $this->user))->toOthers();
-
-            Session::flash('success-message', 'You have joined the chat.');
 
             return redirect(route('chat.show', ['id' => $channel_id]));
         } else {
