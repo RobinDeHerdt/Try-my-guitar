@@ -28,7 +28,7 @@ const app = new Vue({
     },
 
     created() {
-        if(document.getElementById('chat-page') && document.getElementById('channel-id')) {
+        if(document.getElementById('channel-id')) {
             var channel_id = document.getElementById('channel-id').value;
 
             this.fetchMessages(channel_id);
@@ -46,7 +46,13 @@ const app = new Vue({
                     this.channel.users.push(e.user);
                 })
                 .listen('ChatLeft', (e) => {
-                    this.channel.users.splice(e.user);
+                    for(var i = 0; i < this.channel.users.length; i++) {
+                        if(this.channel.users[i].id === e.user.id){
+                            console.log('test' + e.user.id);
+                            console.log(this.channel.users[i].id);
+                            this.channel.users.splice(i,1);
+                        }
+                    }
                 });
         }
     },

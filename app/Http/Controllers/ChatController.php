@@ -262,12 +262,11 @@ class ChatController extends Controller
      * Leave the specified channel.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  Channel  $channel
      * @return \Illuminate\Http\Response
      */
-    public function leave(Request $request)
+    public function leave(Request $request, Channel $channel)
     {
-        $channel = Channel::find($request->channel_id);
-
         $this->user->removeUserFromChannel($channel->id);
 
         broadcast(new ChatLeft($channel, $this->user))->toOthers();
