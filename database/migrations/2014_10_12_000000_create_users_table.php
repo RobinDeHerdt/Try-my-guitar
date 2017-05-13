@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('location')->nullable();
             $table->text('description')->nullable();
-            $table->string('header_image_uri')->nullable();
+            $table->string('header_image_uri')->default('images/electric-guitars.jpg');
             $table->boolean('verified')->default(false);
             $table->string('verification_token')->nullable();
             $table->rememberToken();

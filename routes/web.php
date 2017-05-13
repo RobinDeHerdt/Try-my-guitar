@@ -27,10 +27,9 @@ Route::group([
 
     // Profile related routes.
     Route::get('profile/edit', 'ProfileController@edit')->name('profile.edit');
-    Route::get('profile/appearance/edit', 'ProfileController@editAppearance')->name('profile.appearance.edit');
-
     Route::get('profile/{id}', 'ProfileController@show')->name('profile.show');
     Route::post('profile/update', 'ProfileController@update')->name('profile.update');
+    Route::post('profile/appearance/update', 'ProfileController@updateAppearance')->name('profile.appearance.update');
 
     Route::get('profile/{user}/invite', 'ProfileController@invite')->name('profile.invite');
 
@@ -39,7 +38,6 @@ Route::group([
     Route::get('conversations/{channel}', 'ConversationController@show')->name('conversation.show');
     Route::post('conversations/edit', 'ConversationController@update')->name('conversation.update');
     Route::post('conversations/leave', 'ConversationController@leave')->name('conversation.leave');
-
     Route::post('invite', 'ConversationController@sendInvite')->name('invite');
     Route::post('invite/response', 'ConversationController@inviteResponse')->name('invite.response');
 

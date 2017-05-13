@@ -91,7 +91,30 @@ class ProfileController extends Controller
 
         $user->save();
 
-        Session::flash('success-message', 'Profile updated successfully.');
+        Session::flash('success-message', 'Personal information updated successfully.');
+
+        return back();
+    }
+
+    /**
+     * Update the specified user profile appearance.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function updateAppearance(Request $request)
+    {
+        $user = $this->user;
+
+        $user->description      = $request->description;
+
+        if (isset($request->image)) {
+            $user->header_image_uri = $request->image->store('images', 'public');
+        }
+
+        $user->save();
+
+        Session::flash('success-message', 'Profile appearance updated successfully.');
 
         return back();
     }

@@ -40,6 +40,8 @@ class UsersTableSeeder extends Seeder
             'image_uri' => 'images/matt-heafy.jpg',
             'password' => bcrypt('123456'),
             'verified' => true,
+            'header_image_uri' => 'images/electric-guitars.jpg',
+            'description' => 'Guitar player and vocalist for a metal band called \'Trivium\'',
         ]);
 
         DB::table('role_user')->insert([
