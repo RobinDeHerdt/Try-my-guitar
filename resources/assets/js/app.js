@@ -28,7 +28,6 @@ const app = new Vue({
     },
 
     created() {
-        // There should be a better way to do this. @todo later. maybe.
         if(document.getElementById('chat-page') && document.getElementById('channel-id')) {
             var channel_id = document.getElementById('channel-id').value;
 
@@ -44,7 +43,10 @@ const app = new Vue({
                     this.messageSeen(channel_id);
                 })
                 .listen('ChatJoined', (e) => {
-                    console.log(e);
+                    this.channel.users.push(e.user);
+                })
+                .listen('ChatLeft', (e) => {
+                    this.channel.users.splice(e.user);
                 });
         }
     },

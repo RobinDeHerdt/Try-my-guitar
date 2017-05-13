@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\ChatJoined;
+use App\Events\ChatLeft;
 use Illuminate\Http\Request;
 use App\Events\MessageSent;
 use App\Channel;
@@ -137,12 +138,15 @@ class ChatController extends Controller
     /**
      * Fetch all channel information.
      *
-     * @param  \App\Channel  $channel
+     * @param  integer $id
      * @return Channel
      */
-    public function channel(Channel $channel)
+    public function channel($id)
     {
-        $channel = $channel->with('users')->get();
+        // Get the channel with all of its accepted users.
+        $channel = Channel::where('id', $id)->with(['users' => function ($query) {
+            $query->where('accepted', true);
+        }])->get();
 
         return $channel;
     }
@@ -262,7 +266,11 @@ class ChatController extends Controller
      */
     public function leave(Request $request)
     {
-        $this->user->removeUserFromChannel($request->channel_id);
+        $channel = Channel::find($request->channel_id);
+
+        $this->user->removeUserFromChannel($channel->id);
+
+        broadcast(new ChatLeft($channel, $this->user))->toOthers();
 
         Session::flash('success-message', 'You have left the chat.');
 

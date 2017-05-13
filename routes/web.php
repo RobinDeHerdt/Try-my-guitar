@@ -42,8 +42,8 @@ Route::group([
     Route::post('chat/channel/invite/response', 'ChatController@inviteResponse')->name('invite.response');
 });
 
-Route::get('api/chat/channel/{channel}/messages', 'ChatController@messages');
 Route::get('api/chat/channel/{channel}', 'ChatController@channel');
+Route::get('api/chat/channel/{channel}/messages', 'ChatController@messages');
 Route::post('api/chat/channel/{channel}/messages/send', 'ChatController@store');
 Route::post('api/chat/channel/{channel}/messages/seen', 'ChatController@seen');
 

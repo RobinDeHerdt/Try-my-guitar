@@ -20,7 +20,7 @@ class ChatJoined implements ShouldBroadcast
      *
      * @var integer id
      */
-    public $channel;
+    private $channel;
 
     /**
      * User object

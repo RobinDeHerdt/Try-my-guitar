@@ -36,7 +36,7 @@
                         </div>
                     @else
                         <div class="no-results">
-                            <h4>You don't have open conversations. Yet!</h4>
+                            <h4>You don't have open conversations at the moment.</h4>
                         </div>
                     @endif
                 </div>
