@@ -155,6 +155,19 @@ class ChatController extends Controller
     }
 
     /**
+    * Fetch all user channels.
+    *
+    * @return Channel
+    */
+    public function channels()
+    {
+        $channels = $this->user->channels()->get();
+
+        return $channels;
+    }
+
+
+    /**
      * Set specified channel to 'seen' for the authenticated user.
      *
      * @param  \App\Channel  $channel

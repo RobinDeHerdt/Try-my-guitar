@@ -24,6 +24,7 @@ const app = new Vue({
     el: '#app',
 
     data: {
+        channels: [],
         messages: [],
         channel: [],
         channelname: ''
@@ -35,6 +36,18 @@ const app = new Vue({
 
             this.fetchMessages(channel_id);
             this.fetchChannel(channel_id);
+
+            /**
+             * @todo Api call to get all of the authenticated users channels.
+             * Loop over all channels and apply listeners
+             * Do this in the conditional 'channel-id' else section. That way events don't get shown double on chat pages.
+             *
+             * Create a vue template in the layout file. This template will loop over an array of all received events.
+             * Show the template absolute positioned in the right bottom of the screen.
+             * When clicked on 'close' section of the container, the event gets removed from the array.
+             *
+             * Optional: remove event after 10 seconds. (fade out)
+             */
 
             Echo.private(`channel.${channel_id}`)
                 .listen('MessageSent', (e) => {
@@ -48,15 +61,28 @@ const app = new Vue({
                     this.channel.users.push(e.user);
                 })
                 .listen('ChatLeft', (e) => {
-                    for(var i = 0; i < this.channel.users.length; i++) {
-                        if(this.channel.users[i].id === e.user.id){
-                            this.channel.users.splice(i,1);
+                    for (var i = 0; i < this.channel.users.length; i++) {
+                        if (this.channel.users[i].id === e.user.id) {
+                            this.channel.users.splice(i, 1);
                         }
                     }
                 })
                 .listen('ChatNameChanged', (e) => {
                     this.channelname = e.channel.name;
                 });
+        } else {
+            /**
+             * @todo Api call to get all of the authenticated users channels.
+             * Loop over all channels and apply listeners
+             * Do this in the conditional 'channel-id' else section. That way events don't get shown double on chat pages.
+             *
+             * Create a vue template in the layout file. This template will loop over an array of all received events.
+             * Show the template absolute positioned in the right bottom of the screen.
+             * When clicked on 'close' section of the container, the event gets removed from the array.
+             *
+             * Optional: remove event after 10 seconds. (fade out)
+             */
+            this.fetchUserChannels();
         }
     },
 
@@ -78,6 +104,42 @@ const app = new Vue({
             this.messages.push(message);
             var channel_id = document.getElementById('channel-id').value;
             axios.post(`/api/chat/channel/${channel_id}/messages/send`, message);
+        },
+
+        fetchUserChannels() {
+            axios.get(`/api/chat/channels`).then(response => {
+                this.channels = response.data;
+
+                for (var i = 0; i < this.channels.length; i++) {
+                    var channel_id = this.channels[i].id;
+
+                    Echo.private(`channel.${channel_id}`)
+                        .listen('MessageSent', (e) => {
+                            // e.message.message,
+                            // e.user.first_name
+                            // e.user.last_name
+                            console.log('A message was received!');
+                            /**
+                             * @todo decide wheter to keep this here or not.
+                             * this.messageSeen(channel_id);
+                             **/
+                        })
+                        .listen('ChatJoined', (e) => {
+                            // e.user.first_name
+                            // e.user.last_name
+                            console.log('Someone joined your chat!');
+                        })
+                        .listen('ChatLeft', (e) => {
+                            // e.user.first_name
+                            // e.user.last_name
+                            console.log('Someone left your chat!');
+                        })
+                        .listen('ChatNameChanged', (e) => {
+                            // e.channel.name;
+                            console.log('Someone changed the name of your chat to ' + e.channel.name);
+                        });
+                }
+            });
         },
 
         messageSeen(channel_id) {
