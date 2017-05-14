@@ -88,16 +88,37 @@ body {
   margin-top: 40px;
 }
 
+.notification-close {
+  z-index: 999;
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  color: $primary-font-color;
+
+  &:hover {
+    background-color: #e8eaeb;
+  }
+
+  i {
+    position: relative;
+    left: 4.5px;
+    top: -1px;
+  }
+}
+
 .notification {
   position: fixed;
   right: 10px;
   bottom: 0;
   width: 350px;
-  z-index: 999;
+  z-index: 998;
 
   .chat-notification {
     position: relative;
-    height: 120px;
+    height: 100px;
     margin-bottom: 15px;
     border-right: solid 5px $primary-component-color;
     background-color: #fff;

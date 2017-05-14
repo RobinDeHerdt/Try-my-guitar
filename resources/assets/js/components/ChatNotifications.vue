@@ -1,6 +1,9 @@
 <template>
     <div class="notification">
         <div v-for="notification in notifications">
+            <div class="notification-close" v-on:click="removeNotification(notifications.indexOf(notification))">
+                <i class="fa fa-times" aria-hidden="true"></i>
+            </div>
             <a v-bind:href="'/chat/channel/' + notification.channel.id">
                 <div class="chat-notification">
                     <div class="notification-user">
@@ -8,7 +11,7 @@
                     </div>
                     <div class="notification-content">
                         <strong>{{ notification.channel.name }}</strong><br/>
-                        <span><strong>{{ notification.user.first_name }}: </strong>{{ notification.message | truncate '20' }}</span>
+                        <span><strong>{{ notification.user.first_name }}: </strong>{{ notification.message }}</span>
                     </div>
                 </div>
             </a>
@@ -18,6 +21,11 @@
 
 <script>
     export default {
-        props: ['notifications']
+        props: ['notifications'],
+        methods: {
+            removeNotification(array_index) {
+                this.notifications.splice(array_index, 1);
+            }
+        }
     };
 </script>
