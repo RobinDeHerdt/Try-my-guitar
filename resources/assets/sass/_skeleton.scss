@@ -88,45 +88,47 @@ body {
   margin-top: 40px;
 }
 
-.chat-notification {
+.notification {
   position: fixed;
-  background-color: #fff;
-  box-shadow: $drop-shadow;
-  z-index: 999;
   right: 10px;
-  bottom: 10px;
-  padding: 10px;
-  width: 20%;
-  border-bottom: solid 5px $primary-component-color;
+  bottom: 0;
+  width: 350px;
+  z-index: 999;
 
-  span {
-    color: $primary-font-color;
-  }
-
-  .notification-user {
-    float:left;
-    width: 30%;
-
-    .profile-picture {
-      //width: 100px;
-      //height: 100px;
-      //background-size: cover;
-      //background-position: center;
-      width: 100%;
-      height: 100px;
-      background-size: contain;
-      background-position: center;
-      background-repeat: no-repeat;
-    }
-  }
-
-  .notification-content {
-    float: right;
-    width: 65%;
-    margin-top: 5px;
+  .chat-notification {
+    position: relative;
+    height: 120px;
+    margin-bottom: 15px;
+    border-bottom: solid 5px $primary-component-color;
+    background-color: #fff;
+    box-shadow: $drop-shadow;
 
     span {
-      padding-top: 10px;
+      color: $primary-font-color;
+    }
+
+    .notification-user {
+      float:left;
+      width: 30%;
+      height: 100%;
+
+      .profile-picture {
+        height: 100%;
+        width: 100%;
+        background-size: cover;
+        background-position: top;
+        background-repeat: no-repeat;
+      }
+    }
+
+    .notification-content {
+      float: left;
+      padding: 17.5px;
+      margin-top: 5px;
+
+      span {
+        padding-top: 10px;
+      }
     }
   }
 }

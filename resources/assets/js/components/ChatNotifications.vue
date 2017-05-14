@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="notification">
         <div v-for="notification in notifications">
             <a v-bind:href="'/chat/channel/' + notification.channel.id">
                 <div class="chat-notification">
