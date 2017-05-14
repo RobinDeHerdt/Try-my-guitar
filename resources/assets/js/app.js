@@ -15,6 +15,7 @@ window.VueChatScroll = require('vue-chat-scroll');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+Vue.component('chat-notifications', require('./components/ChatNotifications.vue'));
 Vue.component('chat-participants', require('./components/ChatParticipants.vue'));
 Vue.component('chat-messages', require('./components/ChatMessages.vue'));
 Vue.component('chat-name', require('./components/ChatName.vue'));
@@ -24,6 +25,7 @@ const app = new Vue({
     el: '#app',
 
     data: {
+        notifications: [],
         channels: [],
         messages: [],
         channel: [],
@@ -110,14 +112,18 @@ const app = new Vue({
             axios.get(`/api/chat/channels`).then(response => {
                 this.channels = response.data;
 
-                for (var i = 0; i < this.channels.length; i++) {
-                    var channel_id = this.channels[i].id;
-
-                    Echo.private(`channel.${channel_id}`)
+                this.channels.forEach(channel => {
+                    Echo.private(`channel.${channel.id}`)
                         .listen('MessageSent', (e) => {
                             // e.message.message,
                             // e.user.first_name
                             // e.user.last_name
+                            this.notifications.push({
+                                message: e.message.message,
+                                user: e.user,
+                                channel: this.channel,
+                            });
+                            console.log(this.channel);
                             console.log('A message was received!');
                             /**
                              * @todo decide wheter to keep this here or not.
@@ -138,7 +144,8 @@ const app = new Vue({
                             // e.channel.name;
                             console.log('Someone changed the name of your chat to ' + e.channel.name);
                         });
-                }
+                });
+
             });
         },
 

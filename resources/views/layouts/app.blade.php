@@ -24,6 +24,7 @@
         @yield('navigation')
         @yield('content')
         @yield('footer')
+        <chat-notifications :notifications="notifications"></chat-notifications>
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
