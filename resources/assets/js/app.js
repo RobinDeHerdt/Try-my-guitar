@@ -115,11 +115,16 @@ const app = new Vue({
                 this.channels.forEach(channel => {
                     Echo.private(`channel.${channel.id}`)
                         .listen('MessageSent', (e) => {
-                            // e.message.message,
-                            // e.user.first_name
-                            // e.user.last_name
-                            this.notifications.push({
-                                message: e.message.message,
+                            var limitedMessage = '';
+
+                            if(e.message.message.lenght > 60) {
+                                limitedMessage = e.message.message.substring(0, 60) + '...';
+                            } else {
+                                limitedMessage = e.message.message;
+                            }
+
+                            this.notifications.unshift({
+                                message: limitedMessage,
                                 user: e.user,
                                 channel: channel,
                             });

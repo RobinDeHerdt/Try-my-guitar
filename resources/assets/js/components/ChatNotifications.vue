@@ -8,7 +8,7 @@
                     </div>
                     <div class="notification-content">
                         <strong>{{ notification.channel.name }}</strong><br/>
-                        <span><strong>{{ notification.user.first_name }}: </strong>{{ notification.message }}</span>
+                        <span><strong>{{ notification.user.first_name }}: </strong>{{ notification.message | truncate '20' }}</span>
                     </div>
                 </div>
             </a>
