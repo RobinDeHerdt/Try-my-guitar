@@ -121,10 +121,8 @@ const app = new Vue({
                             this.notifications.push({
                                 message: e.message.message,
                                 user: e.user,
-                                channel: this.channel,
+                                channel: channel,
                             });
-                            console.log(this.channel);
-                            console.log('A message was received!');
                             /**
                              * @todo decide wheter to keep this here or not.
                              * this.messageSeen(channel_id);
