@@ -24,7 +24,9 @@
         @yield('navigation')
         @yield('content')
         @yield('footer')
-        <chat-notifications :notifications="notifications"></chat-notifications>
+        @if(Auth::check())
+            <chat-notifications :notifications="notifications"></chat-notifications>
+        @endif
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
 </body>

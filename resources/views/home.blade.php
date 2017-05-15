@@ -26,21 +26,21 @@
                     <div class="cta-item">
                         <i class="fa fa-music fa-4x" aria-hidden="true"></i>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae consectetur ex. Donec non sollicitudin erat. Aenean libero massa, lobortis eu consequat non, sollicitudin nec diam</p>
-                        <a href="#" class="cta-button text-uppercase">Read more</a>
+                        <a href="about#about-1" class="cta-button text-uppercase">Read more</a>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="cta-item">
                         <i class="fa fa-music fa-4x" aria-hidden="true"></i>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae consectetur ex. Donec non sollicitudin erat. Aenean libero massa, lobortis eu consequat non, sollicitudin nec diam</p>
-                        <a href="#" class="cta-button text-uppercase">Read more</a>
+                        <a href="about#about-2" class="cta-button text-uppercase">Read more</a>
                     </div>
                 </div>
                 <div class="col-md-4 ">
                     <div class="cta-item">
                         <i class="fa fa-music fa-4x" aria-hidden="true"></i>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae consectetur ex. Donec non sollicitudin erat. Aenean libero massa, lobortis eu consequat non, sollicitudin nec diam</p>
-                        <a href="#" class="cta-button text-uppercase">Read more</a>
+                        <a href="about#about-3" class="cta-button text-uppercase">Read more</a>
                     </div>
                 </div>
             </div>

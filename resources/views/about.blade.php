@@ -17,8 +17,28 @@
             @if (Session::has('error-message'))
                 <div class="alert alert-danger">{{ Session::get('error-message') }}</div>
             @endif
-            <h2>How does it work?</h2>
-            <div class="row col-container">
+            <h2>About us</h2>
+            <div class="row col-container" id="about-1">
+                <div class="col-md-6">
+                    <h3>Lorem ipsum</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus justo eget ipsum placerat iaculis. Nunc vitae velit magna. Nulla molestie magna vitae arcu vestibulum tincidunt. Nulla non venenatis felis.</p>
+                </div>
+                <div class="col-md-6">
+                    <h3>Lorem ipsum</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus justo eget ipsum placerat iaculis. Nunc vitae velit magna. Nulla molestie magna vitae arcu vestibulum tincidunt. Nulla non venenatis felis.</p>
+                </div>
+            </div>
+            <div class="row col-container" id="about-2">
+                <div class="col-md-6">
+                    <h3>Lorem ipsum</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus justo eget ipsum placerat iaculis. Nunc vitae velit magna. Nulla molestie magna vitae arcu vestibulum tincidunt. Nulla non venenatis felis.</p>
+                </div>
+                <div class="col-md-6">
+                    <h3>Lorem ipsum</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus justo eget ipsum placerat iaculis. Nunc vitae velit magna. Nulla molestie magna vitae arcu vestibulum tincidunt. Nulla non venenatis felis.</p>
+                </div>
+            </div>
+            <div class="row col-container" id="about-3">
                 <div class="col-md-6">
                     <h3>Lorem ipsum</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus justo eget ipsum placerat iaculis. Nunc vitae velit magna. Nulla molestie magna vitae arcu vestibulum tincidunt. Nulla non venenatis felis.</p>

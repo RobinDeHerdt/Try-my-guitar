@@ -11,7 +11,7 @@
                 </div>
             </div>
             @if (Session::has('success-message'))
-                <div class="alert alert-success">{{ Session::get('success-message') }}</div>
+                <div class="alert alert-success">{{ Session::get('²success-message') }}</div>
             @endif
             @if (Session::has('info-message'))
                 <div class="alert alert-info">{{ Session::get('info-message') }}</div>

@@ -112,49 +112,55 @@ const app = new Vue({
             axios.get(`/api/chat/channels`).then(response => {
                 this.channels = response.data;
 
-                this.channels.forEach(channel => {
-                    Echo.private(`channel.${channel.id}`)
-                        .listen('MessageSent', (e) => {
-                            var limitedMessage = '';
+                /**
+                 * Hacky way to check if the user is getting the correct data back,
+                 * instead of the login screen because of middleware redirect. (role:user)
+                 * @todo Check if the user is authenticated before the API call is made.
+                 */
+                if(this.channels[0].id) {
+                    this.channels.forEach(channel => {
+                        Echo.private(`channel.${channel.id}`)
+                            .listen('MessageSent', (e) => {
+                                var limitedMessage = '';
 
-                            if(e.message.message.lenght > 60) {
-                                limitedMessage = e.message.message.substring(0, 60) + '...';
-                            } else {
-                                limitedMessage = e.message.message;
-                            }
+                                if (e.message.message.lenght > 60) {
+                                    limitedMessage = e.message.message.substring(0, 60) + '...';
+                                } else {
+                                    limitedMessage = e.message.message;
+                                }
 
-                            this.notifications.unshift({
-                                message: limitedMessage,
-                                user: e.user,
-                                channel: channel,
+                                this.notifications.unshift({
+                                    message: limitedMessage,
+                                    user: e.user,
+                                    channel: channel,
+                                });
+
+                                this.messageSeen(channel.id);
+                                this.checkMaxNotificationsReached(this.notifications, 8);
+                                this.removeNotificationAfterInterval(this.notifications);
+                            })
+                            .listen('ChatJoined', (e) => {
+                                this.notifications.unshift({
+                                    message: " has joined the chat!",
+                                    user: e.user,
+                                    channel: channel,
+                                });
+
+                                this.checkMaxNotificationsReached(this.notifications, 8);
+                                this.removeNotificationAfterInterval(this.notifications);
+                            })
+                            .listen('ChatLeft', (e) => {
+                                this.notifications.unshift({
+                                    message: " has left the chat.",
+                                    user: e.user,
+                                    channel: channel,
+                                });
+
+                                this.checkMaxNotificationsReached(this.notifications, 8);
+                                this.removeNotificationAfterInterval(this.notifications);
                             });
-
-                            this.messageSeen(channel.id);
-                            this.checkMaxNotificationsReached(this.notifications, 8);
-                            this.removeNotificationAfterInterval(this.notifications);
-                        })
-                        .listen('ChatJoined', (e) => {
-                            this.notifications.unshift({
-                                message: " has joined the chat!",
-                                user: e.user,
-                                channel: channel,
-                            });
-
-                            this.checkMaxNotificationsReached(this.notifications, 8);
-                            this.removeNotificationAfterInterval(this.notifications);
-                        })
-                        .listen('ChatLeft', (e) => {
-                            this.notifications.unshift({
-                                message: " has left the chat.",
-                                user: e.user,
-                                channel: channel,
-                            });
-
-                            this.checkMaxNotificationsReached(this.notifications, 8);
-                            this.removeNotificationAfterInterval(this.notifications);
-                        });
-                });
-
+                    });
+                }
             });
         },
 
