@@ -130,6 +130,8 @@ const app = new Vue({
                             });
 
                             this.messageSeen(channel.id);
+                            this.checkMaxNotificationsReached(this.notifications, 8);
+                            this.removeNotificationAfterInterval(this.notifications);
                         })
                         .listen('ChatJoined', (e) => {
                             this.notifications.unshift({
@@ -137,6 +139,9 @@ const app = new Vue({
                                 user: e.user,
                                 channel: channel,
                             });
+
+                            this.checkMaxNotificationsReached(this.notifications, 8);
+                            this.removeNotificationAfterInterval(this.notifications);
                         })
                         .listen('ChatLeft', (e) => {
                             this.notifications.unshift({
@@ -144,10 +149,27 @@ const app = new Vue({
                                 user: e.user,
                                 channel: channel,
                             });
+
+                            this.checkMaxNotificationsReached(this.notifications, 8);
+                            this.removeNotificationAfterInterval(this.notifications);
                         });
                 });
 
             });
+        },
+
+        checkMaxNotificationsReached(notifications, max) {
+            if (notifications.length >= max) {
+                notifications.pop();
+                return notifications;
+            }
+        },
+
+        removeNotificationAfterInterval(notifications) {
+            setInterval(function(){
+                notifications.pop();
+                return notifications;
+            },10000)
         },
 
         messageSeen(channel_id) {
