@@ -8,8 +8,23 @@
     <div class="content">
         <div class="container">
             <div class="row heading">
+                <h1>Control panel</h1>
+            </div>
+            <div class="row col-container">
                 <div class="col-md-12">
-                    <h1>Administrator dashboard</h1>
+                    @if($contact_messages->isNotEmpty())
+                        <h3>New contact messages</h3>
+                        <hr>
+                        @foreach($contact_messages as $contact_message)
+                            <span><strong>From: </strong><a href="mailto:{{ $contact_message->email }}">{{ $contact_message->email }}</a></span><br>
+                            <span><strong>Message: </strong>{{ $contact_message->message }}</span><br><br>
+                            <a href="{{ route('admin.messages.show', ['contact_message' => $contact_message->id]) }}">View full message</a>
+                            <hr>
+                        @endforeach
+                    @else
+                        <span>There are no new contact messages.</span>
+                    @endif
+                    <a href="{{ route('admin.messages.index') }}">View all contact messages</a>
                 </div>
             </div>
         </div>

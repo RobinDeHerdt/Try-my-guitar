@@ -22,7 +22,7 @@ Route::group([
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('about', 'AboutController@index')->name('about');
     Route::get('search', 'SearchController@search')->name('search');
-    Route::post('contact', 'AboutController@contact')->name('contact');
+    Route::post('contact', 'ContactController@store')->name('contact');
 
     // Dashboard related routes.
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
@@ -56,4 +56,8 @@ Route::group(['middleware' => ['role:administrator']], function () {
     Route::get('admin/articles/trashed', 'ArticleController@trashed')->name('articles.trashed');
     Route::post('admin/articles/{id}/restore', 'ArticleController@restore')->name('articles.restore');
     Route::resource('admin/articles', 'ArticleController');
+
+    Route::get('admin/messages', 'ContactController@index')->name('admin.messages.index');
+    Route::get('admin/messages/{contact_message}', 'ContactController@show')->name('admin.messages.show');
+
 });

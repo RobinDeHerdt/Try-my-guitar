@@ -37,8 +37,8 @@
                         @foreach($articles as $article)
                             <tr>
                                 <td>{{ str_limit($article->title, 15) }}</td>
-                                <td>{{ $article->user->first_name . ' ' . $article->user->last_name }}</td>
-                                <td>{{ str_limit($article->body, 50)}}</td>
+                                <td>{{ $article->user->fullName() }}</td>
+                                <td>{{ str_limit($article->body, 50) }}</td>
                                 <td><a href="{{ Storage::disk('public')->url($article->image_uri) }}">View image</a></td>
                                 <td class="center"><a href="{{ route('articles.show', ['id' => $article->id]) }}"><span class="glyphicon glyphicon-search"></span></a></td>
                                 <td class="center"><a href="{{ route('articles.edit', ['id' => $article->id]) }}"><span class="glyphicon glyphicon-pencil"></span></a></td>

@@ -13,7 +13,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $contact_messages = Contactmessage::where('seen', false);
+        $contact_messages = Contactmessage::where('seen', false)->get();
 
         return view('admin.dashboard', [
             'contact_messages' => $contact_messages,

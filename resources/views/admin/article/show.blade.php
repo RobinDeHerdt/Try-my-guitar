@@ -6,7 +6,7 @@
             <div class="row heading">
                 <div class="col-md-12">
                     <h1>{{ $article->title }}</h1>
-                    <a href="{{ route('articles.index') }}" class="icon-text"><span class="glyphicon glyphicon-home"></span>Back to overview</a>
+                    <a href="{{ route('articles.index') }}" class="icon-text"><span class="glyphicon glyphicon-list"></span>Back to overview</a>
                 </div>
             </div>
             @if (Session::has('success-message'))
