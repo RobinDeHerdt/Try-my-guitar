@@ -20,8 +20,9 @@ Route::group([
     Route::get('/verify/resend', 'Auth\VerifyController@resend')->name('verify.resend');
 
     Route::get('/', 'HomeController@index')->name('home');
-    Route::get('/about', 'AboutController@index')->name('about');
+    Route::get('about', 'AboutController@index')->name('about');
     Route::get('search', 'SearchController@search')->name('search');
+    Route::post('contact', 'AboutController@contact')->name('contact');
 
     // Dashboard related routes.
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');

@@ -54,9 +54,9 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-2">
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                <button type="submit" class="btn btn-primary form-control">Save changes</button>
                             </div>
                         </div>
                     </div>
@@ -89,9 +89,9 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-2">
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                <button type="submit" class="btn btn-primary form-control">Save changes</button>
                             </div>
                         </div>
                     </div>
