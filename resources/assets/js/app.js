@@ -128,24 +128,22 @@ const app = new Vue({
                                 user: e.user,
                                 channel: channel,
                             });
-                            /**
-                             * @todo decide wheter to keep this here or not.
-                             * this.messageSeen(channel_id);
-                             **/
+
+                            this.messageSeen(channel.id);
                         })
                         .listen('ChatJoined', (e) => {
-                            // e.user.first_name
-                            // e.user.last_name
-                            console.log('Someone joined your chat!');
+                            this.notifications.unshift({
+                                message: " has joined the chat!",
+                                user: e.user,
+                                channel: channel,
+                            });
                         })
                         .listen('ChatLeft', (e) => {
-                            // e.user.first_name
-                            // e.user.last_name
-                            console.log('Someone left your chat!');
-                        })
-                        .listen('ChatNameChanged', (e) => {
-                            // e.channel.name;
-                            console.log('Someone changed the name of your chat to ' + e.channel.name);
+                            this.notifications.unshift({
+                                message: " has left the chat.",
+                                user: e.user,
+                                channel: channel,
+                            });
                         });
                 });
 
