@@ -25,13 +25,27 @@ class GuitarsTableSeeder extends Seeder
             'name' => 'Electric guitar',
         ]);
 
+        DB::table('guitar_types')->insert([
+            'name' => '6-string',
+        ]);
+
         DB::table('guitar_type')->insert([
             'type_id' => 1,
             'guitar_id' => 1,
         ]);
 
+        DB::table('guitar_type')->insert([
+            'type_id' => 2,
+            'guitar_id' => 1,
+        ]);
+
         DB::table('guitar_images')->insert([
             'image_uri' => 'images/matt-heafy.jpg',
+            'guitar_id' => 1,
+        ]);
+
+        DB::table('guitar_images')->insert([
+            'image_uri' => 'images/register-bg.jpg',
             'guitar_id' => 1,
         ]);
     }

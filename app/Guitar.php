@@ -33,7 +33,7 @@ class Guitar extends Model
      */
     public function guitarBrand()
     {
-        return $this->belongsTo('App\GuitarBrand');
+        return $this->belongsTo('App\GuitarBrand', 'brand_id');
     }
 
     /**
@@ -43,6 +43,6 @@ class Guitar extends Model
      */
     public function guitarTypes()
     {
-        return $this->belongsToMany('App\GuitarType', 'guitar_type');
+        return $this->belongsToMany('App\GuitarType', 'guitar_type', 'guitar_id', 'type_id');
     }
 }

@@ -9,7 +9,21 @@
         <div class="container">
             <div class="row heading">
                 <div class="col-md-12">
-                    <h1>{{ $guitar->name }}</h1>
+                    <h1>{{ $guitar->guitarBrand->name }} {{ $guitar->name }}</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Images:</h3>
+                    @foreach($guitar->guitarImages as $guitarImage)
+                        <span>{{ $guitarImage->image_uri }}</span><br>
+                    @endforeach
+                </div>
+                <div class="col-md-6">
+                    <h3>Types:</h3>
+                    @foreach($guitar->guitarTypes as $guitarType)
+                        <span>{{ $guitarType->name }}</span><br>
+                    @endforeach
                 </div>
             </div>
         </div>
