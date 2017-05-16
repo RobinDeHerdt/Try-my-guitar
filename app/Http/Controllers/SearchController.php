@@ -19,17 +19,25 @@ class SearchController extends Controller
 
         // Check if the input is not empty.
         if (!empty($input) && !ctype_space($input)) {
-            // Remove whitespace from both sides of the string.
-            $term = trim($input);
+            // Split the string into terms and remove whitespace from both sides of the string.
+            $terms = preg_split('/\s+/', $input, -1, PREG_SPLIT_NO_EMPTY);
 
-            $users = User::where('first_name', 'LIKE', $term)
-                ->orWhere('last_name', 'LIKE', $term)
-                ->take(6)
-                ->get();
+            $users = User::where(function($q) use ($terms)
+            {
+                foreach ($terms as $term)
+                {
+                    $q->orWhere('first_name', 'like', '%'.$term.'%')
+                      ->orWhere('last_name', 'like', '%'.$term.'%');
+                }
+            })->take(6)->get();
 
-            $guitars = Guitar::where('name', 'LIKE', $term)
-                ->take(6)
-                ->get();
+            $guitars = Guitar::where(function($q) use ($terms)
+            {
+                foreach ($terms as $term)
+                {
+                    $q->orWhere('name', 'like', '%'.$term.'%');
+                }
+            })->take(6)->get();
 
         } else {
             return back();
@@ -38,7 +46,7 @@ class SearchController extends Controller
         return view('results', [
             'users' => $users,
             'guitars' => $guitars,
-            'search_term' => $term,
+            'search_term' => $input,
         ]);
     }
 }
