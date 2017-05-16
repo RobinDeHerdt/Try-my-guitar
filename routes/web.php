@@ -21,7 +21,8 @@ Route::group([
 
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('about', 'AboutController@index')->name('about');
-    Route::get('search', 'SearchController@search')->name('search');
+    Route::get('search', 'SearchController@result')->name('search');
+    Route::get('search/autocomplete', 'SearchController@autocomplete')->name('search.autocomplete');
     Route::post('contact', 'ContactController@store')->name('contact');
 
     // Dashboard related routes.

@@ -2,6 +2,7 @@
 
 @section('navigation')
     @include('partials.navigation')
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/themes/base/minified/jquery-ui.min.css" type="text/css" />
 @endsection
 
 @section('content')
@@ -10,7 +11,7 @@
             <h1>Try my guitar</h1>
             <div class="header-search">
                 <form class="form-inline" id="search-form" method="GET" action="{{ route('search') }}">
-                    <input type="text" class="form-control search-input" name="term" placeholder="Search for a user or guitar">
+                    <input type="text" class="form-control search-input" name="term" id="search-input" placeholder="Search for a user or guitar">
                     <a href="{{ route('search') }}" class="btn btn-default search-submit" id="search-submit" onclick="event.preventDefault(); document.getElementById('search-form').submit();">Search</a>
                     <a href="{{ route('search') }}" class="btn btn-default search-submit" id="search-submit-mobile" onclick="event.preventDefault(); document.getElementById('search-form').submit();"><i class="fa fa-search" aria-hidden="true"></i></a>
                 </form>
@@ -77,4 +78,18 @@
 
 @section('footer')
     @include('partials.footer')
+@endsection
+
+@section('scripts')
+    <script>
+        $( "#search-input" ).autocomplete({
+            source: "{{ route('search.autocomplete') }}",
+            minLength: 3,
+            autoFocus:true,
+            select: function (event, ui) {
+                $('#search-input').val(ui.item.value);
+                $('#search-form').submit();
+            }
+        });
+    </script>
 @endsection
