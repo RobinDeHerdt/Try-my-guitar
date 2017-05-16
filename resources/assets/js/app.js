@@ -116,6 +116,7 @@ const app = new Vue({
                  * Hacky way to check if the user is getting the correct data back,
                  * instead of the login screen because of middleware redirect. (role:user)
                  * @todo Check if the user is authenticated before the API call is made.
+                 * @todo Don't broadcast chat 'joined chat' event to the current authenticated user.
                  */
                 if(this.channels[0].id) {
                     this.channels.forEach(channel => {
