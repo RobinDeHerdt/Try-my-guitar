@@ -39,6 +39,31 @@
                     <h4>No results found.</h4>
                 </div>
             @endif
+            @if($guitars->isNotEmpty())
+                @foreach($guitars as $guitar)
+                    @if($loop->index % 2 === 0)
+                        <div class="row">
+                            @endif
+                            <div class="col-md-6">
+                                <div class="search-result">
+                                    <a href="{{ route('guitar.show', ['id' => $guitar->id]) }}">
+                                        <div class="search-result-overlay">
+                                            <span class="search-result-overlay-text">View profile</span>
+                                        </div>
+                                    </a>
+                                    <div class="search-result-image" style="background-image: url({{ Storage::disk('public')->url($guitar->image_uri) }})"></div>
+                                    <h3>{{ $guitar->name }}</h3>
+                                </div>
+                            </div>
+                            @if($loop->index % 2 === 1)
+                        </div>
+                    @endif
+                @endforeach
+            @else
+                <div class="no-results">
+                    <h4>No results found.</h4>
+                </div>
+            @endif
         </div>
     </div>
 @endsection

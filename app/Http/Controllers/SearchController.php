@@ -21,12 +21,17 @@ class SearchController extends Controller
                 ->take(6)
                 ->get();
 
+            $guitars = Guitar::where('name', 'LIKE', $term)
+                ->orWhere('description')
+                ->take(6)
+                ->get();
         } else {
             return back();
         }
 
         return view('results', [
             'users' => $users,
+            'guitars' => $guitars,
             'search_term' => $term,
         ]);
     }
