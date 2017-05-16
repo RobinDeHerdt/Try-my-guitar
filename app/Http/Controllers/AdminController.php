@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Contactmessage;
+use App\ContactMessage;
 
 class AdminController extends Controller
 {
@@ -13,7 +13,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $contact_messages = Contactmessage::where('seen', false)->get();
+        $contact_messages = ContactMessage::where('seen', false)->get();
 
         return view('admin.dashboard', [
             'contact_messages' => $contact_messages,

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Session;
-use App\Contactmessage;
+use App\ContactMessage;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
@@ -13,9 +13,9 @@ class ContactController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Contactmessage $contact_message)
+    public function index(ContactMessage $contact_message)
     {
-        $contact_messages = Contactmessage::paginate(15);
+        $contact_messages = ContactMessage::paginate(15);
 
         return view('admin.contactmessage.index', [
             'contact_messages' => $contact_messages,
@@ -29,7 +29,7 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        $contact_message = new Contactmessage();
+        $contact_message = new ContactMessage();
 
         $contact_message->email     = $request->email;
         $contact_message->message   = $request->message;
@@ -44,10 +44,10 @@ class ContactController extends Controller
     /**
      * Show the specified contact message.
      *
-     * @param Contactmessage $contact_message
+     * @param ContactMessage $contact_message
      * @return \Illuminate\Http\Response
      */
-    public function show(Contactmessage $contact_message)
+    public function show(ContactMessage $contact_message)
     {
         $contact_message->seen = true;
 

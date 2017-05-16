@@ -21,8 +21,28 @@ class Guitar extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\hasMany
      */
-    public function guitarimages()
+    public function guitarImages()
     {
-        return $this->hasMany('App\Guitarimage');
+        return $this->hasMany('App\GuitarImage');
+    }
+
+    /**
+     * A guitar belongs to a guitar brand.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+     */
+    public function guitarBrand()
+    {
+        return $this->belongsTo('App\GuitarBrand');
+    }
+
+    /**
+     * A guitar belongs to many guitar types.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
+     */
+    public function guitarTypes()
+    {
+        return $this->belongsToMany('App\GuitarType', 'guitar_type');
     }
 }

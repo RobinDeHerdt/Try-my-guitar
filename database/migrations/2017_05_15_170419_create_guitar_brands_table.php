@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGuitarsTable extends Migration
+class CreateGuitarBrandsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateGuitarsTable extends Migration
      */
     public function up()
     {
-        Schema::create('guitars', function (Blueprint $table) {
+        Schema::create('guitar_brands', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->text('description');
-            $table->integer('brand_id')->unsigned();
-            $table->foreign('brand_id')->references('id')->on('guitar_brands');
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ class CreateGuitarsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('guitars');
+        Schema::dropIfExists('guitar_brands');
     }
 }

@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Guitarimage extends Model
+class GuitarImage extends Model
 {
     /**
      * A guitar image belongs to a guitar.
