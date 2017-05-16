@@ -4,9 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Guitar;
 
 class SearchController extends Controller
 {
+    /**
+     * Execute search and return the results.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function search(Request $request)
     {
         $input = strip_tags($request->term);
@@ -22,9 +28,9 @@ class SearchController extends Controller
                 ->get();
 
             $guitars = Guitar::where('name', 'LIKE', $term)
-                ->orWhere('description')
                 ->take(6)
                 ->get();
+
         } else {
             return back();
         }

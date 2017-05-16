@@ -39,6 +39,8 @@
                     <h4>No results found.</h4>
                 </div>
             @endif
+            <h2>Guitars</h2>
+            <hr class="dark-hr">
             @if($guitars->isNotEmpty())
                 @foreach($guitars as $guitar)
                     @if($loop->index % 2 === 0)

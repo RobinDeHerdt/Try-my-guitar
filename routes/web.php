@@ -36,7 +36,7 @@ Route::group([
     Route::get('profile/{user}/invite', 'ProfileController@invite')->name('profile.invite');
 
     // Guitar related routes.
-    Route::get('guitar/{id}', 'GuitarController@show')->name('guitar.show');
+    Route::get('guitar/{guitar}', 'GuitarController@show')->name('guitar.show');
 
     // Chat related routes.
     Route::get('chat/channels', 'ChatController@index')->name('chat.index');
