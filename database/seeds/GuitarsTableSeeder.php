@@ -40,7 +40,7 @@ class GuitarsTableSeeder extends Seeder
         ]);
 
         DB::table('guitar_images')->insert([
-            'image_uri' => 'images/matt-heafy.jpg',
+            'image_uri' => 'images/ec-1000.jpg',
             'guitar_id' => 1,
         ]);
 

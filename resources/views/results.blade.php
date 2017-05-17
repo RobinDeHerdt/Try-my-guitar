@@ -16,6 +16,7 @@
                 @if($users->isNotEmpty())
                     @foreach($users as $user)
                         <div class="col-md-6">
+                            <div class="search-result-header-image" style="background-image: url({{ Storage::disk('public')->url($user->header_image_uri) }})"></div>
                             <div class="search-result">
                                 <a href="{{ route('profile.show', ['id' => $user->id]) }}">
                                 <div class="search-result-overlay">
@@ -45,7 +46,7 @@
                                         <span class="search-result-overlay-text">View profile</span>
                                     </div>
                                 </a>
-                                <div class="search-result-image" style="background-image: url({{ Storage::disk('public')->url($guitar->image_uri) }})"></div>
+                                <div class="search-result-image" style="background-image: url({{ Storage::disk('public')->url($guitar->guitarImages()->first()->image_uri) }})"></div>
                                 <h3>{{ $guitar->name }}</h3>
                             </div>
                         </div>

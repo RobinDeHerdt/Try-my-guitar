@@ -76,6 +76,7 @@ class SearchController extends Controller
             }
         })->take(6)->get();
 
+
         $this->guitars = Guitar::where(function($q) use ($terms)
         {
             foreach ($terms as $term)
