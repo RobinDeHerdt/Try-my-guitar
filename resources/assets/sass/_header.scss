@@ -21,33 +21,38 @@
     font-weight: 700;
     text-align: center;
   }
+}
+
+.search-results-search {
+  margin-top: 100px;
+  margin-bottom: 175px;
+}
+
+.header-search {
+  margin-top: 25px;
+
+  .search-input {
+    width: 77.5%;
+    float: left;
+  }
+
+  .search-submit {
+    border: none;
+    border-radius: 0;
+    height: 40px;
+    width: 22.5%;
+    float: right;
+    background-color: $primary-component-color;
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 9px 12px;
+  }
 
   input {
     border: none;
     border-radius: 0;
     height: 40px;
-  }
-
-  .header-search {
-    margin-top: 25px;
-
-    .search-input {
-      width: 77.5%;
-      float: left;
-    }
-
-    .search-submit {
-      border: none;
-      border-radius: 0;
-      height: 40px;
-      width: 22.5%;
-      float: right;
-      background-color: $primary-component-color;
-      color: white;
-      font-weight: 600;
-      text-transform: uppercase;
-      padding: 9px 12px;
-    }
   }
 }
 
