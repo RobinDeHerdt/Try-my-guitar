@@ -44,7 +44,7 @@
                             <div class="search-result">
                                 <a href="{{ route('guitar.show', ['id' => $guitar->id]) }}">
                                     <div class="search-result-overlay">
-                                        <span class="search-result-overlay-text">View profile</span>
+                                        <span class="search-result-overlay-text">View details</span>
                                     </div>
                                 </a>
                                 <div class="search-result-image" style="background-image: url({{ Storage::disk('public')->url($guitar->guitarImages()->first()->image_uri) }})"></div>

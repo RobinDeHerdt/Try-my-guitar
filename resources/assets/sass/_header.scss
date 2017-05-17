@@ -47,12 +47,14 @@
     font-weight: 600;
     text-transform: uppercase;
     padding: 9px 12px;
+    box-shadow: $drop-shadow;
   }
 
   input {
     border: none;
     border-radius: 0;
     height: 40px;
+    box-shadow: $drop-shadow;
   }
 }
 
@@ -90,14 +92,14 @@
     h1 {
       font-size: 10vw;
     }
+  }
 
-    #search-submit {
-      display: none;
-    }
+  #search-submit {
+    display: none;
+  }
 
-    #search-submit-mobile {
-      display: inline;
-    }
+  #search-submit-mobile {
+    display: inline;
   }
 
   .header-image {
