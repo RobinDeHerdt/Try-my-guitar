@@ -10,10 +10,15 @@
             <div class="search-results-search">
                 @include('partials.search')
             </div>
-            <h2>Users</h2>
-            <hr class="dark-hr">
-            <div class="row">
-                @if($users->isNotEmpty())
+            @if($users->isEmpty() && $guitars->isEmpty())
+                <div class="no-results">
+                    <h4>No results found.</h4>
+                </div>
+            @endif
+            @if($users->isNotEmpty())
+                <h2>Users</h2>
+                <hr class="dark-hr">
+                <div class="row">
                     @foreach($users as $user)
                         <div class="col-md-6">
                             <div class="search-result-header-image" style="background-image: url({{ Storage::disk('public')->url($user->header_image_uri) }})"></div>
@@ -28,16 +33,12 @@
                             </div>
                         </div>
                     @endforeach
-                @else
-                    <div class="no-results">
-                        <h4>No results found.</h4>
-                    </div>
-                @endif
-            </div>
-            <h2>Guitars</h2>
-            <hr class="dark-hr">
-            <div class="row">
-                @if($guitars->isNotEmpty())
+                </div>
+            @endif
+            @if($guitars->isNotEmpty())
+                <h2>Guitars</h2>
+                <hr class="dark-hr">
+                <div class="row">
                     @foreach($guitars as $guitar)
                         <div class="col-md-6">
                             <div class="search-result">
@@ -51,12 +52,8 @@
                             </div>
                         </div>
                     @endforeach
-                @else
-                    <div class="no-results">
-                        <h4>No results found.</h4>
-                    </div>
-                @endif
-            </div>
+                </div>
+            @endif
         </div>
     </div>
 @endsection
@@ -69,7 +66,7 @@
     <script>
         $( "#search-input" ).autocomplete({
             source: "{{ route('search.autocomplete') }}",
-            minLength: 3,
+            minLength: 1,
             autoFocus:true,
             select: function (event, ui) {
                 $('#search-input').val(ui.item.value);

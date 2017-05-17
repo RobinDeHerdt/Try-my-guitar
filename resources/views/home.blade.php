@@ -78,7 +78,7 @@
     <script>
         $( "#search-input" ).autocomplete({
             source: "{{ route('search.autocomplete') }}",
-            minLength: 3,
+            minLength: 1,
             autoFocus:true,
             select: function (event, ui) {
                 $('#search-input').val(ui.item.value);
