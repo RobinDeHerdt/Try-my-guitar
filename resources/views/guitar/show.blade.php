@@ -9,7 +9,7 @@
         <div class="container">
             <div class="row heading">
                 <div class="col-md-12">
-                    <h1>{{ $guitar->guitarBrand->name }} {{ $guitar->name }}</h1>
+                    <h1>{{ $guitar->guitarBrand->name }} (logo: {{ $guitar->guitarBrand->logo_uri }}){{ $guitar->name }}</h1>
                 </div>
             </div>
             <div class="row">

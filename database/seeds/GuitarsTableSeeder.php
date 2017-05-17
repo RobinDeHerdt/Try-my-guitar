@@ -13,6 +13,7 @@ class GuitarsTableSeeder extends Seeder
     {
         DB::table('guitar_brands')->insert([
             'name' => 'LTD',
+            'logo_uri' => 'images/ltd-logo.png',
         ]);
 
         DB::table('guitars')->insert([

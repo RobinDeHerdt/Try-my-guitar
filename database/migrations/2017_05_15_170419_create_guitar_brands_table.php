@@ -16,6 +16,7 @@ class CreateGuitarBrandsTable extends Migration
         Schema::create('guitar_brands', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('logo_uri');
             $table->timestamps();
         });
     }
