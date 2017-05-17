@@ -46,7 +46,7 @@ class GuitarsTableSeeder extends Seeder
         ]);
 
         DB::table('guitar_images')->insert([
-            'image_uri' => 'images/register-bg.jpg',
+            'image_uri' => 'images/electric-guitars.jpg',
             'guitar_id' => 1,
         ]);
     }
