@@ -34,7 +34,7 @@
                                 <input type="text" class="form-control" name="last_name" value="{{ $user->last_name }}">
                             </div>
                             <div class="form-group">
-                                <label for="email">@lang('input.email') *</label>
+                                <label for="email">@lang('input.email') * </label>
                                 <input type="email" class="form-control" name="email" value="{{ $user->email }}" required>
                             </div>
                             <div class="form-group">

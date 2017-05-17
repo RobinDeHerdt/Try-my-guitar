@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Auth;
 use App\User;
+use App\Mail\VerifyEmail;
+use Illuminate\Support\Facades\Mail;
 
 class ProfileController extends Controller
 {
@@ -66,11 +68,19 @@ class ProfileController extends Controller
      */
     public function update(Request $request)
     {
-        $user = $this->user;
+        $send_mail  = false;
+        $user       = $this->user;
 
         $user->first_name   = $request->first_name;
         $user->last_name    = $request->last_name;
-        $user->email        = $request->email;
+
+        if($request->email !== $user->email){
+            $user->email                = $request->email;
+            $user->verified             = false;
+            $user->verification_token   = str_random(12);
+            $send_mail                  = true;
+        }
+
         $user->location     = $request->location;
 
         if (isset($request->image)) {
@@ -79,7 +89,14 @@ class ProfileController extends Controller
 
         $user->save();
 
-        Session::flash('success-message', 'Personal information updated successfully.');
+        if($send_mail) {
+            Mail::to($user->email)->send(new VerifyEmail($user));
+            Session::flash('success-message', 'Personal information updated successfully. We\'ve sent a verification link to your new email address.');
+        } else {
+            Session::flash('success-message', 'Personal information updated successfully.');
+        }
+
+
 
         return back();
     }

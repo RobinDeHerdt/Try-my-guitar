@@ -79,7 +79,7 @@ class RegisterController extends Controller
 
         Mail::to($user->email)->send(new VerifyEmail($user));
 
-        Session::flash('success-message', "Thanks for registering! We've sent you a verification link via email.");
+        Session::flash('success-message', "Thanks for registering! We've sent a verification link to your email address.");
 
         return $user;
     }
