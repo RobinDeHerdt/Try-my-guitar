@@ -63,3 +63,17 @@
 @section('footer')
     @include('partials.footer')
 @endsection
+
+@section('scripts')
+    <script>
+        $( "#search-input" ).autocomplete({
+            source: "{{ route('search.autocomplete') }}",
+            minLength: 3,
+            autoFocus:true,
+            select: function (event, ui) {
+                $('#search-input').val(ui.item.value);
+                $('#search-form').submit();
+            }
+        });
+    </script>
+@endsection
