@@ -14,10 +14,55 @@
   }
 }
 
-.guitar-type {
-  background-color: $primary-component-color;
-  padding: 5px 15px;
-  border-radius: 2.5px;
-  color: #fff;
-  margin-left: 2.5px;
+.slick-related {
+  .slick-item {
+    text-align: center;
+    padding-bottom: 10px;
+    background-color: #fff;
+    box-shadow: $drop-shadow;
+    padding: 20px;
+
+    span {
+      position: relative;
+    }
+
+    img {
+      height: 150px;
+      margin: 10px;
+    }
+  }
+
+  .slick-prev:before, .slick-next:before {
+    color: $primary-font-color;
+  }
+
+  .slick-prev {
+    left: 0;
+    z-index: 5;
+  }
+
+  .slick-next {
+    right: 0;
+    z-index: 5;
+  }
+}
+
+.guitar-type-container {
+  margin-top: 20px;
+
+  .guitar-type {
+    background-color: $primary-component-color;
+    padding: 5px 15px;
+    border-radius: 2.5px;
+    color: #fff;
+    margin-left: 2.5px;
+    margin-top: 10px;
+  }
+}
+
+.guitar-brand-logo {
+  width: 20%;
+  float: right;
+  margin-top: 5px;
+  margin-right: 10px;
 }

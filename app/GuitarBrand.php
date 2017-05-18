@@ -13,6 +13,6 @@ class GuitarBrand extends Model
      */
     public function guitars()
     {
-        return $this->hasMany('App\Guitar');
+        return $this->hasMany('App\Guitar', 'brand_id');
     }
 }

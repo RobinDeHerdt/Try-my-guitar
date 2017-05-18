@@ -17,6 +17,12 @@ class GuitarsTableSeeder extends Seeder
         ]);
 
         DB::table('guitars')->insert([
+            'name' => 'EC-1000 Deluxe',
+            'description' => 'Black and gold colors',
+            'brand_id' => 1,
+        ]);
+
+        DB::table('guitars')->insert([
             'name' => 'EC-1000',
             'description' => 'Black and gold colors',
             'brand_id' => 1,
@@ -56,6 +62,12 @@ class GuitarsTableSeeder extends Seeder
             'image_uri' => 'images/ec-1000-3.jpg',
             'guitar_id' => 1,
             'user_id'   => 2,
+        ]);
+
+        DB::table('guitar_images')->insert([
+            'image_uri' => 'images/ec-1000.jpg',
+            'guitar_id' => 2,
+            'user_id'   => 7,
         ]);
     }
 }
