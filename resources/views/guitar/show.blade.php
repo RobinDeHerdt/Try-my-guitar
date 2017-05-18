@@ -40,7 +40,7 @@
                     </div>
                 </div>
             </div>
-            @if($brand_guitars)
+            @if($brand_guitars->isNotEmpty())
             <div class="row">
                 <div class="col-md-12">
                     <h2>More {{ $guitar->guitarBrand->name }} guitars</h2>

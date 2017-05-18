@@ -16,19 +16,26 @@ class GuitarController extends Controller
      */
     public function show(Guitar $guitar)
     {
-        // Get all guitars from the specified guitar's brand.
-        $brand_guitars = $guitar->guitarBrand->guitars()->get();
+        // Get all guitars from the specified guitar's brand. Take a maximum of 10 records.
+        $brand_guitars = $guitar->guitarBrand->guitars()->take(10)->get();
 
-        $types = $guitar->guitarTypes()->get();
+        $types = $guitar->guitarTypes()->pluck('id');
 
-        // Get all guitars with the same types as the specified guitar.
-        $similar_guitars = Guitar::whereHas('guitarTypes', function($q) use ($types)
-        {
-            foreach($types as $type) {
-                $q->where('type_id', $type->id);
-            }
+        /**
+         * Get all guitars with the same types as the specified guitar. Take a maximum of 10 records.
+         *
+         * $similar_guitars = Guitar::whereHas('guitarTypes', function($q) use ($types) {
+         * foreach($types as $type) {
+         *   // @todo make this work.
+         *   $q->where('id', $type->id);
+         * }
+         * })->take(10)->get();
+         */
 
-        })->get();
+        // Get all guitars with the same types as the specified guitar. Take a maximum of 10 records.
+        $similar_guitars = Guitar::whereHas('guitarTypes', function($q) use ($types) {
+            $q->whereIn('id', $types);
+        })->take(10)->get();
 
         return view('guitar.show', [
             'guitar' => $guitar,
