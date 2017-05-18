@@ -1,0 +1,23 @@
+.slick-main {
+  .slick-item {
+    text-align: center;
+    padding-bottom: 10px;
+
+    span {
+      position: relative;
+    }
+
+    img {
+      height: 300px;
+      margin: 10px;
+    }
+  }
+}
+
+.guitar-type {
+  background-color: $primary-component-color;
+  padding: 5px 15px;
+  border-radius: 2.5px;
+  color: #fff;
+  margin-left: 2.5px;
+}

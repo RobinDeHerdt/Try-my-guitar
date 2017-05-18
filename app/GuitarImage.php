@@ -15,4 +15,14 @@ class GuitarImage extends Model
     {
         return $this->belongsTo('App\Guitar');
     }
+
+    /**
+     * A guitar image belongs to a user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

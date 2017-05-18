@@ -104,6 +104,17 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Channel');
     }
 
+
+    /**
+     * A user has many guitar images.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
+     */
+    public function guitarImages()
+    {
+        return $this->hasMany('App\GuitarImage');
+    }
+
     /**
      * Returns the full user name.
      *
