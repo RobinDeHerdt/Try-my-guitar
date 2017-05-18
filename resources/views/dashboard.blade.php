@@ -57,7 +57,7 @@
                                 <div class="message-teaser-container">
                                     <div class="row">
                                         <div class="col-md-8">
-                                            <span>You have been invited by <strong>{{ $invite->sender->first_name }}</strong> to join <strong>{{ $invite->channel->name }}</strong></span>
+                                            <span>You have been invited by <a href="{{ route('profile.show', ['id' => $invite->sender->id]) }}"><strong>{{ $invite->sender->fullName() }}</strong></a> to join <strong>{{ $invite->channel->name }}</strong></span>
                                         </div>
                                         <div class="col-md-2 text-center">
                                             <a href="{{ route('invite.response') }}" onclick="event.preventDefault(); document.getElementById('accept-form').submit();"><span><i class="fa fa-check" aria-hidden="true"></i> Accept</span></a>
