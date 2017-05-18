@@ -15,11 +15,15 @@
 }
 
 .slick-related {
+  width: 95%;
+  margin-left: 2.5%;
+
   .slick-item {
     text-align: center;
     background-color: #fff;
     box-shadow: $drop-shadow;
     padding: 20px;
+    margin: 0 10px;
 
     span {
       position: relative;
@@ -33,16 +37,6 @@
 
   .slick-prev:before, .slick-next:before {
     color: $primary-font-color;
-  }
-
-  .slick-prev {
-    left: 0;
-    z-index: 5;
-  }
-
-  .slick-next {
-    right: 0;
-    z-index: 5;
   }
 }
 

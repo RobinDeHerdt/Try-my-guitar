@@ -48,7 +48,11 @@
                                     </div>
                                 </a>
                                 <img src="{{ Storage::disk('public')->url($guitar->guitarBrand->logo_uri) }}" alt="{{ $guitar->guitarBrand->name }} logo" class="search-result-logo">
-                                <div class="search-result-image" style="background-image: url({{ Storage::disk('public')->url($guitar->guitarImages()->first()->image_uri) }})"></div>
+                                @if($guitar->guitarImages->isNotEmpty())
+                                    <div class="search-result-image" style="background-image: url({{ Storage::disk('public')->url($guitar->guitarImages()->first()->image_uri) }})"></div>
+                                @else
+                                    <div class="search-result-image">No image available</div>
+                                @endif
                                 <h3>{{ $guitar->name }}</h3>
                             </div>
                         </div>

@@ -13,6 +13,6 @@ class GuitarType extends Model
      */
     public function guitars()
     {
-        return $this->belongsToMany('App\Guitar', 'guitar_type', 'guitar_id', 'type_id');
+        return $this->belongsToMany('App\Guitar', 'guitar_type', 'type_id', 'guitar_id');
     }
 }

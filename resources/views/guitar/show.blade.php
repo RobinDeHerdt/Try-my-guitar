@@ -40,21 +40,48 @@
                     </div>
                 </div>
             </div>
+            @if($brand_guitars)
             <div class="row">
                 <div class="col-md-12">
                     <h2>More {{ $guitar->guitarBrand->name }} guitars</h2>
                     <div class="slick-related">
-                        @foreach($guitar->guitarBrand->guitars->except(['id' => $guitar->id]) as $guitarBrandGuitar)
-                            <a href="{{ route('guitar.show', ['guitar' => $guitarBrandGuitar->id]) }}">
+                        @foreach($brand_guitars as $brand_guitar)
+                            <a href="{{ route('guitar.show', ['guitar' => $brand_guitar->id]) }}">
                             <div class="slick-item">
-                                <img src="{{ Storage::disk('public')->url($guitarBrandGuitar->guitarImages->first()->image_uri) }}">
-                                <span><strong>{{ $guitarBrandGuitar->name }}</strong></span>
+                                @if($brand_guitar->guitarImages->isNotEmpty())
+                                    <img src="{{ Storage::disk('public')->url($brand_guitar->guitarImages->first()->image_uri) }}">
+                                @else
+                                    <div class="search-result-image">No image available</div>
+                                @endif
+                                <span><strong>{{ $brand_guitar->name }}</strong></span>
                             </div>
                             </a>
                         @endforeach
                     </div>
                 </div>
             </div>
+            @endif
+            @if($similar_guitars->isNotEmpty())
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>Similar guitars</h2>
+                        <div class="slick-related">
+                            @foreach($similar_guitars as $similar_guitar)
+                                <a href="{{ route('guitar.show', ['guitar' => $similar_guitar->id]) }}">
+                                    <div class="slick-item">
+                                        @if($similar_guitar->guitarImages->isNotEmpty())
+                                            <img src="{{ Storage::disk('public')->url($similar_guitar->guitarImages->first()->image_uri) }}">
+                                        @else
+                                            <div class="search-result-image">No image available</div>
+                                        @endif
+                                        <span><strong>{{ $similar_guitar->name }}</strong></span>
+                                    </div>
+                                </a>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
 @endsection
@@ -79,12 +106,9 @@
         });
 
         $('.slick-related').slick({
-            lazyLoad: 'ondemand',
             arrows: true,
-            dots: true,
+            infinite: false,
             variableWidth: true,
-            adaptiveHeight: true,
-            centerMode: true,
         });
     </script>
 @endsection
