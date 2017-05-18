@@ -16,31 +16,43 @@ class GuitarController extends Controller
      */
     public function show(Guitar $guitar)
     {
-        // Get all guitars from the specified guitar's brand. Take a maximum of 10 records.
-        $brand_guitars = $guitar->guitarBrand->guitars()->take(10)->get();
+        /**
+         * Get all guitars from the specified guitar's brand.
+         * Take a maximum of 10 records.
+         */
+        $brand_guitars = $guitar->guitarBrand->guitars()->take(10)->get()->except(['id' => $guitar->id]);
 
         $types = $guitar->guitarTypes()->pluck('id');
 
-        /**
-         * Get all guitars with the same types as the specified guitar. Take a maximum of 10 records.
-         *
-         * $similar_guitars = Guitar::whereHas('guitarTypes', function($q) use ($types) {
-         * foreach($types as $type) {
-         *   // @todo make this work.
-         *   $q->where('id', $type->id);
-         * }
-         * })->take(10)->get();
-         */
+        $guitars = Guitar::has('guitarTypes');
 
-        // Get all guitars with the same types as the specified guitar. Take a maximum of 10 records.
-        $similar_guitars = Guitar::whereHas('guitarTypes', function($q) use ($types) {
-            $q->whereIn('id', $types);
-        })->take(10)->get();
+        /**
+         * Get all guitars with minimum the same types as the specified guitar.
+         * Take a maximum of 10 records.
+         */
+        foreach($types as $type) {
+            $guitars->whereHas('guitarTypes', function ($q) use ($type) {
+                $q->where('id', $type);
+            });
+        }
+
+        $similar_guitars = $guitars->take(10)->get()->except(['id' => $guitar->id]);
+
+        /**
+         * If the previous query gives no results back, execute the following query.
+         * This query returns less accurate, but still relevant guitars.
+         * Take a maximum of 10 records.
+         */
+        if($similar_guitars->isEmpty()) {
+            $similar_guitars = Guitar::whereHas('guitarTypes', function($q) use ($types) {
+                $q->whereIn('id', $types);
+            })->take(10)->get()->except(['id' => $guitar->id]);
+        }
 
         return view('guitar.show', [
             'guitar' => $guitar,
-            'brand_guitars' => $brand_guitars->except(['id' => $guitar->id]),
-            'similar_guitars' => $similar_guitars->except(['id' => $guitar->id]),
+            'brand_guitars' => $brand_guitars,
+            'similar_guitars' => $similar_guitars,
         ]);
     }
 }
