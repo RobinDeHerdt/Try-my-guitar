@@ -22,6 +22,9 @@
                                 <span class="guitar-type">{{ $guitarType->name }}</span>
                             @endforeach
                         </div>
+                        <div class="guitar-description-container">
+                            {{ $guitar->description }}
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -30,7 +33,7 @@
                             @foreach($guitar->guitarImages as $guitarImage)
                                 <div class="slick-item">
                                     <img src="{{ Storage::disk('public')->url($guitarImage->image_uri) }}">
-                                    <span><strong>{{ $guitarImage->user->fullName() }}</strong></span>
+                                    <span>By <a href="{{  route('profile.show', ['id' => $guitarImage->user->id]) }}"><strong>{{ $guitarImage->user->fullName() }}</strong></a></span>
                                 </div>
                             @endforeach
                         </div>

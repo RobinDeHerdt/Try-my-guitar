@@ -17,7 +17,6 @@
 .slick-related {
   .slick-item {
     text-align: center;
-    padding-bottom: 10px;
     background-color: #fff;
     box-shadow: $drop-shadow;
     padding: 20px;
@@ -60,8 +59,12 @@
   }
 }
 
+.guitar-description-container {
+  margin: 20px 0;
+}
+
 .guitar-brand-logo {
-  width: 20%;
+  width: 80px;
   float: right;
   margin-top: 5px;
   margin-right: 10px;
