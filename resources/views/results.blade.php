@@ -47,6 +47,7 @@
                                         <span class="search-result-overlay-text">View details</span>
                                     </div>
                                 </a>
+                                <img src="{{ Storage::disk('public')->url($guitar->guitarBrand->logo_uri) }}" alt="{{ $guitar->guitarBrand->name }} logo" class="search-result-logo">
                                 <div class="search-result-image" style="background-image: url({{ Storage::disk('public')->url($guitar->guitarImages()->first()->image_uri) }})"></div>
                                 <h3>{{ $guitar->name }}</h3>
                             </div>
