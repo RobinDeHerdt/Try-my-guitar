@@ -15,7 +15,7 @@
                             <h4>Types</h4>
                             <div class="form-group">
                                 @foreach($types as $type)
-                                    <label class="checkbox-inline"><input type="checkbox" name="types[]" value="{{ $type->id }}">{{ $type->name }}</label>
+                                    <label class="checkbox-inline"><input type="checkbox" name="types[]" value="{{ $type->id }}" {{ in_array($type->id, $filter_types) ? 'checked' : ''}}>{{ $type->name }}</label>
                                 @endforeach
                             </div>
                         </div>

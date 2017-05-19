@@ -26,7 +26,51 @@ class SearchController extends Controller
         if (!empty($input) && !ctype_space($input)) {
             // Split the string into terms and remove whitespace from both sides of the string.
             $terms = preg_split('/\s+/', $input, -1, PREG_SPLIT_NO_EMPTY);
-            $this->search($terms);
+
+            /**
+             * User search.
+             */
+            $most_relevant_user_results = collect();
+
+            if(count($terms) >= 2) {
+                $most_relevant_user_results = User::where('first_name', 'like', '%'.$terms[0].'%')->where('last_name', 'like', '%'.$terms[1].'%')->take(6)->get();
+            }
+
+            $less_relevant_user_results = User::where(function($q) use ($terms)
+            {
+                foreach ($terms as $term)
+                {
+                    $q->orWhere('first_name', 'like', '%'.$term.'%')
+                        ->orWhere('last_name', 'like', '%'.$term.'%');
+                }
+            })->take(6)->get();
+
+            $this->users = $most_relevant_user_results->merge($less_relevant_user_results);
+
+            /**
+             * Guitar search.
+             */
+            $query = Guitar::where(function($q) use ($terms)
+            {
+                foreach ($terms as $term)
+                {
+                    $q->orWhere('name', 'like', '%'.$term.'%');
+                }
+            });
+
+
+
+            if($filter_types = $request->query('types')) {
+                foreach ($filter_types as $filter_type) {
+                    $query->whereHas('guitarTypes', function($q) use ($filter_type) {
+                       $q->where('id', $filter_type);
+                    });
+                }
+            } else {
+                $filter_types = [];
+            }
+
+            $this->guitars = $query->get();
         } else {
             return back();
         }
@@ -40,6 +84,7 @@ class SearchController extends Controller
             'search_term'   => $input,
             'types'         => $types,
             'brands'        => $brands,
+            'filter_types'  => $filter_types,
         ]);
     }
 
@@ -55,7 +100,22 @@ class SearchController extends Controller
             // Split the string into terms and remove whitespace from both sides of the string.
             $terms = preg_split('/\s+/', $input, -1, PREG_SPLIT_NO_EMPTY);
 
-            $this->search($terms);
+            $this->users = User::where(function($q) use ($terms)
+            {
+                foreach ($terms as $term)
+                {
+                    $q->orWhere('first_name', 'like', '%'.$term.'%')
+                        ->orWhere('last_name', 'like', '%'.$term.'%');
+                }
+            })->take(6)->get();
+
+            $this->guitars = Guitar::where(function($q) use ($terms)
+            {
+                foreach ($terms as $term)
+                {
+                    $q->orWhere('name', 'like', '%'.$term.'%');
+                }
+            })->take(6)->get();
         }
 
         $result_array = [];
@@ -69,28 +129,5 @@ class SearchController extends Controller
         }
 
         return response()->json($result_array);
-    }
-
-    /**
-     * Search for guitars and users using the specified terms.
-     */
-    private function search($terms)
-    {
-        $this->users = User::where(function($q) use ($terms)
-        {
-            foreach ($terms as $term)
-            {
-                $q->orWhere('first_name', 'like', '%'.$term.'%')
-                    ->orWhere('last_name', 'like', '%'.$term.'%');
-            }
-        })->take(6)->get();
-
-        $this->guitars = Guitar::where(function($q) use ($terms)
-        {
-            foreach ($terms as $term)
-            {
-                $q->orWhere('name', 'like', '%'.$term.'%');
-            }
-        })->take(6)->get();
     }
 }
