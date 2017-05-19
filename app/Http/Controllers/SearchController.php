@@ -50,14 +50,13 @@ class SearchController extends Controller
             /**
              * Guitar search.
              */
-            $query = Guitar::where(function($q) use ($terms)
-            {
-                foreach ($terms as $term)
-                {
+            $query = Guitar::where(function($q) use ($terms) {
+                foreach ($terms as $term) {
                     $q->orWhere('name', 'like', '%'.$term.'%');
                 }
             });
 
+            // Filter types.
             if($filter_types = $request->query('types')) {
                 foreach ($filter_types as $filter_type) {
                     $query->whereHas('guitarTypes', function($q) use ($filter_type) {
@@ -68,6 +67,7 @@ class SearchController extends Controller
                 $filter_types = [];
             }
 
+            // Filter brands.
             if($filter_brands = $request->query('brands')) {
                 foreach ($filter_brands as $filter_brand) {
                     $query->whereHas('guitarBrand', function($q) use ($filter_brand) {
@@ -78,7 +78,9 @@ class SearchController extends Controller
                 $filter_brands = [];
             }
 
-            $this->guitars = $query->get();
+            // Execute the query. Get a maximum of 10 records.
+            $this->guitars = $query->paginate(10);
+
         } else {
             return back();
         }
