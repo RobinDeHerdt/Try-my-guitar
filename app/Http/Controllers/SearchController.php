@@ -58,8 +58,6 @@ class SearchController extends Controller
                 }
             });
 
-
-
             if($filter_types = $request->query('types')) {
                 foreach ($filter_types as $filter_type) {
                     $query->whereHas('guitarTypes', function($q) use ($filter_type) {
@@ -68,6 +66,16 @@ class SearchController extends Controller
                 }
             } else {
                 $filter_types = [];
+            }
+
+            if($filter_brands = $request->query('brands')) {
+                foreach ($filter_brands as $filter_brand) {
+                    $query->whereHas('guitarBrand', function($q) use ($filter_brand) {
+                        $q->where('id', $filter_brand);
+                    });
+                }
+            } else {
+                $filter_brands = [];
             }
 
             $this->guitars = $query->get();
@@ -85,6 +93,7 @@ class SearchController extends Controller
             'types'         => $types,
             'brands'        => $brands,
             'filter_types'  => $filter_types,
+            'filter_brands' => $filter_brands,
         ]);
     }
 

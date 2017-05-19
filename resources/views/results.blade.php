@@ -32,7 +32,7 @@
                             <h4>Brands</h4>
                             <div class="form-group">
                                 @foreach($brands as $brand)
-                                    <label class="checkbox-inline"><input type="checkbox" value="">{{ $brand->name }}</label>
+                                    <label class="checkbox-inline"><input type="checkbox" name="brands[]" value="{{ $brand->id }}" {{ in_array($brand->id, $filter_brands) ? 'checked' : ''}}>{{ $brand->name }}</label>
                                 @endforeach
                             </div>
                         </div>
