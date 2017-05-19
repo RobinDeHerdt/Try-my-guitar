@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\GuitarBrand;
+use App\GuitarType;
 use Illuminate\Http\Request;
 use App\User;
 use App\Guitar;
@@ -24,16 +26,20 @@ class SearchController extends Controller
         if (!empty($input) && !ctype_space($input)) {
             // Split the string into terms and remove whitespace from both sides of the string.
             $terms = preg_split('/\s+/', $input, -1, PREG_SPLIT_NO_EMPTY);
-
             $this->search($terms);
         } else {
             return back();
         }
 
+        $types  = GuitarType::all();
+        $brands = GuitarBrand::all();
+
         return view('results', [
-            'users' => $this->users,
-            'guitars' => $this->guitars,
-            'search_term' => $input,
+            'users'         => $this->users,
+            'guitars'       => $this->guitars,
+            'search_term'   => $input,
+            'types'         => $types,
+            'brands'        => $brands,
         ]);
     }
 
@@ -78,7 +84,6 @@ class SearchController extends Controller
                     ->orWhere('last_name', 'like', '%'.$term.'%');
             }
         })->take(6)->get();
-
 
         $this->guitars = Guitar::where(function($q) use ($terms)
         {

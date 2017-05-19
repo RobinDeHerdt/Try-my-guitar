@@ -7,9 +7,45 @@
 @section('content')
     <div class="content">
         <div class="container">
-            <div class="search-results-search">
-                @include('partials.search')
-            </div>
+            <form class="form-inline" id="search-form" method="GET" action="{{ route('search') }}">
+                <div class="dashboard-content search-filter">
+                    <h3>Filters</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Types</h4>
+                            <div class="form-group">
+                                @foreach($types as $type)
+                                    <label class="checkbox-inline"><input type="checkbox" name="types[]" value="{{ $type->id }}">{{ $type->name }}</label>
+                                @endforeach
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Categories</h4>
+                            <div class="form-group">
+                                <label class="checkbox-inline"><input type="checkbox" value="">Users</label>
+                                <label class="checkbox-inline"><input type="checkbox" value="">Guitars</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Brands</h4>
+                            <div class="form-group">
+                                @foreach($brands as $brand)
+                                    <label class="checkbox-inline"><input type="checkbox" value="">{{ $brand->name }}</label>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="search-results-search">
+                    <div class="header-search">
+                        <input type="text" class="form-control search-input" name="term" id="search-input" placeholder="Search for a user or guitar" value="{{app('request')->input('term') }}">
+                        <a href="{{ route('search') }}" class="btn btn-default search-submit" id="search-submit" onclick="event.preventDefault(); document.getElementById('search-form').submit();">Search</a>
+                        <a href="{{ route('search') }}" class="btn btn-default search-submit" id="search-submit-mobile" onclick="event.preventDefault(); document.getElementById('search-form').submit();"><i class="fa fa-search" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </form>
             @if($users->isEmpty() && $guitars->isEmpty())
                 <div class="no-results">
                     <h4>No results found.</h4>
