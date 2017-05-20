@@ -49,10 +49,17 @@ class GuitarController extends Controller
             })->take(10)->get()->except(['id' => $guitar->id]);
         }
 
+        $query      = $guitar->users();
+
+        $users      = $query->take(4)->get();
+        $user_count = $query->count();
+
         return view('guitar.show', [
-            'guitar' => $guitar,
-            'brand_guitars' => $brand_guitars,
-            'similar_guitars' => $similar_guitars,
+            'users'             => $users,
+            'user_count'        => $user_count,
+            'guitar'            => $guitar,
+            'brand_guitars'     => $brand_guitars,
+            'similar_guitars'   => $similar_guitars,
         ]);
     }
 }

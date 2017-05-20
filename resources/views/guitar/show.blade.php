@@ -40,23 +40,27 @@
                     </div>
                 </div>
             </div>
-
             <h2>People with this guitar</h2>
             <div class="collection">
-                @foreach($guitar->users as $user)
+                @foreach($users as $user)
                     <div class="collection-item">
                         <a href="{{ route('profile.show', ['user' => $user->id]) }}" title="{{ $user->fullName() }}">
                             <div style="background-image: url({{ Storage::disk('public')->url($user->image_uri) }}" class="collection-item-image"></div>
                         </a>
                     </div>
                 @endforeach
+                @if($user_count > 4)
                     <div class="collection-item">
-                        <a href="#">
+                        <a href="{{ route('guitar.show.users', ['guitar' => $guitar->id]) }}">
                             <div class="collection-item-color">
-                                <span>View all</span>
+                                <div class="collection-more" title="View all people with this guitar">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                    <span>{{ $user_count - 4 }}</span>
+                                </div>
                             </div>
                         </a>
                     </div>
+                @endif
             </div>
             @if($brand_guitars->isNotEmpty())
             <div class="row">

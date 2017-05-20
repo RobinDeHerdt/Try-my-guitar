@@ -166,6 +166,11 @@
     flex: 1;
     text-align: center;
 
+    a:link, a:visited, a:hover {
+      text-decoration: none;
+      color: $primary-font-color;
+    }
+
     .collection-item-image {
       height: 150px;
       width: 150px;
@@ -181,6 +186,17 @@
       margin: 0 auto;
       border-radius: 50%;
       background-color: $secondary-bg-color;
+
+      .collection-more {
+        position: relative;
+        top: 42px;
+        font-size: 24px;
+      }
+
+      .collection-more span {
+        font-size: 40px;
+        font-weight: 600;
+      }
     }
   }
 }

@@ -38,6 +38,7 @@ Route::group([
 
     // Guitar related routes.
     Route::get('guitar/{guitar}', 'GuitarController@show')->name('guitar.show');
+    Route::get('guitar/{guitar}/users', 'GuitarController@show')->name('guitar.show.users');
 
     // Chat related routes.
     Route::get('chat/channels', 'ChatController@index')->name('chat.index');
