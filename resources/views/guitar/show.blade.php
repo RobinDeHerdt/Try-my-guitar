@@ -41,7 +41,7 @@
                 </div>
             </div>
             <div class="dashboard-content">
-                <h2>People with this guitar</h2>
+                <h2>People who own this guitar</h2>
                 <div class="collection">
                     @foreach($users as $user)
                         <div class="collection-item">
