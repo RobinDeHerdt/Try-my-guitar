@@ -85,7 +85,7 @@ class SearchController extends Controller
         $terms = preg_split('/\s+/', $input, -1, PREG_SPLIT_NO_EMPTY);
 
         $most_relevant_query = Guitar::where('name', 'like', '%'.$input.'%');
-        
+
         $less_relevant_query = Guitar::where(function($q) use ($terms) {
             foreach ($terms as $term) {
                 $q->orWhere('name', 'like', '%'.$term.'%');
@@ -111,9 +111,11 @@ class SearchController extends Controller
         }
 
         if($this->filter_brands) {
-            foreach ($this->filter_brands as $filter_brand) {
-                $query->whereHas('guitarBrand', function($q) use ($filter_brand) {
-                    $q->where('id', $filter_brand);
+            if($this->filter_brands) {
+                $query->where(function($q){
+                    foreach ($this->filter_brands as $filter_brand) {
+                        $q->orWhere('brand_id', $filter_brand);
+                    }
                 });
             }
         }
