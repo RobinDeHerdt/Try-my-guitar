@@ -209,5 +209,45 @@ class GuitarsTableSeeder extends Seeder
             'guitar_id' => 9,
             'user_id'   => 19,
         ]);
+
+        DB::table('user_guitar')->insert([
+            'guitar_id' => 1,
+            'user_id'   => 1,
+        ]);
+
+        DB::table('user_guitar')->insert([
+            'guitar_id' => 1,
+            'user_id'   => 2,
+        ]);
+
+        DB::table('user_guitar')->insert([
+            'guitar_id' => 1,
+            'user_id'   => 3,
+        ]);
+
+        DB::table('user_guitar')->insert([
+            'guitar_id' => 2,
+            'user_id'   => 2,
+        ]);
+
+        DB::table('user_guitar')->insert([
+            'guitar_id' => 2,
+            'user_id'   => 3,
+        ]);
+
+        DB::table('user_guitar')->insert([
+            'guitar_id' => 3,
+            'user_id'   => 3,
+        ]);
+
+        DB::table('user_guitar')->insert([
+            'guitar_id' => 4,
+            'user_id'   => 3,
+        ]);
+
+        DB::table('user_guitar')->insert([
+            'guitar_id' => 5,
+            'user_id'   => 3,
+        ]);
     }
 }
