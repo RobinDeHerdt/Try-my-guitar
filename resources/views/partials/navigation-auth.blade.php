@@ -13,7 +13,7 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <ul class="nav navbar-nav navbar-left">
                     <li><a href="{{ route('home') }}">@lang('navigation.home')</a></li>
-                    <li><a href="#">@lang('navigation.about')</a></li>
+                    <li><a href="{{ route('explore') }}">@lang('navigation.explore')</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     @if (Route::currentRouteName() !== 'register')

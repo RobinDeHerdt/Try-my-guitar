@@ -19,7 +19,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="dashboard-content">
-                        <h3>Messages</h3>
+                        <h3>Chat</h3>
                         <hr>
                         @if($messages->isNotEmpty())
                             @foreach($messages as $message)

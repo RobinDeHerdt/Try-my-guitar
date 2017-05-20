@@ -110,8 +110,13 @@ class SearchController extends Controller
      */
     public function explore()
     {
+        $types  = GuitarType::all();
+        $brands = GuitarBrand::all();
 
-        return view('explore');
+        return view('explore', [
+            'types'     => $types,
+            'brands'    => $brands,
+        ]);
     }
 
     /**
@@ -122,7 +127,7 @@ class SearchController extends Controller
         $terms = preg_split('/\s+/', $input, -1, PREG_SPLIT_NO_EMPTY);
 
         if(count($terms) >= 2) {
-            $this->most_relevant_users = User::where('first_name', 'like', '%'.$terms[0].'%')->where('last_name', 'like', '%'.$terms[1].'%')->take(6)->get();
+            $this->most_relevant_users = User::where('first_name', 'like', $terms[0])->where('last_name', 'like', $terms[1])->take(6)->get();
         } else {
             $this->most_relevant_users = collect();
         }

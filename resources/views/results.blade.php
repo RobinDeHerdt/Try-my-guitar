@@ -12,14 +12,6 @@
                     <h3>Filters</h3>
                     <div class="row">
                         <div class="col-md-6">
-                            <h4>Types</h4>
-                            <div class="form-group">
-                                @foreach($types as $type)
-                                    <label class="checkbox-inline"><input type="checkbox" name="types[]" value="{{ $type->id }}" {{ in_array($type->id, $filter_types) ? 'checked' : ''}}>{{ $type->name }}</label>
-                                @endforeach
-                            </div>
-                        </div>
-                        <div class="col-md-6">
                             <h4>Categories</h4>
                             <div class="form-group">
                                 <label class="radio-inline"><input type="radio" name="category" value="all" {{ $filter_category === 'all' || $filter_category === null ? 'checked' : '' }}>All</label>
@@ -29,23 +21,38 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
+                            <h4>Types</h4>
+                        </div>
+                        @foreach($types as $type)
+                            <div class="col-md-2">
+                                <label class="checkbox-inline"><input type="checkbox" name="types[]" value="{{ $type->id }}" {{ in_array($type->id, $filter_types) ? 'checked' : ''}}>{{ $type->name }}</label>
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
                             <h4>Brands</h4>
-                            <div class="form-group">
-                                @foreach($brands as $brand)
-                                    <label class="checkbox-inline"><input type="checkbox" name="brands[]" value="{{ $brand->id }}" {{ in_array($brand->id, $filter_brands) ? 'checked' : ''}}>{{ $brand->name }}</label>
-                                @endforeach
+                        </div>
+                        @foreach($brands as $brand)
+                            <div class="col-md-2">
+                                <label class="checkbox-inline"><input type="checkbox" name="brands[]" value="{{ $brand->id }}" {{ in_array($brand->id, $filter_brands) ? 'checked' : ''}}>{{ $brand->name }}</label>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="search-results-search">
+                            <div class="header-search">
+                                <input type="text" class="form-control search-input" name="term" id="search-input" placeholder="Search for a user or guitar" value="{{app('request')->input('term') }}">
+                                <a href="{{ route('search') }}" class="btn btn-default search-submit" id="search-submit" onclick="event.preventDefault(); document.getElementById('search-form').submit();">Search</a>
+                                <a href="{{ route('search') }}" class="btn btn-default search-submit" id="search-submit-mobile" onclick="event.preventDefault(); document.getElementById('search-form').submit();"><i class="fa fa-search" aria-hidden="true"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="search-results-search">
-                    <div class="header-search">
-                        <input type="text" class="form-control search-input" name="term" id="search-input" placeholder="Search for a user or guitar" value="{{app('request')->input('term') }}">
-                        <a href="{{ route('search') }}" class="btn btn-default search-submit" id="search-submit" onclick="event.preventDefault(); document.getElementById('search-form').submit();">Search</a>
-                        <a href="{{ route('search') }}" class="btn btn-default search-submit" id="search-submit-mobile" onclick="event.preventDefault(); document.getElementById('search-form').submit();"><i class="fa fa-search" aria-hidden="true"></i></a>
-                    </div>
-                </div>
+
             </form>
             @if($most_relevant_users->isEmpty() && $less_relevant_users->isEmpty() && $most_relevant_guitars->isEmpty() && $less_relevant_guitars->isEmpty())
                 <div class="no-results">

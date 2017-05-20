@@ -16,6 +16,7 @@ class CreateGuitarTypesTable extends Migration
         Schema::create('guitar_types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('image_uri');
             $table->timestamps();
         });
     }

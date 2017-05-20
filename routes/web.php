@@ -41,6 +41,9 @@ Route::group([
     Route::get('guitar/{guitar}', 'GuitarController@show')->name('guitar.show');
     Route::get('guitar/{guitar}/users', 'GuitarController@show')->name('guitar.show.users');
 
+    Route::get('brand/{brand}', 'BrandController@show')->name('brand.show');
+    Route::get('type/{type}', 'TypeController@show')->name('type.show');
+
     // Chat related routes.
     Route::get('chat/channels', 'ChatController@index')->name('chat.index');
     Route::get('chat/channel/{channel}', 'ChatController@show')->name('chat.show');
