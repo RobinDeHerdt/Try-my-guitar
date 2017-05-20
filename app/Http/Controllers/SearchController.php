@@ -22,7 +22,6 @@ class SearchController extends Controller
      */
     private $most_relevant_users;
     private $less_relevant_users;
-
     private $most_relevant_guitars;
     private $less_relevant_guitars;
 
@@ -148,6 +147,8 @@ class SearchController extends Controller
 
     /**
      * Filter the 'guitar search' query.
+     *
+     * @return $query
      */
     private function filterResults($query) {
         if($this->filter_types) {
@@ -172,7 +173,7 @@ class SearchController extends Controller
     }
 
     /**
-     * Retrieve data for the autocomplete feature.
+     * Retrieve data for the auto complete feature.
      *
      * @return \Illuminate\Http\Response
      */
@@ -207,7 +208,6 @@ class SearchController extends Controller
         foreach($this->users as $user) {
             array_push($result_array, ["value" => $user->fullName(), "label" => $user->fullName()]);
         }
-
         foreach($this->guitars as $guitar) {
             array_push($result_array, ["value" => $guitar->name, "label" => $guitar->name  . ' (' .  $guitar->guitarBrand->name. ')']);
         }
