@@ -13,6 +13,7 @@ return [
     'logout'        => 'logout',
     'profile'       => 'profile',
     'disclaimer'    => 'Disclaimer',
-    'dashboard'     => 'Dashboard'
+    'dashboard'     => 'Dashboard',
+    'explore'       => 'Explore',
 
 ];

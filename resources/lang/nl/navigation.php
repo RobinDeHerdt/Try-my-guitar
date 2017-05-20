@@ -14,5 +14,5 @@ return [
     'profile'       => 'profiel',
     'disclaimer'    => 'Disclaimer',
     'dashboard'     => 'Dashboard',
-
+    'explore'       => 'Verkennen',
 ];

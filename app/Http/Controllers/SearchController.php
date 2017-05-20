@@ -104,6 +104,17 @@ class SearchController extends Controller
     }
 
     /**
+     * Display the explore page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function explore()
+    {
+
+        return view('explore');
+    }
+
+    /**
      * User search query.
      */
     private function userSearch($input) {
