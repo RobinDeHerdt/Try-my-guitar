@@ -27,13 +27,26 @@ class SearchController extends Controller
 
         // Check if the input is not empty.
         if (!empty($input) && !ctype_space($input)) {
-            // If there is no querystring set for 'types' or 'brands',
+            // If there is no query string set for 'types' or 'brands',
             // return an empty array, to avoid errors in the view.
             $this->filter_types     = ($request->query('types') ? $request->query('types') : []);
             $this->filter_brands    = ($request->query('brands') ? $request->query('brands') : []);
 
-            $this->userSearch($input);
-            $this->guitarSearch($input);
+            switch($filter_category = $request->query('category')) {
+                case 'guitar':
+                    $this->guitarSearch($input);
+                    $this->users = collect();
+                    break;
+
+                case 'user':
+                    $this->userSearch($input);
+                    $this->guitars = collect();
+                    break;
+
+                default:
+                    $this->userSearch($input);
+                    $this->guitarSearch($input);
+            }
         } else {
             return back();
         }
@@ -42,13 +55,14 @@ class SearchController extends Controller
         $brands = GuitarBrand::all();
 
         return view('results', [
-            'users'         => $this->users,
-            'guitars'       => $this->guitars,
-            'search_term'   => $input,
-            'types'         => $types,
-            'brands'        => $brands,
-            'filter_types'  => $this->filter_types,
-            'filter_brands' => $this->filter_brands,
+            'users'             => $this->users,
+            'guitars'           => $this->guitars,
+            'search_term'       => $input,
+            'types'             => $types,
+            'brands'            => $brands,
+            'filter_types'      => $this->filter_types,
+            'filter_brands'     => $this->filter_brands,
+            'filter_category'   => $filter_category,
         ]);
     }
 

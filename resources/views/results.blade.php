@@ -22,8 +22,9 @@
                         <div class="col-md-6">
                             <h4>Categories</h4>
                             <div class="form-group">
-                                <label class="checkbox-inline"><input type="checkbox" value="">Users</label>
-                                <label class="checkbox-inline"><input type="checkbox" value="">Guitars</label>
+                                <label class="radio-inline"><input type="radio" name="category" value="all" {{ $filter_category === 'all' || $filter_category === null ? 'checked' : '' }}>All</label>
+                                <label class="radio-inline"><input type="radio" name="category" value="user" {{ $filter_category === 'user' ? 'checked' : '' }}>Users</label>
+                                <label class="radio-inline"><input type="radio" name="category" value="guitar" {{ $filter_category === 'guitar' ? 'checked' : '' }}>Guitars</label>
                             </div>
                         </div>
                     </div>
@@ -51,26 +52,6 @@
                     <h4>No results found.</h4>
                 </div>
             @endif
-            @if($users->isNotEmpty())
-                <h2>Users</h2>
-                <hr class="dark-hr">
-                <div class="row">
-                    @foreach($users as $user)
-                        <div class="col-md-6">
-                            <div class="search-result-header-image" style="background-image: url({{ Storage::disk('public')->url($user->header_image_uri) }})"></div>
-                            <div class="search-result">
-                                <a href="{{ route('profile.show', ['id' => $user->id]) }}">
-                                <div class="search-result-overlay">
-                                    <span class="search-result-overlay-text">View profile</span>
-                                </div>
-                                </a>
-                                <div class="search-result-image" style="background-image: url({{ Storage::disk('public')->url($user->image_uri) }})"></div>
-                                <h3>{{ $user->fullName()  }}</h3>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            @endif
             @if($guitars->isNotEmpty())
                 <h2>Guitars</h2>
                 <hr class="dark-hr">
@@ -90,6 +71,26 @@
                                     <div class="search-result-image">No image available</div>
                                 @endif
                                 <h3>{{ $guitar->name }}</h3>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            @endif
+            @if($users->isNotEmpty())
+                <h2>Users</h2>
+                <hr class="dark-hr">
+                <div class="row">
+                    @foreach($users as $user)
+                        <div class="col-md-6">
+                            <div class="search-result-header-image" style="background-image: url({{ Storage::disk('public')->url($user->header_image_uri) }})"></div>
+                            <div class="search-result">
+                                <a href="{{ route('profile.show', ['id' => $user->id]) }}">
+                                    <div class="search-result-overlay">
+                                        <span class="search-result-overlay-text">View profile</span>
+                                    </div>
+                                </a>
+                                <div class="search-result-image" style="background-image: url({{ Storage::disk('public')->url($user->image_uri) }})"></div>
+                                <h3>{{ $user->fullName()  }}</h3>
                             </div>
                         </div>
                     @endforeach
