@@ -36,8 +36,8 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                @if($guitars->isNotEmpty())
+            @if($guitars->isNotEmpty())
+                <div class="row">
                     @foreach($guitars as $guitar)
                         <div class="col-md-6">
                             <div class="search-result">
@@ -57,8 +57,12 @@
                         </div>
                     @endforeach
                     {{ $guitars->links() }}
-                @endif
-            </div>
+                </div>
+            @else
+                <div class="no-results">
+                    <h4>No results found.</h4>
+                </div>
+            @endif
         </div>
     </div>
 @endsection

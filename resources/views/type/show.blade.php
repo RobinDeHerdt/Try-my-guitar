@@ -11,7 +11,7 @@
                 <div class="col-md-12">
                     <div class="dashboard-content brand-logo-header-container">
                         {{--<img src="{{ Storage::disk('public')->url($type->image_uri) }}" alt="" class="brand-logo-header">--}}
-                        <h2>{{ $type->name }}</h2>
+                        <h3>{{ $type->name }}</h3>
                     </div>
                 </div>
             </div>
@@ -45,8 +45,8 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                @if($guitars->isNotEmpty())
+            @if($guitars->isNotEmpty())
+                <div class="row">
                     @foreach($guitars as $guitar)
                         <div class="col-md-6">
                             <div class="search-result">
@@ -66,8 +66,12 @@
                         </div>
                     @endforeach
                     {{ $guitars->links() }}
-                @endif
-            </div>
+                </div>
+            @else
+                <div class="no-results">
+                    <h4>No results found.</h4>
+                </div>
+            @endif
         </div>
     </div>
 @endsection
