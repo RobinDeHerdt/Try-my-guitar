@@ -116,14 +116,22 @@ class SearchController extends Controller
             $this->most_relevant_users = collect();
         }
 
-        $this->less_relevant_users = User::where(function($q) use ($terms)
+        $less_relevant_query = User::where(function($q) use ($terms)
         {
             foreach ($terms as $term)
             {
                 $q->orWhere('first_name', 'like', '%'.$term.'%')
                     ->orWhere('last_name', 'like', '%'.$term.'%');
             }
-        })->take(6)->get();
+        });
+
+        // If there are relevant results, avoid outputting them again with the less relevant results.
+        if($this->most_relevant_users->isNotEmpty()) {
+            $most_relevant_users_keys = $this->most_relevant_users->pluck('id')->all();
+            $this->less_relevant_users = $less_relevant_query->take(8)->get()->except($most_relevant_users_keys);
+        } else {
+            $this->less_relevant_users = $less_relevant_query->take(8)->get();
+        }
     }
 
     /**
@@ -133,7 +141,7 @@ class SearchController extends Controller
         // Split the string into terms and remove whitespace from both sides of the string.
         $terms = preg_split('/\s+/', $input, -1, PREG_SPLIT_NO_EMPTY);
 
-        $most_relevant_query = Guitar::where('name', 'like', '%'.$input.'%');
+        $most_relevant_query = Guitar::where('name', 'like', $input);
 
         $less_relevant_query = Guitar::where(function($q) use ($terms) {
             foreach ($terms as $term) {
@@ -142,7 +150,9 @@ class SearchController extends Controller
         });
 
         $this->most_relevant_guitars = $this->filterResults($most_relevant_query)->get();
-        $this->less_relevant_guitars = $this->filterResults($less_relevant_query)->get();
+        $most_relevant_guitars_keys  = $this->most_relevant_guitars->pluck('id')->all();
+
+        $this->less_relevant_guitars = $this->filterResults($less_relevant_query)->take(8)->get()->except($most_relevant_guitars_keys);
     }
 
     /**
