@@ -9,8 +9,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
+                    <h2>Guitar brands</h2>
                     <div class="dashboard-content">
-                        <h2>Brands</h2>
                         <div class="row">
                             @foreach($brands as $brand)
                                 <div class="col-md-2">
@@ -25,14 +25,16 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
+                    <h2>Guitar types</h2>
                     <div class="dashboard-content">
-                        <h2>Categories</h2>
                         <div class="row">
                             @foreach($types as $type)
-                                <div class="col-md-2 center">
+                                <div class="col-md-3 center explore-type-container">
+                                    <div style="background-image:url({{  Storage::disk('public')->url($type->image_uri) }}" class="type-image"></div>
                                     <a href="{{ route('type.show', ['brand' => $type->id]) }}">
-                                        <div style="background-image:url({{  Storage::disk('public')->url($type->image_uri) }}" class="brand-logo"></div>
-                                        <span>{{ $type->name }}</span>
+                                        <div class="guitar-type-button">
+                                            <span>{{ $type->name }}</span>
+                                        </div>
                                     </a>
                                 </div>
                             @endforeach

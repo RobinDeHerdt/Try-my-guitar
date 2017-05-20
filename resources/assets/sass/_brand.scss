@@ -16,3 +16,19 @@
     margin: auto 0;
   }
 }
+
+.type-image {
+  height: 200px;
+  width: 90%;
+  position: relative;
+  left: 5%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom;
+}
+
+.explore-type-container {
+  a:link, a:hover {
+    text-decoration: none;
+  }
+}

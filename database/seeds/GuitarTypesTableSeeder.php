@@ -15,63 +15,63 @@ class GuitarTypesTableSeeder extends Seeder
          * Guitar types seeders.
          */
         DB::table('guitar_types')->insert([
-            'name' => 'Electric guitar',
+            'name' => 'Electric guitars',
             'image_uri' => 'images/ec-1000.jpg',
         ]);
 
         DB::table('guitar_types')->insert([
-            'name' => 'Acoustic guitar',
+            'name' => 'Acoustic guitars',
             'image_uri' => 'images/acoustic-guitar.jpg',
         ]);
 
         DB::table('guitar_types')->insert([
-            'name' => 'Classical guitar',
+            'name' => 'Classical guitars',
             'image_uri' => 'images/classical-guitar.jpg',
         ]);
 
         DB::table('guitar_types')->insert([
-            'name' => 'Single cut',
-            'image_uri' => 'images/single-cut-guitar.jpg',
+            'name' => 'Single cut guitars',
+            'image_uri' => 'images/ec-1000.jpg',
         ]);
 
         DB::table('guitar_types')->insert([
-            'name' => 'Double cut',
+            'name' => 'Double cut guitars',
             'image_uri' => 'images/double-cut-guitar.jpg',
         ]);
 
         DB::table('guitar_types')->insert([
-            'name' => 'Hollow body',
+            'name' => 'Hollow body guitars',
             'image_uri' => 'images/hollow-body-guitar.jpg',
         ]);
 
         DB::table('guitar_types')->insert([
-            'name' => 'Single coil',
+            'name' => 'Single coil guitars',
             'image_uri' => 'images/single-coil-guitar.png',
         ]);
 
         DB::table('guitar_types')->insert([
-            'name' => 'Humbucker',
+            'name' => 'Humbucker guitars',
             'image_uri' => 'images/humbucker-guitar.jpg',
         ]);
 
         DB::table('guitar_types')->insert([
-            'name' => '6-string',
+            'name' => '6-string guitars',
             'image_uri' => 'images/6-string-guitar.jpg',
         ]);
 
         DB::table('guitar_types')->insert([
-            'name' => '7-string',
+            'name' => '7-string guitars',
             'image_uri' => 'images/7-string-guitar.jpg',
         ]);
 
         DB::table('guitar_types')->insert([
-            'name' => '8-string',
+            'name' => '8-string guitars',
             'image_uri' => 'images/8-string-guitar.jpg',
         ]);
 
         DB::table('guitar_types')->insert([
-            'name' => 'Signature',
-            'image_uri' => 'signature-guitar.png',
+            'name' => 'Signature guitars',
+            'image_uri' => 'images/signature-guitar.png',
         ]);
 
 

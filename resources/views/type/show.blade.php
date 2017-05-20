@@ -11,7 +11,7 @@
                 <div class="col-md-12">
                     <div class="dashboard-content brand-logo-header-container">
                         {{--<img src="{{ Storage::disk('public')->url($type->image_uri) }}" alt="" class="brand-logo-header">--}}
-                        <h1>{{ $type->name }}</h1>
+                        <h2>{{ $type->name }}</h2>
                     </div>
                 </div>
             </div>
