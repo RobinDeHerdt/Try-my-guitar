@@ -23,6 +23,12 @@ class VerifyController extends Controller
     {
         $user = User::find($id);
 
+        if($user->verified = true) {
+            Session::flash('info-message', 'Your account was already verified. But thanks for the confirmation!');
+
+            return redirect(route('dashboard'));
+        }
+
         if ($user->verification_token === $token) {
             $user->verified = true;
             $user->save();

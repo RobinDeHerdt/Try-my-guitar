@@ -96,8 +96,6 @@ class ProfileController extends Controller
             Session::flash('success-message', 'Personal information updated successfully.');
         }
 
-
-
         return back();
     }
 

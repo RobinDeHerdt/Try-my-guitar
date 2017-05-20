@@ -108,7 +108,7 @@ class User extends Authenticatable
     /**
      * A user has many guitar images.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
      */
     public function guitarImages()
     {
