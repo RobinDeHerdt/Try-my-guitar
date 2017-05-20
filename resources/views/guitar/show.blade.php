@@ -40,27 +40,30 @@
                     </div>
                 </div>
             </div>
-            <h2>People with this guitar</h2>
-            <div class="collection">
-                @foreach($users as $user)
-                    <div class="collection-item">
-                        <a href="{{ route('profile.show', ['user' => $user->id]) }}" title="{{ $user->fullName() }}">
-                            <div style="background-image: url({{ Storage::disk('public')->url($user->image_uri) }}" class="collection-item-image"></div>
-                        </a>
-                    </div>
-                @endforeach
-                @if($user_count > 4)
-                    <div class="collection-item">
-                        <a href="{{ route('guitar.show.users', ['guitar' => $guitar->id]) }}">
-                            <div class="collection-item-color">
-                                <div class="collection-more" title="View all people with this guitar">
-                                    <i class="fa fa-plus" aria-hidden="true"></i>
-                                    <span>{{ $user_count - 4 }}</span>
+            <div class="dashboard-content">
+                <h2>People with this guitar</h2>
+                <div class="collection">
+                    @foreach($users as $user)
+                        <div class="collection-item">
+                            <a href="{{ route('profile.show', ['user' => $user->id]) }}" title="{{ $user->fullName() }}">
+                                <div style="background-image: url({{ Storage::disk('public')->url($user->image_uri) }}" class="collection-item-image"></div>
+                                <span class="collection-item-text">{{ $user->fullName() }}</span>
+                            </a>
+                        </div>
+                    @endforeach
+                    @if($user_count > 4)
+                        <div class="collection-item">
+                            <a href="{{ route('guitar.show.users', ['guitar' => $guitar->id]) }}">
+                                <div class="collection-item-color">
+                                    <div class="collection-more" title="View all people with this guitar">
+                                        <i class="fa fa-plus" aria-hidden="true"></i>
+                                        <span>{{ $user_count - 4 }}</span>
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
-                @endif
+                            </a>
+                        </div>
+                    @endif
+                </div>
             </div>
             @if($brand_guitars->isNotEmpty())
             <div class="row">

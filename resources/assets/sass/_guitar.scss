@@ -18,12 +18,16 @@
   width: 95%;
   margin-left: 2.5%;
 
+  a:link, a:visited, a:hover {
+    color: $primary-font-color;
+  }
+
   .slick-item {
     text-align: center;
     background-color: #fff;
-    box-shadow: $drop-shadow;
+    box-shadow: $strong-drop-shadow;
     padding: 20px;
-    margin: 0 10px;
+    margin: 5px 10px;
 
     span {
       position: relative;

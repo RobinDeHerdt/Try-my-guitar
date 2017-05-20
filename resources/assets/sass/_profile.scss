@@ -161,6 +161,7 @@
 
 .collection {
   display: flex;
+  padding: 25px 0;
 
   .collection-item {
     flex: 1;
@@ -168,7 +169,7 @@
 
     a:link, a:visited, a:hover {
       text-decoration: none;
-      color: $primary-font-color;
+      color: #fff;
     }
 
     .collection-item-image {
@@ -178,6 +179,15 @@
       background-position: center;
       margin: 0 auto;
       border-radius: 50%;
+      box-shadow: $strong-drop-shadow;
+    }
+
+    .collection-item-text {
+      color: $primary-font-color;
+      font-size: 18px;
+      font-weight: 600;
+      position: relative;
+      top: 15px;
     }
 
     .collection-item-color {
@@ -185,7 +195,8 @@
       width: 150px;
       margin: 0 auto;
       border-radius: 50%;
-      background-color: $secondary-bg-color;
+      background-color: $primary-component-color;
+      box-shadow: $strong-drop-shadow;
 
       .collection-more {
         position: relative;
@@ -216,8 +227,17 @@
 }
 
 @media (max-width: 991px) {
- .text-center {
-   text-align: inherit;
-   margin: 10px 0;
- }
+  .text-center {
+    text-align: inherit;
+    margin: 10px 0;
+  }
+
+  .collection {
+    display: inherit;
+
+    .collection-item {
+      flex: 0;
+      margin-bottom: 20px;
+    }
+  }
 }
