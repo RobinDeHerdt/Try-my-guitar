@@ -15,11 +15,13 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="dashboard-content">
-                        <img src="{{ Storage::disk('public')->url($guitar->guitarBrand->logo_uri) }}" alt="{{ $guitar->guitarBrand->name }} logo" class="guitar-brand-logo">
+                        <a href="{{ route('brand.show', ['brand' => $guitar->guitarBrand->id]) }}">
+                            <img src="{{ Storage::disk('public')->url($guitar->guitarBrand->logo_uri) }}" alt="{{ $guitar->guitarBrand->name }} logo" class="guitar-brand-logo">
+                        </a>
                         <h1>{{ $guitar->guitarBrand->name }} {{ $guitar->name }}</h1>
                         <div class="guitar-type-container">
                             @foreach($guitar->guitarTypes as $guitarType)
-                                <span class="guitar-type">{{ $guitarType->name }}</span>
+                                <a href="{{ route('type.show', ['id' => $guitarType->id]) }}"><span class="guitar-type">{{ $guitarType->name }}</span></a>
                             @endforeach
                         </div>
                         <div class="guitar-description-container">
