@@ -47,40 +47,76 @@
                     </div>
                 </div>
             </form>
-            @if($users->isEmpty() && $guitars->isEmpty())
+            @if($most_relevant_users->isEmpty() && $less_relevant_users->isEmpty() && $most_relevant_guitars->isEmpty() && $less_relevant_guitars->isEmpty())
                 <div class="no-results">
                     <h4>No results found.</h4>
                 </div>
             @endif
-            @if($guitars->isNotEmpty())
+            @if($most_relevant_guitars->isNotEmpty() || $less_relevant_guitars->isNotEmpty())
                 <h2>Guitars</h2>
                 <hr class="dark-hr">
                 <div class="row">
-                    @foreach($guitars as $guitar)
-                        <div class="col-md-6">
-                            <div class="search-result">
-                                <a href="{{ route('guitar.show', ['id' => $guitar->id]) }}">
-                                    <div class="search-result-overlay">
-                                        <span class="search-result-overlay-text">View details</span>
-                                    </div>
-                                </a>
-                                <img src="{{ Storage::disk('public')->url($guitar->guitarBrand->logo_uri) }}" alt="{{ $guitar->guitarBrand->name }} logo" class="search-result-logo">
-                                @if($guitar->guitarImages->isNotEmpty())
-                                    <div class="search-result-image" style="background-image: url({{ Storage::disk('public')->url($guitar->guitarImages()->first()->image_uri) }})"></div>
-                                @else
-                                    <div class="search-result-image">No image available</div>
-                                @endif
-                                <h3>{{ $guitar->name }}</h3>
+                    @if($most_relevant_guitars->isNotEmpty())
+                        @foreach($most_relevant_guitars as $guitar)
+                            <div class="col-md-12">
+                                <div class="search-result">
+                                    <a href="{{ route('guitar.show', ['id' => $guitar->id]) }}">
+                                        <div class="search-result-overlay">
+                                            <span class="search-result-overlay-text">View details</span>
+                                        </div>
+                                    </a>
+                                    <img src="{{ Storage::disk('public')->url($guitar->guitarBrand->logo_uri) }}" alt="{{ $guitar->guitarBrand->name }} logo" class="search-result-logo">
+                                    @if($guitar->guitarImages->isNotEmpty())
+                                        <div class="search-result-image" style="background-image: url({{ Storage::disk('public')->url($guitar->guitarImages()->first()->image_uri) }})"></div>
+                                    @else
+                                        <div class="search-result-image">No image available</div>
+                                    @endif
+                                    <h3>{{ $guitar->name }}</h3>
+                                </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    @endif
+                    @if($less_relevant_guitars->isNotEmpty())
+                        @foreach($less_relevant_guitars as $guitar)
+                            <div class="col-md-6">
+                                <div class="search-result">
+                                    <a href="{{ route('guitar.show', ['id' => $guitar->id]) }}">
+                                        <div class="search-result-overlay">
+                                            <span class="search-result-overlay-text">View details</span>
+                                        </div>
+                                    </a>
+                                    <img src="{{ Storage::disk('public')->url($guitar->guitarBrand->logo_uri) }}" alt="{{ $guitar->guitarBrand->name }} logo" class="search-result-logo">
+                                    @if($guitar->guitarImages->isNotEmpty())
+                                        <div class="search-result-image" style="background-image: url({{ Storage::disk('public')->url($guitar->guitarImages()->first()->image_uri) }})"></div>
+                                    @else
+                                        <div class="search-result-image">No image available</div>
+                                    @endif
+                                    <h3>{{ $guitar->name }}</h3>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
                 </div>
             @endif
-            @if($users->isNotEmpty())
+            @if($most_relevant_users->isNotEmpty() || $less_relevant_users->isNotEmpty())
                 <h2>Users</h2>
                 <hr class="dark-hr">
                 <div class="row">
-                    @foreach($users as $user)
+                    @foreach($most_relevant_users as $user)
+                        <div class="col-md-12">
+                            <div class="search-result-header-image" style="background-image: url({{ Storage::disk('public')->url($user->header_image_uri) }})"></div>
+                            <div class="search-result">
+                                <a href="{{ route('profile.show', ['id' => $user->id]) }}">
+                                    <div class="search-result-overlay">
+                                        <span class="search-result-overlay-text">View profile</span>
+                                    </div>
+                                </a>
+                                <div class="search-result-image" style="background-image: url({{ Storage::disk('public')->url($user->image_uri) }})"></div>
+                                <h3>{{ $user->fullName()  }}</h3>
+                            </div>
+                        </div>
+                    @endforeach
+                    @foreach($less_relevant_users as $user)
                         <div class="col-md-6">
                             <div class="search-result-header-image" style="background-image: url({{ Storage::disk('public')->url($user->header_image_uri) }})"></div>
                             <div class="search-result">

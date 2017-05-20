@@ -11,10 +11,28 @@ use function MongoDB\BSON\toJSON;
 
 class SearchController extends Controller
 {
+    /**
+     * Auto complete variables
+     */
     private $users;
     private $guitars;
-    private $filter_brands = [];
-    private $filter_types  = [];
+
+    /**
+     * Search results variables
+     */
+    private $most_relevant_users;
+    private $less_relevant_users;
+
+    private $most_relevant_guitars;
+    private $less_relevant_guitars;
+
+    /**
+     * Filter variables
+     * @var array
+     */
+    private $filter_brands   = [];
+    private $filter_types    = [];
+    private $filter_category = [];
 
     /**
      * Display the results page.
@@ -24,23 +42,41 @@ class SearchController extends Controller
     public function result(Request $request)
     {
         $input = strip_tags($request->term);
-
         // Check if the input is not empty.
         if (!empty($input) && !ctype_space($input)) {
-            // If there is no query string set for 'types' or 'brands',
-            // return an empty array, to avoid errors in the view.
-            $this->filter_types     = ($request->query('types') ? $request->query('types') : []);
-            $this->filter_brands    = ($request->query('brands') ? $request->query('brands') : []);
+            $this->filter_category  =  $request->query('category');
 
-            switch($filter_category = $request->query('category')) {
+            /**
+             * When a filter is set, set the search category to 'guitar'.
+             *
+             * If there is no query string set for 'types' or 'brands',
+             * return an empty array, to avoid errors in the view.
+             */
+            if($request->query('types')) {
+                $this->filter_types     = $request->query('types');
+                $this->filter_category  = 'guitar';
+            } else {
+                $this->filter_types     = [];
+            }
+
+            if($request->query('brands')) {
+                $this->filter_brands    = $request->query('brands');
+                $this->filter_category  = 'guitar';
+            } else {
+                $this->filter_brands    = [];
+            }
+
+            switch($filter_category = $this->filter_category) {
                 case 'guitar':
                     $this->guitarSearch($input);
-                    $this->users = collect();
+                    $this->most_relevant_users = collect();
+                    $this->less_relevant_users = collect();
                     break;
 
                 case 'user':
                     $this->userSearch($input);
-                    $this->guitars = collect();
+                    $this->most_relevant_guitars = collect();
+                    $this->less_relevant_guitars = collect();
                     break;
 
                 default:
@@ -55,14 +91,16 @@ class SearchController extends Controller
         $brands = GuitarBrand::all();
 
         return view('results', [
-            'users'             => $this->users,
-            'guitars'           => $this->guitars,
-            'search_term'       => $input,
-            'types'             => $types,
-            'brands'            => $brands,
-            'filter_types'      => $this->filter_types,
-            'filter_brands'     => $this->filter_brands,
-            'filter_category'   => $filter_category,
+            'most_relevant_users'   => $this->most_relevant_users,
+            'less_relevant_users'   => $this->less_relevant_users,
+            'most_relevant_guitars' => $this->most_relevant_guitars,
+            'less_relevant_guitars' => $this->less_relevant_guitars,
+            'filter_types'          => $this->filter_types,
+            'filter_brands'         => $this->filter_brands,
+            'filter_category'       => $this->filter_category,
+            'search_term'           => $input,
+            'types'                 => $types,
+            'brands'                => $brands,
         ]);
     }
 
@@ -74,12 +112,12 @@ class SearchController extends Controller
         $terms = preg_split('/\s+/', $input, -1, PREG_SPLIT_NO_EMPTY);
 
         if(count($terms) >= 2) {
-            $most_relevant_results = User::where('first_name', 'like', '%'.$terms[0].'%')->where('last_name', 'like', '%'.$terms[1].'%')->take(6)->get();
+            $this->most_relevant_users = User::where('first_name', 'like', '%'.$terms[0].'%')->where('last_name', 'like', '%'.$terms[1].'%')->take(6)->get();
         } else {
-            $most_relevant_results = collect();
+            $this->most_relevant_users = collect();
         }
 
-        $less_relevant_results = User::where(function($q) use ($terms)
+        $this->less_relevant_users = User::where(function($q) use ($terms)
         {
             foreach ($terms as $term)
             {
@@ -87,8 +125,6 @@ class SearchController extends Controller
                     ->orWhere('last_name', 'like', '%'.$term.'%');
             }
         })->take(6)->get();
-
-        $this->users = $most_relevant_results->merge($less_relevant_results);
     }
 
     /**
@@ -106,10 +142,8 @@ class SearchController extends Controller
             }
         });
 
-        $most_relevant_results = $this->filterResults($most_relevant_query)->get();
-        $less_relevant_results = $this->filterResults($less_relevant_query)->get();
-
-        $this->guitars = $most_relevant_results->merge($less_relevant_results);
+        $this->most_relevant_guitars = $this->filterResults($most_relevant_query)->get();
+        $this->less_relevant_guitars = $this->filterResults($less_relevant_query)->get();
     }
 
     /**
@@ -169,6 +203,7 @@ class SearchController extends Controller
 
         $result_array = [];
 
+        // jQuery UI auto complete requires data to be in the label - value format.
         foreach($this->users as $user) {
             array_push($result_array, ["value" => $user->fullName(), "label" => $user->fullName()]);
         }
