@@ -18,7 +18,14 @@ class TypeController extends Controller
     private $filter_brands   = [];
     private $filter_types    = [];
 
-    public function show(GuitarType $type, Request $request)
+    /**
+     * Display page for the specified guitar type.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  GuitarType  $type
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Request $request, GuitarType $type)
     {
         $types  = GuitarType::all()->except($type->id);
         $brands = GuitarBrand::all();

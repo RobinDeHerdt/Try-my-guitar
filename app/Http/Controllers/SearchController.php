@@ -38,6 +38,7 @@ class SearchController extends Controller
     /**
      * Display the results page.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function result(Request $request)
@@ -66,12 +67,14 @@ class SearchController extends Controller
             switch($filter_category = $this->filter_category) {
                 case 'guitar':
                     $this->guitarSearch($input);
+                    // Return an empty collection to avoid errors in the view.
                     $this->most_relevant_users = collect();
                     $this->less_relevant_users = collect();
                     break;
 
                 case 'user':
                     $this->userSearch($input);
+                    // Return an empty collection to avoid errors in the view.
                     $this->most_relevant_guitars = collect();
                     $this->less_relevant_guitars = collect();
                     break;
@@ -102,23 +105,9 @@ class SearchController extends Controller
     }
 
     /**
-     * Display the explore page.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function explore()
-    {
-        $types  = GuitarType::all();
-        $brands = GuitarBrand::all();
-
-        return view('explore', [
-            'types'     => $types,
-            'brands'    => $brands,
-        ]);
-    }
-
-    /**
      * User search query.
+     *
+     * @param  string  $input
      */
     private function userSearch($input) {
         // Split the string into terms and remove whitespace from both sides of the string.
@@ -150,6 +139,8 @@ class SearchController extends Controller
 
     /**
      * Guitar search query.
+     *
+     * @param  string  $input
      */
     private function guitarSearch($input) {
         // Split the string into terms and remove whitespace from both sides of the string.
@@ -175,9 +166,10 @@ class SearchController extends Controller
     /**
      * Retrieve data for the auto complete feature.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function autocomplete(Request $request) {
+    public function autoComplete(Request $request) {
         $input = strip_tags($request->term);
         // Check if the input is not empty.
         if (!empty($input) && !ctype_space($input)) {
@@ -205,11 +197,12 @@ class SearchController extends Controller
         $result_array = [];
 
         // jQuery UI auto complete requires data to be in the label - value format.
-        foreach($this->users as $user) {
-            array_push($result_array, ["value" => $user->fullName(), "label" => $user->fullName()]);
-        }
         foreach($this->guitars as $guitar) {
             array_push($result_array, ["value" => $guitar->name, "label" => $guitar->name  . ' (' .  $guitar->guitarBrand->name. ')']);
+        }
+
+        foreach($this->users as $user) {
+            array_push($result_array, ["value" => $user->fullName(), "label" => $user->fullName()]);
         }
 
         return response()->json($result_array);

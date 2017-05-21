@@ -37,12 +37,11 @@ class ProfileController extends Controller
     /**
      * Show the specified user profile.
      *
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        $user = User::find($id);
-
         return view('profile.show', [
             'user' => $user
         ]);

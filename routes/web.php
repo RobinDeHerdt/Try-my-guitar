@@ -16,14 +16,15 @@ Route::group([
 ], function () {
     // Authentication related routes.
     Auth::routes();
+
     Route::get('/verify/{id}/{token}', 'Auth\VerifyController@verify')->name('verify');
     Route::get('/verify/resend', 'Auth\VerifyController@resend')->name('verify.resend');
 
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('about', 'AboutController@index')->name('about');
-    Route::get('explore', 'SearchController@explore')->name('explore');
+    Route::get('explore', 'ExploreController@explore')->name('explore');
     Route::get('search', 'SearchController@result')->name('search');
-    Route::get('search/autocomplete', 'SearchController@autocomplete')->name('search.autocomplete');
+    Route::get('search/autocomplete', 'SearchController@autoComplete')->name('search.autocomplete');
     Route::post('contact', 'ContactController@store')->name('contact');
 
     // Dashboard related routes.
@@ -31,7 +32,7 @@ Route::group([
 
     // Profile related routes.
     Route::get('profile/edit', 'ProfileController@edit')->name('profile.edit');
-    Route::get('profile/{id}', 'ProfileController@show')->name('profile.show');
+    Route::get('profile/{user}', 'ProfileController@show')->name('profile.show');
     Route::post('profile/update', 'ProfileController@update')->name('profile.update');
     Route::post('profile/appearance/update', 'ProfileController@updateAppearance')->name('profile.appearance.update');
 

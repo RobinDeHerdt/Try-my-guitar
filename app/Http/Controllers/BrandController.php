@@ -21,9 +21,11 @@ class BrandController extends Controller
     /**
      * Display page for the specified brand.
      *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  GuitarBrand  $brand
      * @return \Illuminate\Http\Response
      */
-    public function show(GuitarBrand $brand, Request $request)
+    public function show(Request $request, GuitarBrand $brand)
     {
         $types = GuitarType::all();
 
@@ -43,8 +45,9 @@ class BrandController extends Controller
     }
 
     /**
-     * Filter the 'guitar search' query.
+     * Filter the specified query on guitar brand and/or type.
      *
+     * @param  $query
      * @return $query
      */
     private function filterResults($query) {

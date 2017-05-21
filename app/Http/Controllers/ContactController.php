@@ -13,7 +13,7 @@ class ContactController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(ContactMessage $contact_message)
+    public function index()
     {
         $contact_messages = ContactMessage::paginate(15);
 
@@ -25,6 +25,7 @@ class ContactController extends Controller
     /**
      * Store the contact message.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
