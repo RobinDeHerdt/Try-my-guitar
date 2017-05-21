@@ -13,6 +13,7 @@
             <span title="Verified e-mail address">
                 <div class="verified-mark"><i class="fa fa-check fa-2x" aria-hidden="true"></i></div>
             </span>
+            </span>
             @endif
             <h1 class="profile-name">{{ $user->fullName() }}</h1>
             @if($user->description)
@@ -31,6 +32,9 @@
                         @else
                             <div class="big-cta-button">
                                 <a href="{{ route('profile.invite', ['id' => $user->id]) }}">Invite to chat</a>
+                            </div>
+                            <div class="big-cta-button">
+                                <a href="{{ route('report.create', ['id' => $user->id]) }}">Report</a>
                             </div>
                         @endif
                     @endif

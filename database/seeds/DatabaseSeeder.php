@@ -18,5 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(GuitarsTableSeeder::class);
         $this->call(GuitarTypesTableSeeder::class);
         $this->call(GuitarImagesTableSeeder::class);
+        $this->call(ReportsTableSeeder::class);
     }
 }

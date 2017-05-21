@@ -23,5 +23,6 @@ return [
     'forgot-password'   => 'Wachtwoord vergeten?',
     'guitar'            => 'Gitaar',
     'experience'        => 'Ervaring',
+    'reason'            => 'Reden',
 
 ];

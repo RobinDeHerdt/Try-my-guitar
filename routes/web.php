@@ -33,10 +33,11 @@ Route::group([
     // Profile related routes.
     Route::get('profile/edit', 'ProfileController@edit')->name('profile.edit');
     Route::get('profile/{user}', 'ProfileController@show')->name('profile.show');
+    Route::get('profile/{user}/report', 'ReportController@create')->name('report.create');
+    Route::get('profile/{user}/invite', 'ProfileController@invite')->name('profile.invite');
+    Route::post('profile/{user}/report', 'ReportController@store')->name('report.store');
     Route::post('profile/update', 'ProfileController@update')->name('profile.update');
     Route::post('profile/appearance/update', 'ProfileController@updateAppearance')->name('profile.appearance.update');
-
-    Route::get('profile/{user}/invite', 'ProfileController@invite')->name('profile.invite');
 
     // Guitar related routes.
     Route::get('guitar/{guitar}', 'GuitarController@show')->name('guitar.show');
@@ -73,6 +74,9 @@ Route::group(['middleware' => ['role:administrator']], function () {
     Route::resource('admin/articles', 'ArticleController');
 
     Route::get('admin/messages', 'ContactController@index')->name('admin.messages.index');
+    Route::get('admin/reports', 'ReportController@index')->name('admin.reports.index');
+    Route::get('admin/reports/{report}', 'ReportController@show')->name('admin.reports.show');
+    Route::post('admin/reports/{report}', 'ReportController@reviewed')->name('admin.reports.reviewed');
     Route::get('admin/messages/{contact_message}', 'ContactController@show')->name('admin.messages.show');
 
 });

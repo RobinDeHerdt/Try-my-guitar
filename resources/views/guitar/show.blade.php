@@ -18,7 +18,7 @@
                         <a href="{{ route('brand.show', ['brand' => $guitar->guitarBrand->id]) }}">
                             <img src="{{ Storage::disk('public')->url($guitar->guitarBrand->logo_uri) }}" alt="{{ $guitar->guitarBrand->name }} logo" class="guitar-brand-logo">
                         </a>
-                        <h1>{{ $guitar->guitarBrand->name }} {{ $guitar->name }}</h1>
+                        <h1>{{ $guitar->name }}</h1>
                         <div class="guitar-type-container">
                             @foreach($guitar->guitarTypes as $guitarType)
                                 <a href="{{ route('type.show', ['id' => $guitarType->id]) }}"><span class="guitar-type">{{ $guitarType->name }}</span></a>

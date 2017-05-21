@@ -12,6 +12,28 @@
             </div>
             <div class="row col-container">
                 <div class="col-md-12">
+                    @if($reports->isNotEmpty())
+                        <h3>Reports to be reviewed</h3>
+                        <hr>
+                        @foreach($reports as $report)
+                            <span>
+                                <a href="{{ route('profile.show', ['user' => $report->reporter->id]) }}">{{ $report->reporter->fullName() }}</a>
+                                has reported
+                                <a href="{{ route('profile.show', ['user' => $report->reporter->id]) }}">{{ $report->reported->fullName() }}</a>:
+                            </span>
+                            <br>
+                            <p>{{ $report->reason }}</p>
+                            <a href="{{ route('admin.reports.show', ['report' => $report->id]) }}">View full report</a>
+                            <hr>
+                        @endforeach
+                    @else
+                        <span>There are no new contact messages.</span>
+                    @endif
+                    <a href="{{ route('admin.reports.index') }}">View all reports</a>
+                </div>
+            </div>
+            <div class="row col-container">
+                <div class="col-md-12">
                     @if($contact_messages->isNotEmpty())
                         <h3>New contact messages</h3>
                         <hr>

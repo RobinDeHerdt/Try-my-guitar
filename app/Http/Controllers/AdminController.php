@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\ContactMessage;
+use App\Report;
 
 class AdminController extends Controller
 {
@@ -14,9 +15,11 @@ class AdminController extends Controller
     public function index()
     {
         $contact_messages = ContactMessage::where('seen', false)->get();
+        $reports = Report::where('reviewed', false)->get();
 
         return view('admin.dashboard', [
             'contact_messages' => $contact_messages,
+            'reports' => $reports,
         ]);
     }
 }

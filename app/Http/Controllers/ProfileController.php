@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-use Auth;
-use App\User;
 use App\Mail\VerifyEmail;
 use Illuminate\Support\Facades\Mail;
+use App\User;
+use Auth;
 
 class ProfileController extends Controller
 {

@@ -55,6 +55,28 @@ class User extends Authenticatable
     }
 
     /**
+     * A user has many reports.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function received_reports()
+    {
+        return $this->hasMany('App\Report', 'reported_id');
+    }
+
+    /**
+     * A user has many reports.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function sent_reports()
+    {
+        return $this->hasMany('App\Report', 'reporter_id');
+    }
+
+
+
+    /**
      * A user has many messages.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

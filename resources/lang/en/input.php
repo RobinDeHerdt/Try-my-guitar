@@ -23,5 +23,6 @@ return [
     'forgot-password'   => 'Forgot your password?',
     'guitar'            => 'Guitar',
     'experience'        => 'Experience',
+    'reason'            => 'Reason',
 
 ];
