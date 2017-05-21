@@ -30,12 +30,12 @@ class TypeController extends Controller
         $types  = GuitarType::all()->except($type->id);
         $brands = GuitarBrand::all();
 
-        if($request->query('types')) {
-            $this->filter_types     = $request->query('types');
+        if ($request->query('types')) {
+            $this->filter_types = $request->query('types');
         }
 
-        if($request->query('brands')) {
-            $this->filter_brands     = $request->query('brands');
+        if ($request->query('brands')) {
+            $this->filter_brands = $request->query('brands');
         }
 
         $query      = $type->guitars();

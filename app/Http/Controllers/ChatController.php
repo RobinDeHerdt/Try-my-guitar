@@ -57,6 +57,7 @@ class ChatController extends Controller
     /**
      * Edit the specified channel name.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
@@ -75,7 +76,7 @@ class ChatController extends Controller
     /**
      * Store a message in database and broadcast it to the current channel.
      *
-     * @param  Request  $request
+     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Channel  $channel
      * @return \Illuminate\Http\Response
      */
@@ -183,7 +184,7 @@ class ChatController extends Controller
     /**
      * Set up a chat invite for the specified user.
      *
-     * @param  Request  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function sendInvite(Request $request)

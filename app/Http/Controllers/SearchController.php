@@ -54,17 +54,17 @@ class SearchController extends Controller
              * If there is no query string set for 'types' or 'brands',
              * return an empty array, to avoid errors in the view.
              */
-            if($request->query('types')) {
+            if ($request->query('types')) {
                 $this->filter_types     = $request->query('types');
                 $this->filter_category  = 'guitar';
             }
 
-            if($request->query('brands')) {
+            if ($request->query('brands')) {
                 $this->filter_brands    = $request->query('brands');
                 $this->filter_category  = 'guitar';
             }
 
-            switch($filter_category = $this->filter_category) {
+            switch ($filter_category = $this->filter_category) {
                 case 'guitar':
                     $this->guitarSearch($input);
                     // Return an empty collection to avoid errors in the view.
@@ -109,27 +109,29 @@ class SearchController extends Controller
      *
      * @param  string  $input
      */
-    private function userSearch($input) {
+    private function userSearch($input)
+    {
         // Split the string into terms and remove whitespace from both sides of the string.
         $terms = preg_split('/\s+/', $input, -1, PREG_SPLIT_NO_EMPTY);
 
-        if(count($terms) >= 2) {
-            $this->most_relevant_users = User::where('first_name', 'like', $terms[0])->where('last_name', 'like', $terms[1])->take(6)->get();
+        if (count($terms) >= 2) {
+            $this->most_relevant_users = User::where('first_name', 'like', $terms[0])
+                ->where('last_name', 'like', $terms[1])
+                ->take(6)
+                ->get();
         } else {
             $this->most_relevant_users = collect();
         }
 
-        $less_relevant_query = User::where(function($q) use ($terms)
-        {
-            foreach ($terms as $term)
-            {
+        $less_relevant_query = User::where(function ($q) use ($terms) {
+            foreach ($terms as $term) {
                 $q->orWhere('first_name', 'like', '%'.$term.'%')
                     ->orWhere('last_name', 'like', '%'.$term.'%');
             }
         });
 
         // If there are relevant results, avoid outputting them again with the less relevant results.
-        if($this->most_relevant_users->isNotEmpty()) {
+        if ($this->most_relevant_users->isNotEmpty()) {
             $most_relevant_users_keys = $this->most_relevant_users->pluck('id')->all();
             $this->less_relevant_users = $less_relevant_query->take(8)->get()->except($most_relevant_users_keys);
         } else {
@@ -142,13 +144,14 @@ class SearchController extends Controller
      *
      * @param  string  $input
      */
-    private function guitarSearch($input) {
+    private function guitarSearch($input)
+    {
         // Split the string into terms and remove whitespace from both sides of the string.
         $terms = preg_split('/\s+/', $input, -1, PREG_SPLIT_NO_EMPTY);
 
         $most_relevant_query = Guitar::where('name', 'like', $input);
 
-        $less_relevant_query = Guitar::where(function($q) use ($terms) {
+        $less_relevant_query = Guitar::where(function ($q) use ($terms) {
             foreach ($terms as $term) {
                 $q->orWhere('name', 'like', '%'.$term.'%');
             }
@@ -169,26 +172,23 @@ class SearchController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function autoComplete(Request $request) {
+    public function autoComplete(Request $request)
+    {
         $input = strip_tags($request->term);
         // Check if the input is not empty.
         if (!empty($input) && !ctype_space($input)) {
             // Split the string into terms and remove whitespace from both sides of the string.
             $terms = preg_split('/\s+/', $input, -1, PREG_SPLIT_NO_EMPTY);
 
-            $this->users = User::where(function($q) use ($terms)
-            {
-                foreach ($terms as $term)
-                {
+            $this->users = User::where(function ($q) use ($terms) {
+                foreach ($terms as $term) {
                     $q->orWhere('first_name', 'like', '%'.$term.'%')
                         ->orWhere('last_name', 'like', '%'.$term.'%');
                 }
             })->take(6)->get();
 
-            $this->guitars = Guitar::where(function($q) use ($terms)
-            {
-                foreach ($terms as $term)
-                {
+            $this->guitars = Guitar::where(function ($q) use ($terms) {
+                foreach ($terms as $term) {
                     $q->orWhere('name', 'like', '%'.$term.'%');
                 }
             })->take(6)->get();
@@ -197,11 +197,11 @@ class SearchController extends Controller
         $result_array = [];
 
         // jQuery UI auto complete requires data to be in the label - value format.
-        foreach($this->guitars as $guitar) {
+        foreach ($this->guitars as $guitar) {
             array_push($result_array, ["value" => $guitar->name, "label" => $guitar->name  . ' (' .  $guitar->guitarBrand->name. ')']);
         }
 
-        foreach($this->users as $user) {
+        foreach ($this->users as $user) {
             array_push($result_array, ["value" => $user->fullName(), "label" => $user->fullName()]);
         }
 

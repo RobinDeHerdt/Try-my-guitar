@@ -12,10 +12,12 @@ class VerifyEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    private $user;
+
     /**
-     * Create a new message instance.
+     * Create a new VerifyEmail instance.
      *
-     * @return void
+     * @param \App\User  $user
      */
     public function __construct(User $user)
     {

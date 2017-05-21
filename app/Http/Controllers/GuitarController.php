@@ -30,7 +30,7 @@ class GuitarController extends Controller
          * Get all guitars with minimum the same types as the specified guitar.
          * Take a maximum of 10 records.
          */
-        foreach($types as $type) {
+        foreach ($types as $type) {
             $guitars->whereHas('guitarTypes', function ($q) use ($type) {
                 $q->where('id', $type);
             });
@@ -43,8 +43,8 @@ class GuitarController extends Controller
          * This query returns less accurate, but still relevant guitars.
          * Take a maximum of 10 records.
          */
-        if($similar_guitars->isEmpty()) {
-            $similar_guitars = Guitar::whereHas('guitarTypes', function($q) use ($types) {
+        if ($similar_guitars->isEmpty()) {
+            $similar_guitars = Guitar::whereHas('guitarTypes', function ($q) use ($types) {
                 $q->whereIn('id', $types);
             })->take(10)->get()->except(['id' => $guitar->id]);
         }
@@ -52,8 +52,8 @@ class GuitarController extends Controller
         $owners_query       = $guitar->owners();
         $experiencers_query = $guitar->experiencers();
 
-        $owners         = $owners_query->take(4)->get();
-        $experiencers   = $experiencers_query->take(4)->get();
+        $owners             = $owners_query->take(4)->get();
+        $experiencers       = $experiencers_query->take(4)->get();
 
         $owner_count        = $owners_query->count();
         $experiencer_count  = $experiencers_query->count();

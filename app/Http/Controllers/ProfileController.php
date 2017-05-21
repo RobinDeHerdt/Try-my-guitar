@@ -73,7 +73,7 @@ class ProfileController extends Controller
         $user->first_name   = $request->first_name;
         $user->last_name    = $request->last_name;
 
-        if($request->email !== $user->email){
+        if ($request->email !== $user->email) {
             $user->email                = $request->email;
             $user->verified             = false;
             $user->verification_token   = str_random(12);
@@ -88,7 +88,7 @@ class ProfileController extends Controller
 
         $user->save();
 
-        if($send_mail) {
+        if ($send_mail) {
             Mail::to($user->email)->send(new VerifyEmail($user));
             Session::flash('success-message', 'Personal information updated successfully. We\'ve sent a verification link to your new email address.');
         } else {
