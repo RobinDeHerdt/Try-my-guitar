@@ -16,13 +16,10 @@
                 <div class="col-md-12">
                     <a href="{{ route('chat.leave', ['channel' => $channel->id]) }}" class="icon-text icon-full" onclick="event.preventDefault(); document.getElementById('leave-form').submit();"><span class="glyphicon glyphicon-log-out"></span>Leave this conversation</a>
                     <a href="{{ route('chat.leave', ['channel' => $channel->id]) }}" class="icon-text icon-responsive" onclick="event.preventDefault(); document.getElementById('leave-form').submit();"><span class="glyphicon glyphicon-log-out"></span></a>
-
                     <a href="{{ route('chat.index') }}" class="icon-text icon-full"><span class="glyphicon glyphicon-th-list"></span>Back to conversations</a>
                     <a href="{{ route('chat.index') }}" class="icon-text icon-responsive"><span class="glyphicon glyphicon-th-list"></span></a>
-
                     <a href="{{ route('chat.update') }}" class="icon-text icon-full" onclick="event.preventDefault(); document.getElementById('edit-channel-form').style.display = 'inherit'"><span class="glyphicon glyphicon-pencil"></span>Edit conversation name</a>
                     <a href="{{ route('chat.update') }}" class="icon-text icon-responsive" onclick="event.preventDefault(); document.getElementById('edit-channel-form').style.display = 'inherit'"><span class="glyphicon glyphicon-pencil"></span></a>
-
                     <div class="row edit-channel-form">
                         <form id="edit-channel-form" action="{{ route('chat.update') }}" method="POST" style="display: none;">
                             {{ csrf_field() }}

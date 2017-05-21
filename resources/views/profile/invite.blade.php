@@ -7,12 +7,13 @@
 @section('content')
     <div class="content">
         <div class="container">
-            <div class="row">
                 <div class="row heading">
                     <div class="col-md-12">
-                        <h1>Invite {{ $user->fullName() }} to chat</h1>
-                        <a href="{{ route('chat.index') }}" class="icon-text"><span class="glyphicon glyphicon-list"></span>Conversation overview</a>
-                        <a href="{{ route('dashboard') }}" class="icon-text"><span class="glyphicon glyphicon-home"></span>Back to dashboard</a>
+                        <h1>Invite {{ $user->first_name }} to chat</h1>
+                        <a href="{{ route('chat.index') }}" class="icon-text icon-full"><span class="glyphicon glyphicon-list"></span>Conversation overview</a>
+                        <a href="{{ route('chat.index') }}" class="icon-text icon-responsive"><span class="glyphicon glyphicon-list"></span></a>
+                        <a href="{{ route('dashboard') }}" class="icon-text icon-full"><span class="glyphicon glyphicon-home"></span>Back to dashboard</a>
+                        <a href="{{ route('dashboard') }}" class="icon-text icon-responsive"><span class="glyphicon glyphicon-home"></span></a>
                     </div>
                 </div>
                 <div class="row">
