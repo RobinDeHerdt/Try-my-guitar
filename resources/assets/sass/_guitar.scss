@@ -71,3 +71,49 @@
   margin-top: 5px;
   margin-right: 10px;
 }
+
+.brand-logo {
+  width: 90%;
+  position: relative;
+  left: 5%;
+  height: 200px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.brand-logo-header-container {
+  text-align: center;
+  padding-top: 30px;
+
+  .brand-logo-header {
+    width: 150px;
+    margin-top: -12px;
+  }
+}
+
+.explore-guitar-type-container {
+  padding: 25px 0;
+
+  .type-image {
+    height: 200px;
+    width: 90%;
+    position: relative;
+    left: 5%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom;
+  }
+
+  a:link, a:hover {
+    color: $primary-font-color;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 20px;
+  }
+
+  span {
+    position: relative;
+    top: 20px;
+  }
+}

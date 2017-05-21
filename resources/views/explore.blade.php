@@ -29,12 +29,10 @@
                     <div class="dashboard-content">
                         <div class="row">
                             @foreach($types as $type)
-                                <div class="col-md-3 center explore-type-container">
-                                    <div style="background-image:url({{  Storage::disk('public')->url($type->image_uri) }}" class="type-image"></div>
+                                <div class="col-md-3 center explore-guitar-type-container">
                                     <a href="{{ route('type.show', ['brand' => $type->id]) }}">
-                                        <div class="guitar-type-button">
-                                            <span>{{ $type->name }}</span>
-                                        </div>
+                                        <div style="background-image:url({{  Storage::disk('public')->url($type->image_uri) }}" class="type-image"></div>
+                                        <span>{{ $type->name }}</span>
                                     </a>
                                 </div>
                             @endforeach
