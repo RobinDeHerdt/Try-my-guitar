@@ -87,6 +87,15 @@
     vertical-align: -0.4em;
   }
 
+  blockquote:after {
+    visibility: hidden;
+    color: $primary-component-color;
+    content: close-quote;
+    font-size: 4em;
+    line-height: 0.1em;
+    vertical-align: -0.4em;
+  }
+
   blockquote p {
     display: inline;
     font-size: 14px;

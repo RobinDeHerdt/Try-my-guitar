@@ -17,7 +17,7 @@ class Guitar extends Model
     }
 
     /**
-     * A guitar belongs to many owners.
+     * A guitar belongs to many users.
      *
      * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
      */
@@ -27,13 +27,13 @@ class Guitar extends Model
     }
 
     /**
-     * A guitar belongs to many experiencers.
+     * A guitar belongs to many users.
      *
      * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
      */
     public function experiencers()
     {
-        return $this->belongsToMany('App\User', 'user_guitar')->wherePivot('owned', false)->withPivot('experience');;
+        return $this->belongsToMany('App\User', 'user_guitar')->wherePivot('owned', false)->withPivot('experience');
     }
 
     /**

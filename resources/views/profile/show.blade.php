@@ -36,15 +36,32 @@
                     @endif
                 </div>
             </div>
-            <h2>My collection</h2>
+            @if($user->ownedGuitars->isNotEmpty())
+            <h2>Owned guitars</h2>
             <div class="collection">
-                @foreach($user->guitars as $guitar)
-                    <div class="collection-item">
-                        <div style="background-image: url({{ Storage::disk('public')->url($guitar->guitarImages()->first()->image_uri) }}" class="collection-item-image"></div>
-                        <a href="{{ route('guitar.show', ['guitar' => $guitar->id]) }}" class="collection-item-text">{{ $guitar->name }}</a>
-                    </div>
+                @foreach($user->ownedGuitars as $guitar)
+                    <a href="{{ route('guitar.show', ['guitar' => $guitar->id]) }}">
+                        <div class="collection-item">
+                            <div style="background-image: url({{ Storage::disk('public')->url($guitar->guitarImages()->first()->image_uri) }}" class="collection-item-image"></div>
+                            <a href="{{ route('guitar.show', ['guitar' => $guitar->id]) }}" class="collection-item-text">{{ $guitar->name }}</a>
+                        </div>
+                    </a>
                 @endforeach
             </div>
+            @endif
+            @if($user->experiencedGuitars->isNotEmpty())
+                <h2>Experienced guitars</h2>
+                <div class="collection">
+                    @foreach($user->experiencedGuitars as $guitar)
+                        <a href="{{ route('guitar.show', ['guitar' => $guitar->id]) }}">
+                            <div class="collection-item">
+                                <div style="background-image: url({{ Storage::disk('public')->url($guitar->guitarImages()->first()->image_uri) }}" class="collection-item-image"></div>
+                                <a href="{{ route('guitar.show', ['guitar' => $guitar->id]) }}" class="collection-item-text">{{ $guitar->name }}</a>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
+            @endif
         </div>
     </div>
 @endsection
