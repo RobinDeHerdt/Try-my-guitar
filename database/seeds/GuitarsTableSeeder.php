@@ -37,27 +37,44 @@ class GuitarsTableSeeder extends Seeder
          */
         DB::table('user_guitar')->insert([
             'guitar_id' => 1,
-            'user_id'   => 1,
+            'user_id' => 1,
+            'owned' => true,
+            'experience' => 'This was my first guitar. I bought it 30 years ago and it\'s still my favorite.',
         ]);
 
         DB::table('user_guitar')->insert([
             'guitar_id' => 1,
-            'user_id'   => 3,
+            'user_id' => 2,
+            'owned' => true,
+            'experience' => 'This was my second guitar. I bought it 31 years ago and it\'s still my favorite.',
+        ]);
+
+        DB::table('user_guitar')->insert([
+            'guitar_id' => 1,
+            'user_id' => 3,
+            'owned' => false,
+            'experience' => 'A friend of mine owns this guitar. Plays very smooth blabla.',
         ]);
 
         DB::table('user_guitar')->insert([
             'guitar_id' => 2,
-            'user_id'   => 2,
+            'user_id' => 2,
+            'owned' => true,
+            'experience' => 'This is a guitar I own.',
         ]);
 
         DB::table('user_guitar')->insert([
             'guitar_id' => 2,
-            'user_id'   => 3,
+            'user_id' => 3,
+            'owned' => false,
+            'experience' => 'This is a guitar I don\'t own.',
         ]);
 
         DB::table('user_guitar')->insert([
             'guitar_id' => 3,
-            'user_id'   => 3,
+            'user_id' => 3,
+            'owned' => false,
+            'experience' => 'This is a guitar I don\'t own.',
         ]);
     }
 }

@@ -42,10 +42,37 @@
                     </div>
                 </div>
             </div>
+            <h2>People that own this guitar</h2>
+            <div class="row">
+                @foreach($owners as $user)
+                    <div class="col-md-6">
+                        <div class="experience-container">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="experience-user">
+                                        <a href="{{ route('profile.show', ['user' => $user->id]) }}" title="{{ $user->fullName() }}">
+                                            <div class="experience-user-image" style="background-image: url({{ Storage::disk('public')->url($user->image_uri) }})"></div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="experience-text">
+                                        <blockquote>
+                                            <br>
+                                            <p>{{ $user->pivot->experience }}</p>
+                                            <span> - <strong>{{ $user->fullName() }}</strong></span>
+                                        </blockquote>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+            <h2>People that have experienced this guitar</h2>
             <div class="dashboard-content">
-                <h2>People who own this guitar</h2>
                 <div class="collection">
-                    @foreach($users as $user)
+                    @foreach($experiencers as $user)
                         <div class="collection-item">
                             <a href="{{ route('profile.show', ['user' => $user->id]) }}" title="{{ $user->fullName() }}">
                                 <div style="background-image: url({{ Storage::disk('public')->url($user->image_uri) }}" class="collection-item-image"></div>
@@ -53,7 +80,7 @@
                             </a>
                         </div>
                     @endforeach
-                    @if($user_count > 4)
+                    @if($experiencer_count > 4)
                         <div class="collection-item">
                             <a href="{{ route('guitar.show.users', ['guitar' => $guitar->id]) }}">
                                 <div class="collection-item-color">

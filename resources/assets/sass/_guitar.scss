@@ -26,7 +26,7 @@
   .slick-item {
     text-align: center;
     background-color: #fff;
-    box-shadow: $strong-drop-shadow;
+    box-shadow: $drop-shadow;
     padding: 20px;
     margin: 5px 10px;
 
@@ -42,6 +42,54 @@
 
   .slick-prev:before, .slick-next:before {
     color: $primary-font-color;
+  }
+}
+
+.experience-container {
+  border-left: 10px solid $primary-component-color;
+  background-color: #fff;
+  box-shadow: $drop-shadow;
+  height: 160px;
+
+  .experience-user {
+    .experience-user-image {
+      width: 100%;
+      height: 160px;
+      background-size: cover;
+      background-position: top;
+    }
+
+    .experience-user-name {
+      top: 5px;
+      position: relative;
+    }
+  }
+
+  .experience-text {
+    margin-left: -15px;
+  }
+
+  blockquote {
+    border: none;
+    padding: 18px 0;
+
+    span {
+      font-size: 14px;
+    }
+  }
+
+  blockquote:before {
+    color: $primary-component-color;
+    content: open-quote;
+    font-size: 4em;
+    line-height: 0.1em;
+    margin-right: 5px;
+    vertical-align: -0.4em;
+  }
+
+  blockquote p {
+    display: inline;
+    font-size: 14px;
   }
 }
 

@@ -17,6 +17,26 @@ class Guitar extends Model
     }
 
     /**
+     * A guitar belongs to many owners.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
+     */
+    public function owners()
+    {
+        return $this->belongsToMany('App\User', 'user_guitar')->wherePivot('owned', true)->withPivot('experience');
+    }
+
+    /**
+     * A guitar belongs to many experiencers.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
+     */
+    public function experiencers()
+    {
+        return $this->belongsToMany('App\User', 'user_guitar')->wherePivot('owned', false)->withPivot('experience');;
+    }
+
+    /**
      * A guitar has many guitar images.
      *
      * @return \Illuminate\Database\Eloquent\Relations\hasMany
