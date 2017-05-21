@@ -45,6 +45,11 @@ Route::group([
     Route::get('brand/{brand}', 'BrandController@show')->name('brand.show');
     Route::get('type/{type}', 'TypeController@show')->name('type.show');
 
+    Route::get('collection/autocomplete', 'CollectionController@autoComplete')->name('collection.autocomplete');
+    Route::get('profile/{user}/collection', 'CollectionController@index')->name('collection.index');
+    Route::get('collection/add', 'CollectionController@create')->name('collection.create');
+    Route::post('collection/store', 'CollectionController@store')->name('collection.store');
+
     // Chat related routes.
     Route::get('chat/channels', 'ChatController@index')->name('chat.index');
     Route::get('chat/channel/{channel}', 'ChatController@show')->name('chat.show');

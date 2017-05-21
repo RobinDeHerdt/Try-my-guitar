@@ -42,8 +42,8 @@
                     <div class="dashboard-content">
                         <h3>Collection</h3>
                         <hr>
-                        <a href="#">View full collection</a><br>
-                        <a href="#">Add to collection</a>
+                        <a href="{{ route('collection.index', ['user' => $user->id]) }}">View full collection</a><br>
+                        <a href="{{ route('collection.create') }}">Add to collection</a>
                     </div>
                 </div>
             </div>

@@ -20,6 +20,8 @@ return [
     'login'             => 'Inloggen',
     'register'          => 'Registreren',
     'remember-me'       => 'Onthoud mij',
-    'forgot-password'   => 'Wachtwoord vergeten?'
+    'forgot-password'   => 'Wachtwoord vergeten?',
+    'guitar'            => 'Gitaar',
+    'experience'        => 'Ervaring',
 
 ];

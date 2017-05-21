@@ -7,10 +7,10 @@ trait Filter
     /**
      * Filter the 'guitar search' query.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  \Illuminate\Database\Eloquent\Relations\belongsToMany  $query
      * @param  array $filter_types
      * @param  array  $filter_brands
-     * @return \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany  $query
      */
     protected function filterResults($query, $filter_types, $filter_brands)
     {

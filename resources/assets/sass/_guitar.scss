@@ -46,10 +46,11 @@
 }
 
 .experience-container {
-  border-left: 10px solid $primary-component-color;
+  //border-right: 10px solid $primary-component-color;
   background-color: #fff;
   box-shadow: $drop-shadow;
   height: 160px;
+  margin-bottom: 20px;
 
   .experience-user {
     .experience-user-image {

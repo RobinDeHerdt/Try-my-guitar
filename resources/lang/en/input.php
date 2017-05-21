@@ -20,6 +20,8 @@ return [
     'login'             => 'Login',
     'register'          => 'Register',
     'remember-me'       => 'Remember me',
-    'forgot-password'   => 'Forgot your password?'
+    'forgot-password'   => 'Forgot your password?',
+    'guitar'            => 'Guitar',
+    'experience'        => 'Experience',
 
 ];

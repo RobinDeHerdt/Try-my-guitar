@@ -43,33 +43,4 @@ class BrandController extends Controller
             'filter_types'  => $this->filter_types,
         ]);
     }
-
-    /**
-     * Filter the specified query on guitar brand and/or type.
-     *
-     * @param  $query
-     * @return $query
-     */
-    private function filterResults($query)
-    {
-        if ($this->filter_types) {
-            foreach ($this->filter_types as $filter_type) {
-                $query->whereHas('guitarTypes', function ($q) use ($filter_type) {
-                    $q->where('id', $filter_type);
-                });
-            }
-        }
-
-        if ($this->filter_brands) {
-            if ($this->filter_brands) {
-                $query->where(function ($q) {
-                    foreach ($this->filter_brands as $filter_brand) {
-                        $q->orWhere('brand_id', $filter_brand);
-                    }
-                });
-            }
-        }
-
-        return $query;
-    }
 }
