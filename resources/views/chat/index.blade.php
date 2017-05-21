@@ -9,8 +9,9 @@
         <div class="container">
             <div class="row heading">
                 <div class="col-md-12">
-                    <h1>Conversations</h1>
-                    <a href="{{ route('dashboard') }}" class="icon-text"><span class="glyphicon glyphicon-home"></span>Back to dashboard</a>
+                    <h1>Chats</h1>
+                    <a href="{{ route('dashboard') }}" class="icon-text icon-full"><span class="glyphicon glyphicon-home"></span>Dashboard</a>
+                    <a href="{{ route('dashboard') }}" class="icon-text icon-responsive"><span class="glyphicon glyphicon-home"></span></a>
                 </div>
             </div>
             <div class="row">

@@ -64,6 +64,14 @@ body {
   }
 }
 
+.icon-full {
+  display: inherit;
+}
+
+.icon-responsive {
+  display: none;
+}
+
 .dashboard-content {
   background-color: $secondary-bg-color;
   padding: 20px;
@@ -152,6 +160,16 @@ body {
         padding-top: 10px;
       }
     }
+  }
+}
+
+@media (max-width: 767px) {
+  .icon-full {
+    display: none;
+  }
+
+  .icon-responsive {
+    display: inherit;
   }
 }
 
