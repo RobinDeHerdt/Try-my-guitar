@@ -80,7 +80,7 @@
                                 @else
                                     <div class="search-result-image">No image available</div>
                                 @endif
-                                <span class="guitar-link"><strong>{{ $brand_guitar->name }}</strong></span>
+                                <span class="guitar-link">{{ $brand_guitar->name }}</span>
                             </div>
                             </a>
                         @endforeach
@@ -101,7 +101,7 @@
                                         @else
                                             <div class="search-result-image">No image available</div>
                                         @endif
-                                        <span class="guitar-link"><strong>{{ $similar_guitar->name }}</strong></span>
+                                        <span class="guitar-link">{{ $similar_guitar->name }}</span>
                                     </div>
                                 </a>
                             @endforeach

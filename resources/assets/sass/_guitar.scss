@@ -20,6 +20,7 @@
 
   a:link, a:visited, a:hover {
     color: $primary-font-color;
+    text-decoration: none;
   }
 
   .slick-item {
@@ -45,7 +46,7 @@
 }
 
 .guitar-link {
-  //background-color: #2359bd;
+  margin-top: 5px;
   font-size: 18px;
 }
 
@@ -105,9 +106,9 @@
     background-position: bottom;
   }
 
-  a:link, a:hover {
+  a:link, a:hover, a:visited {
     color: $primary-font-color;
-    font-weight: 600;
+    font-weight: 500;
     text-decoration: none;
     font-size: 20px;
   }

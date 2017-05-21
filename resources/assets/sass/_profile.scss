@@ -123,8 +123,11 @@
     text-align: center;
 
     a:link, a:visited, a:hover {
-      text-decoration: none;
-      color: #fff;
+      color: $primary-font-color;
+      font-size: 18px;
+      font-weight: 500;
+      position: relative;
+      top: 15px;
     }
 
     .collection-item-image {
@@ -133,15 +136,8 @@
       background-size: cover;
       background-position: center;
       margin: 0 auto;
-      border-radius: 50%;
-    }
-
-    .collection-item-text {
-      color: $primary-font-color;
-      font-size: 18px;
-      font-weight: 600;
-      position: relative;
-      top: 15px;
+      border-radius: 15px;
+      border: solid 5px white;
     }
 
     .collection-item-color {
@@ -160,7 +156,7 @@
 
       .collection-more span {
         font-size: 40px;
-        font-weight: 600;
+        font-weight: 500;
       }
     }
   }
