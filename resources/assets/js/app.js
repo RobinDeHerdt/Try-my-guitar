@@ -44,18 +44,6 @@ const app = new Vue({
             this.fetchMessages(channel_id);
             this.fetchChannel(channel_id);
 
-            /**
-             * @todo Api call to get all of the authenticated users channels.
-             * Loop over all channels and apply listeners
-             * Do this in the conditional 'channel-id' else section. That way events don't get shown double on chat pages.
-             *
-             * Create a vue template in the layout file. This template will loop over an array of all received events.
-             * Show the template absolute positioned in the right bottom of the screen.
-             * When clicked on 'close' section of the container, the event gets removed from the array.
-             *
-             * Optional: remove event after 10 seconds. (fade out)
-             */
-
             Echo.private(`channel.${channel_id}`)
                 .listen('MessageSent', (e) => {
                     this.messages.push({
@@ -78,17 +66,6 @@ const app = new Vue({
                     this.channelname = e.channel.name;
                 });
         } else {
-            /**
-             * @todo Api call to get all of the authenticated users channels.
-             * Loop over all channels and apply listeners
-             * Do this in the conditional 'channel-id' else section. That way events don't get shown double on chat pages.
-             *
-             * Create a vue template in the layout file. This template will loop over an array of all received events.
-             * Show the template absolute positioned in the right bottom of the screen.
-             * When clicked on 'close' section of the container, the event gets removed from the array.
-             *
-             * Optional: remove event after 10 seconds. (fade out)
-             */
             this.fetchUserChannels();
         }
     },
@@ -118,12 +95,12 @@ const app = new Vue({
                 this.channels = response.data;
 
                 /**
-                 * Hacky way to check if the user is getting the correct data back,
+                 * Extremely hacky way to check if the user is getting the correct data back,
                  * instead of the login screen because of middleware redirect. (role:user)
                  * @todo Check if the user is authenticated before the API call is made.
                  * @todo Don't broadcast chat 'joined chat' event to the current authenticated user.
                  */
-                if(this.channels[0].id) {
+                if(this.channels && this.channels[0] !== '<') {
                     this.channels.forEach(channel => {
                         Echo.private(`channel.${channel.id}`)
                             .listen('MessageSent', (e) => {
