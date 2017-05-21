@@ -117,3 +117,17 @@
     top: 20px;
   }
 }
+
+@media (max-width: 991px) {
+  .brand-logo {
+    width: 40%;
+    left: 30%;
+    margin: 20px 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .brand-logo {
+    margin: 0;
+  }
+}

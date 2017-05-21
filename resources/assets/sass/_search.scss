@@ -53,10 +53,6 @@
   }
 }
 
-.search-filter {
-
-}
-
 .search-results-search {
   padding-bottom: 20px;
 }
@@ -76,11 +72,18 @@
 }
 
 @media (max-width: 991px) {
-  .search-result .search-result-overlay {
-    top: 0;
-  }
+  .search-result {
+    .search-result-logo {
+      width: 50px;
+      float: left
+    }
 
-  .search-result-header-image {
-    top: 0;
+    .search-result-overlay {
+      top: 0;
+    }
+
+    .search-result-header-image {
+      top: 0;
+    }
   }
 }
