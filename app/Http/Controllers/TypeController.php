@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use App\Traits\Filter;
 use App\GuitarBrand;
 use App\GuitarType;
-use Illuminate\Http\Request;
 
 class TypeController extends Controller
 {
+    use Filter;
+
     /**
      * Filter variables
      * @var array
@@ -29,7 +32,7 @@ class TypeController extends Controller
         }
 
         $query      = $type->guitars();
-        $guitars    = $this->filterResults($query)->paginate(10);
+        $guitars    = $this->filterResults($query, $this->filter_types, $this->filter_brands)->paginate(10);
 
         return view('type.show', [
             'type'              => $type,
@@ -39,32 +42,5 @@ class TypeController extends Controller
             'filter_brands'     => $this->filter_brands,
             'filter_types'      => $this->filter_types,
         ]);
-    }
-
-    /**
-     * Filter the 'guitar search' query.
-     *
-     * @return $query
-     */
-    private function filterResults($query) {
-        if($this->filter_types) {
-            foreach ($this->filter_types as $filter_type) {
-                $query->whereHas('guitarTypes', function($q) use ($filter_type) {
-                    $q->where('id', $filter_type);
-                });
-            }
-        }
-
-        if($this->filter_brands) {
-            if($this->filter_brands) {
-                $query->where(function($q){
-                    foreach ($this->filter_brands as $filter_brand) {
-                        $q->orWhere('brand_id', $filter_brand);
-                    }
-                });
-            }
-        }
-
-        return $query;
     }
 }

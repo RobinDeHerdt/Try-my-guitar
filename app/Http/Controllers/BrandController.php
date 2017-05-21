@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\GuitarType;
 use Illuminate\Http\Request;
+use App\Traits\Filter;
 use App\GuitarBrand;
+use App\GuitarType;
 
 class BrandController extends Controller
 {
+    use Filter;
+
     /**
      * Filter variables
      * @var array
@@ -29,7 +32,7 @@ class BrandController extends Controller
         }
 
         $query      = $brand->guitars();
-        $guitars    = $this->filterResults($query)->paginate(10);
+        $guitars    = $this->filterResults($query, $this->filter_types, $this->filter_brands)->paginate(10);
 
         return view('brand.show', [
             'brand'         => $brand,

@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use App\Traits\Filter;
 use App\GuitarBrand;
 use App\GuitarType;
-use Illuminate\Http\Request;
-use App\User;
 use App\Guitar;
-use function MongoDB\BSON\toJSON;
+use App\User;
 
 class SearchController extends Controller
 {
+    use Filter;
+
     /**
      * Auto complete variables
      */
@@ -54,15 +56,11 @@ class SearchController extends Controller
             if($request->query('types')) {
                 $this->filter_types     = $request->query('types');
                 $this->filter_category  = 'guitar';
-            } else {
-                $this->filter_types     = [];
             }
 
             if($request->query('brands')) {
                 $this->filter_brands    = $request->query('brands');
                 $this->filter_category  = 'guitar';
-            } else {
-                $this->filter_brands    = [];
             }
 
             switch($filter_category = $this->filter_category) {
@@ -165,37 +163,13 @@ class SearchController extends Controller
             }
         });
 
-        $this->most_relevant_guitars = $this->filterResults($most_relevant_query)->get();
+        $this->most_relevant_guitars = $this->filterResults($most_relevant_query, $this->filter_types, $this->filter_brands)->get();
         $most_relevant_guitars_keys  = $this->most_relevant_guitars->pluck('id')->all();
 
-        $this->less_relevant_guitars = $this->filterResults($less_relevant_query)->take(8)->get()->except($most_relevant_guitars_keys);
-    }
-
-    /**
-     * Filter the 'guitar search' query.
-     *
-     * @return $query
-     */
-    private function filterResults($query) {
-        if($this->filter_types) {
-            foreach ($this->filter_types as $filter_type) {
-                $query->whereHas('guitarTypes', function($q) use ($filter_type) {
-                    $q->where('id', $filter_type);
-                });
-            }
-        }
-
-        if($this->filter_brands) {
-            if($this->filter_brands) {
-                $query->where(function($q){
-                    foreach ($this->filter_brands as $filter_brand) {
-                        $q->orWhere('brand_id', $filter_brand);
-                    }
-                });
-            }
-        }
-
-        return $query;
+        $this->less_relevant_guitars = $this->filterResults($less_relevant_query, $this->filter_types, $this->filter_brands)
+            ->take(8)
+            ->get()
+            ->except($most_relevant_guitars_keys);
     }
 
     /**
