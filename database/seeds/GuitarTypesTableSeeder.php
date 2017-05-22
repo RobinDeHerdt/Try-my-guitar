@@ -84,13 +84,93 @@ class GuitarTypesTableSeeder extends Seeder
         ]);
 
         DB::table('guitar_type')->insert([
-            'type_id' => 2,
+            'type_id' => 4,
+            'guitar_id' => 1,
+        ]);
+
+        DB::table('guitar_type')->insert([
+            'type_id' => 9,
+            'guitar_id' => 1,
+        ]);
+
+        DB::table('guitar_type')->insert([
+            'type_id' => 9,
+            'guitar_id' => 2,
+        ]);
+
+        DB::table('guitar_type')->insert([
+            'type_id' => 9,
+            'guitar_id' => 3,
+        ]);
+
+        DB::table('guitar_type')->insert([
+            'type_id' => 9,
+            'guitar_id' => 4,
+        ]);
+
+        DB::table('guitar_type')->insert([
+            'type_id' => 9,
+            'guitar_id' => 5,
+        ]);
+
+        DB::table('guitar_type')->insert([
+            'type_id' => 9,
+            'guitar_id' => 6,
+        ]);
+
+        DB::table('guitar_type')->insert([
+            'type_id' => 9,
+            'guitar_id' => 7,
+        ]);
+
+        DB::table('guitar_type')->insert([
+            'type_id' => 9,
+            'guitar_id' => 8,
+        ]);
+
+        DB::table('guitar_type')->insert([
+            'type_id' => 1,
             'guitar_id' => 1,
         ]);
 
         DB::table('guitar_type')->insert([
             'type_id' => 1,
             'guitar_id' => 2,
+        ]);
+
+        DB::table('guitar_type')->insert([
+            'type_id' => 1,
+            'guitar_id' => 3,
+        ]);
+
+        DB::table('guitar_type')->insert([
+            'type_id' => 1,
+            'guitar_id' => 4,
+        ]);
+
+        DB::table('guitar_type')->insert([
+            'type_id' => 1,
+            'guitar_id' => 5,
+        ]);
+
+        DB::table('guitar_type')->insert([
+            'type_id' => 1,
+            'guitar_id' => 6,
+        ]);
+
+        DB::table('guitar_type')->insert([
+            'type_id' => 1,
+            'guitar_id' => 7,
+        ]);
+
+        DB::table('guitar_type')->insert([
+            'type_id' => 1,
+            'guitar_id' => 8,
+        ]);
+
+        DB::table('guitar_type')->insert([
+            'type_id' => 12,
+            'guitar_id' => 7,
         ]);
 
         DB::table('guitar_type')->insert([

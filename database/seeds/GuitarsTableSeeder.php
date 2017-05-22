@@ -23,14 +23,45 @@ class GuitarsTableSeeder extends Seeder
         DB::table('guitars')->insert([
             'name' => 'James Hetfield Iron Cross',
             'description' => 'Made by hand at the ESP Custom Shop in Japan, the ESP Iron Cross is a Signature Series model of James Hetfield, the frontman of Metallica and one of the world\'s most highly respected rhtyhm guitar players in any genre. The Iron Cross is based on James\' personal custom instrument design, and features set-neck construction of a mahogany body with maple cap, and a single-piece mahogany neck with ebony fingerboard and 22 extra-jumbo frets with an Iron Cross inlay at the 12th fret. The ESP Iron Cross is powered by James\' own EMG JH SET active pickups, and includes premier components such as Schaller straplocks, Sperzel locking tuners, and a TonePros locking TOM bridge and tailpiece. Available in Snow White finish with black stripe graphic and iron cross fixture. The ESP Iron Cross includes a hardshell case and comes with a Certificate of Authenticity from ESP.',
-            'brand_id' => 2,
+            'brand_id' => 3,
         ]);
 
         DB::table('guitars')->insert([
-            'name' => 'Squier Stratocaster',
+            'name' => 'Stratocaster',
             'description' => 'Squier is Fender-sharing its product platforms, trademarks, standards and iconic designs. Squier is the launching pad for beginners, pointing intermediate and advancing guitarists toward their ultimate goal-owning a Fender!',
-            'brand_id' => 4,
+            'brand_id' => 8,
         ]);
+
+        DB::table('guitars')->insert([
+            'name' => 'Stratocaster',
+            'description' => 'Fender product.',
+            'brand_id' => 5,
+        ]);
+
+        DB::table('guitars')->insert([
+            'name' => 'EX-1000',
+            'description' => 'LTD EX-1000 series guitar.',
+            'brand_id' => 1,
+        ]);
+
+        DB::table('guitars')->insert([
+            'name' => 'AX-1000',
+            'description' => 'LTD AX-1000 series guitar.',
+            'brand_id' => 1,
+        ]);
+
+        DB::table('guitars')->insert([
+            'name' => 'Alex Skolnick signature AS-1',
+            'description' => 'Signature guitar. Silverburst.',
+            'brand_id' => 3,
+        ]);
+
+        DB::table('guitars')->insert([
+            'name' => 'Arrow',
+            'description' => 'The ESP Original Series are guitars made by hand by our experienced master luthiers who work in the ESP Custom Shop in Tokyo, Japan. Each guitar is made one at a time, with a level of detail and craftsmanship that\'s unsurpassed in the musical instrument industry. With the ESP Arrow Rusty Iron, you get a guitar that will set you apart from the rest of the world. It has a textured finish that looks like oxidized metal, as if your guitar was an ancient relic sculpted in a different era. But the ESP Arrow is a completely modern machine, with neck-thru-body construction at 25.5" scale, a set of active Seymour Duncan Blackout pickups, and top-tier components like a Floyd Rose Original bridge and Gotoh locking tuners. It offers an alder body, a super-fast three-piece maple neck, and an ebony fingerboard with 24 extra-jumbo frets. Includes a hardshell case.',
+            'brand_id' => 3,
+        ]);
+
 
         /**
          * Pivot table seeders.
