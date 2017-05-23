@@ -32,7 +32,7 @@
                                 <input type="text" class="form-control" name="first_name" value="{{ $user->first_name }}" required>
                             </div>
                             <div class="form-group">
-                                <label for="last_name">@lang('input.last-name')</label>
+                                <label for="last_name">@lang('input.last-name') *</label>
                                 <input type="text" class="form-control" name="last_name" value="{{ $user->last_name }}">
                             </div>
                             <div class="form-group">
@@ -40,18 +40,30 @@
                                 <input type="email" class="form-control" name="email" value="{{ $user->email }}" required>
                             </div>
                             <div class="form-group">
-                                <label for="location">@lang('input.location')</label>
-                                <input type="text" class="form-control" name="location" value="{{ $user->location }}">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="">Current picture</label>
+                                <label for="">Your current picture</label>
                                 <img src="{{ Storage::disk('public')->url($user->image_uri) }}" alt="profile picture" class="edit-profile-picture">
                             </div>
                             <div class="form-group">
                                 <label for="image">Upload a new picture</label>
                                 <input type="file" name="image" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Your preferred meetup spot *</label>
+                                <div class="pac-card" id="pac-card">
+                                    <div id="pac-container">
+                                        <input id="pac-input" type="text" name="location" placeholder="Where would you like to meet up?" value="{{ $user->location }}">
+                                    </div>
+                                </div>
+                                <div id="map"></div>
+                                <div id="infowindow-content">
+                                    <img src="" width="16" height="16" id="place-icon">
+                                    <span id="place-name"  class="title"></span><br>
+                                    <span id="place-address"></span>
+                                </div>
+                                <input type="hidden" class="form-control" name="location_lat" id="location_lat" value="{{ $user->location_lat }}">
+                                <input type="hidden" class="form-control" name="location_lng" id="location_lng" value="{{ $user->location_lng }}">
                             </div>
                         </div>
                     </div>
@@ -64,27 +76,6 @@
                     </div>
                 </form>
             </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="pac-card" id="pac-card">
-                            <div>
-                                <div id="title">
-                                    Set a default meeting location
-                                </div>
-                            </div>
-                            <div id="pac-container">
-                                <input id="pac-input" type="text"
-                                       placeholder="Enter a location">
-                            </div>
-                        </div>
-                        <div id="map"></div>
-                        <div id="infowindow-content">
-                            <img src="" width="16" height="16" id="place-icon">
-                            <span id="place-name"  class="title"></span><br>
-                            <span id="place-address"></span>
-                        </div>
-                    </div>
-                </div>
             <div class="row heading">
                 <div class="col-md-12">
                     <h1>Profile appearance</h1>
@@ -116,7 +107,7 @@
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary form-control">Save changes</button>
                             </div>
-                        </div>
+                        </div>doc
                     </div>
                 </form>
             </div>
@@ -131,12 +122,31 @@
 @section('scripts')
     <script>
         function initMap() {
-            var map = new google.maps.Map(document.getElementById('map'), {
-                center: {lat: -33.8688, lng: 151.2195},
-                zoom: 13
-            });
-            var card = document.getElementById('pac-card');
-            var input = document.getElementById('pac-input');
+            var card            = document.getElementById('pac-card');
+            var input           = document.getElementById('pac-input');
+            var location_lat    = document.getElementById('location_lat');
+            var location_lng    = document.getElementById('location_lng');
+
+            if(location_lat.value && location_lng.value) {
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    center: {lat: parseFloat(location_lat.value), lng: parseFloat(location_lng.value)},
+                    zoom: 17
+                });
+            } else {
+                // @todo Base on ip geolocation instead of a default value.
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    center: {lat: -33.8688, lng: 151.2195},
+                    zoom: 13
+                });
+            }
+
+            // Prevent the full form from submitting.
+            input.onkeypress = function(e) {
+                var key = e.charCode || e.keyCode || 0;
+                if (key === 13) {
+                    return false;
+                }
+            }
 
             map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
 
@@ -150,10 +160,15 @@
             var infowindow = new google.maps.InfoWindow();
             var infowindowContent = document.getElementById('infowindow-content');
             infowindow.setContent(infowindowContent);
+
             var marker = new google.maps.Marker({
                 map: map,
                 anchorPoint: new google.maps.Point(0, -29)
             });
+
+            if(location_lat.value && location_lng.value) {
+                marker.setPosition({lat: parseFloat(location_lat.value), lng: parseFloat(location_lng.value)});
+            }
 
             autocomplete.addListener('place_changed', function() {
                 infowindow.close();
@@ -166,7 +181,6 @@
                     return;
                 }
 
-                // If the place has a geometry, then present it on a map.
                 if (place.geometry.viewport) {
                     map.fitBounds(place.geometry.viewport);
                 } else {
@@ -175,6 +189,10 @@
                 }
                 marker.setPosition(place.geometry.location);
                 marker.setVisible(true);
+
+                location_lat.value = place.geometry.location.lat();
+                location_lng.value = place.geometry.location.lng();
+
 
                 var address = '';
                 if (place.address_components) {

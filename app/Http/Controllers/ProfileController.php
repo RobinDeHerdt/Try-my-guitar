@@ -88,6 +88,8 @@ class ProfileController extends Controller
         }
 
         $user->location     = $request->location;
+        $user->location_lat = $request->location_lat;
+        $user->location_lng = $request->location_lng;
 
         if (isset($request->image)) {
             $user->image_uri = $request->image->store('images', 'public');
