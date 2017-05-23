@@ -79,11 +79,6 @@ class GuitarTypesTableSeeder extends Seeder
          * Pivot table seeders.
          */
         DB::table('guitar_type')->insert([
-            'type_id' => 1,
-            'guitar_id' => 1,
-        ]);
-
-        DB::table('guitar_type')->insert([
             'type_id' => 4,
             'guitar_id' => 1,
         ]);

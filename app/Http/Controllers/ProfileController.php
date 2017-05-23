@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-use App\Mail\VerifyEmail;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Http\Request;
+use App\Mail\VerifyEmail;
 use App\User;
 use Auth;
 
@@ -57,6 +57,13 @@ class ProfileController extends Controller
         return view('profile.edit', [
             'user' => $this->user,
         ]);
+    }
+
+    public function autoComplete(Request $request)
+    {
+        $response = GooglePlaces::placeAutocomplete($request->input);
+
+        return $response;
     }
 
     /**
