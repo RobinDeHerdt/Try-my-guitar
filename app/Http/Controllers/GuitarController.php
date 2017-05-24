@@ -55,6 +55,14 @@ class GuitarController extends Controller
         $owners             = $owners_query->take(4)->get();
         $experiencers       = $experiencers_query->take(4)->get();
 
+        $owners_coords      = $owners_query->get('location_lat','location_lng','location');
+
+        $owner_locations = [];
+
+        foreach ($owners_coords as $owner) {
+            array_push($owner_locations, ['lat' => $owner->location_lat, 'lng' => $owner->location_lng]);
+        }
+
         $owner_count        = $owners_query->count();
         $experiencer_count  = $experiencers_query->count();
 
@@ -66,6 +74,7 @@ class GuitarController extends Controller
             'guitar'            => $guitar,
             'brand_guitars'     => $brand_guitars,
             'similar_guitars'   => $similar_guitars,
+            'owner_locations'   => json_encode($owner_locations),
         ]);
     }
 }

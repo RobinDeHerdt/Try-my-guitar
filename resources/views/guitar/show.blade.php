@@ -27,10 +27,6 @@
                         <div class="guitar-description-container">
                             {{ $guitar->description }}
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="dashboard-content">
                         <div class="slick-main">
                             @foreach($guitar->guitarImages as $guitarImage)
                                 <div class="slick-item">
@@ -41,81 +37,89 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <h2>People that own this guitar</h2>
-            <div class="row">
-                @foreach($owners as $user)
-                    <div class="col-md-6">
-                        <div class="experience-container">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="experience-user">
-                                        <a href="{{ route('profile.show', ['user' => $user->id]) }}" title="{{ $user->fullName() }}">
-                                            <div class="experience-user-image" style="background-image: url({{ Storage::disk('public')->url($user->image_uri) }})"></div>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="experience-text">
-                                        <blockquote>
-                                            <br>
-                                            <p>{{ $user->pivot->experience }}</p>
-                                            <span> - <strong>{{ $user->fullName() }}</strong></span>
-                                        </blockquote>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-            <h2>People that have experienced this guitar</h2>
-            <div class="row">
-                @foreach($experiencers as $user)
-                    <div class="col-md-6">
-                        <div class="experience-container">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="experience-user">
-                                        <a href="{{ route('profile.show', ['user' => $user->id]) }}" title="{{ $user->fullName() }}">
-                                            <div class="experience-user-image" style="background-image: url({{ Storage::disk('public')->url($user->image_uri) }})"></div>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="experience-text">
-                                        <blockquote>
-                                            <br>
-                                            <p>{{ $user->pivot->experience }}</p>
-                                            <span> - <strong>{{ $user->fullName() }}</strong></span>
-                                        </blockquote>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-            @if($brand_guitars->isNotEmpty())
-            <div class="row">
-                <div class="col-md-12">
-                    <h2>More {{ $guitar->guitarBrand->name }} guitars</h2>
-                    <div class="slick-related">
-                        @foreach($brand_guitars as $brand_guitar)
-                            <a href="{{ route('guitar.show', ['guitar' => $brand_guitar->id]) }}">
-                            <div class="slick-item">
-                                @if($brand_guitar->guitarImages->isNotEmpty())
-                                    <img src="{{ Storage::disk('public')->url($brand_guitar->guitarImages->first()->image_uri) }}">
-                                @else
-                                    <div class="search-result-image">No image available</div>
-                                @endif
-                                <span class="guitar-link">{{ $brand_guitar->name }}</span>
-                            </div>
-                            </a>
-                        @endforeach
-                    </div>
+                <div class="col-md-6">
+                    <div id="map"></div>
                 </div>
             </div>
+            @if($owners->isNotEmpty())
+                <h2>People that own this guitar</h2>
+                <div class="row">
+                    @foreach($owners as $user)
+                        <div class="col-md-6">
+                            <div class="experience-container">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="experience-user">
+                                            <a href="{{ route('profile.show', ['user' => $user->id]) }}" title="{{ $user->fullName() }}">
+                                                <div class="experience-user-image" style="background-image: url({{ Storage::disk('public')->url($user->image_uri) }})"></div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="experience-text">
+                                            <blockquote>
+                                                <br>
+                                                <p>{{ $user->pivot->experience }}</p>
+                                                <span> - <strong>{{ $user->fullName() }}</strong></span>
+                                            </blockquote>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            @endif
+            <input type="hidden" id="owner-locations" value="{{ $owner_locations }}">
+            @if($experiencers->isNotEmpty())
+                <h2>People that have experienced this guitar</h2>
+                <div class="row">
+                    @foreach($experiencers as $user)
+                        <div class="col-md-6">
+                            <div class="experience-container">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="experience-user">
+                                            <a href="{{ route('profile.show', ['user' => $user->id]) }}" title="{{ $user->fullName() }}">
+                                                <div class="experience-user-image" style="background-image: url({{ Storage::disk('public')->url($user->image_uri) }})"></div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="experience-text">
+                                            <blockquote>
+                                                <br>
+                                                <p>{{ $user->pivot->experience }}</p>
+                                                <span> - <strong>{{ $user->fullName() }}</strong></span>
+                                            </blockquote>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            @endif
+            @if($brand_guitars->isNotEmpty())
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>More {{ $guitar->guitarBrand->name }} guitars</h2>
+                        <div class="slick-related">
+                            @foreach($brand_guitars as $brand_guitar)
+                                <a href="{{ route('guitar.show', ['guitar' => $brand_guitar->id]) }}">
+                                <div class="slick-item">
+                                    @if($brand_guitar->guitarImages->isNotEmpty())
+                                        <img src="{{ Storage::disk('public')->url($brand_guitar->guitarImages->first()->image_uri) }}">
+                                    @else
+                                        <div class="search-result-image">No image available</div>
+                                    @endif
+                                    <span class="guitar-link">{{ $brand_guitar->name }}</span>
+                                </div>
+                                </a>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
             @endif
             @if($similar_guitars->isNotEmpty())
                 <div class="row">
@@ -145,8 +149,29 @@
 @section('footer')
     @include('partials.footer')
 @endsection
-
 @section('scripts')
+    <script>
+        function initMap() {
+            var locations_field = document.getElementById('owner-locations');
+            var locations = JSON.parse(locations_field.value);
+
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: -33.8688, lng: 151.2195},
+                zoom: 2
+            });
+
+            if(locations) {
+                for (var i = 0; i < locations.length; i++) {
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        anchorPoint: new google.maps.Point(0, -29)
+                    });
+                    marker.setPosition(locations[i]);
+                }
+            }
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_PLACES_API_KEY') }}&libraries=places&callback=initMap" async defer></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
     <script>
         $('.slick-main').slick({

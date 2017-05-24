@@ -17,6 +17,9 @@ class UsersTableSeeder extends Seeder
             'last_name' => 'TMG',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('admin'),
+            'location_lat' => 35,
+            'location_lng' => 40,
+            'location' => 'Hest',
         ]);
 
         DB::table('role_user')->insert([
@@ -43,6 +46,9 @@ class UsersTableSeeder extends Seeder
             'verified' => true,
             'header_image_uri' => 'images/electric-guitars.jpg',
             'description' => 'Guitar player and vocalist for a metal band called \'Trivium\'',
+            'location_lat' => 39,
+            'location_lng' => 41,
+            'location' => 'Hest',
         ]);
 
         DB::table('role_user')->insert([
@@ -56,6 +62,9 @@ class UsersTableSeeder extends Seeder
             'email' => 'james@gmail.com',
             'image_uri' => 'images/james.jpg',
             'password' => bcrypt('123456'),
+            'location_lat' => 47,
+            'location_lng' => 45,
+            'location' => 'Hest',
         ]);
 
         DB::table('role_user')->insert([
