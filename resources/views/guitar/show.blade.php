@@ -27,6 +27,8 @@
                         <div class="guitar-description-container">
                             {{ $guitar->description }}
                         </div>
+                    </div>
+                    <div class="dashboard-content">
                         <div class="slick-main">
                             @foreach($guitar->guitarImages as $guitarImage)
                                 <div class="slick-item">
@@ -37,10 +39,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div id="map"></div>
-                </div>
+                @if(!empty(json_decode($owner_locations)))
+                    <div class="col-md-6">
+                        <div class="dashboard-content">
+                            <div id="map"></div>
+                        </div>
+                    </div>
+                @endif
             </div>
+            <input type="hidden" id="owner-locations" value="{{ $owner_locations }}">
             @if($owners->isNotEmpty())
                 <h2>People that own this guitar</h2>
                 <div class="row">
@@ -70,7 +77,6 @@
                     @endforeach
                 </div>
             @endif
-            <input type="hidden" id="owner-locations" value="{{ $owner_locations }}">
             @if($experiencers->isNotEmpty())
                 <h2>People that have experienced this guitar</h2>
                 <div class="row">
@@ -150,28 +156,31 @@
     @include('partials.footer')
 @endsection
 @section('scripts')
-    <script>
-        function initMap() {
-            var locations_field = document.getElementById('owner-locations');
-            var locations = JSON.parse(locations_field.value);
+    @if(!empty(json_decode($owner_locations)))
+        <script>
+            function initMap() {
+                var locations_field = document.getElementById('owner-locations');
+                var locations = JSON.parse(locations_field.value);
 
-            var map = new google.maps.Map(document.getElementById('map'), {
-                center: {lat: -33.8688, lng: 151.2195},
-                zoom: 2
-            });
+                // @todo base this on geolocation
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    center: locations[0],
+                    zoom: 5
+                });
 
-            if(locations) {
-                for (var i = 0; i < locations.length; i++) {
-                    var marker = new google.maps.Marker({
-                        map: map,
-                        anchorPoint: new google.maps.Point(0, -29)
-                    });
-                    marker.setPosition(locations[i]);
+                if(locations) {
+                    for (var i = 0; i < locations.length; i++) {
+                        var marker = new google.maps.Marker({
+                            map: map,
+                            anchorPoint: new google.maps.Point(0, -29)
+                        });
+                        marker.setPosition(locations[i]);
+                    }
                 }
             }
-        }
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_PLACES_API_KEY') }}&libraries=places&callback=initMap" async defer></script>
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_PLACES_API_KEY') }}&libraries=places&callback=initMap" async defer></script>
+    @endif
     <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
     <script>
         $('.slick-main').slick({
