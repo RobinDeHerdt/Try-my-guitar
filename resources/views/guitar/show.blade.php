@@ -189,10 +189,7 @@
             arrows: false,
             dots: true,
             variableWidth: true,
-            adaptiveHeight: true,
             centerMode: true,
-            autoplay: true,
-            autoplaySpeed: 5000,
         });
 
         $('.slick-related').slick({
