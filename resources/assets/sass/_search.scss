@@ -11,15 +11,9 @@
   }
 
   .search-result-image {
-    margin: 0 auto;
-    width: 150px;
-    height: 150px;
-    border-radius: 10px;
-    background-position: center;
-    background-size: cover;
-    z-index: 3;
-    position: relative;
-    border: solid 3px #fff;
+    height: 140px;
+    object-fit: cover;
+    max-width: 100%;
   }
 
   h3 {
@@ -48,8 +42,10 @@
   }
 
   .search-result-logo {
-    width: 80px;
-    float: left
+    width: 50px;
+    left: 40px;
+    position: absolute;
+    bottom: 25px;
   }
 }
 
@@ -74,8 +70,10 @@
 @media (max-width: 991px) {
   .search-result {
     .search-result-logo {
-      width: 50px;
-      float: left
+      width: 45px;
+      left: 40px;
+      position: absolute;
+      bottom: 25px;
     }
 
     .search-result-overlay {
