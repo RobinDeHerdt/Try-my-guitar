@@ -10,7 +10,6 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="dashboard-content brand-logo-header-container">
-                        {{--<img src="{{ Storage::disk('public')->url($type->image_uri) }}" alt="" class="brand-logo-header">--}}
                         <h3>{{ $type->name }}</h3>
                     </div>
                 </div>
@@ -57,7 +56,7 @@
                                 </a>
                                 <img src="{{ Storage::disk('public')->url($guitar->guitarBrand->logo_uri) }}" alt="{{ $guitar->guitarBrand->name }} logo" class="search-result-logo">
                                 @if($guitar->guitarImages->isNotEmpty())
-                                    <div class="search-result-image" style="background-image: url({{ Storage::disk('public')->url($guitar->guitarImages()->first()->image_uri) }})"></div>
+                                    <img src="{{ Storage::disk('public')->url($guitar->guitarImages()->first()->image_uri) }}" class="search-result-image">
                                 @else
                                     <div class="search-result-image">No image available</div>
                                 @endif

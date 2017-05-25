@@ -74,7 +74,7 @@
                                     </a>
                                     <img src="{{ Storage::disk('public')->url($guitar->guitarBrand->logo_uri) }}" alt="{{ $guitar->guitarBrand->name }} logo" class="search-result-logo">
                                     @if($guitar->guitarImages->isNotEmpty())
-                                        <div class="search-result-image" style="background-image: url({{ Storage::disk('public')->url($guitar->guitarImages()->first()->image_uri) }})"></div>
+                                        <img src="{{ Storage::disk('public')->url($guitar->guitarImages()->first()->image_uri) }}" class="search-result-image">
                                     @else
                                         <div class="search-result-image">No image available</div>
                                     @endif
@@ -94,7 +94,7 @@
                                     </a>
                                     <img src="{{ Storage::disk('public')->url($guitar->guitarBrand->logo_uri) }}" alt="{{ $guitar->guitarBrand->name }} logo" class="search-result-logo">
                                     @if($guitar->guitarImages->isNotEmpty())
-                                        <div class="search-result-image" style="background-image: url({{ Storage::disk('public')->url($guitar->guitarImages()->first()->image_uri) }})"></div>
+                                        <img src="{{ Storage::disk('public')->url($guitar->guitarImages()->first()->image_uri) }}" class="search-result-image">
                                     @else
                                         <div class="search-result-image">No image available</div>
                                     @endif

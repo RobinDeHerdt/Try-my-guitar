@@ -132,12 +132,6 @@
                     center: {lat: parseFloat(location_lat.value), lng: parseFloat(location_lng.value)},
                     zoom: 17
                 });
-            } else {
-                // @todo Base on ip geolocation instead of a default value.
-                var map = new google.maps.Map(document.getElementById('map'), {
-                    center: {lat: -33.8688, lng: 151.2195},
-                    zoom: 13
-                });
             }
 
             // Prevent the full form from submitting.
