@@ -16,6 +16,11 @@ class GuitarController extends Controller
      */
     public function show(Guitar $guitar)
     {
+
+        $ip_address = request()->ip();
+        $user_location = geoip($ip_address);
+        $user_coords = ['lat' => $user_location->lat, 'lng' => $user_location->lon];
+
         /**
          * Get all guitars from the specified guitar's brand.
          * Take a maximum of 10 records.
@@ -75,6 +80,7 @@ class GuitarController extends Controller
             'brand_guitars'     => $brand_guitars,
             'similar_guitars'   => $similar_guitars,
             'owner_locations'   => json_encode($owner_locations),
+            'user_coords'       => json_encode($user_coords),
         ]);
     }
 }

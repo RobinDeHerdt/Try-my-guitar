@@ -109,6 +109,8 @@
 }
 
 .guitar-type-container {
+  width: 80%;
+  line-height: 30px;
   margin-top: 30px;
 
   .guitar-type {
@@ -116,7 +118,7 @@
     padding: 5px 15px;
     border-radius: 2.5px;
     color: #fff;
-    margin-left: 2.5px;
+    white-space: nowrap;
   }
 }
 
@@ -125,9 +127,9 @@
 }
 
 .guitar-brand-logo {
-  width: 80px;
+  width: 110px;
   float: right;
-  margin-top: 5px;
+  margin-top: 20px;
   margin-right: 10px;
 }
 

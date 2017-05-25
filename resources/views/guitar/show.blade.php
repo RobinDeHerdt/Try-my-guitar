@@ -48,6 +48,7 @@
                 @endif
             </div>
             <input type="hidden" id="owner-locations" value="{{ $owner_locations }}">
+            <input type="hidden" id="user-location" value="{{ $user_coords }}">
             @if($owners->isNotEmpty())
                 <h2>People that own this guitar</h2>
                 <div class="row">
@@ -160,11 +161,13 @@
         <script>
             function initMap() {
                 var locations_field = document.getElementById('owner-locations');
-                var locations = JSON.parse(locations_field.value);
+                var user_locations_field = document.getElementById('user-location');
 
-                // @todo base this on geolocation
+                var locations = JSON.parse(locations_field.value);
+                var user_location = JSON.parse(user_locations_field.value);
+
                 var map = new google.maps.Map(document.getElementById('map'), {
-                    center: locations[0],
+                    center: user_location,
                     zoom: 5
                 });
 
