@@ -28,6 +28,8 @@
                             {{ $guitar->description }}
                         </div>
                     </div>
+                </div>
+                <div class="col-md-6">
                     <div class="dashboard-content">
                         <div class="slick-main">
                             @foreach($guitar->guitarImages as $guitarImage)
@@ -39,14 +41,16 @@
                         </div>
                     </div>
                 </div>
-                @if(!empty(json_decode($owner_locations)))
-                    <div class="col-md-6">
+            </div>
+            @if(!empty(json_decode($owner_locations)))
+                <div class="row">
+                    <div class="col-md-12">
                         <div class="dashboard-content">
                             <div id="map"></div>
                         </div>
                     </div>
-                @endif
-            </div>
+                </div>
+            @endif
             <input type="hidden" id="owner-locations" value="{{ $owner_locations }}">
             <input type="hidden" id="user-location" value="{{ $user_coords }}">
             @if($owners->isNotEmpty())
