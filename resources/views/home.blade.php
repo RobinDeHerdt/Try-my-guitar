@@ -2,7 +2,6 @@
 
 @section('navigation')
     @include('partials.navigation')
-    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/themes/base/minified/jquery-ui.min.css" type="text/css" />
 @endsection
 
 @section('content')
