@@ -188,7 +188,7 @@
         </script>
         <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_PLACES_API_KEY') }}&libraries=places&callback=initMap" async defer></script>
     @endif
-    <script type="text/javascript" src="https:https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
     <script>
         $('.slick-main').slick({
             lazyLoad: 'ondemand',
