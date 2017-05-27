@@ -39,3 +39,4 @@ Homestead.yaml
 npm-debug.log
 .env
 /storage/images
+.htaccess
