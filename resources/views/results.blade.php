@@ -118,7 +118,7 @@
                                         <span class="search-result-overlay-text">View profile</span>
                                     </div>
                                 </a>
-                                <div class="search-result-image" style="background-image: url({{ Storage::disk('public')->url($user->image_uri) }})"></div>
+                                <div class="search-result-profile-image" style="background-image: url({{ Storage::disk('public')->url($user->image_uri) }})"></div>
                                 <h3>{{ $user->fullName()  }}</h3>
                             </div>
                         </div>
@@ -132,7 +132,7 @@
                                         <span class="search-result-overlay-text">View profile</span>
                                     </div>
                                 </a>
-                                <div class="search-result-image" style="background-image: url({{ Storage::disk('public')->url($user->image_uri) }})"></div>
+                                <div class="search-result-profile-image" style="background-image: url({{ Storage::disk('public')->url($user->image_uri) }})"></div>
                                 <h3>{{ $user->fullName()  }}</h3>
                             </div>
                         </div>

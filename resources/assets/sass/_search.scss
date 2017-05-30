@@ -16,6 +16,18 @@
     object-fit: cover;
   }
 
+  .search-result-profile-image {
+    margin: 0 auto;
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+    background-position: center;
+    background-size: cover;
+    z-index: 3;
+    position: relative;
+    border: solid 3px #fff;
+  }
+
   h3 {
     color: $primary-font-color;
     font-size: 24px;
