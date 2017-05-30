@@ -146,9 +146,6 @@
 
             var autocomplete = new google.maps.places.Autocomplete(input);
 
-            // Bind the map's bounds (viewport) property to the autocomplete object,
-            // so that the autocomplete requests use the current map bounds for the
-            // bounds option in the request.
             autocomplete.bindTo('bounds', map);
 
             var infowindow = new google.maps.InfoWindow();
@@ -169,9 +166,6 @@
                 marker.setVisible(false);
                 var place = autocomplete.getPlace();
                 if (!place.geometry) {
-                    // User entered the name of a Place that was not suggested and
-                    // pressed the Enter key, or the Place Details request failed.
-                    window.alert("No details available for input: '" + place.name + "'");
                     return;
                 }
 
@@ -187,7 +181,6 @@
                 location_lat.value = place.geometry.location.lat();
                 location_lng.value = place.geometry.location.lng();
 
-
                 var address = '';
                 if (place.address_components) {
                     address = [
@@ -201,6 +194,8 @@
                 infowindowContent.children['place-name'].textContent = place.name;
                 infowindowContent.children['place-address'].textContent = address;
                 infowindow.open(map, marker);
+
+                input.blur();
             });
         }
     </script>
