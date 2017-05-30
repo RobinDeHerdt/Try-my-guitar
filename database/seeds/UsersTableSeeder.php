@@ -72,7 +72,7 @@ class UsersTableSeeder extends Seeder
             'role_id' => 3,
         ]);
 
-        factory(App\User::class, 50)->create()->each(function ($u) {
+        factory(App\User::class, 500)->create()->each(function ($u) {
             // Assign 'user' role to every user.
             $u->roles()->attach(3);
 

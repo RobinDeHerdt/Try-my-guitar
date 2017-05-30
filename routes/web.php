@@ -68,6 +68,8 @@ Route::get('api/chat/channel/{channel}/messages', 'ChatController@messages');
 Route::post('api/chat/channel/{channel}/messages/send', 'ChatController@store');
 Route::post('api/chat/channel/{channel}/messages/seen', 'ChatController@seen');
 
+Route::get('explore/map', 'ExploreController@getLocations');
+
 // Administrator only.
 Route::group(['middleware' => ['role:administrator']], function () {
     Route::get('admin/dashboard', 'AdminController@index')->name('admin.dashboard');

@@ -66,6 +66,8 @@
 @section('scripts')
     @if(!empty(json_decode($user_locations)))
         <script>
+            var markers = [];
+
             function initMap() {
                 var locations_field = document.getElementById('owner-locations');
                 var user_locations_field = document.getElementById('user-location');
@@ -75,18 +77,47 @@
 
                 var map = new google.maps.Map(document.getElementById('map'), {
                     center: user_location,
-                    zoom: 5
+                    zoom: 3,
+                    minZoom: 5,
                 });
 
-                if(locations) {
-                    for (var i = 0; i < locations.length; i++) {
-                        var marker = new google.maps.Marker({
-                            map: map,
-                            anchorPoint: new google.maps.Point(0, -29)
-                        });
-                        marker.setPosition(locations[i]);
-                    }
+                // getBounds()
+               map.addListener('idle', function() {
+                   removeMarkers()
+
+                   var bounds = map.getBounds();
+
+                   var lat0 = bounds.getNorthEast().lat();
+                   var lng0 = bounds.getNorthEast().lng();
+                   var lat1 = bounds.getSouthWest().lat();
+                   var lng1 = bounds.getSouthWest().lng();
+
+                   $.get("/explore/map", {
+                       'lat0': lat0,
+                       'lat1': lat1,
+                       'lng0': lng0,
+                       'lng1': lng1,
+                   })
+                   .done(function( data ) {
+                       for (var i = 0; i < data.length; i++) {
+                            var latLng = new google.maps.LatLng({lat: data[i].location_lat, lng: data[i].location_lng});
+
+                            var marker = new google.maps.Marker({
+                                map: map,
+                                position: latLng,
+                            });
+
+                            markers.push(marker);
+                       }
+                   });
+               });
+            }
+
+            function removeMarkers() {
+                for (var i = 0; i < markers.length; i++ ) {
+                    markers[i].setMap(null);
                 }
+                markers = [];
             }
         </script>
         <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_PLACES_API_KEY') }}&libraries=places&callback=initMap" async defer></script>
