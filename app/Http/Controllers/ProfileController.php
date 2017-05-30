@@ -59,13 +59,6 @@ class ProfileController extends Controller
         ]);
     }
 
-    public function autoComplete(Request $request)
-    {
-        $response = GooglePlaces::placeAutocomplete($request->input);
-
-        return $response;
-    }
-
     /**
      * Update the specified user profile.
      *

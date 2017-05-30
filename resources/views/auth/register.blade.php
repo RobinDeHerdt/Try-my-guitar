@@ -26,7 +26,7 @@
                         <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
                             <label for="last_name" class="col-md-4 control-label">Last name</label>
                             <div class="col-md-8">
-                                <input id="last_name" type="text" class="form-control" name="last_name" value="{{ old('last_name') }}">
+                                <input id="last_name" type="text" class="form-control" name="last_name" value="{{ old('last_name') }}" required>
                                 @if ($errors->has('last_name'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('last_name') }}</strong>
