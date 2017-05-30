@@ -42,17 +42,15 @@
                     </div>
                 </div>
             </div>
-            @if(!empty(json_decode($owner_locations)))
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="dashboard-content">
-                            <div id="map"></div>
-                        </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="dashboard-content">
+                        <div id="map"></div>
                     </div>
                 </div>
-            @endif
-            <input type="hidden" id="owner-locations" value="{{ $owner_locations }}">
+            </div>
             <input type="hidden" id="user-location" value="{{ $user_coords }}">
+            <input type="hidden" id="guitar-id" value="{{ $guitar->id }}">
             @if($owners->isNotEmpty())
                 <h2>People that own this guitar</h2>
                 <div class="row">
@@ -161,33 +159,30 @@
     @include('partials.footer')
 @endsection
 @section('scripts')
-    @if(!empty(json_decode($owner_locations)))
-        <script>
-            function initMap() {
-                var locations_field = document.getElementById('owner-locations');
-                var user_locations_field = document.getElementById('user-location');
+    <script>
+        function initMap() {
+            var user_locations_field = document.getElementById('user-location');
+            var user_location = JSON.parse(user_locations_field.value);
 
-                var locations = JSON.parse(locations_field.value);
-                var user_location = JSON.parse(user_locations_field.value);
+            var guitar_id = document.getElementById('guitar-id').value;
 
-                var map = new google.maps.Map(document.getElementById('map'), {
-                    center: user_location,
-                    zoom: 5
-                });
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: user_location,
+                zoom: 5
+            });
 
-                if(locations) {
-                    for (var i = 0; i < locations.length; i++) {
-                        var marker = new google.maps.Marker({
-                            map: map,
-                            anchorPoint: new google.maps.Point(0, -29)
-                        });
-                        marker.setPosition(locations[i]);
-                    }
+            $.get('/guitar/'+ guitar_id +'/map').done(function( data ) {
+                for (var i = 0; i < data.length; i++) {
+                    var latLng = new google.maps.LatLng({lat: data[i].location_lat, lng: data[i].location_lng});
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        position: latLng,
+                    });
                 }
-            }
-        </script>
-        <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_PLACES_API_KEY') }}&libraries=places&callback=initMap" async defer></script>
-    @endif
+            });
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_PLACES_API_KEY') }}&libraries=places&callback=initMap" async defer></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
     <script>
         $('.slick-main').slick({

@@ -69,6 +69,7 @@ Route::post('api/chat/channel/{channel}/messages/send', 'ChatController@store');
 Route::post('api/chat/channel/{channel}/messages/seen', 'ChatController@seen');
 
 Route::get('explore/map', 'ExploreController@getLocations');
+Route::get('guitar/{guitar}/map', 'GuitarController@getLocations');
 
 // Administrator only.
 Route::group(['middleware' => ['role:administrator']], function () {
