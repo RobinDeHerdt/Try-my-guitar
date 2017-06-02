@@ -100,12 +100,7 @@
 
             autocomplete.bindTo('bounds', map);
 
-            // var infowindowContent = document.getElementById('infowindow-content');
-            // infowindow.setContent(infowindowContent);
-
             autocomplete.addListener('place_changed', function() {
-                // infowindow.close();
-
                 var place = autocomplete.getPlace();
                 if (!place.geometry) {
                     return;
@@ -122,16 +117,16 @@
             });
 
             map.addListener('idle', function() {
-                removeOutOfBoundsMarkers(map, infowindow);
+                removeOutOfBoundsMarkers(map, markers);
                 addInBoundsMarkers(map, infowindow);
             });
         }
 
-        function removeOutOfBoundsMarkers(map, infowindow) {
-            for (var i = 0; i < markers.length; i++ ) {
-                if(!map.getBounds().contains(markers[i].getPosition())) {
-                    markers[i].setMap(null);
-                    markers.splice(i, 1);
+        function removeOutOfBoundsMarkers(map, existingMarkers) {
+            for (var i = 0; i < existingMarkers.length; i++ ) {
+                if(!map.getBounds().contains(existingMarkers[i].getPosition())) {
+                    existingMarkers[i].setMap(null);
+                    existingMarkers.splice(i, 1);
                 }
             }
         }
@@ -152,20 +147,35 @@
             }).done(function( data ) {
                 for (var i = 0; i < data.length; i++) {
                     var latLng = new google.maps.LatLng({lat: data[i].location_lat, lng: data[i].location_lng});
-                    var marker = new google.maps.Marker({
-                        map: map,
-                        position: latLng,
-                    });
 
-                    markers.push(marker);
+                    if(!markerExists(markers, latLng)) {
+                        var marker = new google.maps.Marker({
+                            map: map,
+                            position: latLng,
+                            animation: google.maps.Animation.DROP,
+                        });
 
-                    marker.addListener('click', function() {
-                        infowindow.close();
-                        infowindow.setContent('close');
-                        infowindow.open(map, this);
-                    });
+                        markers.push(marker);
+
+                        marker.addListener('click', function() {
+                            infowindow.close();
+                            infowindow.setContent('Hello world!');
+                            infowindow.open(map, this);
+                        });
+                    }
                 }
             });
+        }
+
+        function markerExists(existingMarkers, latLng) {
+            for (var i = 0; i < existingMarkers.length; i++) {
+                if (latLng.equals(existingMarkers[i].getPosition())) {
+                    return true;
+                }
+            }
+
+            return false;
+
         }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_PLACES_API_KEY') }}&libraries=places&callback=initMap" async defer></script>
