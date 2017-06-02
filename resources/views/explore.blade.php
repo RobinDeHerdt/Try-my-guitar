@@ -84,6 +84,8 @@
                 minZoom: 5,
             });
 
+            var infowindow = new google.maps.InfoWindow();
+
             // Prevent the full form from submitting.
             input.onkeypress = function(e) {
                 var key = e.charCode || e.keyCode || 0;
@@ -98,12 +100,11 @@
 
             autocomplete.bindTo('bounds', map);
 
-            var infowindow = new google.maps.InfoWindow();
-            var infowindowContent = document.getElementById('infowindow-content');
-            infowindow.setContent(infowindowContent);
+            // var infowindowContent = document.getElementById('infowindow-content');
+            // infowindow.setContent(infowindowContent);
 
             autocomplete.addListener('place_changed', function() {
-                infowindow.close();
+                // infowindow.close();
 
                 var place = autocomplete.getPlace();
                 if (!place.geometry) {
@@ -117,29 +118,16 @@
                     map.setZoom(17);
                 }
 
-                var address = '';
-                if (place.address_components) {
-                    address = [
-                        (place.address_components[0] && place.address_components[0].short_name || ''),
-                        (place.address_components[1] && place.address_components[1].short_name || ''),
-                        (place.address_components[2] && place.address_components[2].short_name || '')
-                    ].join(' ');
-                }
-
-                infowindowContent.children['place-icon'].src = place.icon;
-                infowindowContent.children['place-name'].textContent = place.name;
-                infowindowContent.children['place-address'].textContent = address;
-
                 input.blur();
             });
 
             map.addListener('idle', function() {
-                removeOutOfBoundsMarkers(map);
-                addInBoundsMarkers(map);
+                removeOutOfBoundsMarkers(map, infowindow);
+                addInBoundsMarkers(map, infowindow);
             });
         }
 
-        function removeOutOfBoundsMarkers(map) {
+        function removeOutOfBoundsMarkers(map, infowindow) {
             for (var i = 0; i < markers.length; i++ ) {
                 if(!map.getBounds().contains(markers[i].getPosition())) {
                     markers[i].setMap(null);
@@ -148,7 +136,7 @@
             }
         }
 
-        function addInBoundsMarkers(map) {
+        function addInBoundsMarkers(map,infowindow) {
             var bounds = map.getBounds();
 
             var lat0 = bounds.getNorthEast().lat();
@@ -170,6 +158,12 @@
                     });
 
                     markers.push(marker);
+
+                    marker.addListener('click', function() {
+                        infowindow.close();
+                        infowindow.setContent('close');
+                        infowindow.open(map, this);
+                    });
                 }
             });
         }
