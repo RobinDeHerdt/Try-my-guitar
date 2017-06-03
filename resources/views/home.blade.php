@@ -24,22 +24,22 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="cta-item">
-                        <i class="fa fa-music fa-4x" aria-hidden="true"></i>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae consectetur ex. Donec non sollicitudin erat. Aenean libero massa, lobortis eu consequat non, sollicitudin nec diam</p>
+                        <i class="fa fa-user-plus fa-4x" aria-hidden="true"></i>
+                        <p>Get to know guitar players in your area, and by extension, their guitar! Arrange a meet-up up in person and rock out together!</p>
                         <a href="about#about-1" class="cta-button text-uppercase">Read more</a>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="cta-item">
-                        <i class="fa fa-music fa-4x" aria-hidden="true"></i>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae consectetur ex. Donec non sollicitudin erat. Aenean libero massa, lobortis eu consequat non, sollicitudin nec diam</p>
+                        <i class="fa fa-search fa-4x" aria-hidden="true"></i>
+                        <p>Discover guitars and read about other people's experiences with them.</p>
                         <a href="about#about-2" class="cta-button text-uppercase">Read more</a>
                     </div>
                 </div>
                 <div class="col-md-4 ">
                     <div class="cta-item">
-                        <i class="fa fa-music fa-4x" aria-hidden="true"></i>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae consectetur ex. Donec non sollicitudin erat. Aenean libero massa, lobortis eu consequat non, sollicitudin nec diam</p>
+                        <i class="fa fa-users fa-4x" aria-hidden="true"></i>
+                        <p>Crowd sourced collection of all guitars in existance.</p>
                         <a href="about#about-3" class="cta-button text-uppercase">Read more</a>
                     </div>
                 </div>
@@ -91,4 +91,5 @@
             }
         });
     </script>
+    @include('partials.analytics')
 @endsection
