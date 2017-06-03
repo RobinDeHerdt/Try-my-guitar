@@ -24,7 +24,7 @@ class VerifyController extends Controller
         $user = User::find($id);
 
         if($user->verified = true) {
-            Session::flash('info-message', 'Your account was already verified. But thanks for the confirmation!');
+            Session::flash('info-message', 'Your account was already verified. Thanks for the confirmation anyway!');
 
             return redirect(route('dashboard'));
         }
@@ -33,13 +33,13 @@ class VerifyController extends Controller
             $user->verified = true;
             $user->save();
 
-            Session::flash('success-message', 'You are now verified!');
+            Session::flash('success-message', 'Your account is now verified!');
 
             if (!Auth::check()) {
                 Auth::login($user);
             }
         } else {
-            Session::flash('error-message', 'Verification invalid. Please request another email from the dashboard.');
+            Session::flash('error-message', 'Verification failed. Please request another email from the dashboard.');
         }
 
         return redirect(route('dashboard'));
@@ -56,7 +56,7 @@ class VerifyController extends Controller
 
         Mail::to($user->email)->send(new VerifyEmail($user));
 
-        Session::flash('success-message', "We've sent you a verification at " . $user->email . '.');
+        Session::flash('success-message', "We've sent you a verification link at '" . $user->email . "''.");
 
         return redirect(route('dashboard'));
     }
