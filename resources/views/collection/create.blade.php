@@ -67,4 +67,6 @@
             }
         });
     </script>
+    @include('partials.analytics')
 @endsection
+

@@ -200,4 +200,5 @@
             variableWidth: true,
         });
     </script>
+    @include('partials.analytics')
 @endsection

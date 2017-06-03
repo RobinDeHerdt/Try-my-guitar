@@ -73,3 +73,7 @@
 @section('footer')
     @include('partials.footer')
 @endsection
+
+@section('scripts')
+    @include('partials.analytics')
+@endsection
