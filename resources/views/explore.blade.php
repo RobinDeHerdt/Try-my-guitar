@@ -179,4 +179,5 @@
         }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_PLACES_API_KEY') }}&libraries=places&callback=initMap" async defer></script>
+    @include('partials.analytics')
 @endsection
