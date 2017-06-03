@@ -17,37 +17,17 @@
             @if (Session::has('error-message'))
                 <div class="alert alert-danger">{{ Session::get('error-message') }}</div>
             @endif
-            <h2>About us</h2>
-            <div class="row col-container" id="about-1">
-                <div class="col-md-6">
-                    <h3>Lorem ipsum</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus justo eget ipsum placerat iaculis. Nunc vitae velit magna. Nulla molestie magna vitae arcu vestibulum tincidunt. Nulla non venenatis felis.</p>
+            @foreach($about_sections as $about_section)
+                    <h2>{{ $about_section->title }}</h2>
+                <div class="row col-container" id="{{ strtolower(kebab_case($about_section->title)) }}">
+                    <div class="col-md-6">
+                        <p>{{ $about_section->column_one }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{{ $about_section->column_two }}</p>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <h3>Lorem ipsum</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus justo eget ipsum placerat iaculis. Nunc vitae velit magna. Nulla molestie magna vitae arcu vestibulum tincidunt. Nulla non venenatis felis.</p>
-                </div>
-            </div>
-            <div class="row col-container" id="about-2">
-                <div class="col-md-6">
-                    <h3>Lorem ipsum</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus justo eget ipsum placerat iaculis. Nunc vitae velit magna. Nulla molestie magna vitae arcu vestibulum tincidunt. Nulla non venenatis felis.</p>
-                </div>
-                <div class="col-md-6">
-                    <h3>Lorem ipsum</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus justo eget ipsum placerat iaculis. Nunc vitae velit magna. Nulla molestie magna vitae arcu vestibulum tincidunt. Nulla non venenatis felis.</p>
-                </div>
-            </div>
-            <div class="row col-container" id="about-3">
-                <div class="col-md-6">
-                    <h3>Lorem ipsum</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus justo eget ipsum placerat iaculis. Nunc vitae velit magna. Nulla molestie magna vitae arcu vestibulum tincidunt. Nulla non venenatis felis.</p>
-                </div>
-                <div class="col-md-6">
-                    <h3>Lorem ipsum</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus justo eget ipsum placerat iaculis. Nunc vitae velit magna. Nulla molestie magna vitae arcu vestibulum tincidunt. Nulla non venenatis felis.</p>
-                </div>
-            </div>
+            @endforeach
             <div class="row col-container">
                 <h2>Contact</h2>
                 <form action="{{ route('contact') }}" method="POST">
