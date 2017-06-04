@@ -84,6 +84,9 @@
                         @endforeach
                     @endif
                     @if($less_relevant_guitars->isNotEmpty())
+                        <div class="col-md-12">
+                            <span>Showing {{ $less_relevant_guitars->count() }} out of {{ $less_relevant_guitars_count }} total results</span>
+                        </div>
                         @foreach($less_relevant_guitars as $guitar)
                             <div class="col-md-6">
                                 <div class="search-result">
@@ -123,6 +126,9 @@
                             </div>
                         </div>
                     @endforeach
+                    <div class="col-md-12">
+                        <span>Showing {{ $less_relevant_users->count() }} out of {{ $less_relevant_users_count }} total results</span>
+                    </div>
                     @foreach($less_relevant_users as $user)
                         <div class="col-md-6">
                             <div class="search-result-header-image" style="background-image: url({{ Storage::disk('public')->url($user->header_image_uri) }})"></div>
