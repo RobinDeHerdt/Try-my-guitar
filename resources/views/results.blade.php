@@ -63,6 +63,11 @@
                 <h2>Guitars</h2>
                 <hr class="dark-hr">
                 <div class="row">
+                    <div class="col-md-12">
+                        <span>Showing {{ $less_relevant_guitars->count() + $most_relevant_guitars->count() }} of {{ $guitars_count }} {{ ($guitars_count > 1 ? 'total results' : 'result') }}</span>
+                    </div>
+                </div>
+                <div class="row">
                     @if($most_relevant_guitars->isNotEmpty())
                         @foreach($most_relevant_guitars as $guitar)
                             <div class="col-md-12">
@@ -84,9 +89,6 @@
                         @endforeach
                     @endif
                     @if($less_relevant_guitars->isNotEmpty())
-                        <div class="col-md-12">
-                            <span>Showing {{ $less_relevant_guitars->count() }} out of {{ $less_relevant_guitars_count }} total results</span>
-                        </div>
                         @foreach($less_relevant_guitars as $guitar)
                             <div class="col-md-6">
                                 <div class="search-result">
@@ -105,12 +107,20 @@
                                 </div>
                             </div>
                         @endforeach
+                        @if($less_relevant_guitars instanceof \Illuminate\Pagination\AbstractPaginator)
+                            {{ $less_relevant_guitars->links() }}
+                        @endif
                     @endif
                 </div>
             @endif
             @if($most_relevant_users->isNotEmpty() || $less_relevant_users->isNotEmpty())
                 <h2>Users</h2>
                 <hr class="dark-hr">
+                <div class="row">
+                    <div class="col-md-12">
+                        <span>Showing {{ $less_relevant_users->count() + $most_relevant_users->count() }} of {{ $users_count }} {{ ($users_count > 1 ? 'total results' : 'result') }}</span>
+                    </div>
+                </div>
                 <div class="row">
                     @foreach($most_relevant_users as $user)
                         <div class="col-md-12">
@@ -126,9 +136,6 @@
                             </div>
                         </div>
                     @endforeach
-                    <div class="col-md-12">
-                        <span>Showing {{ $less_relevant_users->count() }} out of {{ $less_relevant_users_count }} total results</span>
-                    </div>
                     @foreach($less_relevant_users as $user)
                         <div class="col-md-6">
                             <div class="search-result-header-image" style="background-image: url({{ Storage::disk('public')->url($user->header_image_uri) }})"></div>
@@ -144,6 +151,9 @@
                         </div>
                     @endforeach
                 </div>
+                @if($less_relevant_users instanceof \Illuminate\Pagination\AbstractPaginator)
+                    {{ $less_relevant_users->links() }}
+                @endif
             @endif
         </div>
     </div>

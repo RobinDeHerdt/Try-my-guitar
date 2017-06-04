@@ -27,8 +27,8 @@ class SearchController extends Controller
     private $most_relevant_guitars;
     private $less_relevant_guitars;
 
-    private $less_relevant_guitars_count;
-    private $less_relevant_users_count;
+    private $guitars_count;
+    private $users_count;
 
     private $guitar_pagination_amount   = 8;
     private $user_pagination_amount     = 8;
@@ -99,10 +99,10 @@ class SearchController extends Controller
         return view('results', [
             'most_relevant_users'           => $this->most_relevant_users,
             'less_relevant_users'           => $this->less_relevant_users,
-            'less_relevant_users_count'     => $this->less_relevant_users_count,
+            'users_count'                   => $this->users_count,
             'most_relevant_guitars'         => $this->most_relevant_guitars,
             'less_relevant_guitars'         => $this->less_relevant_guitars,
-            'less_relevant_guitars_count'   => $this->less_relevant_guitars_count,
+            'guitars_count'                 => $this->guitars_count,
             'filter_types'                  => $this->filter_types,
             'filter_brands'                 => $this->filter_brands,
             'filter_category'               => $this->filter_category,
@@ -138,19 +138,21 @@ class SearchController extends Controller
             }
         });
 
+        // Get the id's of all the most relevant search results.
+        // Use them to prevent double result listing in the less relevant results section.
         $most_relevant_users_keys = $this->most_relevant_users->pluck('id')->all();
 
         // @todo Add filters here, obviously.
+        // Run the query through brand and category filters.
         $filtered_query = $less_relevant_query;
 
         if ($paginate_results) {
-            $this->less_relevant_users = $filtered_query->paginate($this->user_pagination_amount)->get()->except($most_relevant_users_keys);
+            $this->less_relevant_users = $filtered_query->paginate($this->user_pagination_amount);
+            $this->users_count = $filtered_query->count() + $this->most_relevant_users->count();
         } else {
-            $this->less_relevant_users = $filtered_query->take(4)->get();
+            $this->less_relevant_users = $filtered_query->take(4)->get()->except($most_relevant_users_keys);
+            $this->users_count = ($filtered_query->count() - $this->most_relevant_users->count()) + $this->most_relevant_users->count();
         }
-
-        // Count the total amount of results for this query.
-        $this->less_relevant_users_count = $filtered_query->count();
     }
 
     /**
@@ -171,19 +173,23 @@ class SearchController extends Controller
             }
         });
 
+        // Run the query through brand and category filters and get the results.
         $this->most_relevant_guitars = $this->filterResults($most_relevant_query, $this->filter_types, $this->filter_brands)->get();
+
+        // Get the id's of all the most relevant search results.
+        // Use them to prevent double result listing in less relevant results section.
         $most_relevant_guitars_keys  = $this->most_relevant_guitars->pluck('id')->all();
 
+        // Run the query through brand and category filters.
         $filtered_query = $this->filterResults($less_relevant_query, $this->filter_types, $this->filter_brands);
 
         if($paginate_results) {
-            $this->less_relevant_guitars = $filtered_query->paginate($this->guitar_pagination_amount)->get()->except($most_relevant_guitars_keys);
+            $this->less_relevant_guitars = $filtered_query->paginate($this->guitar_pagination_amount);
+            $this->guitars_count = $filtered_query->count() + $this->most_relevant_guitars->count();
         } else {
             $this->less_relevant_guitars = $filtered_query->take(4)->get()->except($most_relevant_guitars_keys);
+            $this->guitars_count = ($filtered_query->count() - $this->most_relevant_guitars->count()) + $this->most_relevant_guitars->count();
         }
-
-        // Count the total amount of results for this query.
-        $this->less_relevant_guitars_count = $filtered_query->count();
     }
 
     /**
@@ -218,11 +224,17 @@ class SearchController extends Controller
 
         // jQuery UI auto complete requires data to be in the label - value format.
         foreach ($this->guitars as $guitar) {
-            array_push($result_array, ["value" => $guitar->name, "label" => $guitar->name  . ' (' .  $guitar->guitarBrand->name. ')']);
+            array_push($result_array, [
+                "value" => $guitar->name,
+                "label" => $guitar->name  . ' (' .  $guitar->guitarBrand->name. ')',
+            ]);
         }
 
         foreach ($this->users as $user) {
-            array_push($result_array, ["value" => $user->fullName(), "label" => $user->fullName()]);
+            array_push($result_array, [
+                "value" => $user->fullName(),
+                "label" => $user->fullName(),
+            ]);
         }
 
         return response()->json($result_array);
