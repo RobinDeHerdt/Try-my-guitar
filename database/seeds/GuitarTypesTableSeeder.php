@@ -16,7 +16,7 @@ class GuitarTypesTableSeeder extends Seeder
          */
         DB::table('guitar_types')->insert([
             'name' => 'Electric guitars',
-            'image_uri' => 'images/ec-1000.jpg',
+            'image_uri' => 'images/electric-guitar.jpg',
         ]);
 
         DB::table('guitar_types')->insert([
@@ -31,7 +31,7 @@ class GuitarTypesTableSeeder extends Seeder
 
         DB::table('guitar_types')->insert([
             'name' => 'Single cut guitars',
-            'image_uri' => 'images/ec-1000.jpg',
+            'image_uri' => 'images/single-cut-guitar.jpg',
         ]);
 
         DB::table('guitar_types')->insert([
@@ -45,33 +45,33 @@ class GuitarTypesTableSeeder extends Seeder
         ]);
 
         DB::table('guitar_types')->insert([
-            'name' => 'Single coil guitars',
-            'image_uri' => 'images/single-coil-guitar.png',
+            'name' => 'Single coil',
+            'image_uri' => 'images/single-coil-guitar.jpg',
         ]);
 
         DB::table('guitar_types')->insert([
-            'name' => 'Humbucker guitars',
+            'name' => 'Humbucker',
             'image_uri' => 'images/humbucker-guitar.jpg',
         ]);
 
         DB::table('guitar_types')->insert([
-            'name' => '6-string guitars',
+            'name' => '6-string',
             'image_uri' => 'images/6-string-guitar.jpg',
         ]);
 
         DB::table('guitar_types')->insert([
-            'name' => '7-string guitars',
+            'name' => '7-string',
             'image_uri' => 'images/7-string-guitar.jpg',
         ]);
 
         DB::table('guitar_types')->insert([
-            'name' => '8-string guitars',
+            'name' => '8-string',
             'image_uri' => 'images/8-string-guitar.jpg',
         ]);
 
         DB::table('guitar_types')->insert([
-            'name' => 'Signature guitars',
-            'image_uri' => 'images/signature-guitar.png',
+            'name' => 'Signature',
+            'image_uri' => 'images/signature-guitar.jpg',
         ]);
 
 
