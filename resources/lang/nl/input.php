@@ -24,5 +24,7 @@ return [
     'guitar'            => 'Gitaar',
     'experience'        => 'Ervaring',
     'reason'            => 'Reden',
-
+    'user-search'       => 'Zoek naar gebruikers of gitaren',
+    'search'            => 'Zoeken',
+    'read-more'         => 'Lees meer',
 ];

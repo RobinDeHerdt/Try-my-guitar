@@ -24,5 +24,7 @@ return [
     'guitar'            => 'Guitar',
     'experience'        => 'Experience',
     'reason'            => 'Reason',
-
+    'user-search'       => 'Search for a user or guitar',
+    'search'            => 'Search',
+    'read-more'         => 'Read more',
 ];

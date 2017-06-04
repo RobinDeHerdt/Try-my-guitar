@@ -6,6 +6,9 @@ return [
     * English translations for titles and subtitles.
     */
 
-    'how-does-it-work'      => 'How does it work?',
-    'latest-news'           => 'Latest news'
+    'how-it-works'          => 'How it works',
+    'latest-news'           => 'Latest news',
+    'find-people'           => 'Find people',
+    'guitar-brands'         => 'Brands',
+    'guitar-categories'     => 'Categories',
 ];

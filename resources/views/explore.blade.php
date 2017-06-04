@@ -9,7 +9,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Find people</h2>
+                    <h2>@lang('titles.find-people')</h2>
                     <div class="dashboard-content">
                         <div class="pac-card" id="pac-card">
                             <div id="pac-container">
@@ -28,7 +28,7 @@
             <input type="hidden" id="user-location" value="{{ $user_coords }}">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Guitar brands</h2>
+                    <h2>@lang('titles.guitar-brands')</h2>
                     <div class="dashboard-content">
                         <div class="row">
                             @foreach($brands as $brand)
@@ -44,7 +44,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Guitar types</h2>
+                    <h2>@lang('titles.guitar-categories')</h2>
                     <div class="dashboard-content">
                         <div class="row">
                             @foreach($types as $type)
