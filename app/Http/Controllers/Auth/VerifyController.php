@@ -23,23 +23,21 @@ class VerifyController extends Controller
     {
         $user = User::find($id);
 
-        if($user->verified = true) {
+        if ($user->verified === true) {
             Session::flash('info-message', 'Your account was already verified. Thanks for the confirmation anyway!');
-
-            return redirect(route('dashboard'));
-        }
-
-        if ($user->verification_token === $token) {
-            $user->verified = true;
-            $user->save();
-
-            Session::flash('success-message', 'Your account is now verified!');
-
-            if (!Auth::check()) {
-                Auth::login($user);
-            }
         } else {
-            Session::flash('error-message', 'Verification failed. Please request another email from the dashboard.');
+            if ($user->verification_token === $token) {
+                $user->verified = true;
+                $user->save();
+
+                Session::flash('success-message', 'Your account is now verified!');
+
+                if (!Auth::check()) {
+                    Auth::login($user);
+                }
+            } else {
+                Session::flash('error-message', 'Verification failed. Please request another email from the dashboard.');
+            }
         }
 
         return redirect(route('dashboard'));
