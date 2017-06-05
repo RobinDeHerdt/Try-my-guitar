@@ -62,12 +62,10 @@ class SearchController extends Controller
              */
             if ($request->query('types')) {
                 $this->filter_types     = $request->query('types');
-                $this->filter_category  = 'guitar';
             }
 
             if ($request->query('brands')) {
                 $this->filter_brands    = $request->query('brands');
-                $this->filter_category  = 'guitar';
             }
 
             switch ($filter_category = $this->filter_category) {

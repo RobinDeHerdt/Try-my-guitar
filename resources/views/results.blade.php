@@ -20,25 +20,34 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h4>Types</h4>
-                        </div>
-                        @foreach($types as $type)
-                            <div class="col-md-2">
-                                <label class="checkbox-inline"><input type="checkbox" name="types[]" value="{{ $type->id }}" {{ in_array($type->id, $filter_types) ? 'checked' : ''}}>{{ $type->name }}</label>
+                    <div id="guitar-filters" style="display: none">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>Types</h4>
                             </div>
-                        @endforeach
+                            @foreach($types as $type)
+                                <div class="col-md-2">
+                                    <label class="checkbox-inline"><input type="checkbox" name="types[]" value="{{ $type->id }}" {{ in_array($type->id, $filter_types) ? 'checked' : ''}}>{{ $type->name }}</label>
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>Brands</h4>
+                            </div>
+                            @foreach($brands as $brand)
+                                <div class="col-md-2">
+                                    <label class="checkbox-inline"><input type="checkbox" name="brands[]" value="{{ $brand->id }}" {{ in_array($brand->id, $filter_brands) ? 'checked' : ''}}>{{ $brand->name }}</label>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h4>Brands</h4>
-                        </div>
-                        @foreach($brands as $brand)
-                            <div class="col-md-2">
-                                <label class="checkbox-inline"><input type="checkbox" name="brands[]" value="{{ $brand->id }}" {{ in_array($brand->id, $filter_brands) ? 'checked' : ''}}>{{ $brand->name }}</label>
+                    <div id="user-filters" style="display: none">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>User filters here</h4>
                             </div>
-                        @endforeach
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -174,6 +183,48 @@
                 $('#search-form').submit();
             }
         });
+
+        function getUrlParam(param) {
+            var values = {};
+            window.location.href.replace( location.hash, '' ).replace(
+                /[?&]+([^=&]+)=?([^&]*)?/gi,
+                function( m, key, value ) {
+                    values[key] = value !== undefined ? value : '';
+                }
+            );
+
+            if ( param ) {
+                return values[param] ? values[param] : null;
+            }
+            return values;
+        }
+
+        showSpecificFilters(getUrlParam('category'));
+
+        $("input[name=category]").change(function() {
+            showSpecificFilters($("input[name='category']:checked").val());
+        });
+
+        function showSpecificFilters(category) {
+            switch(category)  {
+                case 'user':
+                    $("#guitar-filters").hide();
+                    $("#user-filters").show();
+                    $("input[name='types[]']:checkbox").prop('checked',false);
+                    $("input[name='brands[]']:checkbox").prop('checked',false);
+                    break;
+
+                case 'guitar':
+                    $("#user-filters").hide();
+                    $("#guitar-filters").show();
+                    break;
+
+                default:
+                    $("#guitar-filters").hide();
+                    $("#user-filters").hide();
+                    $("input[name=types]:checkbox").prop('checked',false);
+            }
+        }
     </script>
     @include('partials.analytics')
 @endsection
