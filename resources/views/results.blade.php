@@ -222,7 +222,8 @@
                 default:
                     $("#guitar-filters").hide();
                     $("#user-filters").hide();
-                    $("input[name=types]:checkbox").prop('checked',false);
+                    $("input[name='types[]']:checkbox").prop('checked',false);
+                    $("input[name='brands[]']:checkbox").prop('checked',false);
             }
         }
     </script>
