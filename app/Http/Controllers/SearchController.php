@@ -15,27 +15,34 @@ class SearchController extends Controller
     use Filter;
 
     /**
-     * Auto complete variables
+     * Auto complete variables.
      */
     private $users;
     private $guitars;
 
     /**
-     * Search results variables
+     * Search results variables.
      */
     private $most_relevant_users;
     private $less_relevant_users;
     private $most_relevant_guitars;
     private $less_relevant_guitars;
 
+    /**
+     * Result count variables.
+     */
     private $guitars_count;
     private $users_count;
 
-    private $guitar_pagination_amount   = 5;
+    /**
+     * Pagination amount variables.
+     * @var integer
+     */
+    private $guitar_pagination_amount   = 8;
     private $user_pagination_amount     = 8;
 
     /**
-     * Filter variables
+     * Filter variables.
      * @var array
      */
     private $filter_brands   = [];
@@ -50,24 +57,26 @@ class SearchController extends Controller
      */
     public function result(Request $request)
     {
+        // Strip the input of unwanted tags.
         $input = strip_tags($request->term);
+
         // Check if the input is not empty.
         if (!empty($input) && !ctype_space($input)) {
             $this->filter_category  = $request->query('category');
             $this->filter_types     = ($request->query('types') ? $request->query('types') : []);
             $this->filter_brands    = ($request->query('brands') ? $request->query('brands') : []);
 
-            switch ($filter_category = $this->filter_category) {
+            switch ($this->filter_category) {
                 case 'guitar':
                     $this->guitarSearch($input, true);
-                    // Return an empty collection to avoid errors in the view.
+                    // Return empty user collections to avoid errors in the view.
                     $this->most_relevant_users = collect();
                     $this->less_relevant_users = collect();
                     break;
 
                 case 'user':
                     $this->userSearch($input, true);
-                    // Return an empty collection to avoid errors in the view.
+                    // Return empty guitar collections to avoid errors in the view.
                     $this->most_relevant_guitars = collect();
                     $this->less_relevant_guitars = collect();
                     break;
@@ -77,6 +86,9 @@ class SearchController extends Controller
                     $this->guitarSearch($input);
             }
         } else {
+            // When the input is empty, redirect.
+            // @todo Redirect to search page, and set an empty input field. No results should be returned.
+            // return redirect(route('search'));
             return back();
         }
 
@@ -110,15 +122,23 @@ class SearchController extends Controller
         // Split the string into terms and remove whitespace from both sides of the string.
         $terms = preg_split('/\s+/', $input, -1, PREG_SPLIT_NO_EMPTY);
 
+        /**
+         * Set up a query to fetch the most relevant results. Don't execute yet.
+         *
+         * This query assumes the user's name in the format of "first_name last_name",
+         * because auto complete applies the same format.
+         */
         if (count($terms) >= 2) {
             $this->most_relevant_users = User::where('first_name', 'like', $terms[0])
                 ->where('last_name', 'like', $terms[1])
                 ->take(6)
                 ->get();
         } else {
+            // When the format isn't matched, return an empty collection to avoid errors in the view.
             $this->most_relevant_users = collect();
         }
 
+        // Set up a query to fetch less relevant results. Don't execute yet.
         $less_relevant_query = User::where(function ($q) use ($terms) {
             foreach ($terms as $term) {
                 $q->orWhere('first_name', 'like', '%'.$term.'%')
@@ -127,16 +147,19 @@ class SearchController extends Controller
         });
 
         // Get the id's of all the most relevant search results.
-        // Use them to prevent double result listing in the less relevant results section.
+        // Use them to prevent duplicate result listing in the less relevant results section.
         $most_relevant_users_keys = $this->most_relevant_users->pluck('id')->all();
 
         // @todo Add filters here, obviously.
-        // Run the query through user filters.
+        // Run the query through user filters. Don't execute yet.
         $filtered_query = $less_relevant_query;
 
         // Check if results should be paginated or not.
         if ($paginate_results) {
+            // Execute the query to fetch less relevant results. Apply pagination.
             $this->less_relevant_users = $filtered_query->whereNotIn('id', $most_relevant_users_keys)->paginate($this->user_pagination_amount);
+
+            // Count the total number of results.
             $this->users_count = $this->less_relevant_users->total() + $this->most_relevant_users->count();
 
             // Append all query parameters that were received with the initial request.
@@ -144,7 +167,10 @@ class SearchController extends Controller
                 $this->less_relevant_users->appends($input, $value);
             }
         } else {
+            // Execute the query to fetch less relevant results.
             $this->less_relevant_users = $filtered_query->take(4)->get()->except($most_relevant_users_keys);
+
+            // Count the total number of results.
             $this->users_count = ($filtered_query->count() - $this->most_relevant_users->count()) + $this->most_relevant_users->count();
         }
     }
@@ -160,27 +186,32 @@ class SearchController extends Controller
         // Split the string into terms and remove whitespace from both sides of the string.
         $terms = preg_split('/\s+/', $input, -1, PREG_SPLIT_NO_EMPTY);
 
+        // Set up a query to fetch the most relevant results. Don't execute yet.
         $most_relevant_query = Guitar::where('name', 'like', $input);
 
+        // Set up a query to fetch less relevant results. Don't execute yet.
         $less_relevant_query = Guitar::where(function ($q) use ($terms) {
             foreach ($terms as $term) {
                 $q->orWhere('name', 'like', '%'.$term.'%');
             }
         });
 
-        // Run the query through brand and category filters and get the results.
+        // Run the query through brand and category filters and execute it to get the most relevant results.
         $this->most_relevant_guitars = $this->filterResults($most_relevant_query, $this->filter_types, $this->filter_brands)->get();
 
         // Get the id's of all the most relevant search results.
-        // Use them to prevent double result listing in less relevant results section.
-        $most_relevant_guitars_keys  = $this->most_relevant_guitars->pluck('id')->all();
+        // Use them to prevent duplicate result listing in the less relevant results section.
+        $most_relevant_guitars_keys = $this->most_relevant_guitars->pluck('id')->all();
 
-        // Run the query through brand and category filters.
+        // Run the query through brand and category filters. Don't execute it yet.
         $filtered_query = $this->filterResults($less_relevant_query, $this->filter_types, $this->filter_brands);
 
         // Check if results should be paginated or not.
         if($paginate_results) {
+            // Execute the query to fetch less relevant results. Apply pagination.
             $this->less_relevant_guitars = $filtered_query->whereNotIn('id', $most_relevant_guitars_keys)->paginate($this->guitar_pagination_amount);
+
+            // Count the total number of results.
             $this->guitars_count = $this->less_relevant_guitars->total() + $this->most_relevant_guitars->count();
 
             // Append all query parameters that were received with the initial request.
@@ -188,7 +219,10 @@ class SearchController extends Controller
                 $this->less_relevant_guitars->appends($input, $value);
             }
         } else {
+            // Execute the query to fetch less relevant results.
             $this->less_relevant_guitars = $filtered_query->take(4)->get()->except($most_relevant_guitars_keys);
+
+            // Count the total number of results.
             $this->guitars_count = ($filtered_query->count() - $this->most_relevant_guitars->count()) + $this->most_relevant_guitars->count();
         }
     }
@@ -201,12 +235,15 @@ class SearchController extends Controller
      */
     public function autoComplete(Request $request)
     {
+        // Strip the input of unwanted tags.
         $input = strip_tags($request->term);
+
         // Check if the input is not empty.
         if (!empty($input) && !ctype_space($input)) {
             // Split the string into terms and remove whitespace from both sides of the string.
             $terms = preg_split('/\s+/', $input, -1, PREG_SPLIT_NO_EMPTY);
 
+            // Set up a query to fetch users and execute it. Fetch up to 5 users.
             $this->users = User::where(function ($q) use ($terms) {
                 foreach ($terms as $term) {
                     $q->orWhere('first_name', 'like', '%'.$term.'%')
@@ -214,6 +251,7 @@ class SearchController extends Controller
                 }
             })->take(5)->get();
 
+            // Set up a query to fetch users and execute it. Fetch up to 5 guitars.
             $this->guitars = Guitar::where(function ($q) use ($terms) {
                 foreach ($terms as $term) {
                     $q->orWhere('name', 'like', '%'.$term.'%');
@@ -231,6 +269,7 @@ class SearchController extends Controller
             ]);
         }
 
+        // jQuery UI auto complete requires data to be in the label - value format.
         foreach ($this->users as $user) {
             array_push($result_array, [
                 "value" => $user->fullName(),
