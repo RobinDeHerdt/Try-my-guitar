@@ -31,7 +31,7 @@ class SearchController extends Controller
     private $guitars_count;
     private $users_count;
 
-    private $guitar_pagination_amount   = 8;
+    private $guitar_pagination_amount   = 5;
     private $user_pagination_amount     = 8;
 
     /**
@@ -53,22 +53,9 @@ class SearchController extends Controller
         $input = strip_tags($request->term);
         // Check if the input is not empty.
         if (!empty($input) && !ctype_space($input)) {
-            $this->filter_category  =  $request->query('category');
-
-            /**
-             * @todo edit this desciption and remove the if statements.
-             * When a filter is set, set the search category to 'guitar'.
-             *
-             * If there is no query string set for 'types' or 'brands',
-             * return an empty array, to avoid errors in the view.
-             */
-            if ($request->query('types')) {
-                $this->filter_types     = $request->query('types');
-            }
-
-            if ($request->query('brands')) {
-                $this->filter_brands    = $request->query('brands');
-            }
+            $this->filter_category  = $request->query('category');
+            $this->filter_types     = ($request->query('types') ? $request->query('types') : []);
+            $this->filter_brands    = ($request->query('brands') ? $request->query('brands') : []);
 
             switch ($filter_category = $this->filter_category) {
                 case 'guitar':
@@ -147,8 +134,9 @@ class SearchController extends Controller
         // Run the query through user filters.
         $filtered_query = $less_relevant_query;
 
+        // Check if results should be paginated or not.
         if ($paginate_results) {
-            $this->less_relevant_users = $filtered_query->paginate($this->user_pagination_amount);
+            $this->less_relevant_users = $filtered_query->whereNotIn('id', $most_relevant_users_keys)->paginate($this->user_pagination_amount);
             $this->users_count = $this->less_relevant_users->total() + $this->most_relevant_users->count();
 
             // Append all query parameters that were received with the initial request.
@@ -190,8 +178,9 @@ class SearchController extends Controller
         // Run the query through brand and category filters.
         $filtered_query = $this->filterResults($less_relevant_query, $this->filter_types, $this->filter_brands);
 
+        // Check if results should be paginated or not.
         if($paginate_results) {
-            $this->less_relevant_guitars = $filtered_query->paginate($this->guitar_pagination_amount);
+            $this->less_relevant_guitars = $filtered_query->whereNotIn('id', $most_relevant_guitars_keys)->paginate($this->guitar_pagination_amount);
             $this->guitars_count = $this->less_relevant_guitars->total() + $this->most_relevant_guitars->count();
 
             // Append all query parameters that were received with the initial request.
