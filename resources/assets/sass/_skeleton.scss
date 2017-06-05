@@ -163,6 +163,14 @@ body {
   }
 }
 
+.float-right {
+  float: right;
+}
+
+.float-left {
+  float: left;
+}
+
 @media (max-width: 767px) {
   .icon-full {
     display: none;

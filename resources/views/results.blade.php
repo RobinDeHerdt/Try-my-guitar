@@ -73,7 +73,10 @@
                 <hr class="dark-hr">
                 <div class="row">
                     <div class="col-md-12">
-                        <span>Showing {{ $less_relevant_guitars->count() + $most_relevant_guitars->count() }} of {{ $guitars_count }} {{ ($guitars_count > 1 ? 'total results' : 'result') }}</span>
+                        <span class="float-left">Showing {{ $less_relevant_guitars->count() + $most_relevant_guitars->count() }} of {{ $guitars_count }} {{ ($guitars_count > 1 ? 'total results' : 'result') }}</span>
+                        @if($less_relevant_guitars instanceof \Illuminate\Pagination\AbstractPaginator  && $less_relevant_guitars->total() >= $less_relevant_guitars->perPage())
+                            <span class="float-right"><strong>Page {{ $less_relevant_guitars->currentPage() }}</strong></span>
+                        @endif
                     </div>
                 </div>
                 <div class="row">
@@ -127,7 +130,10 @@
                 <hr class="dark-hr">
                 <div class="row">
                     <div class="col-md-12">
-                        <span>Showing {{ $less_relevant_users->count() + $most_relevant_users->count() }} of {{ $users_count }} {{ ($users_count > 1 ? 'total results' : 'result') }}</span>
+                        <span class="float-left">Showing {{ $less_relevant_users->count() + $most_relevant_users->count() }} of {{ $users_count }} {{ ($users_count > 1 ? 'total results' : 'result') }}</span>
+                        @if($less_relevant_users instanceof \Illuminate\Pagination\AbstractPaginator && $less_relevant_users->total() >= $less_relevant_users->perPage())
+                            <span class="float-right"><strong>Page {{ $less_relevant_users->currentPage() }}</strong></span>
+                        @endif
                     </div>
                 </div>
                 <div class="row">

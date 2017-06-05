@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use App\Traits\Filter;
 use App\GuitarBrand;
@@ -55,6 +56,7 @@ class SearchController extends Controller
             $this->filter_category  =  $request->query('category');
 
             /**
+             * @todo edit this desciption and remove the if statements.
              * When a filter is set, set the search category to 'guitar'.
              *
              * If there is no query string set for 'types' or 'brands',
@@ -114,6 +116,7 @@ class SearchController extends Controller
      * User search query.
      *
      * @param  string  $input
+     * @param  boolean  $paginate_results
      */
     private function userSearch($input, $paginate_results = false)
     {
@@ -141,12 +144,17 @@ class SearchController extends Controller
         $most_relevant_users_keys = $this->most_relevant_users->pluck('id')->all();
 
         // @todo Add filters here, obviously.
-        // Run the query through brand and category filters.
+        // Run the query through user filters.
         $filtered_query = $less_relevant_query;
 
         if ($paginate_results) {
             $this->less_relevant_users = $filtered_query->paginate($this->user_pagination_amount);
-            $this->users_count = $filtered_query->count() + $this->most_relevant_users->count();
+            $this->users_count = $this->less_relevant_users->total() + $this->most_relevant_users->count();
+
+            // Append all query parameters that were received with the initial request.
+            foreach (Input::except('page') as $input => $value) {
+                $this->less_relevant_users->appends($input, $value);
+            }
         } else {
             $this->less_relevant_users = $filtered_query->take(4)->get()->except($most_relevant_users_keys);
             $this->users_count = ($filtered_query->count() - $this->most_relevant_users->count()) + $this->most_relevant_users->count();
@@ -157,6 +165,7 @@ class SearchController extends Controller
      * Guitar search query.
      *
      * @param  string  $input
+     * @param  boolean  $paginate_results
      */
     private function guitarSearch($input, $paginate_results = false)
     {
@@ -183,7 +192,12 @@ class SearchController extends Controller
 
         if($paginate_results) {
             $this->less_relevant_guitars = $filtered_query->paginate($this->guitar_pagination_amount);
-            $this->guitars_count = $filtered_query->count() + $this->most_relevant_guitars->count();
+            $this->guitars_count = $this->less_relevant_guitars->total() + $this->most_relevant_guitars->count();
+
+            // Append all query parameters that were received with the initial request.
+            foreach (Input::except('page') as $input => $value) {
+                $this->less_relevant_guitars->appends($input, $value);
+            }
         } else {
             $this->less_relevant_guitars = $filtered_query->take(4)->get()->except($most_relevant_guitars_keys);
             $this->guitars_count = ($filtered_query->count() - $this->most_relevant_guitars->count()) + $this->most_relevant_guitars->count();
@@ -209,13 +223,13 @@ class SearchController extends Controller
                     $q->orWhere('first_name', 'like', '%'.$term.'%')
                         ->orWhere('last_name', 'like', '%'.$term.'%');
                 }
-            })->take(6)->get();
+            })->take(5)->get();
 
             $this->guitars = Guitar::where(function ($q) use ($terms) {
                 foreach ($terms as $term) {
                     $q->orWhere('name', 'like', '%'.$term.'%');
                 }
-            })->take(6)->get();
+            })->take(5)->get();
         }
 
         $result_array = [];
