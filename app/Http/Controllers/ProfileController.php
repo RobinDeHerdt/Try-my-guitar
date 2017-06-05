@@ -9,6 +9,10 @@ use App\Mail\VerifyEmail;
 use App\User;
 use Auth;
 
+/**
+ * Class ProfileController
+ * @package App\Http\Controllers
+ */
 class ProfileController extends Controller
 {
     /**

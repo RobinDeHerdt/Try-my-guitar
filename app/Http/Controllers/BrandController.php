@@ -7,6 +7,10 @@ use App\Traits\Filter;
 use App\GuitarBrand;
 use App\GuitarType;
 
+/**
+ * Class BrandController
+ * @package App\Http\Controllers
+ */
 class BrandController extends Controller
 {
     use Filter;

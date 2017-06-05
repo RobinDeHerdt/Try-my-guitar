@@ -14,6 +14,10 @@ use App\Message;
 use Illuminate\Support\Facades\Session;
 use Auth;
 
+/**
+ * Class ChatController
+ * @package App\Http\Controllers
+ */
 class ChatController extends Controller
 {
     /**

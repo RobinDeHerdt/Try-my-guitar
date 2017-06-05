@@ -6,6 +6,10 @@ use App\AboutSection;
 use Illuminate\Http\Request;
 use App\Article;
 
+/**
+ * Class HomeController
+ * @package App\Http\Controllers
+ */
 class HomeController extends Controller
 {
     /**

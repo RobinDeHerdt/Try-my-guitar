@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Auth;
 use Session;
 
+/**
+ * Class DashboardController
+ * @package App\Http\Controllers
+ */
 class DashboardController extends Controller
 {
     /**

@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\AboutSection;
 use Illuminate\Http\Request;
 
+/**
+ * Class AboutController
+ * @package App\Http\Controllers
+ */
 class AboutController extends Controller
 {
     /**

@@ -7,7 +7,10 @@ use App\GuitarBrand;
 use App\GuitarType;
 use App\User;
 
-
+/**
+ * Class ExploreController
+ * @package App\Http\Controllers
+ */
 class ExploreController extends Controller
 {
     /**

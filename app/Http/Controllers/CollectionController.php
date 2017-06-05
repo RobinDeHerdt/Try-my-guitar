@@ -7,6 +7,10 @@ use Illuminate\Support\Facades\Session;
 use App\Guitar;
 use Auth;
 
+/**
+ * Class CollectionController
+ * @package App\Http\Controllers
+ */
 class CollectionController extends Controller
 {
     /**

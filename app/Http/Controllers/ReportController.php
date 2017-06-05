@@ -8,6 +8,10 @@ use App\Report;
 use App\User;
 use Auth;
 
+/**
+ * Class ReportController
+ * @package App\Http\Controllers
+ */
 class ReportController extends Controller
 {
     /**

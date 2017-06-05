@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\GuitarImage;
 use App\Guitar;
 
+/**
+ * Class GuitarController
+ * @package App\Http\Controllers
+ */
 class GuitarController extends Controller
 {
     /**

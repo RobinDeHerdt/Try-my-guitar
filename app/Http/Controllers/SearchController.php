@@ -10,18 +10,24 @@ use App\GuitarType;
 use App\Guitar;
 use App\User;
 
+/**
+ * Class SearchController
+ * @package App\Http\Controllers
+ */
 class SearchController extends Controller
 {
     use Filter;
 
     /**
      * Auto complete variables.
+     * @var
      */
     private $users;
     private $guitars;
 
     /**
      * Search results variables.
+     * @var
      */
     private $most_relevant_users;
     private $less_relevant_users;
@@ -30,6 +36,7 @@ class SearchController extends Controller
 
     /**
      * Result count variables.
+     * @var
      */
     private $guitars_count;
     private $users_count;
@@ -207,7 +214,7 @@ class SearchController extends Controller
         $filtered_query = $this->filterResults($less_relevant_query, $this->filter_types, $this->filter_brands);
 
         // Check if results should be paginated or not.
-        if($paginate_results) {
+        if ($paginate_results) {
             // Execute the query to fetch less relevant results. Apply pagination.
             $this->less_relevant_guitars = $filtered_query->whereNotIn('id', $most_relevant_guitars_keys)->paginate($this->guitar_pagination_amount);
 

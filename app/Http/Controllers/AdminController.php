@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\ContactMessage;
 use App\Report;
 
+/**
+ * Class AdminController
+ * @package App\Http\Controllers
+ */
 class AdminController extends Controller
 {
     /**
