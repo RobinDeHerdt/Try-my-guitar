@@ -61,7 +61,6 @@
                         </div>
                     </div>
                 </div>
-
             </form>
             @if($most_relevant_users->isEmpty() && $less_relevant_users->isEmpty() && $most_relevant_guitars->isEmpty() && $less_relevant_guitars->isEmpty())
                 <div class="no-results">
