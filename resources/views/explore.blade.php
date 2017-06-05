@@ -33,7 +33,7 @@
                         <div class="row">
                             @foreach($brands as $brand)
                                 <div class="col-md-2">
-                                    <a href="{{ route('brand.show', ['brand' => $brand->id]) }}">
+                                    <a href="{{ route('brand.show', ['brand' => str_slug($brand->name)]) }}">
                                         <div style="background-image:url({{  Storage::disk('public')->url($brand->logo_uri) }}" class="brand-logo"></div>
                                     </a>
                                 </div>
@@ -49,7 +49,7 @@
                         <div class="row">
                             @foreach($types as $type)
                                 <div class="col-md-3 center explore-guitar-type-container">
-                                    <a href="{{ route('type.show', ['brand' => $type->id]) }}">
+                                    <a href="{{ route('type.show', ['brand' => str_slug($type->name)]) }}">
                                         <div style="background-image:url({{  Storage::disk('public')->url($type->image_uri) }}" class="type-image"></div>
                                         <span>{{ $type->name }}</span>
                                     </a>

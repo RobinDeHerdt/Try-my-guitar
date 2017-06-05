@@ -19,7 +19,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <h4>Types</h4>
-                        <form action="{{ route('brand.show', ['brand' => $brand->id]) }}" method="GET">
+                        <form action="{{ route('brand.show', ['brand' => $brand->name]) }}" method="GET">
                             <div class="row">
                                 @foreach($types as $type)
                                     <div class="col-md-2">

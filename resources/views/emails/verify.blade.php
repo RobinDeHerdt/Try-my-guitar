@@ -368,7 +368,7 @@
                                                                     <br>
                                                                     <h1 style="text-align: center;">Hey {{ $user->first_name }},</h1>
                                                                     <br>
-                                                                    <p style="text-align: center;">Thanks for registering at TryMyGuitar! Please click the link below to verify your account.</p>
+                                                                    <p style="text-align: center;">Thanks for registering at Try my guitar! Please click the link below to verify your account.</p>
                                                                     <br>
                                                                 </td>
                                                             </tr>
@@ -431,7 +431,7 @@
                                         <tbody>
                                         <tr>
                                             <td valign="top" class="mcnTextContent" style="padding-top:0; padding-right:18px; padding-bottom:9px; padding-left:18px; text-align: center;">
-                                                <em>Copyright © {{ date("Y") }} Try my guitar, All rights reserved.</em><br>
+                                                <em>Copyright © {{ date("Y") }} trymyguitar, All rights reserved.</em><br>
                                                 <br>
                                                 If you didn't register to our website, please ignore this email.
                                             </td>

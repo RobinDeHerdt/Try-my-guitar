@@ -14,6 +14,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // Fixes database error on production environments.
         Schema::defaultStringLength(191);
     }
 

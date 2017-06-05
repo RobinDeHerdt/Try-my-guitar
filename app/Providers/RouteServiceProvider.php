@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\GuitarBrand;
+use App\GuitarType;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -23,7 +25,13 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Route::bind('brand', function ($value) {
+            return GuitarBrand::where('name', $value)->first();
+        });
+
+        Route::bind('type', function ($value) {
+            return GuitarType::where('name', str_replace('-', ' ', $value))->first();
+        });
 
         parent::boot();
     }

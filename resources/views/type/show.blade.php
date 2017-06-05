@@ -18,7 +18,7 @@
                 <h3>Filters</h3>
                 <div class="row">
                     <div class="col-md-12">
-                        <form action="{{ route('type.show', ['type' => $type->id]) }}" method="GET">
+                        <form action="{{ route('type.show', ['type' => $type->name]) }}" method="GET">
                             <h4>Types</h4>
                             <div class="row">
                                 @foreach($types as $type)

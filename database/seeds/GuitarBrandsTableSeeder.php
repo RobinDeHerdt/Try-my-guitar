@@ -6,11 +6,14 @@ class GuitarBrandsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
      * @return void
      */
     public function run()
     {
+        /**
+         * Because of reasons, there should never be a '-' in the name of a guitar brand.
+         * @todo It would be great if this would be possible, someday...
+         */
         DB::table('guitar_brands')->insert([
             'name' => 'LTD',
             'logo_uri' => 'images/ltd-logo.png',

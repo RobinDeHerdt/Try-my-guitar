@@ -2,6 +2,10 @@
 
 namespace App\Traits;
 
+/**
+ * Trait Filter
+ * @package App\Traits
+ */
 trait Filter
 {
     /**
