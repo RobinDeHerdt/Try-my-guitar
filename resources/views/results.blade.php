@@ -72,7 +72,22 @@
                 <hr class="dark-hr">
                 <div class="row">
                     <div class="col-md-12">
-                        <span class="float-left"><strong>Showing {{ $less_relevant_guitars->count() + $most_relevant_guitars->count() }} of {{ $guitars_count }} {{ ($guitars_count > 1 ? 'total results' : 'result') }}</strong></span>
+                        <span class="float-left">
+                            <strong>
+                                Showing
+                                {{ $less_relevant_guitars->count() + $most_relevant_guitars->count() }}
+                                of
+                                {{ $guitars_count }}
+                                {{ ($guitars_count > 1 ? 'total results' : 'result') }}
+                            </strong>
+                        </span>
+                        @if($filter_category === 'all' || $filter_category === null)
+                            <span class="float-right">
+                                <strong>
+                                    <a href="/search" id="search-all-guitars">Show all results</a>
+                                </strong>
+                            </span>
+                        @endif
                         @if($less_relevant_guitars instanceof \Illuminate\Pagination\AbstractPaginator  && $less_relevant_guitars->total() > $less_relevant_guitars->perPage())
                             <span class="float-right"><strong>Page {{ $less_relevant_guitars->currentPage() }}</strong></span>
                         @endif
@@ -131,7 +146,21 @@
                 <hr class="dark-hr">
                 <div class="row">
                     <div class="col-md-12">
-                        <span class="float-left"><strong>Showing {{ $less_relevant_users->count() + $most_relevant_users->count() }} of {{ $users_count }} {{ ($users_count > 1 ? 'total results' : 'result') }}</strong></span>
+                        <span class="float-left">
+                            <strong>
+                                Showing
+                                {{ $less_relevant_users->count() + $most_relevant_users->count() }}
+                                of {{ $users_count }}
+                                {{ ($users_count > 1 ? 'total results' : 'result') }}
+                            </strong>
+                        </span>
+                        @if($filter_category === 'all' || $filter_category === null)
+                            <span class="float-right">
+                                <strong>
+                                    <a href="/search" id="search-all-users">Show all results</a>
+                                </strong>
+                            </span>
+                        @endif
                         @if($less_relevant_users instanceof \Illuminate\Pagination\AbstractPaginator && $less_relevant_users->total() >= $less_relevant_users->perPage())
                             <span class="float-right"><strong>Page {{ $less_relevant_users->currentPage() }}</strong></span>
                         @endif
@@ -210,6 +239,20 @@
 
         showSpecificFilters(getUrlParam('category'));
 
+        $( "#search-all-guitars" ).click(function(event) {
+            event.preventDefault();
+
+            $("input[name='category']").val("guitar");
+            $("#search-form").submit();
+        });
+
+        $( "#search-all-users" ).click(function(event) {
+            event.preventDefault();
+
+            $("input[name='category']").val("user");
+            $("#search-form").submit();
+        });
+
         $("input[name=category]").change(function() {
             showSpecificFilters($("input[name='category']:checked").val());
         });
@@ -219,8 +262,8 @@
                 case 'user':
                     $("#guitar-filters").hide();
                     $("#user-filters").show();
-                    $("input[name='types[]']:checkbox").prop('checked',false);
-                    $("input[name='brands[]']:checkbox").prop('checked',false);
+                    $("input[name='types[]']:checkbox").prop("checked",false);
+                    $("input[name='brands[]']:checkbox").prop("checked",false);
                     break;
 
                 case 'guitar':
@@ -231,8 +274,8 @@
                 default:
                     $("#guitar-filters").hide();
                     $("#user-filters").hide();
-                    $("input[name='types[]']:checkbox").prop('checked',false);
-                    $("input[name='brands[]']:checkbox").prop('checked',false);
+                    $("input[name='types[]']:checkbox").prop("checked",false);
+                    $("input[name='brands[]']:checkbox").prop("checked",false);
             }
         }
     </script>
