@@ -164,19 +164,19 @@ body {
 }
 
 .contact-container {
-  background-color: $primary-component-color-light;
+  background-color: $primary-component-color;
   color: #fff;
   padding-bottom: 50px;
 
   .btn-primary {
     background-color: #fff;
-    color: $primary-component-color-light;
+    color: $primary-component-color;
     text-transform: uppercase;
     font-weight: 600;
 
     &:hover {
       background-color: #fff;
-      color: $primary-component-color-light;
+      color: $primary-component-color;
       text-transform: uppercase;
     }
   }

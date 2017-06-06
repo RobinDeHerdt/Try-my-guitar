@@ -21,6 +21,7 @@ Route::group([
     Route::get('/verify/resend', 'Auth\VerifyController@resend')->name('verify.resend');
 
     Route::get('/', 'HomeController@index')->name('home');
+    Route::get('article/{article}', 'ArticleController@showPublic')->name('article.show');
     Route::get('about', 'AboutController@index')->name('about');
     Route::get('explore', 'ExploreController@explore')->name('explore');
     Route::get('search', 'SearchController@result')->name('search');

@@ -30,36 +30,30 @@
                     </div>
                 </div>
             @endforeach
-        </div>
-        <div class="contact-container" id="contact">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h2>Contact</h2>
-                    </div>
-                    <form action="{{ route('contact') }}" method="POST">
-                        {{ csrf_field() }}
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="email">@lang('input.email') *</label>
-                                <input type="email" class="form-control" name="email" placeholder="Your e-mail address" required>
-                            </div>
+            <h2>Contact</h2>
+            <div class="row col-container">
+                <form action="{{ route('contact') }}" method="POST">
+                    {{ csrf_field() }}
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="email">@lang('input.email') *</label>
+                            <input type="email" class="form-control" name="email" placeholder="Your e-mail address" required>
                         </div>
-                        <div class="col-md-8">
-                            <div class="form-group">
-                                <label for="message">@lang('input.your-message') *</label>
-                                <textarea name="message" cols="30" rows="10" class="form-control" placeholder="Your message" required></textarea>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4 col-md-offset-8">
-                                    <div class="form-group">
-                                        <input type="submit" class="btn btn-primary form-control" value="Send">
-                                    </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label for="message">@lang('input.your-message') *</label>
+                            <textarea name="message" cols="30" rows="10" class="form-control" placeholder="Your message" required></textarea>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-md-offset-8">
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-primary form-control" value="Send">
                                 </div>
                             </div>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

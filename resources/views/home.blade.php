@@ -39,13 +39,15 @@
                         <div class="row">
                     @endif
                         <div class="col-md-4">
-                            <div class="article">
-                                <div class="article-teaser-image" style="background-image: url({{ Storage::disk('public')->url($article->image_uri) }})"></div>
-                                <div class="article-teaser">
-                                    <h4>{{ $article->title }}</h4>
-                                    <p>{{ $article->body }}</p>
+                            <a href="{{ route('article.show', ['article' => $article->id]) }}" class="article-link">
+                                <div class="article">
+                                    <div class="article-teaser-image" style="background-image: url({{ Storage::disk('public')->url($article->image_uri) }})"></div>
+                                    <div class="article-teaser">
+                                        <h4>{{ $article->title }}</h4>
+                                        <p>{{ $article->body }}</p>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                     @if($loop->index % 3 == 2)
                         </div>

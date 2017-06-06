@@ -66,6 +66,19 @@ class ArticleController extends Controller
      * @param  \App\Article  $article
      * @return \Illuminate\Http\Response
      */
+    public function showPublic(Article $article)
+    {
+        return view('article.show', [
+            'article' => $article,
+        ]);
+    }
+
+    /**
+     * Display the specified article (admin section).
+     *
+     * @param  \App\Article  $article
+     * @return \Illuminate\Http\Response
+     */
     public function show(Article $article)
     {
         return view('admin.article.show', [
