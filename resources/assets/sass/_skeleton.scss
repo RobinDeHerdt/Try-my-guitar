@@ -163,12 +163,23 @@ body {
   }
 }
 
-.float-right {
-  float: right;
-}
+.contact-container {
+  background-color: $primary-component-color-light;
+  color: #fff;
+  padding-bottom: 50px;
 
-.float-left {
-  float: left;
+  .btn-primary {
+    background-color: #fff;
+    color: $primary-component-color-light;
+    text-transform: uppercase;
+    font-weight: 600;
+
+    &:hover {
+      background-color: #fff;
+      color: $primary-component-color-light;
+      text-transform: uppercase;
+    }
+  }
 }
 
 @media (max-width: 767px) {
