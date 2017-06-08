@@ -58,8 +58,16 @@ class ProfileController extends Controller
      */
     public function edit()
     {
+        $ip_address     = request()->ip();
+        $user_location  = geoip($ip_address);
+        $user_coords    = [
+            'lat' => $user_location->lat,
+            'lng' => $user_location->lon
+        ];
+
         return view('profile.edit', [
-            'user' => $this->user,
+            'user'          => $this->user,
+            'user_coords'   => json_encode($user_coords),
         ]);
     }
 

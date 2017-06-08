@@ -62,9 +62,6 @@ class UsersTableSeeder extends Seeder
             'email' => 'james@gmail.com',
             'image_uri' => 'images/james.jpg',
             'password' => bcrypt('123456'),
-            'location_lat' => 47,
-            'location_lng' => 45,
-            'location' => 'Hest',
         ]);
 
         DB::table('role_user')->insert([

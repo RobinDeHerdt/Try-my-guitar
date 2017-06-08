@@ -62,8 +62,9 @@
                                     <span id="place-name"  class="title"></span><br>
                                     <span id="place-address"></span>
                                 </div>
-                                <input type="hidden" class="form-control" name="location_lat" id="location_lat" value="{{ $user->location_lat }}">
-                                <input type="hidden" class="form-control" name="location_lng" id="location_lng" value="{{ $user->location_lng }}">
+                                <input type="hidden" class="form-control" name="location_lat" id="location-lat" value="{{ $user->location_lat }}">
+                                <input type="hidden" class="form-control" name="location_lng" id="location-lng" value="{{ $user->location_lng }}">
+                                <input type="hidden" class="form-control" id="user-coords" value="{{ $user_coords }}">
                             </div>
                         </div>
                     </div>
@@ -107,7 +108,7 @@
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary form-control">Save changes</button>
                             </div>
-                        </div>doc
+                        </div>
                     </div>
                 </form>
             </div>
@@ -124,13 +125,20 @@
         function initMap() {
             var card            = document.getElementById('pac-card');
             var input           = document.getElementById('pac-input');
-            var location_lat    = document.getElementById('location_lat');
-            var location_lng    = document.getElementById('location_lng');
+            var location_lat    = document.getElementById('location-lat');
+            var location_lng    = document.getElementById('location-lng');
+            var user_coords     = document.getElementById('user-coords');
 
             if(location_lat.value && location_lng.value) {
                 var map = new google.maps.Map(document.getElementById('map'), {
                     center: {lat: parseFloat(location_lat.value), lng: parseFloat(location_lng.value)},
                     zoom: 17
+                });
+            } else {
+                console.log(user_coords.value);
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    center: JSON.parse(user_coords.value),
+                    zoom: 7
                 });
             }
 

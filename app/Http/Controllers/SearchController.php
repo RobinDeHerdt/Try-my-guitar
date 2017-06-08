@@ -93,9 +93,6 @@ class SearchController extends Controller
                     $this->guitarSearch($input);
             }
         } else {
-            // When the input is empty, redirect.
-            // @todo Redirect to search page, and set an empty input field. No results should be returned.
-            // return redirect(route('search'));
             return back();
         }
 

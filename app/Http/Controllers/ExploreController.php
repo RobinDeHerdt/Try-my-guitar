@@ -25,7 +25,10 @@ class ExploreController extends Controller
 
         $ip_address     = request()->ip();
         $user_location  = geoip($ip_address);
-        $user_coords    = ['lat' => $user_location->lat, 'lng' => $user_location->lon];
+        $user_coords    = [
+            'lat' => $user_location->lat,
+            'lng' => $user_location->lon
+        ];
 
         return view('explore', [
             'types'             => $types,
