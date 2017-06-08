@@ -153,13 +153,14 @@
                             map: map,
                             position: latLng,
                             animation: google.maps.Animation.DROP,
+                            user: data[i],
                         });
 
                         markers.push(marker);
 
                         marker.addListener('click', function() {
                             infowindow.close();
-                            infowindow.setContent('Hello world!');
+                            infowindow.setContent(this.user.first_name + ' ' + this.user.last_name);
                             infowindow.open(map, this);
                         });
                     }
