@@ -15,13 +15,13 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="dashboard-content">
-                        <a href="{{ route('brand.show', ['brand' => $guitar->guitarBrand->id]) }}">
+                        <a href="{{ route('brand.show', ['brand' => str_slug($guitar->guitarBrand->name)]) }}">
                             <img src="{{ Storage::disk('public')->url($guitar->guitarBrand->logo_uri) }}" alt="{{ $guitar->guitarBrand->name }} logo" class="guitar-brand-logo">
                         </a>
                         <h1>{{ $guitar->name }}</h1>
                         <div class="guitar-type-container">
                             @foreach($guitar->guitarTypes as $guitarType)
-                                <a href="{{ route('type.show', ['id' => $guitarType->id]) }}"><span class="guitar-type">{{ $guitarType->name }}</span></a>
+                                <a href="{{ route('type.show', ['id' => str_slug($guitarType->name)])}}"><span class="guitar-type">{{ $guitarType->name }}</span></a>
                             @endforeach
                         </div>
                         <div class="guitar-description-container">
@@ -44,7 +44,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <h2>{{ $guitar->owners->count() }}</h2>
+                    <h2>Owner locations</h2>
                     <div class="dashboard-content">
                         <div id="map"></div>
                     </div>
