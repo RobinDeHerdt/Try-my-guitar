@@ -53,7 +53,7 @@
                         </div>
                     @endif
                 @endforeach
-                <div class="row padding-top">
+                <div class="row">
                     <div class="col-md-4 col-md-offset-4">
                         <div class="big-cta-button">
                             <a href="#" class="text-uppercase">@lang('input.read-more')</a>

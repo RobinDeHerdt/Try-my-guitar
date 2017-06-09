@@ -44,6 +44,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
+                    <h2>{{ $guitar->owners->count() }}</h2>
                     <div class="dashboard-content">
                         <div id="map"></div>
                     </div>
@@ -52,7 +53,7 @@
             <input type="hidden" id="user-location" value="{{ $user_coords }}">
             <input type="hidden" id="guitar-id" value="{{ $guitar->id }}">
             @if($guitar_users->isNotEmpty())
-                <h2>Experiences</h2>
+                <h2 class="padding-top">Experiences</h2>
                 <div class="row">
                     @foreach($guitar_users as $user)
                         <div class="col-md-6">
@@ -67,10 +68,10 @@
                                     </div>
                                     <div class="col-md-8">
                                         <div class="experience-text">
+
                                             <blockquote>
                                                 <br>
-                                                <p>{{ $user->pivot->experience }}</p>
-                                                <span> - <strong>{{ $user->fullName() }}</strong></span>
+                                                <p>{{ str_limit($user->pivot->experience, 150) }}</p>
                                             </blockquote>
                                         </div>
                                     </div>
@@ -79,9 +80,15 @@
                         </div>
                     @endforeach
                 </div>
+                <div class="row"><div class="col-md-4 col-md-offset-4">
+                        <div class="big-cta-button">
+                            <a href="#" class="text-uppercase">View all experiences ({{ $guitar_users_count }})</a>
+                        </div>
+                    </div>
+                </div>
             @endif
             @if($brand_guitars->isNotEmpty())
-                <div class="row">
+                <div class="row padding-top">
                     <div class="col-md-12">
                         <h2>More {{ $guitar->guitarBrand->name }} guitars</h2>
                         <div class="slick-related">
@@ -102,7 +109,7 @@
                 </div>
             @endif
             @if($similar_guitars->isNotEmpty())
-                <div class="row">
+                <div class="row padding-top">
                     <div class="col-md-12">
                         <h2>Similar guitars</h2>
                         <div class="slick-related">
