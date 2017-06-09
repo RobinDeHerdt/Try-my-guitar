@@ -82,11 +82,13 @@
                             </strong>
                         </span>
                         @if($filter_category === 'all' || $filter_category === null)
-                            <span class="float-right">
-                                <strong>
-                                    <a href="/search" id="search-all-guitars">Show all results</a>
-                                </strong>
-                            </span>
+                            @if(($less_relevant_guitars->count() + $most_relevant_guitars->count()) < $guitars_count)
+                                <span class="float-right">
+                                    <strong>
+                                        <a href="/search" id="search-all-guitars">Show all results</a>
+                                    </strong>
+                                </span>
+                            @endif
                         @endif
                         @if($less_relevant_guitars instanceof \Illuminate\Pagination\AbstractPaginator  && $less_relevant_guitars->total() > $less_relevant_guitars->perPage())
                             <span class="float-right"><strong>Page {{ $less_relevant_guitars->currentPage() }}</strong></span>
@@ -155,11 +157,13 @@
                             </strong>
                         </span>
                         @if($filter_category === 'all' || $filter_category === null)
-                            <span class="float-right">
-                                <strong>
-                                    <a href="/search" id="search-all-users">Show all results</a>
-                                </strong>
-                            </span>
+                            @if(($less_relevant_users->count() + $most_relevant_users->count()) < $users_count)
+                                <span class="float-right">
+                                    <strong>
+                                        <a href="/search" id="search-all-users">Show all results</a>
+                                    </strong>
+                                </span>
+                            @endif
                         @endif
                         @if($less_relevant_users instanceof \Illuminate\Pagination\AbstractPaginator && $less_relevant_users->total() >= $less_relevant_users->perPage())
                             <span class="float-right"><strong>Page {{ $less_relevant_users->currentPage() }}</strong></span>

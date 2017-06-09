@@ -49,6 +49,13 @@ class SearchController extends Controller
     private $user_pagination_amount     = 8;
 
     /**
+     * Result amount variables.
+     * @var integer
+     */
+    private $guitar_results_amount   = 4;
+    private $user_results_amount     = 4;
+
+    /**
      * Filter variables.
      * @var array
      */
@@ -172,7 +179,7 @@ class SearchController extends Controller
             }
         } else {
             // Execute the query to fetch less relevant results.
-            $this->less_relevant_users = $filtered_query->take(4)->get()->except($most_relevant_users_keys);
+            $this->less_relevant_users = $filtered_query->take($this->user_results_amount)->get()->except($most_relevant_users_keys);
 
             // Count the total number of results.
             $this->users_count = ($filtered_query->count() - $this->most_relevant_users->count()) + $this->most_relevant_users->count();
@@ -224,7 +231,7 @@ class SearchController extends Controller
             }
         } else {
             // Execute the query to fetch less relevant results.
-            $this->less_relevant_guitars = $filtered_query->take(4)->get()->except($most_relevant_guitars_keys);
+            $this->less_relevant_guitars = $filtered_query->take($this->guitar_results_amount)->get()->except($most_relevant_guitars_keys);
 
             // Count the total number of results.
             $this->guitars_count = ($filtered_query->count() - $this->most_relevant_guitars->count()) + $this->most_relevant_guitars->count();
