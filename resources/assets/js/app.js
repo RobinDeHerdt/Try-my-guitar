@@ -72,13 +72,13 @@ const app = new Vue({
 
     methods: {
         fetchMessages(channel_id) {
-            axios.get(`/api/chat/channel/${channel_id}/messages`).then(response => {
+            axios.get(`/channel/${channel_id}/messages`).then(response => {
                 this.messages = response.data;
             });
         },
 
         fetchChannel(channel_id) {
-            axios.get(`/api/chat/channel/${channel_id}`).then(response => {
+            axios.get(`/channel/${channel_id}`).then(response => {
                 this.channel = response.data[0];
                 this.channelname = this.channel.name;
             });
@@ -87,11 +87,11 @@ const app = new Vue({
         addMessage(message) {
             this.messages.push(message);
             var channel_id = document.getElementById('channel-id').value;
-            axios.post(`/api/chat/channel/${channel_id}/messages/send`, message);
+            axios.post(`/channel/${channel_id}/messages/send`, message);
         },
 
         fetchUserChannels() {
-            axios.get(`/api/chat/channels`).then(response => {
+            axios.get(`/channels`).then(response => {
                 this.channels = response.data;
 
                 /**
@@ -162,7 +162,7 @@ const app = new Vue({
         },
 
         messageSeen(channel_id) {
-            axios.post(`/api/chat/channel/${channel_id}/messages/seen`);
+            axios.post(`/channel/${channel_id}/messages/seen`);
         },
     }
 });
