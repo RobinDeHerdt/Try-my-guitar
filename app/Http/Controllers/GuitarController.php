@@ -58,24 +58,17 @@ class GuitarController extends Controller
             })->take(10)->get()->except(['id' => $guitar->id]);
         }
 
-        $owners_query       = $guitar->owners();
-        $experiencers_query = $guitar->experiencers();
-
-        $owners             = $owners_query->take(4)->get();
-        $experiencers       = $experiencers_query->take(4)->get();
-
-        $owner_count        = $owners_query->count();
-        $experiencer_count  = $experiencers_query->count();
+        $users_query        = $guitar->users();
+        $guitar_users       = $users_query->orderBy('owned', 'desc')->take(4)->get();
+        $guitar_users_count = $users_query->count();
 
         return view('guitar.show', [
-            'owners'            => $owners,
-            'owner_count'       => $owner_count,
-            'experiencers'      => $experiencers,
-            'experiencer_count' => $experiencer_count,
-            'guitar'            => $guitar,
-            'brand_guitars'     => $brand_guitars,
-            'similar_guitars'   => $similar_guitars,
-            'user_coords'       => json_encode($user_coords),
+            'guitar_users'          => $guitar_users,
+            'guitar_users_count'    => $guitar_users_count,
+            'guitar'                => $guitar,
+            'brand_guitars'         => $brand_guitars,
+            'similar_guitars'       => $similar_guitars,
+            'user_coords'           => json_encode($user_coords),
         ]);
     }
 

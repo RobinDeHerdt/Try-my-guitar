@@ -13,7 +13,7 @@ class Guitar extends Model
      */
     public function users()
     {
-        return $this->belongsToMany('App\User', 'user_guitar');
+        return $this->belongsToMany('App\User', 'user_guitar')->withPivot('experience', 'owned');
     }
 
     /**

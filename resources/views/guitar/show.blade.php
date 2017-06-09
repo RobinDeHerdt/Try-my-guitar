@@ -51,39 +51,10 @@
             </div>
             <input type="hidden" id="user-location" value="{{ $user_coords }}">
             <input type="hidden" id="guitar-id" value="{{ $guitar->id }}">
-            @if($owners->isNotEmpty())
-                <h2>People that own this guitar</h2>
+            @if($guitar_users->isNotEmpty())
+                <h2>Experiences</h2>
                 <div class="row">
-                    @foreach($owners as $user)
-                        <div class="col-md-6">
-                            <div class="experience-container">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="experience-user">
-                                            <a href="{{ route('profile.show', ['user' => $user->id]) }}" title="{{ $user->fullName() }}">
-                                                <div class="experience-user-image" style="background-image: url({{ Storage::disk('public')->url($user->image_uri) }})"></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="experience-text">
-                                            <blockquote>
-                                                <br>
-                                                <p>{{ $user->pivot->experience }}</p>
-                                                <span> - <strong>{{ $user->fullName() }}</strong></span>
-                                            </blockquote>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            @endif
-            @if($experiencers->isNotEmpty())
-                <h2>People that have experienced this guitar</h2>
-                <div class="row">
-                    @foreach($experiencers as $user)
+                    @foreach($guitar_users as $user)
                         <div class="col-md-6">
                             <div class="experience-container">
                                 <div class="row">
