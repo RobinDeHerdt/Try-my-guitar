@@ -45,7 +45,10 @@
                     <div id="user-filters" style="display: none">
                         <div class="row">
                             <div class="col-md-12">
-                                <h4>User filters here</h4>
+                                <h4>Location</h4>
+                                <div class="col-md-2">
+                                    <label class="checkbox-inline"><input type="checkbox" name="proximity">Proximity search</label>
+                                </div>
                             </div>
                         </div>
                     </div>

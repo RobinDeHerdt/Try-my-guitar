@@ -16,7 +16,7 @@ trait Filter
      * @param  array  $filter_brands
      * @return \Illuminate\Database\Eloquent\Relations\belongsToMany  $query
      */
-    protected function filterResults($query, $filter_types, $filter_brands)
+    protected function filterGuitars($query, $filter_types, $filter_brands)
     {
         if ($filter_types) {
             foreach ($filter_types as $filter_type) {

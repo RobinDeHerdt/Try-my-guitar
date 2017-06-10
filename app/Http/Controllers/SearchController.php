@@ -9,6 +9,8 @@ use App\GuitarBrand;
 use App\GuitarType;
 use App\Guitar;
 use App\User;
+use Auth;
+use DB;
 
 /**
  * Class SearchController
@@ -93,6 +95,33 @@ class SearchController extends Controller
                     // Return empty guitar collections to avoid errors in the view.
                     $this->most_relevant_guitars = collect();
                     $this->less_relevant_guitars = collect();
+
+                    if ($request->proximity) {
+                        // Temporary test values.
+                        $lat    = 41.0248086;
+                        $lng    = -73.76301419999999;
+                        $radius = 1000;
+
+                        // Get all users within the specified radius (in km).
+                        // Variable 'distance' is included with the response.
+                        $results = DB::table('users')
+                            ->select('*', (
+                                DB::raw(
+                                    '(
+                                       6371 *
+                                       acos(cos(radians(' . $lat . ')) * 
+                                       cos(radians(location_lat)) * 
+                                       cos(radians(location_lng) - 
+                                       radians(' . $lng . ')) + 
+                                       sin(radians(' . $lat . ')) * 
+                                       sin(radians(location_lat )))
+                                    ) AS distance'
+                                )
+                            ))
+                            ->havingRaw('distance < ' . $radius)
+                            ->orderBy('distance')
+                            ->get();
+                    }
                     break;
 
                 default:
@@ -208,14 +237,14 @@ class SearchController extends Controller
         });
 
         // Run the query through brand and category filters and execute it to get the most relevant results.
-        $this->most_relevant_guitars = $this->filterResults($most_relevant_query, $this->filter_types, $this->filter_brands)->get();
+        $this->most_relevant_guitars = $this->filterGuitars($most_relevant_query, $this->filter_types, $this->filter_brands)->get();
 
         // Get the id's of all the most relevant search results.
         // Use them to prevent duplicate result listing in the less relevant results section.
         $most_relevant_guitars_keys = $this->most_relevant_guitars->pluck('id')->all();
 
         // Run the query through brand and category filters. Don't execute it yet.
-        $filtered_query = $this->filterResults($less_relevant_query, $this->filter_types, $this->filter_brands);
+        $filtered_query = $this->filterGuitars($less_relevant_query, $this->filter_types, $this->filter_brands);
 
         // Check if results should be paginated or not.
         if ($paginate_results) {
