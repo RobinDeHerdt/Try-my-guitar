@@ -182,6 +182,19 @@ body {
   }
 }
 
+#range-min {
+  float: left;
+}
+
+#range-max {
+  float: right;
+}
+
+.range-slider {
+  text-align: center;
+}
+
+
 @media (max-width: 767px) {
   .icon-full {
     display: none;

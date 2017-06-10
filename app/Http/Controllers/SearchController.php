@@ -58,11 +58,13 @@ class SearchController extends Controller
 
     /**
      * Filter variables.
-     * @var array
+     * @var mixed
      */
     private $filter_brands   = [];
     private $filter_types    = [];
     private $filter_category = [];
+    private $filter_proximity;
+    private $filter_proximity_range;
 
     /**
      * Display the results page.
@@ -77,9 +79,11 @@ class SearchController extends Controller
 
         // Check if the input is not empty.
         if (!empty($input) && !ctype_space($input)) {
-            $this->filter_category  = $request->query('category');
-            $this->filter_types     = ($request->query('types') ? $request->query('types') : []);
-            $this->filter_brands    = ($request->query('brands') ? $request->query('brands') : []);
+            $this->filter_category          = $request->query('category');
+            $this->filter_types             = ($request->query('types') ? $request->query('types') : []);
+            $this->filter_brands            = ($request->query('brands') ? $request->query('brands') : []);
+            $this->filter_proximity         = ($request->query('proximity') === null ? false : true);
+            $this->filter_proximity_range   = $request->query('range');
 
             switch ($this->filter_category) {
                 case 'guitar':
@@ -117,6 +121,8 @@ class SearchController extends Controller
             'filter_types'                  => $this->filter_types,
             'filter_brands'                 => $this->filter_brands,
             'filter_category'               => $this->filter_category,
+            'filter_proximity'              => $this->filter_proximity,
+            'filter_proximity_range'        => $this->filter_proximity_range,
             'search_term'                   => $input,
             'types'                         => $types,
             'brands'                        => $brands,
@@ -172,7 +178,7 @@ class SearchController extends Controller
         // Check if results should be paginated or not.
         if ($paginate_results) {
             // Run the query through user filters. Don't execute yet.
-            $filtered_query = $this->filterUsers($less_relevant_query, $haversine, true);
+            $filtered_query = $this->filterUsers($less_relevant_query, $haversine, $this->filter_proximity, $this->filter_proximity_range);
 
             // Execute the query to fetch less relevant results. Apply pagination.
             $this->less_relevant_users = $filtered_query->whereNotIn('id', $most_relevant_users_keys)->paginate($this->user_pagination_amount);
@@ -186,7 +192,7 @@ class SearchController extends Controller
             }
         } else {
             // Run the query through user filters. Don't execute yet.
-            $filtered_query = $this->filterUsers($less_relevant_query, $haversine, false);
+            $filtered_query = $this->filterUsers($less_relevant_query, $haversine, $this->filter_proximity, $this->filter_proximity_range);
 
             // Execute the query to fetch less relevant results.
             $this->less_relevant_users = $filtered_query->take($this->user_results_amount)->get()->except($most_relevant_users_keys);

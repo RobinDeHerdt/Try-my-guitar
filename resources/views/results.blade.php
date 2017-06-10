@@ -48,7 +48,17 @@
                                 <h4>Location</h4>
                             </div>
                             <div class="col-md-2">
-                                <label class="checkbox-inline"><input type="checkbox" name="proximity">Sort by proximity</label>
+                                <label class="checkbox-inline"><input type="checkbox" name="proximity" {{ $filter_proximity ? 'checked' : ''}}>Sort by proximity</label>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="range-slider">
+                                    <label>Get users within range:</label><br>
+                                    <span id="range-value"></span>
+                                    <div id="proximity-slider"></div>
+                                    <span id="range-min"></span>
+                                    <input type="hidden" name="range" id="proximity-range" value="{{ $filter_proximity_range }}">
+                                    <span id="range-max"></span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -221,6 +231,24 @@
 
 @section('scripts')
     <script>
+        $( "#proximity-slider" ).slider({
+            min: 1,
+            max: 10000,
+            value: $('#proximity-range').val(),
+            create: function(event, ui) {
+                $('#range-min').text($(this).slider("option", "min") + ' km');
+                $('#range-value').text($(this).slider("value") + ' km');
+                $('#range-max').text($(this).slider("option", "max") + ' km');
+                $('#proximity-range').val($(this).slider("value"));
+            },
+            change: function( event, ui ) {
+                $('#proximity-range').val($(this).slider("value"));
+                $('#range-value').text($(this).slider("value") + ' km');
+            },
+        });
+
+
+
         $( "#search-input" ).autocomplete({
             source: "{{ route('search.autocomplete') }}",
             minLength: 1,
@@ -278,6 +306,7 @@
                 case 'guitar':
                     $("#user-filters").hide();
                     $("#guitar-filters").show();
+                    $("input[name='proximity']:checkbox").prop("checked",false);
                     break;
 
                 default:
@@ -285,6 +314,7 @@
                     $("#user-filters").hide();
                     $("input[name='types[]']:checkbox").prop("checked",false);
                     $("input[name='brands[]']:checkbox").prop("checked",false);
+                    $("input[name='proximity']:checkbox").prop("checked",false);
             }
         }
     </script>

@@ -45,14 +45,11 @@ trait Filter
      * @param  \Illuminate\Database\Eloquent\Relations\belongsToMany  $query
      * @param  string  $haversine
      * @param  integer  $radius
-     * @param  boolean  $order
+     * @param  boolean  $orderResults
      * @return \Illuminate\Database\Eloquent\Relations\belongsToMany  $query
      */
-    protected function filterUsers($query, $haversine, $orderResults, $radius = null)
+    protected function filterUsers($query, $haversine, $orderResults, $radius)
     {
-        // Temporary variable for testing purposes.
-        $radius = 9000;
-
         if ($radius) {
             // Get all users within the specified radius (in km).
             // For some reason 'having' is not working with pagination/counting results.
