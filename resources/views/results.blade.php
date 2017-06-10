@@ -46,9 +46,9 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <h4>Location</h4>
-                                <div class="col-md-2">
-                                    <label class="checkbox-inline"><input type="checkbox" name="proximity">Proximity search</label>
-                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="checkbox-inline"><input type="checkbox" name="proximity">Sort by proximity</label>
                             </div>
                         </div>
                     </div>
@@ -185,6 +185,7 @@
                                 </a>
                                 <div class="search-result-profile-image" style="background-image: url({{ Storage::disk('public')->url($user->image_uri) }})"></div>
                                 <h3>{{ $user->fullName()  }}</h3>
+                                <span>&#177; {{ round($user->distance) }} km away</span>
                             </div>
                         </div>
                     @endforeach
@@ -199,6 +200,7 @@
                                 </a>
                                 <div class="search-result-profile-image" style="background-image: url({{ Storage::disk('public')->url($user->image_uri) }})"></div>
                                 <h3>{{ $user->fullName()  }}</h3>
+                                <span>&#177; {{ round($user->distance) }} km away</span>
                             </div>
                         </div>
                     @endforeach

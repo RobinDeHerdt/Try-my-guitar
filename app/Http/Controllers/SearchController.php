@@ -9,7 +9,6 @@ use App\GuitarBrand;
 use App\GuitarType;
 use App\Guitar;
 use App\User;
-use Auth;
 use DB;
 
 /**
@@ -95,33 +94,6 @@ class SearchController extends Controller
                     // Return empty guitar collections to avoid errors in the view.
                     $this->most_relevant_guitars = collect();
                     $this->less_relevant_guitars = collect();
-
-                    if ($request->proximity) {
-                        // Temporary test values.
-                        $lat    = 41.0248086;
-                        $lng    = -73.76301419999999;
-                        $radius = 1000;
-
-                        // Get all users within the specified radius (in km).
-                        // Variable 'distance' is included with the response.
-                        $results = DB::table('users')
-                            ->select('*', (
-                                DB::raw(
-                                    '(
-                                       6371 *
-                                       acos(cos(radians(' . $lat . ')) * 
-                                       cos(radians(location_lat)) * 
-                                       cos(radians(location_lng) - 
-                                       radians(' . $lng . ')) + 
-                                       sin(radians(' . $lat . ')) * 
-                                       sin(radians(location_lat )))
-                                    ) AS distance'
-                                )
-                            ))
-                            ->havingRaw('distance < ' . $radius)
-                            ->orderBy('distance')
-                            ->get();
-                    }
                     break;
 
                 default:
@@ -162,6 +134,11 @@ class SearchController extends Controller
         // Split the string into terms and remove whitespace from both sides of the string.
         $terms = preg_split('/\s+/', $input, -1, PREG_SPLIT_NO_EMPTY);
 
+        // Temporary test values.
+        $lat        = 41.0248086;
+        $lng        = -73.76301419999999;
+        $haversine  = '(6371 * acos(cos(radians(' . $lat . ')) * cos(radians(location_lat)) * cos(radians(location_lng) - radians(' . $lng . ')) + sin(radians(' . $lat . ')) * sin(radians(location_lat ))))';
+
         /**
          * Set up a query to fetch the most relevant results. Don't execute yet.
          *
@@ -169,7 +146,8 @@ class SearchController extends Controller
          * because auto complete applies the same format.
          */
         if (count($terms) >= 2) {
-            $this->most_relevant_users = User::where('first_name', 'like', $terms[0])
+            $this->most_relevant_users = User::selectRaw("*, {$haversine} AS distance")
+                ->where('first_name', 'like', $terms[0])
                 ->where('last_name', 'like', $terms[1])
                 ->take(6)
                 ->get();
@@ -179,27 +157,27 @@ class SearchController extends Controller
         }
 
         // Set up a query to fetch less relevant results. Don't execute yet.
-        $less_relevant_query = User::where(function ($q) use ($terms) {
-            foreach ($terms as $term) {
-                $q->orWhere('first_name', 'like', '%'.$term.'%')
-                    ->orWhere('last_name', 'like', '%'.$term.'%');
-            }
-        });
+        $less_relevant_query = User::selectRaw("*, {$haversine} AS distance")
+            ->where(function ($q) use ($terms) {
+                foreach ($terms as $term) {
+                    $q->orWhere('first_name', 'like', '%'.$term.'%')
+                      ->orWhere('last_name', 'like', '%'.$term.'%');
+                }
+            });
 
         // Get the id's of all the most relevant search results.
         // Use them to prevent duplicate result listing in the less relevant results section.
         $most_relevant_users_keys = $this->most_relevant_users->pluck('id')->all();
 
-        // @todo Add filters here, obviously.
-        // Run the query through user filters. Don't execute yet.
-        $filtered_query = $less_relevant_query;
-
         // Check if results should be paginated or not.
         if ($paginate_results) {
+            // Run the query through user filters. Don't execute yet.
+            $filtered_query = $this->filterUsers($less_relevant_query, $haversine, true);
+
             // Execute the query to fetch less relevant results. Apply pagination.
             $this->less_relevant_users = $filtered_query->whereNotIn('id', $most_relevant_users_keys)->paginate($this->user_pagination_amount);
 
-            // Count the total number of results.
+            // Count the total number of results. For some reason, code fails here because of 'distance' alias.
             $this->users_count = $this->less_relevant_users->total() + $this->most_relevant_users->count();
 
             // Append all query parameters that were received with the initial request.
@@ -207,10 +185,13 @@ class SearchController extends Controller
                 $this->less_relevant_users->appends($input, $value);
             }
         } else {
+            // Run the query through user filters. Don't execute yet.
+            $filtered_query = $this->filterUsers($less_relevant_query, $haversine, false);
+
             // Execute the query to fetch less relevant results.
             $this->less_relevant_users = $filtered_query->take($this->user_results_amount)->get()->except($most_relevant_users_keys);
 
-            // Count the total number of results.
+            // Count the total number of results. For some reason, code fails here because of 'distance' alias.
             $this->users_count = ($filtered_query->count() - $this->most_relevant_users->count()) + $this->most_relevant_users->count();
         }
     }

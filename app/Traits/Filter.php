@@ -2,6 +2,8 @@
 
 namespace App\Traits;
 
+use DB;
+
 /**
  * Trait Filter
  * @package App\Traits
@@ -32,6 +34,34 @@ trait Filter
                     $q->orWhere('brand_id', $filter_brand);
                 }
             });
+        }
+
+        return $query;
+    }
+
+    /**
+     * Filter the 'user search' query.
+     *
+     * @param  \Illuminate\Database\Eloquent\Relations\belongsToMany  $query
+     * @param  string  $haversine
+     * @param  integer  $radius
+     * @param  boolean  $order
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany  $query
+     */
+    protected function filterUsers($query, $haversine, $orderResults, $radius = null)
+    {
+        // Temporary variable for testing purposes.
+        $radius = 9000;
+
+        if ($radius) {
+            // Get all users within the specified radius (in km).
+            // For some reason 'having' is not working with pagination/counting results.
+            if ($orderResults) {
+                $query->orderBy('distance')
+                    ->whereRaw("{$haversine} < ?", [$radius]);
+            } else {
+                $query->whereRaw("{$haversine} < ?", [$radius]);
+            }
         }
 
         return $query;
