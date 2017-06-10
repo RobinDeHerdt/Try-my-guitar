@@ -160,7 +160,13 @@
 
                         marker.addListener('click', function() {
                             infowindow.close();
-                            infowindow.setContent(this.user.first_name + ' ' + this.user.last_name);
+                            infowindow.setContent(
+                                "<div class='center-content'>" +
+                                "<a href='/profile/" + this.user.id + "'><img src='/storage/" + this.user.image_uri + "' width='100'></a>" +
+                                "<br><br><strong>" + this.user.first_name + ' ' + this.user.last_name + "</strong>" +
+                                "<br><span>" + this.user.location + "</span>" +
+                                "</div>"
+                            );
                             infowindow.open(map, this);
                         });
                     }
