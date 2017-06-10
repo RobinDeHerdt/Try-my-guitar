@@ -239,7 +239,10 @@
                 $('#range-min').text($(this).slider("option", "min") + ' km');
                 $('#range-value').text($(this).slider("value") + ' km');
                 $('#range-max').text($(this).slider("option", "max") + ' km');
-                $('#proximity-range').val($(this).slider("value"));
+
+                if(!$('#proximity-range').val()) {
+                    $('#proximity-range').val($(this).slider("option", "max"));
+                }
             },
             change: function( event, ui ) {
                 $('#proximity-range').val($(this).slider("value"));

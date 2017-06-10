@@ -9,6 +9,7 @@ use App\GuitarBrand;
 use App\GuitarType;
 use App\Guitar;
 use App\User;
+use Auth;
 use DB;
 
 /**
@@ -65,6 +66,13 @@ class SearchController extends Controller
     private $filter_category = [];
     private $filter_proximity;
     private $filter_proximity_range;
+
+    /**
+     * Geolocation variables.
+     * @var
+     */
+    private $lat;
+    private $lng;
 
     /**
      * Display the results page.
@@ -140,10 +148,23 @@ class SearchController extends Controller
         // Split the string into terms and remove whitespace from both sides of the string.
         $terms = preg_split('/\s+/', $input, -1, PREG_SPLIT_NO_EMPTY);
 
-        // Temporary test values.
-        $lat        = 41.0248086;
-        $lng        = -73.76301419999999;
-        $haversine  = '(6371 * acos(cos(radians(' . $lat . ')) * cos(radians(location_lat)) * cos(radians(location_lng) - radians(' . $lng . ')) + sin(radians(' . $lat . ')) * sin(radians(location_lat ))))';
+        if (Auth::check()) {
+            $user = Auth::user();
+            if ($user->location_lat && $user->location_lng) {
+                $this->lat = $user->location_lat;
+                $this->lng = $user->location_lng;
+            }
+        }
+
+        if (!isset($this->lat) && !isset($this->lng)) {
+            $ip_address = request()->ip();
+            $user       = geoip($ip_address);
+
+            $this->lat  = $user->lat;
+            $this->lng  = $user->lon;
+        }
+
+        $haversine  = '(6371 * acos(cos(radians(' . $this->lat . ')) * cos(radians(location_lat)) * cos(radians(location_lng) - radians(' . $this->lng . ')) + sin(radians(' . $this->lat . ')) * sin(radians(location_lat ))))';
 
         /**
          * Set up a query to fetch the most relevant results. Don't execute yet.
