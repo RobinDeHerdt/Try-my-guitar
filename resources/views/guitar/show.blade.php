@@ -82,7 +82,7 @@
                 </div>
                 <div class="row"><div class="col-md-4 col-md-offset-4">
                         <div class="big-cta-button">
-                            <a href="#" class="text-uppercase">View all experiences ({{ $guitar_users_count }})</a>
+                            <a href="{{ route('guitar.show.experiences', $guitar->id) }}" class="text-uppercase">View all experiences ({{ $guitar_users_count }})</a>
                         </div>
                     </div>
                 </div>

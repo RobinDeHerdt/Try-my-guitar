@@ -84,4 +84,17 @@ class GuitarController extends Controller
 
         return $users;
     }
+
+    /**
+     * Get all experiences listed for this guitar.
+     *
+     * @param  \App\Guitar  $guitar
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function experiences(Guitar $guitar)
+    {
+        return view('guitar.experiences', [
+            'guitar' => $guitar,
+        ]);
+    }
 }

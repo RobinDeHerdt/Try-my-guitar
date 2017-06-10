@@ -45,7 +45,7 @@ Route::group([
 
     // Guitar related routes.
     Route::get('guitar/{guitar}', 'GuitarController@show')->name('guitar.show');
-    Route::get('guitar/{guitar}/users', 'GuitarController@show')->name('guitar.show.users');
+    Route::get('guitar/{guitar}/experiences', 'GuitarController@experiences')->name('guitar.show.experiences');
     Route::get('brand/{brand}', 'BrandController@show')->name('brand.show');
     Route::get('type/{type}', 'TypeController@show')->name('type.show');
 
