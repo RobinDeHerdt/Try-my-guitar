@@ -38,7 +38,7 @@ class BrandController extends Controller
         }
 
         $query      = $brand->guitars();
-        $guitars    = $this->filterResults($query, $this->filter_types, $this->filter_brands)->paginate(10);
+        $guitars    = $this->filterGuitars($query, $this->filter_types, $this->filter_brands)->paginate(10);
 
         return view('brand.show', [
             'brand'         => $brand,

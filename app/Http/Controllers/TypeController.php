@@ -43,7 +43,7 @@ class TypeController extends Controller
         }
 
         $query      = $type->guitars();
-        $guitars    = $this->filterResults($query, $this->filter_types, $this->filter_brands)->paginate(10);
+        $guitars    = $this->filterGuitars($query, $this->filter_types, $this->filter_brands)->paginate(10);
 
         return view('type.show', [
             'type'              => $type,
