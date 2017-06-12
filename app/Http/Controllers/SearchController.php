@@ -64,6 +64,7 @@ class SearchController extends Controller
     private $filter_brands   = [];
     private $filter_types    = [];
     private $filter_category = [];
+    private $filter_owner;
     private $filter_proximity;
     private $filter_proximity_range;
 
@@ -92,6 +93,7 @@ class SearchController extends Controller
             $this->filter_brands            = ($request->query('brands') ? $request->query('brands') : []);
             $this->filter_proximity         = ($request->query('proximity') === null ? false : true);
             $this->filter_proximity_range   = $request->query('range');
+            $this->filter_owner             = ($request->query('owner') === null ? false : true);
 
             switch ($this->filter_category) {
                 case 'guitar':
@@ -131,6 +133,7 @@ class SearchController extends Controller
             'filter_category'               => $this->filter_category,
             'filter_proximity'              => $this->filter_proximity,
             'filter_proximity_range'        => $this->filter_proximity_range,
+            'filter_owner'                  => $this->filter_owner,
             'search_term'                   => $input,
             'types'                         => $types,
             'brands'                        => $brands,
@@ -199,11 +202,17 @@ class SearchController extends Controller
         // Use them to prevent duplicate result listing in the less relevant results section.
         $most_relevant_users_keys = $this->most_relevant_users->pluck('id')->all();
 
+        // Run the query through user filters. Don't execute yet.
+        $filtered_query = $this->filterUsers(
+            $less_relevant_query,
+            $haversine,
+            $this->filter_proximity,
+            $this->filter_proximity_range,
+            $this->filter_owner
+        );
+
         // Check if results should be paginated or not.
         if ($paginate_results) {
-            // Run the query through user filters. Don't execute yet.
-            $filtered_query = $this->filterUsers($less_relevant_query, $haversine, $this->filter_proximity, $this->filter_proximity_range);
-
             // Execute the query to fetch less relevant results. Apply pagination.
             $this->less_relevant_users = $filtered_query->whereNotIn('id', $most_relevant_users_keys)->paginate($this->user_pagination_amount);
 
@@ -215,9 +224,6 @@ class SearchController extends Controller
                 $this->less_relevant_users->appends($input, $value);
             }
         } else {
-            // Run the query through user filters. Don't execute yet.
-            $filtered_query = $this->filterUsers($less_relevant_query, $haversine, $this->filter_proximity, $this->filter_proximity_range);
-
             // Execute the query to fetch less relevant results.
             $this->less_relevant_users = $filtered_query->take($this->user_results_amount)->get()->except($most_relevant_users_keys);
 
