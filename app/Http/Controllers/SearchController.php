@@ -190,6 +190,9 @@ class SearchController extends Controller
                     $q->orWhere('first_name', 'like', '%'.$term.'%')
                       ->orWhere('last_name', 'like', '%'.$term.'%');
                 }
+            })
+            ->orWhereHas('guitars', function ($q) use ($input) {
+                $q->where('name', $input);
             });
 
         // Get the id's of all the most relevant search results.
