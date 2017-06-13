@@ -19,17 +19,18 @@
                     <div class="alert alert-danger">{{ Session::get('error-message') }}</div>
                 @endif
             </div>
-            @foreach($about_sections as $about_section)
-                <h2 id="{{ strtolower(kebab_case($about_section->title)) }}">{{ $about_section->title }}</h2>
-                <div class="row col-container">
-                    <div class="col-md-6">
-                        <p>{{ $about_section->column_one }}</p>
-                    </div>
-                    <div class="col-md-6">
-                        <p>{{ $about_section->column_two }}</p>
-                    </div>
-                </div>
-            @endforeach
+            <h2 id="meet">Meet people</h2>
+            <div class="row col-container">
+                <span>Content here</span>
+            </div>
+            <h2 id="discover">Discover</h2>
+            <div class="row col-container">
+                <span>Content here</span>
+            </div>
+            <h2 id="crowdsourced">Crowd sourced</h2>
+            <div class="row col-container">
+                <span>Content here</span>
+            </div>
             <h2>Contact</h2>
             <div class="row col-container">
                 <form action="{{ route('contact') }}" method="POST">

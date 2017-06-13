@@ -216,7 +216,8 @@ class SearchController extends Controller
             $this->less_relevant_users = $filtered_query
                 ->whereNotIn('id', $most_relevant_users_keys)
                 ->orWhereHas('guitars', function ($q) use ($input) {
-                    $q->where('name', $input);
+                    $q->where('name', $input)
+                      ->where('owned', true);
                 })->paginate($this->user_pagination_amount);
 
             // Count the total number of results. For some reason, code fails here because of 'distance' alias.
@@ -230,7 +231,8 @@ class SearchController extends Controller
             // Execute the query to fetch less relevant results.
             $this->less_relevant_users = $filtered_query
                 ->orWhereHas('guitars', function ($q) use ($input) {
-                    $q->where('name', $input);
+                    $q->where('name', $input)
+                      ->where('owned', true);
                 })
                 ->take($this->user_results_amount)
                 ->get()
