@@ -51,7 +51,7 @@ Route::group([
 
     // Collection related routes.
     Route::get('collection/autocomplete', 'CollectionController@autoComplete')->name('collection.autocomplete');
-    Route::get('profile/{user}/collection', 'CollectionController@index')->name('collection.index');
+    Route::get('profile/{user}/collection', 'CollectionController@show')->name('collection.show');
     Route::get('collection/add', 'CollectionController@create')->name('collection.create');
     Route::post('collection/store', 'CollectionController@store')->name('collection.store');
 

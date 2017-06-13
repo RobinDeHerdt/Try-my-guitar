@@ -40,19 +40,28 @@
                     @endif
                 </div>
             </div>
-            @if($user->ownedGuitars->isNotEmpty())
-            <h2>Owned guitars</h2>
-            <div class="collection">
-                @foreach($user->ownedGuitars as $guitar)
-                    <a href="{{ route('guitar.show', ['guitar' => $guitar->id]) }}">
-                        <div class="collection-item">
-                            <div style="background-image: url({{ Storage::disk('public')->url($guitar->guitarImages()->first()->image_uri) }}" class="collection-item-image"></div>
-                            <a href="{{ route('guitar.show', ['guitar' => $guitar->id]) }}" class="collection-item-text">{{ $guitar->name }}</a>
+            <div class="row">
+                <div class="col-md-12">
+                    @if($user->ownedGuitars->isNotEmpty())
+                        <h2>Collection ({{ $user->ownedGuitars->count() }})</h2>
+                        <div class="collection">
+                            @foreach($user->ownedGuitars as $guitar)
+                                <div class="collection-item">
+                                    <div style="background-image: url({{ Storage::disk('public')->url($guitar->guitarImages()->first()->image_uri) }}" class="collection-item-image"></div>
+                                    <a href="{{ route('guitar.show', ['guitar' => $guitar->id]) }}" class="collection-item-text">{{ $guitar->name }}</a>
+                                </div>
+                            @endforeach
                         </div>
-                    </a>
-                @endforeach
+                    @endif
+                </div>
             </div>
-            @endif
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                    <div class="big-cta-button">
+                        <a href="{{ route('collection.show', ['id' => $user]) }}">View full collection</a>
+                    </div>
+                </div>
+            </div>
             @if($user->experiencedGuitars->isNotEmpty())
                 <h2>Experienced guitars</h2>
                 <div class="collection">

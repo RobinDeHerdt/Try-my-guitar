@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Guitar;
@@ -28,7 +29,7 @@ class CollectionController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('role:user');
+        $this->middleware('role:user')->except('show');
         $this->middleware(function ($request, $next) {
             $this->user = Auth::user();
 
@@ -39,11 +40,14 @@ class CollectionController extends Controller
     /**
      * Show the specified user's collection.
      *
+     * @param  User $user
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function show(User $user)
     {
-        return view('collection.index');
+        return view('collection.show', [
+            'user' => $user,
+        ]);
     }
 
     /**

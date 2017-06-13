@@ -50,13 +50,13 @@ trait Filter
      */
     protected function filterUsers($query, $haversine, $proximity, $radius)
     {
+        if ($proximity) {
+            $query->orderBy('distance');
+        }
+
         if ($radius) {
             // Get all users within the specified radius (in km).
             // For some reason 'having' is not working with pagination/counting results.
-            if ($proximity) {
-                $query->orderBy('distance');
-            }
-
             $query->whereRaw("{$haversine} < ?", [$radius]);
         }
 

@@ -234,13 +234,13 @@
 @section('scripts')
     <script>
         if(!getUrlParam('range')) {
-            // Replace this by a hidden input field with the max distance value.
-            $('#proximity-range').val(10000);
+            // Set max value as default value.
+            $('#proximity-range').val(1000);
         }
 
         $( "#proximity-slider" ).slider({
             min: 1,
-            max: 10000,
+            max: 1000,
             value: $('#proximity-range').val(),
             create: function(event, ui) {
                 $('#range-min').text($(this).slider("option", "min") + ' km');
