@@ -64,7 +64,6 @@ class SearchController extends Controller
     private $filter_brands   = [];
     private $filter_types    = [];
     private $filter_category = [];
-    private $filter_owner;
     private $filter_proximity;
     private $filter_proximity_range;
 
@@ -93,7 +92,6 @@ class SearchController extends Controller
             $this->filter_brands            = ($request->query('brands') ? $request->query('brands') : []);
             $this->filter_proximity         = ($request->query('proximity') === null ? false : true);
             $this->filter_proximity_range   = $request->query('range');
-            $this->filter_owner             = ($request->query('owner') === null ? false : true);
 
             switch ($this->filter_category) {
                 case 'guitar':
@@ -133,7 +131,6 @@ class SearchController extends Controller
             'filter_category'               => $this->filter_category,
             'filter_proximity'              => $this->filter_proximity,
             'filter_proximity_range'        => $this->filter_proximity_range,
-            'filter_owner'                  => $this->filter_owner,
             'search_term'                   => $input,
             'types'                         => $types,
             'brands'                        => $brands,
@@ -167,7 +164,13 @@ class SearchController extends Controller
             $this->lng  = $user->lon;
         }
 
-        $haversine  = '(6371 * acos(cos(radians(' . $this->lat . ')) * cos(radians(location_lat)) * cos(radians(location_lng) - radians(' . $this->lng . ')) + sin(radians(' . $this->lat . ')) * sin(radians(location_lat ))))';
+        $haversine  =
+            '(6371 * acos(
+                cos(radians(' . $this->lat . ')) * 
+                cos(radians(location_lat)) * 
+                cos(radians(location_lng) - radians(' . $this->lng . ')) + sin(radians(' . $this->lat . ')) * 
+                sin(radians(location_lat ))
+            ))';
 
         /**
          * Set up a query to fetch the most relevant results. Don't execute yet.
@@ -193,9 +196,6 @@ class SearchController extends Controller
                     $q->orWhere('first_name', 'like', '%'.$term.'%')
                       ->orWhere('last_name', 'like', '%'.$term.'%');
                 }
-            })
-            ->orWhereHas('guitars', function ($q) use ($input) {
-                $q->where('name', $input);
             });
 
         // Get the id's of all the most relevant search results.
@@ -207,14 +207,17 @@ class SearchController extends Controller
             $less_relevant_query,
             $haversine,
             $this->filter_proximity,
-            $this->filter_proximity_range,
-            $this->filter_owner
+            $this->filter_proximity_range
         );
 
         // Check if results should be paginated or not.
         if ($paginate_results) {
             // Execute the query to fetch less relevant results. Apply pagination.
-            $this->less_relevant_users = $filtered_query->whereNotIn('id', $most_relevant_users_keys)->paginate($this->user_pagination_amount);
+            $this->less_relevant_users = $filtered_query
+                ->whereNotIn('id', $most_relevant_users_keys)
+                ->orWhereHas('guitars', function ($q) use ($input) {
+                    $q->where('name', $input);
+                })->paginate($this->user_pagination_amount);
 
             // Count the total number of results. For some reason, code fails here because of 'distance' alias.
             $this->users_count = $this->less_relevant_users->total() + $this->most_relevant_users->count();
@@ -225,10 +228,18 @@ class SearchController extends Controller
             }
         } else {
             // Execute the query to fetch less relevant results.
-            $this->less_relevant_users = $filtered_query->take($this->user_results_amount)->get()->except($most_relevant_users_keys);
+            $this->less_relevant_users = $filtered_query
+                ->orWhereHas('guitars', function ($q) use ($input) {
+                    $q->where('name', $input);
+                })
+                ->take($this->user_results_amount)
+                ->get()
+                ->except($most_relevant_users_keys);
 
             // Count the total number of results. For some reason, code fails here because of 'distance' alias.
-            $this->users_count = ($filtered_query->count() - $this->most_relevant_users->count()) + $this->most_relevant_users->count();
+            $this->users_count =
+                ($filtered_query->count() - $this->most_relevant_users->count())
+                + $this->most_relevant_users->count();
         }
     }
 
@@ -254,19 +265,29 @@ class SearchController extends Controller
         });
 
         // Run the query through brand and category filters and execute it to get the most relevant results.
-        $this->most_relevant_guitars = $this->filterGuitars($most_relevant_query, $this->filter_types, $this->filter_brands)->get();
+        $this->most_relevant_guitars = $this->filterGuitars(
+            $most_relevant_query,
+            $this->filter_types,
+            $this->filter_brands
+        )->get();
 
         // Get the id's of all the most relevant search results.
         // Use them to prevent duplicate result listing in the less relevant results section.
         $most_relevant_guitars_keys = $this->most_relevant_guitars->pluck('id')->all();
 
         // Run the query through brand and category filters. Don't execute it yet.
-        $filtered_query = $this->filterGuitars($less_relevant_query, $this->filter_types, $this->filter_brands);
+        $filtered_query = $this->filterGuitars(
+            $less_relevant_query,
+            $this->filter_types,
+            $this->filter_brands
+        );
 
         // Check if results should be paginated or not.
         if ($paginate_results) {
             // Execute the query to fetch less relevant results. Apply pagination.
-            $this->less_relevant_guitars = $filtered_query->whereNotIn('id', $most_relevant_guitars_keys)->paginate($this->guitar_pagination_amount);
+            $this->less_relevant_guitars = $filtered_query
+                ->whereNotIn('id', $most_relevant_guitars_keys)
+                ->paginate($this->guitar_pagination_amount);
 
             // Count the total number of results.
             $this->guitars_count = $this->less_relevant_guitars->total() + $this->most_relevant_guitars->count();
@@ -277,10 +298,15 @@ class SearchController extends Controller
             }
         } else {
             // Execute the query to fetch less relevant results.
-            $this->less_relevant_guitars = $filtered_query->take($this->guitar_results_amount)->get()->except($most_relevant_guitars_keys);
+            $this->less_relevant_guitars = $filtered_query
+                ->take($this->guitar_results_amount)
+                ->get()
+                ->except($most_relevant_guitars_keys);
 
             // Count the total number of results.
-            $this->guitars_count = ($filtered_query->count() - $this->most_relevant_guitars->count()) + $this->most_relevant_guitars->count();
+            $this->guitars_count =
+                ($filtered_query->count() - $this->most_relevant_guitars->count())
+                + $this->most_relevant_guitars->count();
         }
     }
 

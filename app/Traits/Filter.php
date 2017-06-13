@@ -46,23 +46,18 @@ trait Filter
      * @param  string  $haversine
      * @param  boolean  $proximity
      * @param  integer  $radius
-     * @param  boolean  $owner
      * @return \Illuminate\Database\Eloquent\Relations\belongsToMany  $query
      */
-    protected function filterUsers($query, $haversine, $proximity, $radius, $owner)
+    protected function filterUsers($query, $haversine, $proximity, $radius)
     {
         if ($radius) {
             // Get all users within the specified radius (in km).
             // For some reason 'having' is not working with pagination/counting results.
             if ($proximity) {
-                $query->orderBy('distance')->whereRaw("{$haversine} < ?", [$radius]);
-            } else {
-                $query->whereRaw("{$haversine} < ?", [$radius]);
+                $query->orderBy('distance');
             }
-        }
 
-        if ($owner) {
-            $query->whereHas('guitars');
+            $query->whereRaw("{$haversine} < ?", [$radius]);
         }
 
         return $query;

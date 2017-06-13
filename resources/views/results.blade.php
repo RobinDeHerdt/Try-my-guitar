@@ -45,12 +45,6 @@
                     <div id="user-filters" style="display: none">
                         <div class="row">
                             <div class="col-md-12">
-                                <h4>Guitars</h4>
-                            </div>
-                            <div class="col-md-2">
-                                <label class="checkbox-inline"><input type="checkbox" name="owner" {{ $filter_owner ? 'checked' : ''}}>Guitar owner</label>
-                            </div>
-                            <div class="col-md-12">
                                 <h4>Location</h4>
                             </div>
                             <div class="col-md-2">
@@ -317,7 +311,6 @@
                     $("#user-filters").hide();
                     $("#guitar-filters").show();
                     $("input[name='proximity']:checkbox").prop("checked",false);
-                    $("input[name='owner']:checkbox").prop("checked",false);
                     $("#proximity-range").prop("disabled", true);
                     break;
 
@@ -327,7 +320,6 @@
                     $("input[name='types[]']:checkbox").prop("checked",false);
                     $("input[name='brands[]']:checkbox").prop("checked",false);
                     $("input[name='proximity']:checkbox").prop("checked",false);
-                    $("input[name='owner']:checkbox").prop("checked",false);
                     $("#proximity-range").prop("disabled", true);
             }
         }
