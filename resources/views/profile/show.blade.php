@@ -22,27 +22,33 @@
             @if($user->location)
                 <span class="profile-location"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ $user->location }}</span>
             @endif
-            <div class="row">
-                <div class="col-md-2 col-md-offset-5">
-                    @if(Auth::check())
-                        @if ($user->id === Auth::user()->id)
+            @if(Auth::check())
+                @if ($user->id === Auth::user()->id)
+                    <div class="row">
+                        <div class="col-md-2 col-md-offset-5">
                             <div class="big-cta-button">
                                 <a href="{{ route('profile.edit') }}">Edit profile</a>
                             </div>
-                        @else
+                        </div>
+                    </div>
+                @else
+                    <div class="row">
+                        <div class="col-md-2 col-md-offset-5">
                             <div class="big-cta-button">
                                 <a href="{{ route('profile.invite', ['id' => $user->id]) }}">Invite to chat</a>
                             </div>
-                            <div class="big-cta-button">
-                                <a href="{{ route('report.create', ['id' => $user->id]) }}">Report</a>
+                        </div>
+                        <div class="col-md-2 col-md-offset-3">
+                            <div class="report-button">
+                                <a href="{{ route('report.create', ['id' => $user->id]) }}">Report profile</a>
                             </div>
-                        @endif
-                    @endif
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    @if($user->ownedGuitars->isNotEmpty())
+                        </div>
+                    </div>
+                @endif
+            @endif
+            @if($user->ownedGuitars->isNotEmpty())
+                <div class="row">
+                    <div class="col-md-12">
                         <h2>Collection ({{ $user->ownedGuitars->count() }})</h2>
                         <div class="collection">
                             @foreach($user->ownedGuitars as $guitar)
@@ -52,16 +58,16 @@
                                 </div>
                             @endforeach
                         </div>
-                    @endif
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4 col-md-offset-4">
-                    <div class="big-cta-button">
-                        <a href="{{ route('collection.show', ['id' => $user]) }}">View full collection</a>
                     </div>
                 </div>
-            </div>
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-4">
+                        <div class="big-cta-button">
+                            <a href="{{ route('collection.show', ['id' => $user]) }}">View full collection</a>
+                        </div>
+                    </div>
+                </div>
+            @endif
             @if($user->experiencedGuitars->isNotEmpty())
                 <h2>Experienced guitars</h2>
                 <div class="collection">

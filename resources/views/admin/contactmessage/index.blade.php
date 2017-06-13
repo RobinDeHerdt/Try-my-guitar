@@ -43,7 +43,7 @@
                 {{ $contact_messages->links() }}
             @else
                 <div class="no-results">
-                    <h4>No articles to be displayed</h4>
+                    <h4>No contact messages to be displayed</h4>
                 </div>
             @endif
         </div>

@@ -19,7 +19,7 @@ class AdminController extends Controller
     public function index()
     {
         $contact_messages = ContactMessage::where('seen', false)->get();
-        $reports = Report::where('reviewed', false)->get();
+        $reports = Report::where('reviewed', false)->orderBy('created_at', 'desc')->get();
 
         return view('admin.dashboard', [
             'contact_messages' => $contact_messages,

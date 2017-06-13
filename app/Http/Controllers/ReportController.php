@@ -29,7 +29,7 @@ class ReportController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('role:user')->except('show');
+        $this->middleware('role:user');
         $this->middleware(function ($request, $next) {
             $this->user = Auth::user();
 
