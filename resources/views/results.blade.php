@@ -50,9 +50,11 @@
                             <div class="col-md-2">
                                 <label class="checkbox-inline"><input type="checkbox" name="proximity" {{ $filter_proximity ? 'checked' : ''}}>Sort by proximity</label>
                             </div>
+                            <div class="col-md-2">
+                                <label class="checkbox-inline"><input type="checkbox" id="range-toggle" {{ $filter_proximity_range ? 'checked' : ''}}>Filter range</label>
+                            </div>
                             <div class="col-md-4">
-                                <div class="range-slider">
-                                    <label>Get users within range:</label><br>
+                                <div id="range-slider">
                                     <span id="range-value"></span>
                                     <div id="proximity-slider"></div>
                                     <span id="range-min"></span>
@@ -231,18 +233,19 @@
 
 @section('scripts')
     <script>
+        if(!getUrlParam('range')) {
+            // Replace this by a hidden input field with the max distance value.
+            $('#proximity-range').val(10000);
+        }
+
         $( "#proximity-slider" ).slider({
             min: 1,
             max: 10000,
             value: $('#proximity-range').val(),
             create: function(event, ui) {
                 $('#range-min').text($(this).slider("option", "min") + ' km');
-                $('#range-value').text($(this).slider("value") + ' km');
+                $('#range-value').text($(this).slider("option", "max") + ' km');
                 $('#range-max').text($(this).slider("option", "max") + ' km');
-
-                if(!$('#proximity-range').val()) {
-                    $('#proximity-range').val($(this).slider("option", "max"));
-                }
             },
             change: function( event, ui ) {
                 $('#proximity-range').val($(this).slider("value"));
@@ -297,6 +300,10 @@
             showSpecificFilters($("input[name='category']:checked").val());
         });
 
+        $("#range-toggle").change(function() {
+            showSpecificFilters($("input[name='category']:checked").val());
+        });
+
         function showSpecificFilters(category) {
             switch(category)  {
                 case 'user':
@@ -304,13 +311,23 @@
                     $("#user-filters").show();
                     $("input[name='types[]']:checkbox").prop("checked",false);
                     $("input[name='brands[]']:checkbox").prop("checked",false);
-                    $("#proximity-range").prop("disabled", false);
+                    if($("#range-toggle").is(":checked")) {
+                        $("#range-slider").show();
+                        $("#proximity-range").prop("disabled", false);
+                    } else {
+                        $("#range-slider").hide();
+                        $("#proximity-range").prop("disabled", true);
+                    }
+
                     break;
 
                 case 'guitar':
                     $("#user-filters").hide();
                     $("#guitar-filters").show();
                     $("input[name='proximity']:checkbox").prop("checked",false);
+                    $("#proximity-range").prop("disabled", true);
+                    $("#range-slider").hide();
+                    $("#range-toggle").prop("checked",false);
                     $("#proximity-range").prop("disabled", true);
                     break;
 
@@ -320,6 +337,7 @@
                     $("input[name='types[]']:checkbox").prop("checked",false);
                     $("input[name='brands[]']:checkbox").prop("checked",false);
                     $("input[name='proximity']:checkbox").prop("checked",false);
+                    $("#range-toggle").prop("checked",false);
                     $("#proximity-range").prop("disabled", true);
             }
         }
