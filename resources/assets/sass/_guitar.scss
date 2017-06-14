@@ -60,6 +60,17 @@
       background-position: top;
     }
 
+    .experience-guitar-image {
+      width: 95%;
+      margin-left: 2.5%;
+      margin-bottom: 10px;
+      margin-top: 10px;
+      height: 140px;
+      background-size: contain;
+      background-position: top;
+      background-repeat: no-repeat;
+    }
+
     .experience-user-name {
       top: 5px;
       position: relative;
@@ -68,6 +79,7 @@
 
   .experience-text {
     margin-left: -15px;
+    text-align: left;
   }
 
   blockquote {

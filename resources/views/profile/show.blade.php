@@ -69,16 +69,38 @@
                 </div>
             @endif
             @if($user->experiencedGuitars->isNotEmpty())
-                <h2>Experienced guitars</h2>
-                <div class="collection">
+                <h2>Experiences ({{ $user->experiencedGuitars->count() }})</h2>
+                <div class="row">
                     @foreach($user->experiencedGuitars as $guitar)
-                        <a href="{{ route('guitar.show', ['guitar' => $guitar->id]) }}">
-                            <div class="collection-item">
-                                <div style="background-image: url({{ Storage::disk('public')->url($guitar->guitarImages()->first()->image_uri) }}" class="collection-item-image"></div>
-                                <a href="{{ route('guitar.show', ['guitar' => $guitar->id]) }}" class="collection-item-text">{{ $guitar->name }}</a>
+                        <div class="col-md-6">
+                            <div class="experience-container">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="experience-user">
+                                            <a href="{{ route('profile.show', ['guitar' => $guitar->id]) }}" title="{{ $guitar->name }}">
+                                                <div class="experience-guitar-image" style="background-image: url({{ Storage::disk('public')->url($guitar->guitarImages()->first()->image_uri) }})"></div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="experience-text">
+                                            <blockquote>
+                                                <br>
+                                                <p>{{ str_limit($guitar->pivot->experience, 150) }}</p>
+                                            </blockquote>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </a>
+                        </div>
                     @endforeach
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-4">
+                        <div class="big-cta-button">
+                            <a href="{{ route('collection.show', ['id' => $user]) }}">View all experiences</a>
+                        </div>
+                    </div>
                 </div>
             @endif
         </div>
