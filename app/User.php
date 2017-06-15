@@ -59,7 +59,7 @@ class User extends Authenticatable
      *
      * @return \Illuminate\Database\Eloquent\Relations\hasMany
      */
-    public function received_reports()
+    public function receivedReports()
     {
         return $this->hasMany('App\Report', 'reported_id');
     }
@@ -69,7 +69,7 @@ class User extends Authenticatable
      *
      * @return \Illuminate\Database\Eloquent\Relations\hasMany
      */
-    public function sent_reports()
+    public function sentReports()
     {
         return $this->hasMany('App\Report', 'reporter_id');
     }
@@ -93,7 +93,7 @@ class User extends Authenticatable
      */
     public function guitars()
     {
-        return $this->belongsToMany('App\Guitar', 'user_guitar');
+        return $this->belongsToMany('App\Guitar', 'user_guitar')->withPivot('experience', 'owned');
     }
 
     /**

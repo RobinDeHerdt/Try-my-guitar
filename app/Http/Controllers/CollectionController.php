@@ -78,7 +78,7 @@ class CollectionController extends Controller
 
             Session::flash('success-message', $guitar->name . ' (' . $guitar->guitarBrand->name . ')' . ' was added to your collection!');
         } else {
-            Session::flash('info-message', $guitar->name . ' (' . $guitar->guitarBrand->name . ')' . ' was already a part of your collection!');
+            Session::flash('info-message', $guitar->name . ' (' . $guitar->guitarBrand->name . ')' . ' is already a part of your collection!');
         }
 
         return back();
