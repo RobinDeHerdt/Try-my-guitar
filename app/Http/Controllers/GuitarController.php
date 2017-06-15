@@ -60,11 +60,12 @@ class GuitarController extends Controller
 
         $users_query        = $guitar->users();
         $guitar_users       = $users_query->orderBy('owned', 'desc')->take(4)->get();
-        $guitar_users_count = $users_query->count();
+
+        $guitar_owner_count = $guitar->owners()->count();
 
         return view('guitar.show', [
             'guitar_users'          => $guitar_users,
-            'guitar_users_count'    => $guitar_users_count,
+            'guitar_owner_count'    => $guitar_owner_count,
             'guitar'                => $guitar,
             'brand_guitars'         => $brand_guitars,
             'similar_guitars'       => $similar_guitars,
