@@ -234,6 +234,7 @@
 @section('scripts')
     <script>
         if(!getUrlParam('range')) {
+            console.log(getUrlParam('range'));
             // Set max value as default value.
             $('#proximity-range').val(1000);
         }
@@ -244,7 +245,7 @@
             value: $('#proximity-range').val(),
             create: function(event, ui) {
                 $('#range-min').text($(this).slider("option", "min") + ' km');
-                $('#range-value').text($(this).slider("option", "max") + ' km');
+                $('#range-value').text($('#proximity-range').val() + ' km');
                 $('#range-max').text($(this).slider("option", "max") + ' km');
             },
             change: function( event, ui ) {
