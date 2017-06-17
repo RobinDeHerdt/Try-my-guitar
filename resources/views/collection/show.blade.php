@@ -35,11 +35,11 @@
                             <hr>
                             <div class="row">
                                 <div class="col-md-5 col-md-offset-1">
-                                    <a href="{{ route('guitar.show', ['id' => $guitar->id]) }}" class="cta-button">View guitar</a>
+                                    <a href="{{ route('guitar.show', ['id' => $guitar->id]) }}">View guitar</a>
                                 </div>
                                 @if(Auth::check() && Auth::user()->id === $user->id)
                                     <div class="col-md-5">
-                                        <a href="{{ route('guitar.show', ['id' => $guitar->id]) }}" class="cta-button">Edit</a>
+                                        <a href="{{ route('guitar.show', ['id' => $guitar->id]) }}">Edit</a>
                                     </div>
                                 @else
                                     <div class="col-md-5">

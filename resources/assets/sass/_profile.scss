@@ -121,27 +121,35 @@
   .collection-item {
     flex: 1;
     text-align: center;
+    background-color: white;
+    margin: 0 10px;
 
     a:link, a:visited, a:hover {
       color: $primary-font-color;
       font-size: 18px;
       font-weight: 500;
-      position: relative;
-      top: 15px;
+      /*position: relative;
+      top: 15px;*/
     }
 
     a:hover {
       cursor: pointer;
     }
 
+    .collection-text {
+      padding: 15px 0;
+    }
+
     .collection-item-image {
       height: 200px;
       width: 200px;
-      background-size: cover;
+      background-size: contain;
+      background-repeat: no-repeat;
       background-position: center;
       margin: 0 auto;
       border-radius: 15px;
       border: solid 5px white;
+      background-color: white
     }
 
     .collection-item-color {

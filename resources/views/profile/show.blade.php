@@ -40,21 +40,25 @@
                         </div>
                         <div class="col-md-2 col-md-offset-3">
                             <div class="report-button">
-                                <a href="{{ route('report.create', ['id' => $user->id]) }}">Report profile</a>
+                                <a href="{{ route('report.create', ['id' => $user->id]) }}">Report user</a>
                             </div>
                         </div>
                     </div>
                 @endif
             @endif
             @if($user->ownedGuitars->isNotEmpty())
-                <h2 class="padding-top">Collection <span class="counter">{{ $user->ownedGuitars->count() }}</span></h2>
+                <h2 class="padding-top">Owned guitars <span class="counter">{{ $user->ownedGuitars->count() }}</span></h2>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="collection">
                             @foreach($user->ownedGuitars as $guitar)
                                 <div class="collection-item">
-                                    <div style="background-image: url({{ Storage::disk('public')->url($guitar->guitarImages()->first()->image_uri) }}" class="collection-item-image"></div>
-                                    <a href="{{ route('guitar.show', ['guitar' => $guitar->id]) }}" class="collection-item-text">{{ $guitar->name }}</a>
+                                    <a href="{{ route('guitar.show', ['guitar' => $guitar->id]) }}">
+                                        <div style="background-image: url({{ Storage::disk('public')->url($guitar->guitarImages()->first()->image_uri) }}" class="collection-item-image"></div>
+                                        <div class="collection-text">
+                                            <span>{{ $guitar->name }}</span>
+                                        </div>
+                                    </a>
                                 </div>
                             @endforeach
                         </div>
@@ -63,7 +67,7 @@
                 <div class="row">
                     <div class="col-md-4 col-md-offset-4">
                         <div class="big-cta-button">
-                            <a href="{{ route('collection.show', ['id' => $user]) }}">View full collection</a>
+                            <a href="{{ route('collection.show', ['id' => $user]) }}">View all owned guitars</a>
                         </div>
                     </div>
                 </div>
@@ -98,7 +102,7 @@
                 <div class="row">
                     <div class="col-md-4 col-md-offset-4">
                         <div class="big-cta-button">
-                            <a href="{{ route('collection.show', ['id' => $user]) }}">View all experiences</a>
+                            <a href="{{ route('collection.show', ['id' => $user]) }}">View all experienced guitars</a>
                         </div>
                     </div>
                 </div>
