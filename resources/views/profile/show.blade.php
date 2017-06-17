@@ -49,7 +49,7 @@
             @if($user->ownedGuitars->isNotEmpty())
                 <div class="row">
                     <div class="col-md-12">
-                        <h2>Collection ({{ $user->ownedGuitars->count() }})</h2>
+                        <h2>Collection <span class="counter">{{ $user->ownedGuitars->count() }}</span></h2>
                         <div class="collection">
                             @foreach($user->ownedGuitars as $guitar)
                                 <div class="collection-item">
@@ -69,7 +69,7 @@
                 </div>
             @endif
             @if($user->experiencedGuitars->isNotEmpty())
-                <h2>Experiences ({{ $user->experiencedGuitars->count() }})</h2>
+                <h2 class="padding-top">Experienced guitars <span class="counter">{{ $user->experiencedGuitars->count() }}</span></h2>
                 <div class="row">
                     @foreach($user->experiencedGuitars as $guitar)
                         <div class="col-md-6">

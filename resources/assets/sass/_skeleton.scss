@@ -194,6 +194,15 @@ body {
   text-align: center;
 }
 
+.counter {
+  padding-bottom: 2.5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  background-color: #ff3535;
+  // background-color: #f7803b;
+  color: #fff;
+  border-radius: 5px;
+}
 
 @media (max-width: 767px) {
   .icon-full {

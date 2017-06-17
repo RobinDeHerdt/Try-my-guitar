@@ -44,8 +44,8 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Owner locations {{ ($guitar_owner_count ? $guitar_owner_count : '') }}</h2>
-                    <div class="dashboard-content">
+                    <h2 class="padding-top">Owner locations  <span class="counter">{{ ($guitar_owner_count ? $guitar_owner_count : '') }}</span></h2>
+                    <div class="col-container">
                         <div id="map"></div>
                     </div>
                 </div>
@@ -53,7 +53,7 @@
             <input type="hidden" id="user-location" value="{{ $user_coords }}">
             <input type="hidden" id="guitar-id" value="{{ $guitar->id }}">
             @if($guitar_users->isNotEmpty())
-                <h2 class="padding-top">Experiences {{ $guitar_users->count() }}</h2>
+                <h2>Experiences <span class="counter">{{ $guitar_users->count() }}</span></h2>
                 <div class="row">
                     @foreach($guitar_users as $user)
                         <div class="col-md-6">
