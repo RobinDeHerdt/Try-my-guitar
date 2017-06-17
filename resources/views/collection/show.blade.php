@@ -21,19 +21,33 @@
                 @foreach($user->guitars as $guitar)
                     <div class="col-md-6">
                         <div class="search-result">
-                            <a href="{{ route('guitar.show', ['id' => $guitar->id]) }}">
-                                <div class="search-result-overlay">
-                                    <span class="search-result-overlay-text">View details</span>
-                                </div>
-                            </a>
+                            <h3>{{ $guitar->name }}</h3>
+                            <br>
                             @if($guitar->guitarImages->isNotEmpty())
                                 <img src="{{ Storage::disk('public')->url($guitar->guitarImages()->first()->image_uri) }}" class="search-result-image">
                             @else
                                 <div class="search-result-image">No image available</div>
                             @endif
-                            <h3>{{ $guitar->name }}</h3>
-                            <br>
-                            <p>{{ $guitar->pivot->experience }}</p>
+                            <hr>
+                            <div class="collection-experience">
+                                <p>{{ $guitar->pivot->experience }}</p>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-5 col-md-offset-1">
+                                    <a href="{{ route('guitar.show', ['id' => $guitar->id]) }}" class="cta-button">View guitar</a>
+                                </div>
+                                @if(Auth::check() && Auth::user()->id === $user->id)
+                                    <div class="col-md-5">
+                                        <a href="{{ route('guitar.show', ['id' => $guitar->id]) }}" class="cta-button">Edit</a>
+                                    </div>
+                                @else
+                                    <div class="col-md-5">
+                                        <a href="{{ route('guitar.show', ['id' => $guitar->id]) }}" class="cta-button green" title="Mark this experience as helpful"><span class="glyphicon glyphicon-thumbs-up"></span></a>
+                                        <a href="{{ route('guitar.show', ['id' => $guitar->id]) }}" class="cta-button red" title="Mark this experience as not helpful"><span class="glyphicon glyphicon-thumbs-down"></span></a>
+                                    </div>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 @endforeach

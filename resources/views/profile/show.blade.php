@@ -47,9 +47,9 @@
                 @endif
             @endif
             @if($user->ownedGuitars->isNotEmpty())
+                <h2 class="padding-top">Collection <span class="counter">{{ $user->ownedGuitars->count() }}</span></h2>
                 <div class="row">
                     <div class="col-md-12">
-                        <h2>Collection <span class="counter">{{ $user->ownedGuitars->count() }}</span></h2>
                         <div class="collection">
                             @foreach($user->ownedGuitars as $guitar)
                                 <div class="collection-item">
