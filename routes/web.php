@@ -55,6 +55,8 @@ Route::group([
     Route::get('collection/add', 'CollectionController@create')->name('collection.create');
     Route::post('collection/store', 'CollectionController@store')->name('collection.store');
 
+    Route::post('experience/{experience}/vote', 'ExperienceController@vote')->name('experience.vote');
+
     // Chat related routes.
     Route::get('chat/channels', 'ChatController@index')->name('chat.index');
     Route::get('chat/channel/{channel}', 'ChatController@show')->name('chat.show');

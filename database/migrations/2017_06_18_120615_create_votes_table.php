@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserGuitarTable extends Migration
+class CreateVotesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreateUserGuitarTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_guitar', function (Blueprint $table) {
-            $table->boolean('owned')->default(false);
+        Schema::create('votes', function (Blueprint $table) {
+            $table->increments('id');
+            $table->boolean('value');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->integer('guitar_id')->unsigned();
-            $table->foreign('guitar_id')->references('id')->on('guitars');
+            $table->integer('experience_id')->unsigned();
+            $table->foreign('experience_id')->references('id')->on('experiences');
+            $table->timestamps();
         });
     }
 
@@ -29,6 +31,6 @@ class CreateUserGuitarTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_guitar');
+        Schema::dropIfExists('votes');
     }
 }

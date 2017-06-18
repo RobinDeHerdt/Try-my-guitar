@@ -42,36 +42,37 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <h2 class="padding-top">Owner locations  <span class="counter">{{ ($guitar_owner_count ? $guitar_owner_count : '') }}</span></h2>
-                    <div class="col-container">
-                        <div id="map"></div>
+            @if ($guitar_owner_count)
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="padding-top">Owner locations  <span class="counter">{{ $guitar_owner_count }}</span></h2>
+                        <div class="col-container">
+                            <div id="map"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            @endif
             <input type="hidden" id="user-location" value="{{ $user_coords }}">
             <input type="hidden" id="guitar-id" value="{{ $guitar->id }}">
-            @if($guitar_users->isNotEmpty())
-                <h2>Experiences <span class="counter">{{ $guitar_users->count() }}</span></h2>
+            @if($guitar->experiences->isNotEmpty())
+                <h2>Experiences <span class="counter">{{ $guitar->experiences->count() }}</span></h2>
                 <div class="row">
-                    @foreach($guitar_users as $user)
+                    @foreach($guitar->experiences as $experience)
                         <div class="col-md-6">
                             <div class="experience-container">
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="experience-user">
-                                            <a href="{{ route('profile.show', ['user' => $user->id]) }}" title="{{ $user->fullName() }}">
-                                                <div class="experience-user-image" style="background-image: url({{ Storage::disk('public')->url($user->image_uri) }})"></div>
+                                            <a href="{{ route('profile.show', ['user' => $experience->user->id]) }}" title="{{ $experience->user->fullName() }}">
+                                                <div class="experience-user-image" style="background-image: url({{ Storage::disk('public')->url($experience->user->image_uri) }})"></div>
                                             </a>
                                         </div>
                                     </div>
                                     <div class="col-md-8">
                                         <div class="experience-text">
-
                                             <blockquote>
                                                 <br>
-                                                <p>{{ str_limit($user->pivot->experience, 150) }}</p>
+                                                <p>{{ str_limit($experience->experience, 150) }}</p>
                                             </blockquote>
                                         </div>
                                     </div>

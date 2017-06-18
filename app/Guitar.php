@@ -13,7 +13,7 @@ class Guitar extends Model
      */
     public function users()
     {
-        return $this->belongsToMany('App\User', 'user_guitar')->withPivot('experience', 'owned');
+        return $this->belongsToMany('App\User', 'user_guitar')->withPivot('owned');
     }
 
     /**
@@ -23,7 +23,7 @@ class Guitar extends Model
      */
     public function owners()
     {
-        return $this->belongsToMany('App\User', 'user_guitar')->wherePivot('owned', true)->withPivot('experience');
+        return $this->belongsToMany('App\User', 'user_guitar')->wherePivot('owned', true);
     }
 
     /**
@@ -33,7 +33,7 @@ class Guitar extends Model
      */
     public function experiencers()
     {
-        return $this->belongsToMany('App\User', 'user_guitar')->wherePivot('owned', false)->withPivot('experience');
+        return $this->belongsToMany('App\User', 'user_guitar')->wherePivot('owned', false);
     }
 
     /**
@@ -64,5 +64,15 @@ class Guitar extends Model
     public function guitarTypes()
     {
         return $this->belongsToMany('App\GuitarType', 'guitar_type', 'guitar_id', 'type_id');
+    }
+
+    /**
+     * A guitar has many experiences.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function experiences()
+    {
+        return $this->hasMany('App\Experience');
     }
 }

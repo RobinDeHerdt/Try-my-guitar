@@ -72,17 +72,17 @@
                     </div>
                 </div>
             @endif
-            @if($user->experiencedGuitars->isNotEmpty())
-                <h2 class="padding-top">Experienced guitars <span class="counter">{{ $user->experiencedGuitars->count() }}</span></h2>
+            @if($user->experiences->isNotEmpty())
+                <h2 class="padding-top">Guitar experiences <span class="counter">{{ $user->experiences->count() }}</span></h2>
                 <div class="row">
-                    @foreach($user->experiencedGuitars as $guitar)
+                    @foreach($user->experiences as $experience)
                         <div class="col-md-6">
                             <div class="experience-container">
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="experience-user">
-                                            <a href="{{ route('profile.show', ['guitar' => $guitar->id]) }}" title="{{ $guitar->name }}">
-                                                <div class="experience-guitar-image" style="background-image: url({{ Storage::disk('public')->url($guitar->guitarImages()->first()->image_uri) }})"></div>
+                                            <a href="{{ route('profile.show', ['guitar' => $experience->guitar->id]) }}" title="{{ $experience->guitar->name }}">
+                                                <div class="experience-guitar-image" style="background-image: url({{ Storage::disk('public')->url($experience->guitar->guitarImages()->first()->image_uri) }})"></div>
                                             </a>
                                         </div>
                                     </div>
@@ -90,7 +90,7 @@
                                         <div class="experience-text">
                                             <blockquote>
                                                 <br>
-                                                <p>{{ str_limit($guitar->pivot->experience, 150) }}</p>
+                                                <p>{{ str_limit($experience->experience, 150) }}</p>
                                             </blockquote>
                                         </div>
                                     </div>

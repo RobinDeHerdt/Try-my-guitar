@@ -28,26 +28,28 @@
                             @else
                                 <div class="search-result-image">No image available</div>
                             @endif
-                            <hr>
-                            <div class="collection-experience">
-                                <p>{{ $guitar->pivot->experience }}</p>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-md-5 col-md-offset-1">
-                                    <a href="{{ route('guitar.show', ['id' => $guitar->id]) }}">View guitar</a>
+                            @if ($user->getGuitarExperience($guitar))
+                                <hr>
+                                <div class="collection-experience">
+                                    <p>{{ $user->getGuitarExperience($guitar)->experience }}</p>
                                 </div>
-                                @if(Auth::check() && Auth::user()->id === $user->id)
-                                    <div class="col-md-5">
-                                        <a href="{{ route('guitar.show', ['id' => $guitar->id]) }}">Edit</a>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-5 col-md-offset-1">
+                                        <a href="{{ route('guitar.show', ['id' => $guitar->id]) }}">View guitar</a>
                                     </div>
-                                @else
-                                    <div class="col-md-5">
-                                        <a href="{{ route('guitar.show', ['id' => $guitar->id]) }}" class="cta-button green" title="Mark this experience as helpful"><span class="glyphicon glyphicon-thumbs-up"></span></a>
-                                        <a href="{{ route('guitar.show', ['id' => $guitar->id]) }}" class="cta-button red" title="Mark this experience as not helpful"><span class="glyphicon glyphicon-thumbs-down"></span></a>
-                                    </div>
-                                @endif
-                            </div>
+                                    @if(Auth::check() && Auth::user()->id === $user->id)
+                                        <div class="col-md-5">
+                                            <a href="{{ route('guitar.show', ['id' => $guitar->id]) }}">Edit</a>
+                                        </div>
+                                    @else
+                                        <div class="col-md-5">
+                                            <a href="{{ route('guitar.show', ['id' => $guitar->id]) }}" class="cta-button" title="Mark this experience as helpful"><span class="glyphicon glyphicon-thumbs-up"></span> {{ $user->getGuitarExperience($guitar)->upVotes->count() }}</a>
+                                            <a href="{{ route('guitar.show', ['id' => $guitar->id]) }}" class="cta-button" title="Mark this experience as not helpful"><span class="glyphicon glyphicon-thumbs-down"></span> {{ $user->getGuitarExperience($guitar)->downVotes->count() }}</a>
+                                        </div>
+                                    @endif
+                                </div>
+                            @endif
                         </div>
                     </div>
                 @endforeach

@@ -20,5 +20,6 @@ class DatabaseSeeder extends Seeder
         $this->call(GuitarImagesTableSeeder::class);
         $this->call(ReportsTableSeeder::class);
         $this->call(CtaSectionsTableSeeder::class);
+        $this->call(ExperiencesTableSeeder::class);
     }
 }

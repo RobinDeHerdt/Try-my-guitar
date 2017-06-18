@@ -93,7 +93,7 @@ class User extends Authenticatable
      */
     public function guitars()
     {
-        return $this->belongsToMany('App\Guitar', 'user_guitar')->withPivot('experience', 'owned');
+        return $this->belongsToMany('App\Guitar', 'user_guitar')->withPivot('owned');
     }
 
     /**
@@ -103,7 +103,7 @@ class User extends Authenticatable
      */
     public function ownedGuitars()
     {
-        return $this->belongsToMany('App\Guitar', 'user_guitar')->wherePivot('owned', true)->withPivot('experience');
+        return $this->belongsToMany('App\Guitar', 'user_guitar')->wherePivot('owned', true);
     }
 
     /**
@@ -113,7 +113,7 @@ class User extends Authenticatable
      */
     public function experiencedGuitars()
     {
-        return $this->belongsToMany('App\Guitar', 'user_guitar')->wherePivot('owned', false)->withPivot('experience');
+        return $this->belongsToMany('App\Guitar', 'user_guitar')->wherePivot('owned', false);
     }
 
     /**
@@ -155,6 +155,37 @@ class User extends Authenticatable
     public function guitarImages()
     {
         return $this->hasMany('App\GuitarImage');
+    }
+
+    /**
+     * A user has many votes.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function votes()
+    {
+        return $this->hasMany('App\Vote');
+    }
+
+    /**
+     * A user has many experiences.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function experiences()
+    {
+        return $this->hasMany('App\Experience');
+    }
+
+    /**
+     * Check if the user has entered an experience for the specified guitar.
+     *
+     * @param Guitar  $guitar
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function getGuitarExperience(Guitar $guitar)
+    {
+        return $guitar->experiences()->where('user_id', $this->id)->first();
     }
 
     /**
