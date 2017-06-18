@@ -6,6 +6,7 @@
                     <li><a href="{{ route('admin.dashboard') }}">Control panel</a></li>
                     <li><a href="{{ route('articles.index') }}">Articles</a></li>
                     <li><a href="{{ route('admin.reports.index') }}">Reports</a></li>
+                    <li><a href="{{ route('admin.messages.index') }}">Contact messages</a></li>
                 </div>
             </div>
         </ul>
