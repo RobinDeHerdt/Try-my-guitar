@@ -38,6 +38,7 @@ Route::group([
     Route::get('profile/{user}', 'ProfileController@show')->name('profile.show');
     Route::get('profile/{user}/report', 'ReportController@create')->name('report.create');
     Route::get('profile/{user}/invite', 'ProfileController@invite')->name('profile.invite');
+    Route::get('profile/{user}/experiences', 'ProfileController@experiences')->name('profile.experiences');
     Route::get('profile/autocomplete', 'ProfileController@autoComplete')->name('profile.autocomplete');
     Route::post('profile/{user}/report', 'ReportController@store')->name('report.store');
     Route::post('profile/update', 'ProfileController@update')->name('profile.update');

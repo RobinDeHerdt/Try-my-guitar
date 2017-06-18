@@ -49,21 +49,22 @@ class ExperienceController extends Controller
             'value' => 'required',
         ]);
 
-        $vote_exists = $experience->votes()
+        $vote_query = $experience->votes()
             ->where('experience_id', $experience->id)
-            ->where('user_id', $this->user->id)
-            ->exists();
+            ->where('user_id', $this->user->id);
 
-
-        if (!$vote_exists) {
+        if (!$vote_query->exists()) {
             $vote = new Vote();
 
             $vote->value            = $request->value;
             $vote->experience_id    = $experience->id;
             $vote->user_id          = $this->user->id;
-
-            $vote->save();
+        } else {
+            $vote = $vote_query->first();
+            $vote->value            = $request->value;
         }
+
+        $vote->save();
 
         return back();
     }

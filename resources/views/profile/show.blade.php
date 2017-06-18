@@ -47,7 +47,7 @@
                 @endif
             @endif
             @if($user->guitars->isNotEmpty())
-                <h2 class="padding-top">Owned guitars <span class="counter">{{ $user->guitars->count() }}</span></h2>
+                <h2 class="padding-top">Collection <span class="counter">{{ $user->guitars->count() }}</span></h2>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="collection">
@@ -67,13 +67,13 @@
                 <div class="row">
                     <div class="col-md-4 col-md-offset-4">
                         <div class="big-cta-button">
-                            <a href="{{ route('collection.show', ['id' => $user]) }}">View all owned guitars</a>
+                            <a href="{{ route('collection.show', ['id' => $user]) }}">View full collection</a>
                         </div>
                     </div>
                 </div>
             @endif
             @if($user->experiences->isNotEmpty())
-                <h2 class="padding-top">Guitar experiences <span class="counter">{{ $user->experiences->count() }}</span></h2>
+                <h2 class="padding-top">Experiences <span class="counter">{{ $user->experiences->count() }}</span></h2>
                 <div class="row">
                     @foreach($user->experiences as $experience)
                         <div class="col-md-6">
@@ -81,7 +81,7 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="experience-user">
-                                            <a href="{{ route('profile.show', ['guitar' => $experience->guitar->id]) }}" title="{{ $experience->guitar->name }}">
+                                            <a href="{{ route('guitar.show', ['guitar' => $experience->guitar->id]) }}" title="{{ $experience->guitar->name }}">
                                                 <div class="experience-guitar-image" style="background-image: url({{ Storage::disk('public')->url($experience->guitar->guitarImages()->first()->image_uri) }})"></div>
                                             </a>
                                         </div>
@@ -102,7 +102,7 @@
                 <div class="row">
                     <div class="col-md-4 col-md-offset-4">
                         <div class="big-cta-button">
-                            <a href="{{ route('collection.show', ['id' => $user]) }}">View all experiences</a>
+                            <a href="{{ route('profile.experiences', ['id' => $user]) }}">View all experiences</a>
                         </div>
                     </div>
                 </div>

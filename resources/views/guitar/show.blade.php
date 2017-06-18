@@ -110,7 +110,7 @@
                 </div>
             @endif
             @if($similar_guitars->isNotEmpty())
-                <div class="row padding-top">
+                <div class="row">
                     <div class="col-md-12">
                         <h2>Similar guitars</h2>
                         <div class="slick-related">
@@ -139,6 +139,8 @@
 @endsection
 @section('scripts')
     <script>
+        var markers = [];
+
         function initMap() {
             var user_locations_field = document.getElementById('user-location');
             var user_location = JSON.parse(user_locations_field.value);
@@ -150,12 +152,29 @@
                 zoom: 5
             });
 
+            var infowindow = new google.maps.InfoWindow();
+
             $.get('/guitar/'+ guitar_id +'/map').done(function( data ) {
                 for (var i = 0; i < data.length; i++) {
                     var latLng = new google.maps.LatLng({lat: data[i].location_lat, lng: data[i].location_lng});
                     var marker = new google.maps.Marker({
                         map: map,
                         position: latLng,
+                        user: data[i],
+                    });
+
+                    markers.push(marker);
+
+                    marker.addListener('click', function() {
+                        infowindow.close();
+                        infowindow.setContent(
+                            "<div class='center-content'>" +
+                            "<a href='/profile/" + this.user.id + "'><img src='/storage/" + this.user.image_uri + "' width='100'>" +
+                            "<br><br><strong>" + this.user.first_name + ' ' + this.user.last_name + "</strong></a>" +
+                            "<br><span>" + this.user.location + "</span>" +
+                            "</div>"
+                        );
+                        infowindow.open(map, this);
                     });
                 }
             });

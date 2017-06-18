@@ -113,6 +113,22 @@ class ProfileController extends Controller
     }
 
     /**
+     * Show the specified user profile.
+     *
+     * @param  \App\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function experiences(User $user)
+    {
+        $experiences = $user->experiences()->get();
+
+        return view('profile.experiences', [
+            'experiences'   => $experiences,
+            'user'          => $user,
+        ]);
+    }
+
+    /**
      * Update the specified user profile appearance.
      *
      * @param  \Illuminate\Http\Request  $request

@@ -73,15 +73,24 @@ class ReportController extends Controller
      */
     public function store(User $user, Request $request)
     {
-        $report = new Report();
+        $report_exists = Report::where('reporter_id', $this->user->id)
+            ->where('reported_id', $user->id)
+            ->where('reviewed', false)
+            ->exists();
 
-        $report->reason = $request->reason;
-        $report->reported_id = $user->id;
-        $report->reporter_id = $this->user->id;
+        if (!$report_exists) {
+            $report = new Report();
 
-        $report->save();
+            $report->reason = $request->reason;
+            $report->reported_id = $user->id;
+            $report->reporter_id = $this->user->id;
 
-        Session::flash('success-message', 'Thanks for your report. The admin team will review this report as soon as possible.');
+            $report->save();
+
+            Session::flash('success-message', 'Thanks for your report. The admin team will review this report as soon as possible.');
+        } else {
+            Session::flash('info-message', 'You have already reported this person. Please await the review of the admin team.');
+        }
 
         return redirect(route('dashboard'));
     }

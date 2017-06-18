@@ -216,7 +216,7 @@ class SearchController extends Controller
             $this->less_relevant_users = $filtered_query
                 ->whereNotIn('id', $most_relevant_users_keys)
                 ->orWhereHas('guitars', function ($q) use ($input, $haversine) {
-                    $q->where('name', $input)->where('owned', true);
+                    $q->where('name', $input);
                     if ($this->filter_proximity_range) {
                         $q->whereRaw("{$haversine} < ?", [$this->filter_proximity_range]);
                     }
@@ -234,8 +234,7 @@ class SearchController extends Controller
             // Execute the query to fetch less relevant results.
             $this->less_relevant_users = $filtered_query
                 ->orWhereHas('guitars', function ($q) use ($input) {
-                    $q->where('name', $input)
-                      ->where('owned', true);
+                    $q->where('name', $input);
                 })
                 ->take($this->user_results_amount)
                 ->get()
