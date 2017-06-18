@@ -20,7 +20,6 @@ class GuitarController extends Controller
      */
     public function show(Guitar $guitar)
     {
-
         $ip_address = request()->ip();
         $user_location = geoip($ip_address);
         $user_coords = ['lat' => $user_location->lat, 'lng' => $user_location->lon];
@@ -59,13 +58,16 @@ class GuitarController extends Controller
         }
 
         $users_query        = $guitar->users();
-        $guitar_users       = $users_query->orderBy('owned', 'desc')->take(4)->get();
+        $guitar_users       = $users_query->take(4)->get();
 
-        $guitar_owner_count = $guitar->owners()->count();
+        $guitar_user_count  = $users_query
+            ->where('location_lat', '!=', null)
+            ->where('location_lng', '!=', null)
+            ->count();
 
         return view('guitar.show', [
             'guitar_users'          => $guitar_users,
-            'guitar_owner_count'    => $guitar_owner_count,
+            'guitar_user_count'     => $guitar_user_count,
             'guitar'                => $guitar,
             'brand_guitars'         => $brand_guitars,
             'similar_guitars'       => $similar_guitars,
@@ -81,7 +83,10 @@ class GuitarController extends Controller
      */
     public function getLocations(Guitar $guitar)
     {
-        $users = $guitar->owners()->get();
+        $users = $guitar->users()
+            ->where('location_lat', '!=', null)
+            ->where('location_lng', '!=', null)
+            ->get();
 
         return $users;
     }

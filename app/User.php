@@ -93,27 +93,7 @@ class User extends Authenticatable
      */
     public function guitars()
     {
-        return $this->belongsToMany('App\Guitar', 'user_guitar')->withPivot('owned');
-    }
-
-    /**
-     * A user belongs to many guitars.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
-     */
-    public function ownedGuitars()
-    {
-        return $this->belongsToMany('App\Guitar', 'user_guitar')->wherePivot('owned', true);
-    }
-
-    /**
-     * A user belongs to many guitars.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
-     */
-    public function experiencedGuitars()
-    {
-        return $this->belongsToMany('App\Guitar', 'user_guitar')->wherePivot('owned', false);
+        return $this->belongsToMany('App\Guitar', 'user_guitar');
     }
 
     /**

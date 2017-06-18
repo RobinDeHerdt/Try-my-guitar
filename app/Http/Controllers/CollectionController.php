@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Experience;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Guitar;
@@ -57,7 +58,9 @@ class CollectionController extends Controller
      */
     public function create()
     {
-        return view('collection.create');
+        return view('collection.create', [
+            'user' => $this->user,
+        ]);
     }
 
     /**
@@ -68,18 +71,44 @@ class CollectionController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'guitar' => 'required',
+        ]);
+
         $guitar = Guitar::find($request->guitar);
 
         if (!$this->user->guitars->contains($guitar->id)) {
-            $this->user->guitars()->attach($guitar->id, [
-                'experience' => $request->experience,
-                'owned' => $request->owned,
-            ]);
+            $this->user->guitars()->attach($guitar->id);
 
+            $experience_exists = Experience::where('user_id', $this->user->id)->where('guitar_id', $guitar->id)->exists();
+
+            if ($request->experience && !$experience_exists) {
+                $experience = new Experience();
+
+                $experience->experience = $request->experience;
+                $experience->user_id    = $this->user->id;
+                $experience->guitar_id  = $guitar->id;
+
+                $experience->save();
+            }
             Session::flash('success-message', $guitar->name . ' (' . $guitar->guitarBrand->name . ')' . ' was added to your collection!');
-        } else {
-            Session::flash('info-message', $guitar->name . ' (' . $guitar->guitarBrand->name . ')' . ' is already a part of your collection!');
+
+            return redirect(route('collection.show', ['id' => $this->user->id]));
         }
+
+        Session::flash('info-message', $guitar->name . ' (' . $guitar->guitarBrand->name . ')' . ' is already a part of your collection!');
+        return back();
+    }
+
+    /**
+     * Show the form to add a guitar to the collection.
+     *
+     * @param \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request)
+    {
+        $this->user->guitars()->detach($request->id);
 
         return back();
     }

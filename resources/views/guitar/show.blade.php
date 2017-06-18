@@ -42,10 +42,10 @@
                     </div>
                 </div>
             </div>
-            @if ($guitar_owner_count)
+            @if ($guitar_user_count)
                 <div class="row">
                     <div class="col-md-12">
-                        <h2 class="padding-top">Owner locations  <span class="counter">{{ $guitar_owner_count }}</span></h2>
+                        <h2 class="padding-top">Owner locations  <span class="counter">{{ $guitar_user_count }}</span></h2>
                         <div class="col-container">
                             <div id="map"></div>
                         </div>

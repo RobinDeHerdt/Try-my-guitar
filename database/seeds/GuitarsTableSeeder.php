@@ -69,37 +69,31 @@ class GuitarsTableSeeder extends Seeder
         DB::table('user_guitar')->insert([
             'guitar_id' => 1,
             'user_id' => 1,
-            'owned' => true,
         ]);
 
         DB::table('user_guitar')->insert([
             'guitar_id' => 1,
             'user_id' => 2,
-            'owned' => true,
         ]);
 
         DB::table('user_guitar')->insert([
             'guitar_id' => 1,
             'user_id' => 3,
-            'owned' => false,
         ]);
 
         DB::table('user_guitar')->insert([
             'guitar_id' => 2,
             'user_id' => 2,
-            'owned' => true,
         ]);
 
         DB::table('user_guitar')->insert([
             'guitar_id' => 2,
             'user_id' => 3,
-            'owned' => false,
         ]);
 
         DB::table('user_guitar')->insert([
             'guitar_id' => 3,
             'user_id' => 3,
-            'owned' => false,
         ]);
     }
 }

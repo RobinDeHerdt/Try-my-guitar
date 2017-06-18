@@ -16,6 +16,7 @@
             <div class="row heading">
                 <div class="col-md-12">
                     <h1>Add guitar to collection</h1>
+                    <a href="{{ route('collection.show', ['user' => $user->id]) }}" class="icon-text"><span class="glyphicon glyphicon-list"></span>View collection</a>
                 </div>
             </div>
             <div class="col-container">
@@ -29,11 +30,7 @@
                                 <input type="hidden" class="form-control" name="guitar" required id="guitar-id">
                             </div>
                             <div class="form-group">
-                                <label class="radio-inline"><input type="radio" name="owned" value="1">Owned</label>
-                                <label class="radio-inline"><input type="radio" name="owned" value="0">Not owned</label>
-                            </div>
-                            <div class="form-group">
-                                <label for="experience">@lang('input.experience') *</label>
+                                <label for="experience">@lang('input.experience')</label>
                                 <textarea name="experience" cols="30" rows="5" class="form-control"></textarea>
                             </div>
                         </div>

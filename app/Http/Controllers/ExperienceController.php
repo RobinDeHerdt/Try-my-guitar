@@ -45,9 +45,9 @@ class ExperienceController extends Controller
      */
     public function vote(Request $request, Experience $experience)
     {
-        /* $this->validate($request, [
+        $this->validate($request, [
             'value' => 'required',
-        ]); */
+        ]);
 
         $vote_exists = $experience->votes()
             ->where('experience_id', $experience->id)

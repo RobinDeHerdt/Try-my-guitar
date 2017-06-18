@@ -14,7 +14,6 @@ class CreateUserGuitarTable extends Migration
     public function up()
     {
         Schema::create('user_guitar', function (Blueprint $table) {
-            $table->boolean('owned')->default(false);
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('guitar_id')->unsigned();

@@ -54,6 +54,7 @@ Route::group([
     Route::get('profile/{user}/collection', 'CollectionController@show')->name('collection.show');
     Route::get('collection/add', 'CollectionController@create')->name('collection.create');
     Route::post('collection/store', 'CollectionController@store')->name('collection.store');
+    Route::post('collection/destroy', 'CollectionController@destroy')->name('collection.destroy');
 
     Route::post('experience/{experience}/vote', 'ExperienceController@vote')->name('experience.vote');
 
