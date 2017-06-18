@@ -27,6 +27,7 @@
                         <th>Reason</th>
                         <th>Date</th>
                         <th class="center">Reviewed</th>
+                        <th class="center">Action taken</th>
                         <th class="center">View</th>
                     </tr>
                     </thead>
@@ -38,6 +39,7 @@
                                 <td>{{ str_limit($report->reason, 50) }}</td>
                                 <td>{{ $report->created_at }}</td>
                                 <td class="center">{{ $report->reviewed ? 'Yes' : 'No' }}</td>
+                                <td class="center">{{ $report->action ? $report->action : '' }}</td>
                                 <td class="center"><a href="{{ route('admin.reports.show', ['report' => $report->id]) }}"><span class="glyphicon glyphicon-search"></span></a></td>
                             </tr>
                         @endforeach

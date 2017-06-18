@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Auth;
 
 class CheckRole
 {
@@ -18,6 +19,11 @@ class CheckRole
         // If the user is not authenticated or doesn't have sufficient permissions, redirect to login.
         if (!$request->user() || !$request->user()->hasRole($role)) {
             return redirect(route('login'));
+        } else {
+            if (!$request->user()->active) {
+                Auth::logout();
+                return redirect(route('login'));
+            }
         }
 
         return $next($request);

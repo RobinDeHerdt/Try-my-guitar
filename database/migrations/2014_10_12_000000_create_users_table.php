@@ -27,6 +27,7 @@ class CreateUsersTable extends Migration
             $table->string('header_image_uri')->default('images/electric-guitars.jpg');
             $table->boolean('verified')->default(false);
             $table->string('verification_token')->nullable();
+            $table->boolean('active')->default(true);
             $table->rememberToken();
             $table->timestamps();
         });

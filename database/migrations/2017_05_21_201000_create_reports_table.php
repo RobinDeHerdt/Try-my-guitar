@@ -17,6 +17,7 @@ class CreateReportsTable extends Migration
             $table->increments('id');
             $table->text('reason');
             $table->boolean('reviewed')->default(false);
+            $table->string('action')->default('n/a');
             $table->integer('reporter_id')->unsigned();
             $table->foreign('reporter_id')->references('id')->on('users');
             $table->integer('reported_id')->unsigned();

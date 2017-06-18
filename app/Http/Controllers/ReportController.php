@@ -117,10 +117,23 @@ class ReportController extends Controller
      */
     public function reviewed(Request $request, Report $report)
     {
+        if ($request->action == 1) {
+            $report->reported->active = false;
+            $report->reported->save();
+
+            $report->action = 'Ban';
+
+            Session::flash('success-message', 'The user was banned. Report set as reviewed.');
+        } else {
+            $report->action = 'None';
+
+            Session::flash('success-message', 'No action was taken. Report set as reviewed.');
+        }
+
         $report->reviewed = true;
         $report->save();
 
-        Session::flash('success-message', 'Report set as reviewed.');
+
 
         return redirect(route('admin.reports.index'));
     }
