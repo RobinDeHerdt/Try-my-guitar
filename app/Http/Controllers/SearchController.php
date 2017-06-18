@@ -178,10 +178,21 @@ class SearchController extends Controller
          * This query assumes the user's name in the format of "first_name last_name",
          * because auto complete applies the same format.
          */
-        if (count($terms) >= 2) {
+        $first_name = '';
+        $last_name  = '';
+
+        for ($i = 0; $i < count($terms); $i++) {
+            if ($i === 0) {
+                $first_name = $terms[$i];
+            } else {
+                $last_name .= $terms[$i] . ' ';
+            }
+        }
+
+        if ($first_name && $last_name) {
             $this->most_relevant_users = User::selectRaw("*, {$haversine} AS distance")
-                ->where('first_name', 'like', $terms[0])
-                ->where('last_name', 'like', $terms[1])
+                ->where('first_name', 'like', $first_name)
+                ->where('last_name', 'like', rtrim($last_name))
                 ->take(6)
                 ->get();
         } else {
