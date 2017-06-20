@@ -7,6 +7,11 @@
 @section('content')
     <div class="content">
         <div class="container">
+            <div class="row heading">
+                <div class="col-md-8 col-md-offset-2">
+                    <a href="{{ route('article.public.index') }}" class="icon-text"><span class="glyphicon glyphicon-list"></span>Article overview</a>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-8 col-md-offset-2 dashboard-content">
                     <div style="background-image: url({{ Storage::disk('public')->url($article->image_uri) }})" class="article-image"></div>
@@ -15,6 +20,14 @@
                         <span><i>{{ $article->user->fullName() .' - ' . $article->created_at }}</i></span>
                     </div>
                     <p class="article-body">{!! nl2br(e($article->body)) !!}</p>
+                    <hr>
+                    <div class="social-media-right">
+                        <div class="g-plusone"></div>
+                        <a class="twitter-share-button"
+                           href="https://twitter.com/intent/tweet?text=Hello%20world"
+                           data-size="large">
+                            Tweet</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -23,4 +36,25 @@
 
 @section('footer')
     @include('partials.footer')
+@endsection
+
+@section('scripts')
+    <script>window.twttr = (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0],
+                t = window.twttr || {};
+            if (d.getElementById(id)) return t;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://platform.twitter.com/widgets.js";
+            fjs.parentNode.insertBefore(js, fjs);
+
+            t._e = [];
+            t.ready = function(f) {
+                t._e.push(f);
+            };
+
+            return t;
+        }(document, "script", "twitter-wjs"));
+    </script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
 @endsection

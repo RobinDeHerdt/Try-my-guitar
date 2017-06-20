@@ -39,12 +39,12 @@
                         <div class="row">
                     @endif
                         <div class="col-md-4">
-                            <a href="{{ route('article.show', ['article' => $article->id]) }}" class="article-link">
+                            <a href="{{ route('article.public.show', ['article' => $article->id, 'title' => str_slug($article->title)]) }}" class="article-link">
                                 <div class="article">
                                     <div class="article-teaser-image" style="background-image: url({{ Storage::disk('public')->url($article->image_uri) }})"></div>
                                     <div class="article-teaser">
                                         <h4>{{ $article->title }}</h4>
-                                        <p>{{ $article->body }}</p>
+                                        <p>{{ str_limit($article->body, 150) }}</p>
                                     </div>
                                 </div>
                             </a>
@@ -53,13 +53,15 @@
                         </div>
                     @endif
                 @endforeach
-                <div class="row">
-                    <div class="col-md-4 col-md-offset-4">
-                        <div class="big-cta-button">
-                            <a href="#" class="text-uppercase">@lang('input.read-more')</a>
+                @if($articles->count() > 3)
+                    <div class="row">
+                        <div class="col-md-4 col-md-offset-4">
+                            <div class="big-cta-button">
+                                <a href="{{ route('article.public.index') }}" class="text-uppercase">@lang('input.read-more')</a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endif
             @endif
         </div>
     </div>

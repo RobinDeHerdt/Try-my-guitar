@@ -23,7 +23,8 @@ Route::group([
 
     // Main navigation routes.
     Route::get('/', 'HomeController@index')->name('home');
-    Route::get('article/{article}', 'ArticleController@showPublic')->name('article.show');
+    Route::get('article/{article}/{title}', 'ArticleController@showPublic')->name('article.public.show');
+    Route::get('articles', 'ArticleController@indexPublic')->name('article.public.index');
     Route::get('about', 'AboutController@index')->name('about');
     Route::get('explore', 'ExploreController@explore')->name('explore');
     Route::get('search', 'SearchController@result')->name('search');

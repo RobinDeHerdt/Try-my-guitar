@@ -18,4 +18,14 @@ class Article extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    /**
+     * An article has many comments.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
+    }
 }

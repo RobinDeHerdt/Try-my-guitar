@@ -1,5 +1,5 @@
 # Try my guitar
-A platform that brings guitar players together.
+A platform that brings guitar players - and their guitars - together.
 
 ## Installation
 ### Essential

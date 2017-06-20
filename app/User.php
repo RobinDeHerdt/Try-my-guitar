@@ -74,8 +74,6 @@ class User extends Authenticatable
         return $this->hasMany('App\Report', 'reporter_id');
     }
 
-
-
     /**
      * A user has many messages.
      *
@@ -155,6 +153,16 @@ class User extends Authenticatable
     public function experiences()
     {
         return $this->hasMany('App\Experience');
+    }
+
+    /**
+     * A user has many comments.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
     }
 
     /**

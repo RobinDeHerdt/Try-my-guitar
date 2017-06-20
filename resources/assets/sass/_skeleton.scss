@@ -206,6 +206,14 @@ body {
   border-radius: 5px;
 }
 
+.social-media-left {
+  float: left;
+}
+
+.social-media-right {
+  float: right;
+}
+
 @media (max-width: 767px) {
   .icon-full {
     display: none;

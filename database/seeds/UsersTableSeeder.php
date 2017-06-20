@@ -14,8 +14,7 @@ class UsersTableSeeder extends Seeder
     {
         DB::table('users')->insert([
             'first_name' => 'Administrator',
-            'last_name' => 'TMG',
-            'email' => 'admin@gmail.com',
+            'email' => 'admin@trymyguitar.be',
             'password' => bcrypt('admin'),
             'location_lat' => 35,
             'location_lng' => 40,
@@ -69,19 +68,25 @@ class UsersTableSeeder extends Seeder
             'role_id' => 3,
         ]);
 
+        DB::table('users')->insert([
+            'first_name' => 'Editor guy',
+            'email' => 'editor@trymyguitar.be',
+            'password' => bcrypt('editor'),
+        ]);
+
+        DB::table('role_user')->insert([
+            'user_id' => 4,
+            'role_id' => 2,
+        ]);
+
         factory(App\User::class, 1500)->create()->each(function ($u) {
             // Assign 'user' role to every user.
             $u->roles()->attach(3);
 
             for ($i = 1; $i < 3; $i++) {
                 // Assign remaining roles randomly to each user.
-                if (rand(1, 3) > 2) {
+                if (rand(1, 10) < 2) {
                     $u->roles()->attach($i);
-
-                    // Give every user with the editor role an article.
-                    if ($i === 2) {
-                        $u->articles()->save(factory(App\Article::class)->make());
-                    }
                 }
             }
         });

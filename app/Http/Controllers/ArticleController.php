@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 class ArticleController extends Controller
 {
     /**
-     * Display a listing of articles.
+     * Display a listing of articles (for administrators).
      *
      * @return \Illuminate\Http\Response
      */
@@ -23,6 +23,20 @@ class ArticleController extends Controller
         $articles = Article::paginate(15);
 
         return view('admin.article.index', [
+            'articles' => $articles,
+        ]);
+    }
+
+    /**
+     * Display a listing of articles.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexPublic()
+    {
+        $articles = Article::paginate(9);
+
+        return view('article.index', [
             'articles' => $articles,
         ]);
     }
