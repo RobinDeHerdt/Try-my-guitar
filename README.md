@@ -1,7 +1,5 @@
-<div align="center">
-    <h1>Try my guitar</h1>
-    A platform that brings guitar players together.
-</div>
+# Try my guitar
+A platform that brings guitar players together.
 
 ## Installation
 ### Essential
@@ -10,7 +8,7 @@
 * Run "composer install"
 * Run "npm install"
 * Copy the example environment file: "cp .env.example .env"
-* Edit the .env (DB settings are essential to get the project running)
+* Edit the .env file (only the "DB" settings are essential to get the project running)
 * Run "php artisan key:generate"
 * Run "php artisan migrate --seed"
 * Run "npm run dev"
