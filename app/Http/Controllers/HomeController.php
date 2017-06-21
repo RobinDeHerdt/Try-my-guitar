@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\CtaSection;
 use Illuminate\Http\Request;
 use App\Article;
+Use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /**
  * Class HomeController
@@ -19,7 +20,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $articles  = Article::all()->take(6);
+        $locale = LaravelLocalization::getCurrentLocale();
+
+        $articles  = Article::where('lang', $locale)->take(6)->get();
         $cta_items = CtaSection::take(3)->get();
 
         return view('home', [

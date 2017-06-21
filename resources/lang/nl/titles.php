@@ -13,4 +13,5 @@ return [
     'guitar-categories'     => 'Categoriën',
     'article-overview'      => 'Overzicht van alle artikels',
     'comments'              => 'Reacties',
+    'leave-comment'         => 'Laat een reactie achter',
 ];

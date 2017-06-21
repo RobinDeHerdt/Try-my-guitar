@@ -32,7 +32,7 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function indexPublic()
+    public function indexPublic(Request $request)
     {
         $articles = Article::paginate(9);
 

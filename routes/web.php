@@ -23,14 +23,18 @@ Route::group([
 
     // Main navigation routes.
     Route::get('/', 'HomeController@index')->name('home');
-    Route::get('article/{article}/{title}', 'ArticleController@showPublic')->name('article.public.show');
-    Route::get('articles', 'ArticleController@indexPublic')->name('article.public.index');
     Route::get('about', 'AboutController@index')->name('about');
     Route::get('explore', 'ExploreController@explore')->name('explore');
     Route::get('disclaimer', 'HomeController@disclaimer')->name('disclaimer');
     Route::get('search', 'SearchController@result')->name('search');
     Route::get('search/autocomplete', 'SearchController@autoComplete')->name('search.autocomplete');
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+
+    // Article related routes.
+    Route::get('article/{article}/{title}', 'ArticleController@showPublic')->name('article.public.show');
+    Route::get('articles', 'ArticleController@indexPublic')->name('article.public.index');
+    Route::post('comment/store', 'CommentController@store')->name('comment.store');
+    Route::post('comment/update', 'CommentController@update')->name('comment.update');
 
     // Contact message related routes.
     Route::post('contact', 'ContactController@store')->name('contact');

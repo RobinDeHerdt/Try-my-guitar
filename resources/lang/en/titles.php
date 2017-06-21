@@ -13,4 +13,5 @@ return [
     'guitar-categories'     => 'Categories',
     'article-overview'      => 'Article overview',
     'comments'              => 'Comments',
+    'leave-comment'         => 'Leave a comment',
 ];

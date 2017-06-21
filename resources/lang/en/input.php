@@ -29,4 +29,6 @@ return [
     'read-more'             => 'Read more',
     'guitar-autocomplete'   => 'Enter your guitar here (autocomplete)',
     'enter-location'        => 'Enter a location',
+    'write-comment'         => 'Write your comment here.',
+    'submit'                => 'Submit',
 ];

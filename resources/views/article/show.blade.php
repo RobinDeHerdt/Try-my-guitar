@@ -32,6 +32,24 @@
             </div>
             <div class="row heading">
                 <div class="col-md-10 col-md-offset-1 no-padding">
+                    <h1>@lang('titles.leave-comment')</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1 dashboard-content">
+                    <form action="{{ route('comment.store') }}" method="POST">
+                        {{ csrf_field() }}
+                        <div class="form-group">
+                            <textarea name="comment" cols="30" rows="10" class="form-control" placeholder="@lang('input.write-comment')"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary" value="@lang('input.submit')">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row heading">
+                <div class="col-md-10 col-md-offset-1 no-padding">
                     <h1>@lang('titles.comments') ({{ $comments->total() }})</h1>
                     <span class="icon-text">@lang('pagination.showing-comments', ['count' => $comments->count(), 'total' =>  $comments->total()])</span>
                 </div>

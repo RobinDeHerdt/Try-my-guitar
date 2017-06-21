@@ -29,4 +29,6 @@ return [
     'read-more'             => 'Lees meer',
     'guitar-autocomplete'   => 'Geef hier jouw gitaar naar keuze in (autocomplete)',
     'enter-location'        => 'Geef een locatie in',
+    'write-comment'         => 'Schrijf hier jouw reactie',
+    'submit'                => 'Verzenden',
 ];
