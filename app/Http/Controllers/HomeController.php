@@ -23,8 +23,18 @@ class HomeController extends Controller
         $cta_items = CtaSection::take(3)->get();
 
         return view('home', [
-            'articles' => $articles,
+            'articles'  => $articles,
             'cta_items' => $cta_items,
         ]);
+    }
+
+    /**
+     * Show the application disclaimer.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function disclaimer()
+    {
+        return view('disclaimer');
     }
 }

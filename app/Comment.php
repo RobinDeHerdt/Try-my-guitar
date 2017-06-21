@@ -19,10 +19,10 @@ class Comment extends Model
     /**
      * A comment belongs to a user.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
      */
-    public function users()
+    public function user()
     {
-        return $this->hasMany('App\User');
+        return $this->belongsTo('App\User');
     }
 }

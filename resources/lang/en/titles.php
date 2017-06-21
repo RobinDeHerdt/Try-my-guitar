@@ -11,4 +11,5 @@ return [
     'find-people'           => 'Find people',
     'guitar-brands'         => 'Brands',
     'guitar-categories'     => 'Categories',
+    'article-overview'      => 'Article overview',
 ];

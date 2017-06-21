@@ -19,7 +19,7 @@ class ArticlesTableSeeder extends Seeder
         ]);
 
         DB::table('comments')->insert([
-            'body' => "I\'m so looking forward to trying this guitar.",
+            'body' => "I'm so looking forward to trying this guitar.",
             'article_id' => 1,
             'user_id' => 4,
         ]);

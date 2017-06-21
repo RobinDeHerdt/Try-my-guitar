@@ -27,6 +27,7 @@ Route::group([
     Route::get('articles', 'ArticleController@indexPublic')->name('article.public.index');
     Route::get('about', 'AboutController@index')->name('about');
     Route::get('explore', 'ExploreController@explore')->name('explore');
+    Route::get('disclaimer', 'HomeController@disclaimer')->name('disclaimer');
     Route::get('search', 'SearchController@result')->name('search');
     Route::get('search/autocomplete', 'SearchController@autoComplete')->name('search.autocomplete');
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');

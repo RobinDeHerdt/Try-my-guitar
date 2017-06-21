@@ -11,4 +11,5 @@ return [
     'find-people'           => 'Vind mensen',
     'guitar-brands'         => 'Merken',
     'guitar-categories'     => 'Categoriën',
+    'article-overview'      => 'Overzicht van alle artikels',
 ];

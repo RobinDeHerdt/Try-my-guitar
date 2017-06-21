@@ -82,8 +82,16 @@ class ArticleController extends Controller
      */
     public function showPublic(Article $article)
     {
+        // @todo Save viewed article id's in an array and store it in session.
+        // Make sure views doesn't increment with every single page view.
+        $article->views++;
+        $article->save();
+
+        $comments = $article->comments()->paginate(8);
+
         return view('article.show', [
-            'article' => $article,
+            'article'   => $article,
+            'comments'  => $comments,
         ]);
     }
 

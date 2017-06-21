@@ -8,7 +8,7 @@
     <div class="content">
         <div class="container">
             @if($articles->isNotEmpty())
-                <h2 class="padding-top">Articles</h2>
+                <h2 class="padding-top">@lang('titles.article-overview')</h2>
                 @foreach ($articles as $article)
                     @if($loop->index % 3 == 0)
                         <div class="row">

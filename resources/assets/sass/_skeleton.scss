@@ -214,6 +214,10 @@ body {
   float: right;
 }
 
+.no-padding {
+  padding: 0;
+}
+
 @media (max-width: 767px) {
   .icon-full {
     display: none;

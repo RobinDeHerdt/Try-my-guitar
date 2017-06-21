@@ -8,7 +8,7 @@
     <div class="content">
         <div class="container">
             <div class="row heading">
-                <div class="col-md-8 col-md-offset-2">
+                <div class="col-md-8 col-md-offset-2 no-padding">
                     <a href="{{ route('article.public.index') }}" class="icon-text"><span class="glyphicon glyphicon-list"></span>Article overview</a>
                 </div>
             </div>
@@ -21,13 +21,32 @@
                     </div>
                     <p class="article-body">{!! nl2br(e($article->body)) !!}</p>
                     <hr>
+                    <div class="social-media-left">
+                        {{ $article->views }} views
+                    </div>
                     <div class="social-media-right">
                         <div class="g-plusone"></div>
-                        <a class="twitter-share-button"
-                           href="https://twitter.com/intent/tweet?text=Hello%20world"
-                           data-size="large">
-                            Tweet</a>
+                        <a class="twitter-share-button" href="https://twitter.com/intent/tweet" data-size="large">Tweet</a>
                     </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <h2>Comments ({{ $comments->total() }})</h2>
+                </div>
+            </div>
+            @foreach($comments as $comment)
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2 dashboard-content">
+                        <h4>{{ $comment->user->fullName() }}</h4>
+                        <p>{{ $comment->body }}</p>
+                    </div>
+                </div>
+            @endforeach
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 no-padding">
+                    {{ $comments->links() }}
                 </div>
             </div>
         </div>

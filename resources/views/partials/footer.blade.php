@@ -12,12 +12,12 @@
                 @endforeach
             </div>
             <div class="col-md-4 footer-item footer-item-center">
-                <a href="#"><i class="fa fa-youtube-play fa-2x" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-facebook-official fa-2x" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-twitter fa-2x "aria-hidden="true"></i></a>
+                <a href="https://youtube.com"><i class="fa fa-youtube-play fa-2x" aria-hidden="true"></i></a>
+                <a href="https://facebook.com"><i class="fa fa-facebook-official fa-2x" aria-hidden="true"></i></a>
+                <a href="https://twitter.com"><i class="fa fa-twitter fa-2x "aria-hidden="true"></i></a>
             </div>
             <div class="col-md-4 footer-item footer-item-right">
-                <a href="#"><span>@lang('navigation.disclaimer')</span></a>
+                <a href="{{ route('disclaimer') }}"><span>@lang('navigation.disclaimer')</span></a>
             </div>
         </div>
     </div>
