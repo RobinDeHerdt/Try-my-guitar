@@ -30,14 +30,38 @@ class ArticleController extends Controller
     /**
      * Display a listing of articles.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function indexPublic(Request $request)
     {
-        $articles = Article::paginate(9);
+        $article_query = Article::select('*');
+
+        switch ($request->query('sort')) {
+            case 'oldest':
+                $article_query->orderBy('created_at', 'asc');
+                break;
+
+            default:
+                $article_query->orderBy('created_at', 'desc');
+        }
+
+        switch ($request->query('lang')) {
+            case 'nl':
+                $article_query->where('lang', 'nl');
+                break;
+
+            case 'en':
+                $article_query->where('lang', 'en');
+                break;
+        }
+
+        $articles = $article_query->paginate(9);
 
         return view('article.index', [
             'articles' => $articles,
+            'sort_filter' => $request->query('sort'),
+            'lang_filter' => $request->query('lang'),
         ]);
     }
 
@@ -65,6 +89,7 @@ class ArticleController extends Controller
 
         $article->title     = $request->title;
         $article->body      = $request->body;
+        $article->lang      = $request->language;
         $article->image_uri = $request->image->store('images', 'public');
 
         $article->save();

@@ -21,13 +21,31 @@
             @endif
             <form action="{{ route('articles.store') }}" method="POST" enctype="multipart/form-data">
                 {{ csrf_field() }}
-                <div class="form-group">
-                    <label for="title">Title</label>
-                    <input type="text" name="title" class="form-control">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="title">Title</label>
+                            <input type="text" name="title" class="form-control">
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="image">Image</label>
-                    <input type="file" name="image" class="form-control">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="language">Language</label>
+                            <select class="form-control" name="language">
+                                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                    <option value="{{ $localeCode }}">{{ $properties['native'] }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="image">Image</label>
+                            <input type="file" name="image" class="form-control">
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="body">Content</label>

@@ -14,4 +14,8 @@ return [
     'guitars'       => 'Gitaren',
     'users'         => 'Gebruikers',
     'all'           => 'Alle',
+    'no-comments'   => 'Er zijn nog geen reacties',
+    'auth-comment'  => 'Je moet ingelogd zijn om te kunnen reageren.',
+    'to-login'      => 'Je kan hier inloggen',
+    'views'         => ':view-amount weergaven',
 ];

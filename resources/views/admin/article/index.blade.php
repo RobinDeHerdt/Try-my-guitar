@@ -25,6 +25,7 @@
                     <thead>
                         <tr>
                             <th>Title</th>
+                            <th>Language</th>
                             <th>Author</th>
                             <th>Content</th>
                             <th>Image</th>
@@ -36,7 +37,8 @@
                     <tbody>
                         @foreach($articles as $article)
                             <tr>
-                                <td>{{ str_limit($article->title, 15) }}</td>
+                                <td>{{ str_limit($article->title, 25) }}</td>
+                                <td>{{ $article->lang }}</td>
                                 <td>{{ $article->user->fullName() }}</td>
                                 <td>{{ str_limit($article->body, 50) }}</td>
                                 <td><a href="{{ Storage::disk('public')->url($article->image_uri) }}">View image</a></td>

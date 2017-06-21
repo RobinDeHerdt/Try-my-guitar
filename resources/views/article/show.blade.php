@@ -22,7 +22,7 @@
                     <p class="article-body">{!! nl2br(e($article->body)) !!}</p>
                     <hr>
                     <div class="social-media-left">
-                        Viewed {{ $article->views }} times
+                        @lang('content.views', ['view-amount' => $article->views])
                     </div>
                     <div class="social-media-right">
                         <div class="g-plusone"></div>
@@ -35,38 +35,57 @@
                     <h1>@lang('titles.leave-comment')</h1>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-10 col-md-offset-1 dashboard-content">
-                    <form action="{{ route('comment.store') }}" method="POST">
-                        {{ csrf_field() }}
-                        <div class="form-group">
-                            <textarea name="comment" cols="30" rows="10" class="form-control" placeholder="@lang('input.write-comment')"></textarea>
-                        </div>
-                        <div class="form-group">
+            @if(Auth::check())
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1 dashboard-content">
+                        <form action="{{ route('comment.store') }}" method="POST">
+                            {{ csrf_field() }}
+                            <input type="hidden" name="article_id" value="{{ $article->id }}">
+                            <div class="form-group">
+                                <textarea name="comment" cols="30" rows="5" class="form-control" placeholder="@lang('input.write-comment')"></textarea>
+                            </div>
                             <input type="submit" class="btn btn-primary" value="@lang('input.submit')">
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
-            </div>
+            @else
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1 dashboard-content">
+                        <h5>@lang('content.auth-comment') <a href="{{ route('login') }}">@lang('content.to-login')</a></h5>
+                    </div>
+                </div>
+            @endif
             <div class="row heading">
                 <div class="col-md-10 col-md-offset-1 no-padding">
                     <h1>@lang('titles.comments') ({{ $comments->total() }})</h1>
                     <span class="icon-text">@lang('pagination.showing-comments', ['count' => $comments->count(), 'total' =>  $comments->total()])</span>
                 </div>
             </div>
-            @foreach($comments as $comment)
+            @if($comments->isNotEmpty())
                 <div class="row">
                     <div class="col-md-10 col-md-offset-1 dashboard-content">
-                        <h4>{{ $comment->user->fullName() }} - {{ $comment->created_at }}</h4>
-                        <p>{{ $comment->body }}</p>
+                        @foreach($comments as $comment)
+                            <span>{{ $comment->user->fullName() }}</span> &middot; <span class="time-ago">{{ $comment->created_at ? $comment->created_at->diffForHumans() : 'A long time ago' }}</span>
+                            <br><br>
+                            <p>{{ $comment->body }}</p>
+                            @if(!$loop->last)
+                                <hr>
+                            @endif
+                        @endforeach
                     </div>
                 </div>
-            @endforeach
-            <div class="row">
-                <div class="col-md-10 col-md-offset-1 no-padding">
-                    {{ $comments->links() }}
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1 no-padding">
+                        {{ $comments->links() }}
+                    </div>
                 </div>
-            </div>
+            @else
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1 no-padding">
+                        <h4>@lang('content.no-comments')</h4>
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
 @endsection

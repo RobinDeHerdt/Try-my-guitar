@@ -34,10 +34,8 @@
             @endif
             @if($articles->isNotEmpty())
                 <h2 class="padding-top">@lang('titles.latest-news')</h2>
-                @foreach ($articles as $article)
-                    @if($loop->index % 3 == 0)
-                        <div class="row">
-                    @endif
+                <div class="row">
+                    @foreach ($articles as $article)
                         <div class="col-md-4">
                             <a href="{{ route('article.public.show', ['article' => $article->id, 'title' => str_slug($article->title)]) }}" class="article-link">
                                 <div class="article">
@@ -49,10 +47,8 @@
                                 </div>
                             </a>
                         </div>
-                    @if($loop->index % 3 == 2)
-                        </div>
-                    @endif
-                @endforeach
+                    @endforeach
+                </div>
                 @if($articles->count() > 3)
                     <div class="row">
                         <div class="col-md-4 col-md-offset-4">
