@@ -78,7 +78,7 @@
                             <div id="comment-{{ $comment->id }}"></div>
                             <span>{{ $comment->user->fullName() }}</span>
                             &middot; <span class="time-ago">{{ $comment->created_at ? $comment->created_at->diffForHumans() : 'A long time ago' }}</span>
-                            @if($comment->user->id === Auth::user()->id)
+                            @if(Auth::check() && Auth::user()->id === $comment->user->id)
                                 &middot; <span><a href="{{ route('comment.destroy', ['comment' => $comment->id]) }}" onclick="event.preventDefault(); document.getElementById('delete-comment-{{ $comment->id }}').submit();">Remove</a></span>
                                 <form action="{{ route('comment.destroy', ['comment' => $comment->id]) }}" method="POST" id="delete-comment-{{ $comment->id }}" style="display: none">
                                     {{ csrf_field() }}
