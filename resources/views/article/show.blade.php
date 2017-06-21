@@ -7,6 +7,16 @@
 @section('content')
     <div class="content">
         <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1 no-padding">
+                    @if (Session::has('success-message'))
+                        <div class="alert alert-success">{{ Session::get('success-message') }}</div>
+                    @endif
+                    @if (Session::has('info-message'))
+                        <div class="alert alert-info">{{ Session::get('info-message') }}</div>
+                    @endif
+                </div>
+            </div>
             <div class="row heading">
                 <div class="col-md-10 col-md-offset-1 no-padding">
                     <a href="{{ route('article.public.index') }}" class="icon-text"><span class="glyphicon glyphicon-list"></span>Article overview</a>
@@ -65,7 +75,15 @@
                 <div class="row">
                     <div class="col-md-10 col-md-offset-1 dashboard-content">
                         @foreach($comments as $comment)
-                            <span>{{ $comment->user->fullName() }}</span> &middot; <span class="time-ago">{{ $comment->created_at ? $comment->created_at->diffForHumans() : 'A long time ago' }}</span>
+                            <div id="comment-{{ $comment->id }}"></div>
+                            <span>{{ $comment->user->fullName() }}</span>
+                            &middot; <span class="time-ago">{{ $comment->created_at ? $comment->created_at->diffForHumans() : 'A long time ago' }}</span>
+                            @if($comment->user->id === Auth::user()->id)
+                                &middot; <span><a href="{{ route('comment.destroy', ['comment' => $comment->id]) }}" onclick="event.preventDefault(); document.getElementById('delete-comment-{{ $comment->id }}').submit();">Remove</a></span>
+                                <form action="{{ route('comment.destroy', ['comment' => $comment->id]) }}" method="POST" id="delete-comment-{{ $comment->id }}" style="display: none">
+                                    {{ csrf_field() }}
+                                </form>
+                            @endif
                             <br><br>
                             <p>{{ $comment->body }}</p>
                             @if(!$loop->last)

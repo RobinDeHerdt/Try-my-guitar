@@ -34,7 +34,7 @@ Route::group([
     Route::get('article/{article}/{title}', 'ArticleController@showPublic')->name('article.public.show');
     Route::get('articles', 'ArticleController@indexPublic')->name('article.public.index');
     Route::post('comment/store', 'CommentController@store')->name('comment.store');
-    Route::post('comment/update', 'CommentController@update')->name('comment.update');
+    Route::post('comment/{comment}/destroy', 'CommentController@destroy')->name('comment.destroy');
 
     // Contact message related routes.
     Route::post('contact', 'ContactController@store')->name('contact');

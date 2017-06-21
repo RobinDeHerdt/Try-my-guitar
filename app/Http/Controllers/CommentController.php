@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use App\Comment;
 use App\Article;
@@ -52,6 +53,28 @@ class CommentController extends Controller
             $comment->save();
         }
 
-        return redirect(route('article.public.show', ['article' => $article, 'title' => str_slug($article->title)]));
+        return redirect(route('article.public.show', [
+            'article'   => $article,
+            'title'     => str_slug($article->title)
+        ]). "#comment-" . $comment->id);
+    }
+
+    /**
+     * Store a newly created comment.
+     *
+     * @param  \App\Comment  $comment
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Comment $comment)
+    {
+        if ($comment->user->id === $this->user->id) {
+            $comment->delete();
+
+            Session::flash('success-message', 'Your comment has been removed.');
+
+            return back();
+        } else {
+            abort(403);
+        }
     }
 }

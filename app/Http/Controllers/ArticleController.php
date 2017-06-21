@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Article;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 
 /**
@@ -56,7 +57,12 @@ class ArticleController extends Controller
                 break;
         }
 
-        $articles = $article_query->paginate(9);
+        $articles = $article_query->paginate(6);
+
+        // Append all query parameters that were received with the initial request.
+        foreach (Input::except('page') as $input => $value) {
+            $articles->appends($input, $value);
+        }
 
         return view('article.index', [
             'articles' => $articles,
