@@ -15,5 +15,5 @@ return [
 
     'previous'          => '&laquo; Previous',
     'next'              => 'Next &raquo;',
-    'showing-comments'  => 'Showing :count of :total comments',
+    'showing-comments'  => ':count van de :total reacties worden weergegeven',
 ];

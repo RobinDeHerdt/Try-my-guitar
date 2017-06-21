@@ -12,4 +12,5 @@ return [
     'guitar-brands'         => 'Merken',
     'guitar-categories'     => 'Categoriën',
     'article-overview'      => 'Overzicht van alle artikels',
+    'comments'              => 'Reacties',
 ];

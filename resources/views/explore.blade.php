@@ -13,7 +13,7 @@
                     <div class="dashboard-content">
                         <div class="pac-card" id="pac-card">
                             <div id="pac-container">
-                                <input id="pac-input" type="text" name="location" placeholder="Enter a location.">
+                                <input id="pac-input" type="text" name="location" placeholder="@lang('input.enter-location')">
                             </div>
                         </div>
                         <div id="map"></div>

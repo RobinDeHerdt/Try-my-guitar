@@ -12,4 +12,5 @@ return [
     'guitar-brands'         => 'Brands',
     'guitar-categories'     => 'Categories',
     'article-overview'      => 'Article overview',
+    'comments'              => 'Comments',
 ];

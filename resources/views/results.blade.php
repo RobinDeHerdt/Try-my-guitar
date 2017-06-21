@@ -9,21 +9,21 @@
         <div class="container">
             <form class="form-inline" id="search-form" method="GET" action="{{ route('search') }}">
                 <div class="dashboard-content search-filter">
-                    <h3>Filters</h3>
+                    <h3>@lang('content.filters')</h3>
                     <div class="row">
                         <div class="col-md-6">
-                            <h4>Categories</h4>
+                            <h4>@lang('content.categories')</h4>
                             <div class="form-group">
-                                <label class="radio-inline"><input type="radio" name="category" value="all" {{ $filter_category === 'all' || $filter_category === null ? 'checked' : '' }}>All</label>
-                                <label class="radio-inline"><input type="radio" name="category" value="user" {{ $filter_category === 'user' ? 'checked' : '' }}>Users</label>
-                                <label class="radio-inline"><input type="radio" name="category" value="guitar" {{ $filter_category === 'guitar' ? 'checked' : '' }}>Guitars</label>
+                                <label class="radio-inline"><input type="radio" name="category" value="all" {{ $filter_category === 'all' || $filter_category === null ? 'checked' : '' }}>@lang('content.all')</label>
+                                <label class="radio-inline"><input type="radio" name="category" value="user" {{ $filter_category === 'user' ? 'checked' : '' }}>@lang('content.users')</label>
+                                <label class="radio-inline"><input type="radio" name="category" value="guitar" {{ $filter_category === 'guitar' ? 'checked' : '' }}>@lang('content.guitars')</label>
                             </div>
                         </div>
                     </div>
                     <div id="guitar-filters" style="display: none">
                         <div class="row">
                             <div class="col-md-12">
-                                <h4>Types</h4>
+                                <h4>@lang('content.types')</h4>
                             </div>
                             @foreach($types as $type)
                                 <div class="col-md-2">
@@ -33,7 +33,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <h4>Brands</h4>
+                                <h4>@lang('content.brands')</h4>
                             </div>
                             @foreach($brands as $brand)
                                 <div class="col-md-2">
@@ -45,7 +45,7 @@
                     <div id="user-filters" style="display: none">
                         <div class="row">
                             <div class="col-md-12">
-                                <h4>Location</h4>
+                                <h4>@lang('content.location')</h4>
                             </div>
                             <div class="col-md-2">
                                 <label class="checkbox-inline"><input type="checkbox" name="proximity" {{ $filter_proximity ? 'checked' : ''}}>Sort by proximity</label>
@@ -69,8 +69,8 @@
                     <div class="col-md-12">
                         <div class="search-results-search">
                             <div class="header-search">
-                                <input type="text" class="form-control search-input" name="term" id="search-input" placeholder="Search for a user or guitar" value="{{app('request')->input('term') }}">
-                                <a href="{{ route('search') }}" class="btn btn-default search-submit" id="search-submit" onclick="event.preventDefault(); document.getElementById('search-form').submit();">Search</a>
+                                <input type="text" class="form-control search-input" name="term" id="search-input" placeholder="@lang('input.user-search')" value="{{app('request')->input('term') }}">
+                                <a href="{{ route('search') }}" class="btn btn-default search-submit" id="search-submit" onclick="event.preventDefault(); document.getElementById('search-form').submit();">@lang('input.search')</a>
                                 <a href="{{ route('search') }}" class="btn btn-default search-submit" id="search-submit-mobile" onclick="event.preventDefault(); document.getElementById('search-form').submit();"><i class="fa fa-search" aria-hidden="true"></i></a>
                             </div>
                         </div>
@@ -83,7 +83,7 @@
                 </div>
             @endif
             @if($most_relevant_guitars->isNotEmpty() || $less_relevant_guitars->isNotEmpty())
-                <h2>Guitars</h2>
+                <h2>@lang('content.guitars')</h2>
                 <hr class="dark-hr">
                 <div class="row">
                     <div class="col-md-12">
@@ -159,7 +159,7 @@
                 </div>
             @endif
             @if($most_relevant_users->isNotEmpty() || $less_relevant_users->isNotEmpty())
-                <h2>Users</h2>
+                <h2>@lang('content.users')</h2>
                 <hr class="dark-hr">
                 <div class="row">
                     <div class="col-md-12">
@@ -197,7 +197,7 @@
                                 </a>
                                 <div class="search-result-profile-image" style="background-image: url({{ Storage::disk('public')->url($user->image_uri) }})"></div>
                                 <h3>{{ $user->fullName()  }}</h3>
-                                <span>&#177; {{ round($user->distance) }} km away</span>
+                                <span>@lang('content.distance', ['distance' => round($user->distance)])</span>
                             </div>
                         </div>
                     @endforeach
@@ -212,7 +212,7 @@
                                 </a>
                                 <div class="search-result-profile-image" style="background-image: url({{ Storage::disk('public')->url($user->image_uri) }})"></div>
                                 <h3>{{ $user->fullName()  }}</h3>
-                                <span>&#177; {{ round($user->distance) }} km away</span>
+                                <span>@lang('content.distance', ['distance' => round($user->distance)])</span>
                             </div>
                         </div>
                     @endforeach

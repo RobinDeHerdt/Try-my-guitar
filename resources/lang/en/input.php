@@ -28,4 +28,5 @@ return [
     'search'                => 'Search',
     'read-more'             => 'Read more',
     'guitar-autocomplete'   => 'Enter your guitar here (autocomplete)',
+    'enter-location'        => 'Enter a location',
 ];

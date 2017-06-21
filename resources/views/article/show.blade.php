@@ -8,12 +8,12 @@
     <div class="content">
         <div class="container">
             <div class="row heading">
-                <div class="col-md-8 col-md-offset-2 no-padding">
+                <div class="col-md-10 col-md-offset-1 no-padding">
                     <a href="{{ route('article.public.index') }}" class="icon-text"><span class="glyphicon glyphicon-list"></span>Article overview</a>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-8 col-md-offset-2 dashboard-content">
+                <div class="col-md-10 col-md-offset-1 dashboard-content">
                     <div style="background-image: url({{ Storage::disk('public')->url($article->image_uri) }})" class="article-image"></div>
                     <h2>{{ $article->title }}</h2>
                     <div class="article-author">
@@ -22,7 +22,7 @@
                     <p class="article-body">{!! nl2br(e($article->body)) !!}</p>
                     <hr>
                     <div class="social-media-left">
-                        {{ $article->views }} views
+                        Viewed {{ $article->views }} times
                     </div>
                     <div class="social-media-right">
                         <div class="g-plusone"></div>
@@ -30,22 +30,22 @@
                     </div>
                 </div>
             </div>
-            <br>
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                    <h2>Comments ({{ $comments->total() }})</h2>
+            <div class="row heading">
+                <div class="col-md-10 col-md-offset-1 no-padding">
+                    <h1>@lang('titles.comments') ({{ $comments->total() }})</h1>
+                    <span class="icon-text">@lang('pagination.showing-comments', ['count' => $comments->count(), 'total' =>  $comments->total()])</span>
                 </div>
             </div>
             @foreach($comments as $comment)
                 <div class="row">
-                    <div class="col-md-8 col-md-offset-2 dashboard-content">
-                        <h4>{{ $comment->user->fullName() }}</h4>
+                    <div class="col-md-10 col-md-offset-1 dashboard-content">
+                        <h4>{{ $comment->user->fullName() }} - {{ $comment->created_at }}</h4>
                         <p>{{ $comment->body }}</p>
                     </div>
                 </div>
             @endforeach
             <div class="row">
-                <div class="col-md-8 col-md-offset-2 no-padding">
+                <div class="col-md-10 col-md-offset-1 no-padding">
                     {{ $comments->links() }}
                 </div>
             </div>
