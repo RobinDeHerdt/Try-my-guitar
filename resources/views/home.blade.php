@@ -16,7 +16,7 @@
                 </form>
             </div>
         </div>
-        <div class="header-image" style="background-image: url('/images/register-bg.jpg');"></div>
+        <div class="header-image" style="background-image: url('/images/background.jpg'); background-position: top"></div>
         <div class="container">
             @if($cta_items->count() === 3)
                 <h2 class="padding-top">@lang('titles.how-it-works')</h2>
