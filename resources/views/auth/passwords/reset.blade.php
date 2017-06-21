@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-md-4 col-md-offset-4 authentication-block">
                 @if (session('status'))
-                    <div class="alert-success">
+                    <div class="alert alert-success">
                         {{ session('status') }}
                     </div>
                 @endif
