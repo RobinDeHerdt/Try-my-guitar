@@ -31,16 +31,22 @@ body {
 
 .full-page-bg {
   position: absolute;
-  top: 0;
-  bottom: 0;
+  top: 54px;
+  bottom: 120px;
   background-size: cover;
   width: 100%;
   z-index: -10;
+  opacity: 0.9;
+  filter: brightness(60%);
 }
 
 .authentication-block {
-  margin-top: 250px;
-  margin-bottom: 250px;
+  margin-top: 20vh;
+  background: white;
+  padding: 25px;
+  box-shadow: $strong-drop-shadow;
+  border-radius: 5px;
+
 }
 
 .heading {
@@ -239,7 +245,6 @@ body {
 
 @media (max-width: 992px) {
   .authentication-block {
-    margin-top: 25px;
-    margin-bottom: 100px;
+
   }
 }
