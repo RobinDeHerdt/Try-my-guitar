@@ -28,9 +28,23 @@
                             <label for="title">Title</label>
                             <input type="text" name="title" class="form-control" value="{{ $article->title }}">
                         </div>
-                        <div class="form-group">
-                            <label for="image">Replace image (if nothing is selected the current image will stay)</label>
-                            <input type="file" name="image" class="form-control" value="{{ $article->image_uri }}">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="language">Language</label>
+                                    <select class="form-control" name="language">
+                                        @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                            <option value="{{ $article->lang ? $article->lang : $localeCode }}">{{ $properties['native'] }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="form-group">
+                                    <label for="image">Replace image (if nothing is selected the current image will stay)</label>
+                                    <input type="file" name="image" class="form-control" value="{{ $article->image_uri }}">
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="body">Content</label>

@@ -165,6 +165,7 @@ class ArticleController extends Controller
 
         $article->title     = $request->title;
         $article->body      = $request->body;
+        $article->lang      = $request->language;
 
         if (isset($request->image)) {
             $article->image_uri = $request->image->store('images', 'public');
