@@ -4,14 +4,15 @@ a.cta-button {
   padding: 10px 30px;
   border-radius: 2.5px;
   font-weight: 600;
+  margin: 0 5px;
 
-  &:hover {
+  &:hover, &:link, &:visited, &active {
     text-decoration: none;
   }
 }
 
 .cta-button.red {
-  background-color: #bd2a23;
+  background-color: #d64242;
 }
 
 .cta-button.green {
@@ -33,8 +34,10 @@ a.cta-button {
     font-weight: 600;
   }
 
-  a:hover {
-    text-decoration: none;
+  a {
+    &:hover, &:link, &:visited, &active {
+      text-decoration: none;
+    }
   }
 }
 
@@ -53,7 +56,7 @@ a.cta-button {
     text-align: center;
 
     &.red {
-      background-color: darkred;
+      background-color: #d64242;
     }
 
     &.blue {

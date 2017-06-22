@@ -28,17 +28,21 @@
                             <a href="{{ route('profile.edit') }}"><i class="fa fa-edit" aria-hidden="true"></i></a>
                         </div>
                     @else
-                        <div class="profile-button blue" title="Invite to chat">
-                            <a href="{{ route('profile.invite', ['id' => $user->id]) }}"><i class="fa fa-comments" aria-hidden="true"></i></a>
-                        </div>
-                        <div class="profile-button red" title="Report">
-                            <a href="{{ route('report.create', ['id' => $user->id]) }}"><i class="fa fa-flag" aria-hidden="true"></i></a>
-                        </div>
+                        <a href="{{ route('profile.invite', ['id' => $user->id]) }}">
+                            <div class="profile-button blue" title="Invite to chat">
+                                <i class="fa fa-comments" aria-hidden="true"></i>
+                            </div>
+                        </a>
+                        <a href="{{ route('report.create', ['id' => $user->id]) }}">
+                            <div class="profile-button red" title="Report">
+                                <i class="fa fa-flag" aria-hidden="true"></i>
+                            </div>
+                        </a>
                     @endif
                 @endif
             </div>
             @if($guitars->isNotEmpty())
-                <h2 class="padding-top">Collection <span class="counter">{{ $user->guitars->count() }}</span></h2>
+                <h2>Collection <span class="counter">{{ $user->guitars->count() }}</span></h2>
             <div class="dashboard-content">
                 <div class="row">
                     <div class="col-md-12">
@@ -66,7 +70,7 @@
             </div>
             @endif
             @if($user->experiences->isNotEmpty())
-                <h2 class="padding-top">Experiences <span class="counter">{{ $user->experiences->count() }}</span></h2>
+                <h2>Experiences <span class="counter">{{ $user->experiences->count() }}</span></h2>
                 <div class="row">
                     @foreach($user->experiences as $experience)
                         <div class="col-md-6">

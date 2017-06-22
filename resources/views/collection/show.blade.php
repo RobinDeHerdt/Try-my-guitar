@@ -45,12 +45,17 @@
                                         </div>
                                     </div>
                                 @endif
-                                @if ($user->getGuitarExperience($guitar))
-                                    <hr>
-                                    <div class="collection-experience">
-                                        <p>{{ $user->getGuitarExperience($guitar)->experience }}</p>
+                                @if ($user->guitarExperience($guitar))<hr>
+                                    <div class="row">
+                                        <div class="col-md-10 col-md-offset-1">
+                                            <div class="collection-experience">
+                                                <strong>{{ $user->first_name }}'s experience with this guitar:</strong>
+                                                <br><br>
+                                                <p>{{ $user->guitarExperience($guitar)->experience }}</p>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <hr>
+                                    <br>
                                     <div class="row">
                                         @if(Auth::check() && Auth::user()->id === $user->id)
                                             <div class="col-md-12">
@@ -58,17 +63,21 @@
                                             </div>
                                         @else
                                             <div class="col-md-12 feedback-section">
-                                                <a href="{{ route('experience.vote', ['id' => $user->getGuitarExperience($guitar)->id ])}}" class="cta-button" title="Mark this experience as helpful" onclick="event.preventDefault(); vote('{{ $user->getGuitarExperience($guitar)->id }}', 1);">
-                                                    <span class="glyphicon glyphicon-thumbs-up"></span>
-                                                    <span id="upvote-count"> {{ $user->getGuitarExperience($guitar)->upVotes->count() }}</span>
+                                                <a href="{{ route('experience.vote', ['id' => $user->guitarExperience($guitar)->id ])}}" class="cta-button" title="Mark this experience as helpful" onclick="event.preventDefault(); vote('{{ $user->guitarExperience($guitar)->id }}', 1);">
+                                                    <span>
+                                                        <i class="fa {{ Auth::check() && $user->guitarExperience($guitar)->upVotes->contains(Auth::user()->id) ? 'fa-thumbs-up' : 'fa-thumbs-o-up' }}" aria-hidden="true"></i>
+                                                        {{ $user->guitarExperience($guitar)->upVotes->count() }}
+                                                    </span>
                                                 </a>
-                                                <a href="{{ route('experience.vote', ['id' => $user->getGuitarExperience($guitar)->id ])}}" class="cta-button" title="Mark this experience as not helpful" onclick="event.preventDefault(); vote('{{ $user->getGuitarExperience($guitar)->id }}', 0);">
-                                                    <span class="glyphicon glyphicon-thumbs-down"></span>
-                                                    <span id="{{ $user->getGuitarExperience($guitar)->id  }}"> {{ $user->getGuitarExperience($guitar)->downVotes->count() }}</span>
+                                                <a href="{{ route('experience.vote', ['id' => $user->guitarExperience($guitar)->id ])}}" class="cta-button" title="Mark this experience as not helpful" onclick="event.preventDefault(); vote('{{ $user->guitarExperience($guitar)->id }}', 0);">
+                                                    <span>
+                                                        <i class="fa {{ Auth::check() && $user->guitarExperience($guitar)->downVotes->contains(Auth::user()->id) ? 'fa-thumbs-down' : 'fa-thumbs-o-down' }}" aria-hidden="true"></i>
+                                                         {{ $user->guitarExperience($guitar)->downVotes->count() }}
+                                                    </span>
                                                 </a>
-                                                <form action="{{ route('experience.vote', ['id' => $user->getGuitarExperience($guitar)->id ])}}"  method="POST" id="vote-form-{{ $user->getGuitarExperience($guitar)->id }}">
+                                                <form action="{{ route('experience.vote', ['id' => $user->guitarExperience($guitar)->id ])}}"  method="POST" id="vote-form-{{ $user->guitarExperience($guitar)->id }}">
                                                     {{ csrf_field() }}
-                                                    <input type="hidden" name="value" id="value-field-{{ $user->getGuitarExperience($guitar)->id }}">
+                                                    <input type="hidden" name="value" id="value-field-{{ $user->guitarExperience($guitar)->id }}">
                                                 </form>
                                             </div>
                                         @endif

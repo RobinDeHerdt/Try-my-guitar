@@ -16,9 +16,6 @@ class UsersTableSeeder extends Seeder
             'first_name' => 'Administrator',
             'email' => 'admin@trymyguitar.be',
             'password' => bcrypt('admin'),
-            'location_lat' => 35,
-            'location_lng' => 40,
-            'location' => 'Hest',
         ]);
 
         DB::table('role_user')->insert([
@@ -45,9 +42,6 @@ class UsersTableSeeder extends Seeder
             'verified' => true,
             'header_image_uri' => 'images/electric-guitars.jpg',
             'description' => 'Guitar player and vocalist for a metal band called \'Trivium\'',
-            'location_lat' => 39,
-            'location_lng' => 41,
-            'location' => 'Hest',
         ]);
 
         DB::table('role_user')->insert([

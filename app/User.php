@@ -181,7 +181,7 @@ class User extends Authenticatable
      * @param Guitar  $guitar
      * @return \Illuminate\Database\Eloquent\Relations\hasMany
      */
-    public function getGuitarExperience(Guitar $guitar)
+    public function guitarExperience(Guitar $guitar)
     {
         return $guitar->experiences()->where('user_id', $this->id)->first();
     }

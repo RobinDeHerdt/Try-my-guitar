@@ -32,12 +32,16 @@
                                 <div class="row">
                                     <div class="col-md-12 feedback-section">
                                         <a href="{{ route('experience.vote', ['id' => $experience->id ])}}" class="cta-button" title="Mark this experience as helpful" onclick="event.preventDefault(); vote('{{ $experience->id }}', 1);">
-                                            <span class="glyphicon glyphicon-thumbs-up"></span>
-                                            <span id="upvote-count"> {{ $experience->upVotes->count() }}</span>
+                                            <span id="upvote-count">
+                                                <i class="fa {{ Auth::check() && $experience->upVotes->contains(Auth::user()->id) ? 'fa-thumbs-up' : 'fa-thumbs-o-up' }}" aria-hidden="true"></i>
+                                                {{ $experience->upVotes->count() }}
+                                            </span>
                                         </a>
                                         <a href="{{ route('experience.vote', ['id' => $experience->id ])}}" class="cta-button" title="Mark this experience as not helpful" onclick="event.preventDefault(); vote('{{ $experience->id }}', 0);">
-                                            <span class="glyphicon glyphicon-thumbs-down"></span>
-                                            <span id="{{ $experience->id  }}"> {{ $experience->downVotes->count() }}</span>
+                                             <span>
+                                                 <i class="fa {{ Auth::check() && $experience->downVotes->contains(Auth::user()->id) ? 'fa-thumbs-down' : 'fa-thumbs-o-down' }}" aria-hidden="true"></i>
+                                                 {{ $experience->downVotes->count() }}
+                                             </span>
                                         </a>
                                         <form action="{{ route('experience.vote', ['id' => $experience->id ])}}"  method="POST" id="vote-form-{{ $experience->id }}">
                                             {{ csrf_field() }}
