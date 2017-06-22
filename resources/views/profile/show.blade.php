@@ -22,30 +22,22 @@
             @if($user->location)
                 <span class="profile-location"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ $user->location }}</span>
             @endif
-            @if(Auth::check())
-                @if ($user->id === Auth::user()->id)
-                    <div class="row">
-                        <div class="col-md-2 col-md-offset-5">
-                            <div class="big-cta-button">
-                                <a href="{{ route('profile.edit') }}">Edit profile</a>
-                            </div>
+            <div class="profile-button-container">
+                @if(Auth::check())
+                    @if ($user->id === Auth::user()->id)
+                        <div class="profile-button blue" title="Edit profile">
+                            <a href="{{ route('profile.edit') }}"><i class="fa fa-edit" aria-hidden="true"></i></a>
                         </div>
-                    </div>
-                @else
-                    <div class="row">
-                        <div class="col-md-2 col-md-offset-5">
-                            <div class="big-cta-button">
-                                <a href="{{ route('profile.invite', ['id' => $user->id]) }}">Invite to chat</a>
-                            </div>
+                    @else
+                        <div class="profile-button blue" title="Invite to chat">
+                            <a href="{{ route('profile.invite', ['id' => $user->id]) }}"><i class="fa fa-comments" aria-hidden="true"></i></a>
                         </div>
-                        <div class="col-md-2 col-md-offset-3">
-                            <div class="report-button">
-                                <a href="{{ route('report.create', ['id' => $user->id]) }}">Report user</a>
-                            </div>
+                        <div class="profile-button red" title="Report">
+                            <a href="{{ route('report.create', ['id' => $user->id]) }}"><i class="fa fa-flag" aria-hidden="true"></i></a>
                         </div>
-                    </div>
+                    @endif
                 @endif
-            @endif
+            </div>
             @if($user->guitars->isNotEmpty())
                 <h2 class="padding-top">Collection <span class="counter">{{ $user->guitars->count() }}</span></h2>
                 <div class="row">
@@ -65,9 +57,9 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4 col-md-offset-4">
+                    <div class="col-md-2 col-md-offset-5">
                         <div class="big-cta-button">
-                            <a href="{{ route('collection.show', ['id' => $user]) }}">View full collection</a>
+                            <a href="{{ route('collection.show', ['id' => $user]) }}">View collection</a>
                         </div>
                     </div>
                 </div>
@@ -100,9 +92,9 @@
                     @endforeach
                 </div>
                 <div class="row">
-                    <div class="col-md-4 col-md-offset-4">
+                    <div class="col-md-2 col-md-offset-5">
                         <div class="big-cta-button">
-                            <a href="{{ route('profile.experiences', ['id' => $user]) }}">View all experiences</a>
+                            <a href="{{ route('profile.experiences', ['id' => $user]) }}">View experiences</a>
                         </div>
                     </div>
                 </div>
