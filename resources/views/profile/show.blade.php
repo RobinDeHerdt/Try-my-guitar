@@ -13,7 +13,6 @@
             <span title="Verified e-mail address">
                 <div class="verified-mark"><i class="fa fa-check fa-2x" aria-hidden="true"></i></div>
             </span>
-            </span>
             @endif
             <h1 class="profile-name">{{ $user->fullName() }}</h1>
             @if($user->description)
@@ -38,12 +37,13 @@
                     @endif
                 @endif
             </div>
-            @if($user->guitars->isNotEmpty())
+            @if($guitars->isNotEmpty())
                 <h2 class="padding-top">Collection <span class="counter">{{ $user->guitars->count() }}</span></h2>
+            <div class="dashboard-content">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="collection">
-                            @foreach($user->guitars as $guitar)
+                            @foreach($guitars as $guitar)
                                 <div class="collection-item">
                                     <a href="{{ route('guitar.show', ['guitar' => $guitar->id]) }}">
                                         <div style="background-image: url({{ Storage::disk('public')->url($guitar->guitarImages()->first()->image_uri) }}" class="collection-item-image"></div>
@@ -63,6 +63,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
             @endif
             @if($user->experiences->isNotEmpty())
                 <h2 class="padding-top">Experiences <span class="counter">{{ $user->experiences->count() }}</span></h2>
@@ -80,10 +81,7 @@
                                     </div>
                                     <div class="col-md-8">
                                         <div class="experience-text">
-                                            <blockquote>
-                                                <br>
-                                                <p>{{ str_limit($experience->experience, 150) }}</p>
-                                            </blockquote>
+                                            <p>{{ str_limit($experience->experience, 150) }}</p>
                                         </div>
                                     </div>
                                 </div>

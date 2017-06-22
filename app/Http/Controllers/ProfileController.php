@@ -46,8 +46,11 @@ class ProfileController extends Controller
      */
     public function show(User $user)
     {
+        $guitars = $user->profileShowGuitars()->take(3)->get();
+
         return view('profile.show', [
-            'user' => $user
+            'user'      => $user,
+            'guitars'   => $guitars,
         ]);
     }
 

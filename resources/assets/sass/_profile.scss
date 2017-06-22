@@ -115,13 +115,12 @@
 }
 
 .collection {
-  padding: 25px 0;
   display: inline-block;
 
   .collection-item {
     display: inline-block;
     text-align: center;
-    margin: 0 20px;
+    margin: 20px 50px;
 
     a:link, a:visited, a:hover {
       color: $primary-font-color;
@@ -145,9 +144,7 @@
       background-position: center;
       margin: 0 auto;
       background-color: white;
-      border-radius: 50%;
       padding: 100px;
-      box-shadow: $drop-shadow;
     }
 
     .collection-item-color {
@@ -170,10 +167,6 @@
       }
     }
   }
-}
-
-.collection-experience {
-  padding: 20px 0;
 }
 
 @media (max-width: 767px) {

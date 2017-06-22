@@ -69,12 +69,11 @@
                                         </div>
                                     </div>
                                     <div class="col-md-8">
-                                        <div class="experience-text">
-                                            <blockquote>
-                                                <br>
+                                        <a href="{{ route('guitar.show.experiences', ['guitar' => $guitar->id]) . "#experience-".$experience->id }}" title="View experience">
+                                            <div class="experience-text">
                                                 <p>{{ str_limit($experience->experience, 150) }}</p>
-                                            </blockquote>
-                                        </div>
+                                            </div>
+                                        </a>
                                     </div>
                                 </div>
                             </div>

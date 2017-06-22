@@ -27,16 +27,24 @@
                     <div style="background-image: url({{ Storage::disk('public')->url($article->image_uri) }})" class="article-image"></div>
                     <h2>{{ $article->title }}</h2>
                     <div class="article-author">
-                        <span><i>{{ $article->user->fullName() .' - ' . $article->created_at }}</i></span>
+                        <span><i>{{ $article->user->fullName() }} - {{ $article->created_at ? $article->created_at->formatLocalized('%A %d %B %Y') : 'A long time ago' }}</i></span>
                     </div>
-                    <p class="article-body">{!! nl2br(e($article->body)) !!}</p>
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <p class="article-body">{!! nl2br(e($article->body)) !!}</p>
+                        </div>
+                    </div>
                     <hr>
-                    <div class="social-media-left">
-                        @lang('content.views', ['view-amount' => $article->views])
-                    </div>
-                    <div class="social-media-right">
-                        <div class="g-plusone"></div>
-                        <a class="twitter-share-button" href="https://twitter.com/intent/tweet" data-size="large">Tweet</a>
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <div class="social-media-left">
+                                @lang('content.views', ['view-amount' => $article->views])
+                            </div>
+                            <div class="social-media-right">
+                                <div class="g-plusone"></div>
+                                <a class="twitter-share-button" href="https://twitter.com/intent/tweet" data-size="large">Tweet</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -13,7 +13,7 @@
             </div>
             <div class="row">
                 @foreach($guitar->experiences as $experience)
-                    <div class="col-md-6">
+                    <div class="col-md-6" id="experience-{{ $experience->id }}">
                         <div class="search-result-header-image" style="background-image: url({{ Storage::disk('public')->url($experience->user->header_image_uri) }})"></div>
                         <div class="search-result">
                             <a href="{{ route('profile.show', ['id' => $experience->user->id]) }}" title="{{ $experience->user->fullName() }}">
@@ -21,7 +21,11 @@
                             </a>
                             <h3>{{ $experience->user->fullName()  }}</h3>
                             <br>
-                            <p>{{ $experience->experience }}</p>
+                            <div class="row">
+                                <div class="col-md-10 col-md-offset-1">
+                                    <p>{{ $experience->experience }}</p>
+                                </div>
+                            </div>
                             <hr>
                             <div class="col-md-12 feedback-section">
                                 <a href="{{ route('experience.vote', ['id' => $experience->id ])}}" class="cta-button" title="Mark this experience as helpful" onclick="event.preventDefault(); vote('{{ $experience->id }}', 1);">

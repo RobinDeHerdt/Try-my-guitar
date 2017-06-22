@@ -74,11 +74,13 @@ class GuitarsTableSeeder extends Seeder
         DB::table('user_guitar')->insert([
             'guitar_id' => 1,
             'user_id' => 2,
+            'profile_show' => true,
         ]);
 
         DB::table('user_guitar')->insert([
             'guitar_id' => 1,
             'user_id' => 3,
+            'profile_show' => true,
         ]);
 
         DB::table('user_guitar')->insert([
@@ -89,6 +91,7 @@ class GuitarsTableSeeder extends Seeder
         DB::table('user_guitar')->insert([
             'guitar_id' => 2,
             'user_id' => 3,
+            'profile_show' => true,
         ]);
 
         DB::table('user_guitar')->insert([

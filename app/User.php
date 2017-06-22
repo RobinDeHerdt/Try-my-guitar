@@ -95,6 +95,16 @@ class User extends Authenticatable
     }
 
     /**
+     * A user belongs to many guitars.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
+     */
+    public function profileShowGuitars()
+    {
+        return $this->belongsToMany('App\Guitar', 'user_guitar')->wherePivot('profile_show', true);
+    }
+
+    /**
      * A user has many invites.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

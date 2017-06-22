@@ -50,10 +50,8 @@
 }
 
 .experience-container {
-  //border-right: 10px solid $primary-component-color;
   background-color: #fff;
   box-shadow: $drop-shadow;
-  height: 160px;
   margin-bottom: 20px;
 
   .experience-user {
@@ -74,48 +72,17 @@
       background-position: center;
       background-repeat: no-repeat;
     }
+  }
 
-    .experience-user-name {
-      top: 5px;
-      position: relative;
-    }
+  a:link, a:visited, a:hover {
+    color: $primary-font-color;
+    text-decoration: none;
   }
 
   .experience-text {
-    margin-left: -15px;
+    padding: 20px 20px 20px 0;
     text-align: left;
-  }
-
-  blockquote {
-    border: none;
-    padding: 18px 0;
-
-    span {
-      font-size: 14px;
-    }
-  }
-
-  blockquote:before {
-    color: $primary-component-color;
-    content: open-quote;
-    font-size: 4em;
-    line-height: 0.1em;
-    margin-right: 5px;
-    vertical-align: -0.4em;
-  }
-
-  blockquote:after {
-    visibility: hidden;
-    color: $primary-component-color;
-    content: close-quote;
-    font-size: 4em;
-    line-height: 0.1em;
-    vertical-align: -0.4em;
-  }
-
-  blockquote p {
-    display: inline;
-    font-size: 14px;
+    font-size: 16px;
   }
 }
 
@@ -201,6 +168,12 @@
     width: 40%;
     left: 30%;
     margin: 20px 0;
+  }
+
+  .experience-text {
+    padding-top: 20px;
+    padding-left: 20px;
+    text-align: left;
   }
 }
 
