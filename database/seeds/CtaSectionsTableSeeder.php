@@ -24,7 +24,7 @@ class CtaSectionsTableSeeder extends Seeder
         ]);
 
         DB::table('cta_sections')->insert([
-            'title' => 'Crow sourced',
+            'title' => 'Crowd sourced',
             'cta_icon_class' => 'fa-users',
             'cta_text' => 'Crowd sourced collection of all guitars in existance.',
         ]);

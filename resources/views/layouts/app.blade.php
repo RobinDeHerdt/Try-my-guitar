@@ -15,6 +15,7 @@
     <meta name="theme-color" content="#ffffff">
     @yield('stylesheets')
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src="https://use.fontawesome.com/24f215a663.js" async ></script>
     <script>
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),

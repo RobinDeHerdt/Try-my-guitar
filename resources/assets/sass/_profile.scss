@@ -120,7 +120,7 @@
   .collection-item {
     display: inline-block;
     text-align: center;
-    margin: 20px 50px;
+    margin: 0 50px;
 
     a:link, a:visited, a:hover {
       color: $primary-font-color;
@@ -169,9 +169,14 @@
   }
 }
 
+@media (max-width: 991px) {
+  .collection .collection-item {
+    margin: 0;
+  }
+}
+
 @media (max-width: 767px) {
   .profile-container {
-
     .profile-image {
       width: 250px;
       height: 250px;
@@ -181,20 +186,8 @@
       font-size: 36px;
     }
   }
-}
 
-@media (max-width: 991px) {
-  .text-center {
-    text-align: inherit;
-    margin: 10px 0;
-  }
-
-  .collection {
-    display: inherit;
-
-    .collection-item {
-      flex: 0;
-      margin-bottom: 50px;
-    }
+  .profile-header-image {
+    height: 300px;
   }
 }

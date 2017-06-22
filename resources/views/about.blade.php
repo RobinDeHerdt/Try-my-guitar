@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="content {{ Auth::user() && Auth::user()->hasRole('administrator') ? 'admin-authenticated' : '' }}">
-        <div class="header-image" style="background-image: url('/images/login-bg.jpg');"></div>
+        <div class="header-image" style="background-image: url('/images/about-bg.jpg');"></div>
         <div class="container">
             <div class="row">
                 @if (Session::has('success-message'))
@@ -20,41 +20,59 @@
                 @endif
             </div>
             <h2 id="meet">Meet people</h2>
-            <div class="row col-container">
-                <span>Content here</span>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="dashboard-content">
+                        <span>Content here</span>
+                    </div>
+                </div>
             </div>
             <h2 id="discover">Discover</h2>
-            <div class="row col-container">
-                <span>Content here</span>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="dashboard-content">
+                        <span>Content here</span>
+                    </div>
+                </div>
             </div>
             <h2 id="crowdsourced">Crowd sourced</h2>
-            <div class="row col-container">
-                <span>Content here</span>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="dashboard-content">
+                        <span>Content here</span>
+                    </div>
+                </div>
             </div>
             <h2>Contact</h2>
-            <div class="row col-container">
-                <form action="{{ route('contact') }}" method="POST">
-                    {{ csrf_field() }}
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="email">@lang('input.email') *</label>
-                            <input type="email" class="form-control" name="email" placeholder="Your e-mail address" required>
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="form-group">
-                            <label for="message">@lang('input.your-message') *</label>
-                            <textarea name="message" cols="30" rows="10" class="form-control" placeholder="Your message" required></textarea>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4 col-md-offset-8">
-                                <div class="form-group">
-                                    <input type="submit" class="btn btn-primary form-control" value="Send">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="dashboard-content">
+                        <form action="{{ route('contact') }}" method="POST">
+                            {{ csrf_field() }}
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="email">@lang('input.email') *</label>
+                                        <input type="email" class="form-control" name="email" placeholder="Your e-mail address" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label for="message">@lang('input.your-message') *</label>
+                                        <textarea name="message" cols="30" rows="10" class="form-control" placeholder="Your message" required></textarea>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4 col-md-offset-8">
+                                            <div class="form-group">
+                                                <input type="submit" class="btn btn-primary form-control" value="Send">
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
@@ -65,5 +83,12 @@
 @endsection
 
 @section('scripts')
+    <script>
+        if(location.hash.slice(1)) {
+            $('html,body').animate({
+                scrollTop: $("#" + location.hash.slice(1)).offset().top - 70
+            }, 1000 );
+        }
+    </script>
     @include('partials.analytics')
 @endsection

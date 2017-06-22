@@ -45,3 +45,31 @@
   font-weight: 500;
   padding: 6px 12px;
 }
+
+@media (max-width: 500px) {
+  #pac-card {
+    width: 200px;
+
+    #pac-container {
+      width: 200px;
+
+      #pac-input {
+        width: 200px;
+      }
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  #pac-card {
+    width: 150px;
+
+    #pac-container {
+      width: 150px;
+
+      #pac-input {
+        width: 150px;
+      }
+    }
+  }
+}
