@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\URL;
 use App\Experience;
 use Auth;
 use App\Vote;
@@ -66,6 +68,6 @@ class ExperienceController extends Controller
 
         $vote->save();
 
-        return back();
+        return Redirect::to(URL::previous() . "#experience-" . $experience->id);
     }
 }

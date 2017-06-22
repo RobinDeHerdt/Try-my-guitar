@@ -65,13 +65,13 @@
                                             <div class="col-md-12 feedback-section">
                                                 <a href="{{ route('experience.vote', ['id' => $user->guitarExperience($guitar)->id ])}}" class="cta-button" title="Mark this experience as helpful" onclick="event.preventDefault(); vote('{{ $user->guitarExperience($guitar)->id }}', 1);">
                                                     <span>
-                                                        <i class="fa {{ Auth::check() && $user->guitarExperience($guitar)->upVotes->contains(Auth::user()->id) ? 'fa-thumbs-up' : 'fa-thumbs-o-up' }}" aria-hidden="true"></i>
+                                                        <i class="fa {{ Auth::check() && $user->guitarExperience($guitar)->upVotes->contains('user_id', Auth::user()->id) ? 'fa-thumbs-up' : 'fa-thumbs-o-up' }}" aria-hidden="true"></i>
                                                         {{ $user->guitarExperience($guitar)->upVotes->count() }}
                                                     </span>
                                                 </a>
                                                 <a href="{{ route('experience.vote', ['id' => $user->guitarExperience($guitar)->id ])}}" class="cta-button" title="Mark this experience as not helpful" onclick="event.preventDefault(); vote('{{ $user->guitarExperience($guitar)->id }}', 0);">
                                                     <span>
-                                                        <i class="fa {{ Auth::check() && $user->guitarExperience($guitar)->downVotes->contains(Auth::user()->id) ? 'fa-thumbs-down' : 'fa-thumbs-o-down' }}" aria-hidden="true"></i>
+                                                        <i class="fa {{ Auth::check() && $user->guitarExperience($guitar)->downVotes->contains('user_id', Auth::user()->id) ? 'fa-thumbs-down' : 'fa-thumbs-o-down' }}" aria-hidden="true"></i>
                                                          {{ $user->guitarExperience($guitar)->downVotes->count() }}
                                                     </span>
                                                 </a>

@@ -127,6 +127,10 @@
                             <hr>
                             <span>You have not yet verified your e-mail address yet. Click <a href="{{ route('verify.resend') }}">here</a> to send the verification mail again.</span>
                         @endif
+                        <hr>
+                        @if(!$user->location)
+                            <span>You have not completed your profile setup yet. Click <a href="{{ route('profile.edit') }}">here</a> to customize your profile.</span>
+                        @endif
                     </div>
                 </div>
             </div>

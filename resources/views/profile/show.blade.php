@@ -84,9 +84,11 @@
                                         </div>
                                     </div>
                                     <div class="col-md-8">
-                                        <div class="experience-text">
-                                            <p>{{ str_limit($experience->experience, 150) }}</p>
-                                        </div>
+                                        <a href="{{ route('profile.experiences', ['id' => $user]).'#experience-'. $experience->id }}">
+                                            <div class="experience-text">
+                                                <p>{{ str_limit($experience->experience, 150) }}</p>
+                                            </div>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
