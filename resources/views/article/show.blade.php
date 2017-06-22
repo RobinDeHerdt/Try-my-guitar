@@ -24,11 +24,13 @@
             </div>
             <div class="row">
                 <div class="col-md-10 col-md-offset-1 dashboard-content">
-                    <div style="background-image: url({{ Storage::disk('public')->url($article->image_uri) }})" class="article-image"></div>
                     <h2>{{ $article->title }}</h2>
                     <div class="article-author">
                         <span><i>{{ $article->user->fullName() }} - {{ $article->created_at ? $article->created_at->formatLocalized('%A %d %B %Y') : 'A long time ago' }}</i></span>
                     </div>
+                    <br><br>
+                    <div style="background-image: url({{ Storage::disk('public')->url($article->image_uri) }})" class="article-image"></div>
+                    <br>
                     <p class="article-body">{!! nl2br(e($article->body)) !!}</p>
                     <hr>
                     <div class="social-media-left">
