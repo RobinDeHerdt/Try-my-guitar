@@ -62,8 +62,8 @@ a.cta-button {
     &.blue {
       background-color: $primary-component-color;
     }
-
-    a:link, a:hover, a:visited {
+    
+    a:link, a:hover, a:visited, a:active{
       color: white;
       text-decoration: none;
       font-size: 14px;

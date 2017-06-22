@@ -1,7 +1,7 @@
 .article-link {
   color: $primary-font-color;
 
-  &:hover {
+  &:hover, &:link, &:visited, &active {
     text-decoration: none;
     color: $primary-component-color;
   }
