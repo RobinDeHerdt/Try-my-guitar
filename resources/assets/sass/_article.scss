@@ -1,9 +1,12 @@
 .article-link {
   color: $primary-font-color;
 
-  &:hover, &:link, &:visited, &active {
-    text-decoration: none;
+  &:hover {
     color: $primary-component-color;
+  }
+
+  &:link, &:visited, &active {
+    text-decoration: none;
   }
 
   .article {

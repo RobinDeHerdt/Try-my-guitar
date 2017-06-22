@@ -68,30 +68,30 @@
                         {{ $comments->links() }}
                     </div>
                 </div>
-                @if(Auth::check())
-                    <div class="row">
-                        <div class="col-md-10 col-md-offset-1 dashboard-content">
-                            <form action="{{ route('comment.store') }}" method="POST">
-                                {{ csrf_field() }}
-                                <input type="hidden" name="article_id" value="{{ $article->id }}">
-                                <div class="form-group">
-                                    <textarea name="comment" cols="30" rows="5" class="form-control" placeholder="@lang('input.write-comment')"></textarea>
-                                </div>
-                                <input type="submit" class="btn btn-primary col-md-3" value="@lang('input.submit')">
-                            </form>
-                        </div>
-                    </div>
-                @else
-                    <div class="row">
-                        <div class="col-md-10 col-md-offset-1 dashboard-content">
-                            <h5>@lang('content.auth-comment') <a href="{{ route('login') }}">@lang('content.to-login')</a></h5>
-                        </div>
-                    </div>
-                @endif
             @else
-                <div class="row">
+                <div class="row padding-top">
                     <div class="col-md-10 col-md-offset-1 no-padding">
                         <h4>@lang('content.no-comments')</h4>
+                    </div>
+                </div>
+            @endif
+            @if(Auth::check())
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1 dashboard-content">
+                        <form action="{{ route('comment.store') }}" method="POST">
+                            {{ csrf_field() }}
+                            <input type="hidden" name="article_id" value="{{ $article->id }}">
+                            <div class="form-group">
+                                <textarea name="comment" cols="30" rows="5" class="form-control" placeholder="@lang('input.write-comment')"></textarea>
+                            </div>
+                            <input type="submit" class="btn btn-primary col-md-3" value="@lang('input.submit')">
+                        </form>
+                    </div>
+                </div>
+            @else
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1 dashboard-content">
+                        <h5>@lang('content.auth-comment') <a href="{{ route('login') }}">@lang('content.to-login')</a></h5>
                     </div>
                 </div>
             @endif
