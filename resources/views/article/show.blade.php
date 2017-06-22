@@ -105,13 +105,6 @@
 
 @section('scripts')
     <script>
-        var hash = window.location.hash;
-        $('a').click(function(e) {
-            e.preventDefault();
-            hash = link.attr("href");
-            window.location = hash;
-        });
-
         if(location.hash.slice(1)) {
             $('html,body').animate({
                 scrollTop: $("#" + location.hash.slice(1)).offset().top - 80
