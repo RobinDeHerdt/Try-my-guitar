@@ -28,7 +28,34 @@
                                 </a>
                                 <h3>{{ $experience->guitar->name }}</h3>
                                 <hr>
-                                <p>{{ $experience->experience }}</p>
+                                <form action="{{ route('experience.update', ['id' => $experience->id ])}}"  method="POST" id="experience-form-{{ $experience->id }}" style="display: none">
+                                    {{ csrf_field() }}
+                                    <div class="form-group">
+                                        <textarea name="experience" class="form-control" id="input-experience" rows="5">{{ $experience->experience }}</textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="submit" class="btn btn-primary" value="Save">
+                                    </div>
+                                </form>
+                                <div id="experience-text-{{ $experience->id }}">
+                                    <p>{{ $experience->experience }}</p>
+                                </div>
+                                @if(Auth::check() && Auth::user()->id === $user->id)
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="col-md-4 col-md-offset-2">
+                                                <a href="{{ route('guitar.show', ['id' => $experience->guitar->id]) }}" onclick="event.preventDefault(); showEditForm({{ $experience->id }});"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <a href="{{ route('experience.destroy', ['id' => $experience->id ]) }}" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $experience->id }}').submit();"><i class="fa fa-times" aria-hidden="true"></i> Delete</a>
+                                                <form action="{{ route('experience.destroy', ['id' => $experience->id ])}}"  method="POST" id="delete-form-{{ $experience->id }}" style="display: none">
+                                                    {{ csrf_field() }}
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
                                 <hr>
                                 <div class="row">
                                     <div class="col-md-12 feedback-section">
@@ -76,6 +103,11 @@
         function vote(id, value) {
             $('#value-field-' +id).val(value);
             $('#vote-form-' + id).submit();
+        }
+
+        function showEditForm(id) {
+            $('#experience-form-' + id).show();
+            $('#experience-text-' + id).hide();
         }
     </script>
     @include('partials.analytics')

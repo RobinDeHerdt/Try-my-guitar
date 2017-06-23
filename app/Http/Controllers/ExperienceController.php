@@ -40,6 +40,19 @@ class ExperienceController extends Controller
     }
 
     /**
+     * Show experience create form.
+     *
+     * @param \App\Guitar  $guitar
+     * @return \Illuminate\Http\Response
+     */
+    public function create(Guitar $guitar)
+    {
+        return view('experience.create', [
+            'guitar' => $guitar,
+        ]);
+    }
+
+    /**
      * Store an experience.
      *
      * @param \Illuminate\Http\Request  $request
@@ -55,7 +68,7 @@ class ExperienceController extends Controller
             $experience->guitar_id  = $guitar->id;
             $experience->save();
 
-            return Redirect::to(URL::previous() . "#experience-" . $experience->id);
+            return redirect(route('profile.experiences', ['user' => $this->user->id]) . "#experience-" . $experience->id);
         } else {
             return back();
         }

@@ -63,6 +63,8 @@ Route::group([
     Route::post('collection/store', 'CollectionController@store')->name('collection.store');
     Route::post('collection/{guitar}/remove', 'CollectionController@destroy')->name('collection.destroy');
 
+
+    Route::get('guitar/{guitar}/experience/create', 'ExperienceController@create')->name('experience.create');
     Route::post('collection/{guitar}/experience/add', 'ExperienceController@store')->name('experience.store');
     Route::post('experience/{experience}/destroy', 'ExperienceController@destroy')->name('experience.destroy');
     Route::post('experience/{experience}/update', 'ExperienceController@update')->name('experience.update');

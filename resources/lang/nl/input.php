@@ -22,7 +22,7 @@ return [
     'remember-me'           => 'Onthoud mij',
     'forgot-password'       => 'Wachtwoord vergeten?',
     'guitar'                => 'Gitaar',
-    'experience'            => 'Beschrijf jouw ervaring met deze gitaar (optioneel)',
+    'experience'            => 'Beschrijf jouw ervaring met deze gitaar',
     'reason'                => 'Reden',
     'user-search'           => 'Zoek naar gebruikers of gitaren',
     'search'                => 'Zoeken',

@@ -22,7 +22,7 @@ return [
     'remember-me'           => 'Remember me',
     'forgot-password'       => 'Forgot your password?',
     'guitar'                => 'Guitar',
-    'experience'            => 'Tell something about your experience with this guitar (optional)',
+    'experience'            => 'Tell something about your experience with this guitar',
     'reason'                => 'Reason',
     'user-search'           => 'Search for a user or guitar',
     'search'                => 'Search',
