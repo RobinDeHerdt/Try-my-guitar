@@ -8,13 +8,13 @@
     <div class="content {{ Auth::user() && Auth::user()->hasRole('administrator') ? 'admin-authenticated' : '' }}">
         <div class="container">
             @if (Session::has('success-message'))
-                <div class="alert alert-success">{{ Session::get('success-message') }}</div>
+                <div class="alert alert-success alert-margin">{{ Session::get('success-message') }}</div>
             @endif
             @if (Session::has('info-message'))
-                <div class="alert alert-info">{{ Session::get('info-message') }}</div>
+                <div class="alert alert-info alert-margin">{{ Session::get('info-message') }}</div>
             @endif
             @if (Session::has('error-message'))
-                <div class="alert alert-danger">{{ Session::get('error-message') }}</div>
+                <div class="alert alert-danger alert-margin">{{ Session::get('error-message') }}</div>
             @endif
             <div class="row">
                 <div class="col-md-6">
@@ -126,11 +126,12 @@
                         <hr>
                         <a href="{{ route('profile.show', ['id' => $user->id]) }}">@lang('dashboard.my-profile')</a>
                         @if(!$user->verified)
-                            <hr>@lang('dashboard.profile-not-verified')
+                            <hr>
+                            @lang('dashboard.profile-not-verified')
                             <span>@lang('dashboard.profile-not-verified') <a href="{{ route('verify.resend') }}">@lang('dashboard.click-to-send')</a> to send the verification mail again.</span>
                         @endif
-                        <hr>
                         @if(!$user->location)
+                            <hr>
                             <span>@lang('dashboard.profile-not-complete') <a href="{{ route('profile.edit') }}">@lang('dashboard.click-to-complete')</a></span>
                         @endif
                     </div>

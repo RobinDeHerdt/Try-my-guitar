@@ -11,7 +11,7 @@
                 <div class="alert alert-success alert-margin">{{ Session::get('success-message') }}</div>
             @endif
             @if (Session::has('info-message'))
-                <div class="alert alert-info">{{ Session::get('info-message') }}</div>
+                <div class="alert alert-info alert-margin">{{ Session::get('info-message') }}</div>
             @endif
             <div class="row heading">
                 <div class="col-md-12">
