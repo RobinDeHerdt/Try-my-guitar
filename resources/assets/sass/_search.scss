@@ -97,3 +97,17 @@
     top: 0;
   }
 }
+
+@media (max-width: 768px) {
+  .search-result {
+    .search-result-logo {
+      display: none;
+    }
+  }
+
+  .search-result .search-result-image {
+    height: 140px;
+    max-width: 100%;
+    object-fit: contain;
+  }
+}

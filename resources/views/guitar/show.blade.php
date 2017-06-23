@@ -42,16 +42,14 @@
                     </div>
                 </div>
             </div>
-            @if ($guitar_user_count)
-                <div class="row">
-                    <div class="col-md-12">
-                        <h2 class="padding-top">Owner locations  <span class="counter">{{ $guitar_user_count }}</span></h2>
-                        <div class="col-container">
-                            <div id="map"></div>
-                        </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="padding-top">Owners <span class="counter">{{ $guitar_user_count }}</span></h2>
+                    <div class="col-container">
+                        <div id="map"></div>
                     </div>
                 </div>
-            @endif
+            </div>
             <input type="hidden" id="user-location" value="{{ $user_coords }}">
             <input type="hidden" id="guitar-id" value="{{ $guitar->id }}">
             @if($guitar->experiences->isNotEmpty())

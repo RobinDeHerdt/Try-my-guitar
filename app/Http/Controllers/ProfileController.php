@@ -30,7 +30,7 @@ class ProfileController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('role:user')->except('show');
+        $this->middleware('role:user')->except('show', 'experiences');
         $this->middleware(function ($request, $next) {
             $this->user = Auth::user();
 

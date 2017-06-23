@@ -169,15 +169,5 @@ class GuitarTypesTableSeeder extends Seeder
             'type_id' => 12,
             'guitar_id' => 7,
         ]);
-
-        DB::table('guitar_type')->insert([
-            'type_id' => 1,
-            'guitar_id' => 3,
-        ]);
-
-        DB::table('guitar_type')->insert([
-            'type_id' => 2,
-            'guitar_id' => 3,
-        ]);
     }
 }
