@@ -40,3 +40,4 @@ npm-debug.log
 .env
 /storage/images
 .htaccess
+sitemap.xml

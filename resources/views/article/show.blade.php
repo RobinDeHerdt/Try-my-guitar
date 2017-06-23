@@ -19,7 +19,8 @@
             </div>
             <div class="row heading">
                 <div class="col-md-10 col-md-offset-1">
-                    <a href="{{ route('article.public.index') }}" class="icon-text"><span class="glyphicon glyphicon-list"></span>Article overview</a>
+                    <a href="{{ route('article.public.index') }}" class="icon-text icon-full"><span class="glyphicon glyphicon-list"></span>Article overview</a>
+                    <a href="{{ route('article.public.index') }}" class="icon-text icon-responsive"><span class="glyphicon glyphicon-list"></span></a>
                 </div>
             </div>
             <div class="row">

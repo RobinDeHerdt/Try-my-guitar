@@ -34,6 +34,12 @@ class MessagesTableSeeder extends Seeder
         ]);
 
         DB::table('channel_user')->insert([
+            'user_id' => 3,
+            'channel_id' => 1,
+            'accepted' => true,
+        ]);
+
+        DB::table('channel_user')->insert([
             'user_id' => 1,
             'channel_id' => 2,
             'accepted' => true,
