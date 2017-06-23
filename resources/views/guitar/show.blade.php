@@ -31,24 +31,36 @@
                 </div>
                 <div class="col-md-6">
                     @if(Auth::check())
-                        <div class="dashboard-content">
-                            <div class="row">
-                                @if(!Auth::user()->guitarExperience($guitar))
-                                    <div class="col-md-4">
-                                        <a href="{{ route('experience.create', ['guitar' => $guitar]) }}"><button class="btn btn-primary">Write an experience</button></a>
-                                    </div>
-                                @endif
-                                @if(!Auth::user()->guitars->contains('id', $guitar->id))
-                                    <div class="col-md-4">
-                                        <form action="{{ route('collection.store') }}" method="POST">
-                                            {{ csrf_field() }}
-                                            <input type="hidden" name="guitar" value="{{ $guitar->id }}">
-                                            <input type="submit" class="btn btn-primary" value="Add to my collection">
-                                        </form>
-                                    </div>
-                                @endif
+                            <div class="dashboard-content">
+                                <div class="row">
+                                    @if(!Auth::user()->guitarExperience($guitar))
+                                        <div class="col-md-12">
+                                            <a href="{{ route('experience.create', ['guitar' => $guitar]) }}"><button class="btn btn-primary big-cta-button">Write an experience</button></a>
+                                        </div>
+                                    @else
+                                        <div class="col-md-12">
+                                            <span>You have described your experience with this guitar!</span>
+                                        </div>
+                                    @endif
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    @if(!Auth::user()->guitars->contains('id', $guitar->id))
+                                        <div class="col-md-12">
+                                            <form action="{{ route('collection.store') }}" method="POST">
+                                                {{ csrf_field() }}
+                                                <input type="hidden" name="guitar" value="{{ $guitar->id }}">
+                                                <input type="submit" class="btn btn-primary big-cta-button" value="Add to my collection">
+                                            </form>
+                                        </div>
+                                    @else
+                                        <div class="col-md-12">
+                                            <span>This guitar is part of your collection!</span>
+                                        </div>
+                                    @endif
+                                </div>
                             </div>
-                        </div>
+
                     @endif
                     <div class="dashboard-content">
                         <div class="slick-main">
