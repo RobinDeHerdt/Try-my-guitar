@@ -16,7 +16,8 @@
             <div class="row heading">
                 <div class="col-md-12">
                     <h1>Add guitar to collection</h1>
-                    <a href="{{ route('collection.show', ['user' => $user->id]) }}" class="icon-text"><span class="glyphicon glyphicon-list"></span>View collection</a>
+                    <a href="{{ route('collection.show', ['user' => $user->id]) }}" class="icon-text icon-full"><span class="glyphicon glyphicon-list"></span>View collection</a>
+                    <a href="{{ route('collection.show', ['user' => $user->id]) }}" class="icon-text icon-responsive"><span class="glyphicon glyphicon-list"></span></a>
                 </div>
             </div>
             <div class="col-container">

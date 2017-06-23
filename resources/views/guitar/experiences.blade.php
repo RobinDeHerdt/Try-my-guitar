@@ -8,8 +8,11 @@
     <div class="content">
         <div class="container">
             <div class="row heading">
-                <h1>"{{ $guitar->name }}" experiences</h1>
-                <a href="{{ route('guitar.show', $guitar->id) }}" class="icon-text"><span class="glyphicon glyphicon-search"></span>View guitar</a>
+                <div class="col-md-12">
+                    <h1>"{{ $guitar->name }}" experiences</h1>
+                    <a href="{{ route('guitar.show', $guitar->id) }}" class="icon-text icon-full"><span class="glyphicon glyphicon-search"></span>View guitar</a>
+                    <a href="{{ route('guitar.show', $guitar->id) }}" class="icon-text icon-responsive"><span class="glyphicon glyphicon-search"></span></a>
+                </div>
             </div>
             <div class="row">
                 @foreach($guitar->experiences as $experience)

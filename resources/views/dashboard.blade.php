@@ -35,15 +35,17 @@
                                 <span>There are no unseen messages.</span>
                             </div>
                         @endif
-                        <a href="{{ route('chat.index') }}">All chats</a>
+                        <hr>
+                        <a href="{{ route('chat.index') }}">View my conversations</a>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="dashboard-content">
                         <h3>Collection</h3>
                         <hr>
-                        <a href="{{ route('collection.show', ['user' => $user->id]) }}">View full collection</a><br>
-                        <a href="{{ route('collection.create') }}">Add to collection</a>
+                        <a href="{{ route('collection.show', ['user' => $user->id]) }}">My collection</a><br>
+                        <hr>
+                        <a href="{{ route('collection.create') }}">Add a guitar to my collection</a>
                     </div>
                 </div>
             </div>
@@ -122,14 +124,14 @@
                         <hr>
                         <a href="{{ route('profile.edit') }}">Personal information</a><br>
                         <hr>
-                        <a href="{{ route('profile.show', ['id' => $user->id]) }}">View profile</a>
+                        <a href="{{ route('profile.show', ['id' => $user->id]) }}">View my profile</a>
                         @if(!$user->verified)
                             <hr>
                             <span>You have not yet verified your e-mail address yet. Click <a href="{{ route('verify.resend') }}">here</a> to send the verification mail again.</span>
                         @endif
                         <hr>
                         @if(!$user->location)
-                            <span>You have not completed your profile setup yet. Click <a href="{{ route('profile.edit') }}">here</a> to customize your profile.</span>
+                            <span>You have not completed your profile setup yet. Click <a href="{{ route('profile.edit') }}">here</a> to complete your profile.</span>
                         @endif
                     </div>
                 </div>
