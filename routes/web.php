@@ -61,8 +61,11 @@ Route::group([
     Route::get('profile/{user}/collection', 'CollectionController@show')->name('collection.show');
     Route::get('collection/add', 'CollectionController@create')->name('collection.create');
     Route::post('collection/store', 'CollectionController@store')->name('collection.store');
-    Route::post('collection/destroy', 'CollectionController@destroy')->name('collection.destroy');
+    Route::post('collection/{guitar}/remove', 'CollectionController@destroy')->name('collection.destroy');
 
+    Route::post('collection/{guitar}/experience/add', 'ExperienceController@store')->name('experience.store');
+    Route::post('experience/{experience}/destroy', 'ExperienceController@destroy')->name('experience.destroy');
+    Route::post('experience/{experience}/update', 'ExperienceController@update')->name('experience.update');
     Route::post('experience/{experience}/vote', 'ExperienceController@vote')->name('experience.vote');
 
     // Chat related routes.

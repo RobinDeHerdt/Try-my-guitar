@@ -101,14 +101,14 @@ class CollectionController extends Controller
     }
 
     /**
-     * Show the form to add a guitar to the collection.
+     * Remove guitar from the user's collection.
      *
-     * @param \Illuminate\Http\Request  $request
+     * @param \App\Guitar  $guitar
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy(Guitar $guitar)
     {
-        $this->user->guitars()->detach($request->id);
+        $this->user->guitars()->detach($guitar->id);
 
         return back();
     }

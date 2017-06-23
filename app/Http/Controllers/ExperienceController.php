@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
 use App\Experience;
+use App\Guitar;
 use Auth;
 use App\Vote;
 use Illuminate\Http\Request;
@@ -36,6 +37,61 @@ class ExperienceController extends Controller
 
             return $next($request);
         });
+    }
+
+    /**
+     * Store an experience.
+     *
+     * @param \Illuminate\Http\Request  $request
+     * @param \App\Guitar  $guitar
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request, Guitar $guitar)
+    {
+        if (!Experience::where('user_id', $this->user->id)->where('guitar_id', $guitar->id)->exists()) {
+            $experience = new Experience();
+            $experience->experience = $request->experience;
+            $experience->user_id    = $this->user->id;
+            $experience->guitar_id  = $guitar->id;
+            $experience->save();
+
+            return Redirect::to(URL::previous() . "#experience-" . $experience->id);
+        } else {
+            return back();
+        }
+    }
+
+    /**
+     * Update an experience.
+     *
+     * @param \Illuminate\Http\Request  $request
+     * @param \App\Experience  $experience
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Experience $experience)
+    {
+        if ($experience->user->id === $this->user->id) {
+            $experience->experience = $request->experience;
+            $experience->save();
+        }
+
+        return Redirect::to(URL::previous() . "#experience-" . $experience->id);
+    }
+
+    /**
+     * Remove an experience.
+     *
+     * @param \App\Experience  $experience
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Experience $experience)
+    {
+        if ($experience->user->id === $this->user->id) {
+            Vote::where('experience_id', $experience->id)->delete();
+            $experience->delete();
+        }
+
+        return back();
     }
 
     /**
