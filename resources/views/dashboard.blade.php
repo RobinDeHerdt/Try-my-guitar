@@ -19,7 +19,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="dashboard-content">
-                        <h3>Chat</h3>
+                        <h3>@lang('dashboard.chat')</h3>
                         <hr>
                         @if($messages->isNotEmpty())
                             @foreach($messages as $message)
@@ -32,27 +32,27 @@
                             @endforeach
                         @else
                             <div class="message-teaser-container">
-                                <span>There are no unseen messages.</span>
+                                <span>@lang('dashboard.no-unseen-messages')</span>
                             </div>
                         @endif
                         <hr>
-                        <a href="{{ route('chat.index') }}">View my conversations</a>
+                        <a href="{{ route('chat.index') }}">@lang('dashboard.my-conversations')</a>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="dashboard-content">
-                        <h3>Collection</h3>
+                        <h3>@lang('dashboard.collection')</h3>
                         <hr>
-                        <a href="{{ route('collection.show', ['user' => $user->id]) }}">My collection</a><br>
+                        <a href="{{ route('collection.show', ['user' => $user->id]) }}">@lang('dashboard.my-collection')</a><br>
                         <hr>
-                        <a href="{{ route('collection.create') }}">Add a guitar to my collection</a>
+                        <a href="{{ route('collection.create') }}">@lang('dashboard.add-to-collection')</a>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6">
                     <div class="dashboard-content">
-                        <h3>Chat invites</h3>
+                        <h3>@lang('dashboard.invites')</h3>
                         <hr>
                         @if($received_invites->isNotEmpty())
                             @foreach($received_invites as $invite)
@@ -82,14 +82,14 @@
                             @endforeach
                         @else
                             <div class="message-teaser-container">
-                                <span>There are no open invitations.</span>
+                                <span>@lang('dashboard.no-invites')</span>
                             </div>
                         @endif
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="dashboard-content">
-                        <h3>Pending chat invites</h3>
+                        <h3>@lang('dashboard.pending-invites')</h3>
                         <hr>
                         @if($sent_invites->isNotEmpty())
                             @foreach($sent_invites as $invite)
@@ -111,7 +111,7 @@
                             @endforeach
                         @else
                             <div class="message-teaser-container">
-                                <span>There are no open invitations.</span>
+                                <span>@lang('dashboard.no-pending-invites')</span>
                             </div>
                         @endif
                     </div>
@@ -120,18 +120,18 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="dashboard-content">
-                        <h3>Personal information</h3>
+                        <h3>@lang('dashboard.personal-information')</h3>
                         <hr>
-                        <a href="{{ route('profile.edit') }}">Personal information</a><br>
+                        <a href="{{ route('profile.edit') }}">@lang('dashboard.personal-information')</a><br>
                         <hr>
-                        <a href="{{ route('profile.show', ['id' => $user->id]) }}">View my profile</a>
+                        <a href="{{ route('profile.show', ['id' => $user->id]) }}">@lang('dashboard.my-profile')</a>
                         @if(!$user->verified)
-                            <hr>
-                            <span>You have not yet verified your e-mail address yet. Click <a href="{{ route('verify.resend') }}">here</a> to send the verification mail again.</span>
+                            <hr>@lang('dashboard.profile-not-verified')
+                            <span>@lang('dashboard.profile-not-verified') <a href="{{ route('verify.resend') }}">@lang('dashboard.click-to-send')</a> to send the verification mail again.</span>
                         @endif
                         <hr>
                         @if(!$user->location)
-                            <span>You have not completed your profile setup yet. Click <a href="{{ route('profile.edit') }}">here</a> to complete your profile.</span>
+                            <span>@lang('dashboard.profile-not-complete') <a href="{{ route('profile.edit') }}">@lang('dashboard.click-to-complete')</a></span>
                         @endif
                     </div>
                 </div>

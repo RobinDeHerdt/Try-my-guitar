@@ -47,13 +47,17 @@ a.cta-button {
 
   .profile-button {
     display: inline-block;
-    width: 50px;
-    height: 50px;
-    padding: 14px 0;
+    width: 75px;
+    height: 75px;
+    padding: 21px 0;
     border-radius: 50%;
     margin: 0 10px 0 10px;
     color: white;
     text-align: center;
+
+    &#edit-profile-button {
+      padding: 23px 26px;
+    }
 
     &.red {
       background-color: #d64242;

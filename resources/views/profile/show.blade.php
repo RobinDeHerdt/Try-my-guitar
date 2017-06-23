@@ -24,18 +24,20 @@
             <div class="profile-button-container">
                 @if(Auth::check())
                     @if ($user->id === Auth::user()->id)
-                        <div class="profile-button blue" title="Edit profile">
-                            <a href="{{ route('profile.edit') }}"><i class="fa fa-edit" aria-hidden="true"></i></a>
-                        </div>
+                        <a href="{{ route('profile.edit') }}">
+                            <div class="profile-button blue" id="edit-profile-button" title="Edit profile">
+                                <i class="fa fa-edit fa-2x" aria-hidden="true"></i>
+                            </div>
+                        </a>
                     @else
                         <a href="{{ route('profile.invite', ['id' => $user->id]) }}">
                             <div class="profile-button blue" title="Invite to chat">
-                                <i class="fa fa-comments" aria-hidden="true"></i>
+                                <i class="fa fa-comments fa-2x" aria-hidden="true"></i>
                             </div>
                         </a>
                         <a href="{{ route('report.create', ['id' => $user->id]) }}">
                             <div class="profile-button red" title="Report">
-                                <i class="fa fa-flag" aria-hidden="true"></i>
+                                <i class="fa fa-flag fa-2x" aria-hidden="true"></i>
                             </div>
                         </a>
                     @endif
@@ -43,31 +45,31 @@
             </div>
             @if($guitars->isNotEmpty())
                 <h2>Collection <span class="counter">{{ $user->guitars->count() }}</span></h2>
-            <div class="dashboard-content">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="collection">
-                            @foreach($guitars as $guitar)
-                                <div class="collection-item">
-                                    <a href="{{ route('guitar.show', ['guitar' => $guitar->id]) }}">
-                                        <div style="background-image: url({{ Storage::disk('public')->url($guitar->guitarImages()->first()->image_uri) }}" class="collection-item-image"></div>
-                                        <div class="collection-text">
-                                            <span>{{ $guitar->name }}</span>
-                                        </div>
-                                    </a>
-                                </div>
-                            @endforeach
+                <div class="dashboard-content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="collection">
+                                @foreach($guitars as $guitar)
+                                    <div class="collection-item">
+                                        <a href="{{ route('guitar.show', ['guitar' => $guitar->id]) }}">
+                                            <div style="background-image: url({{ Storage::disk('public')->url($guitar->guitarImages()->first()->image_uri) }}" class="collection-item-image"></div>
+                                            <div class="collection-text">
+                                                <span>{{ $guitar->name }}</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2 col-md-offset-5">
+                            <div class="big-cta-button">
+                                <a href="{{ route('collection.show', ['id' => $user]) }}">View collection</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-2 col-md-offset-5">
-                        <div class="big-cta-button">
-                            <a href="{{ route('collection.show', ['id' => $user]) }}">View collection</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
             @endif
             @if($user->experiences->isNotEmpty())
                 <h2>Experiences <span class="counter">{{ $user->experiences->count() }}</span></h2>

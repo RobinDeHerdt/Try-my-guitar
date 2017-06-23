@@ -9,7 +9,7 @@
         <div class="container">
             <div class="row heading">
                 <div class="col-md-12">
-                    <h1>Chats</h1>
+                    <h1>@lang('dashboard.chat')</h1>
                     <a href="{{ route('dashboard') }}" class="icon-text icon-full"><span class="glyphicon glyphicon-home"></span>Dashboard</a>
                     <a href="{{ route('dashboard') }}" class="icon-text icon-responsive"><span class="glyphicon glyphicon-home"></span></a>
                 </div>
