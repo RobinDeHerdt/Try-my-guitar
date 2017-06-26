@@ -45,10 +45,14 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="col-md-4 col-md-offset-2">
-                                                <a href="{{ route('guitar.show', ['id' => $experience->guitar->id]) }}" onclick="event.preventDefault(); showEditForm({{ $experience->id }});"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
+                                                <a href="{{ route('experience.update', ['id' => $experience->id ]) }}" onclick="event.preventDefault(); showEditForm({{ $experience->id }});" title="Update your experience">
+                                                    <i class="fa fa-pencil" aria-hidden="true"></i> Edit
+                                                </a>
                                             </div>
                                             <div class="col-md-4">
-                                                <a href="{{ route('experience.destroy', ['id' => $experience->id ]) }}" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $experience->id }}').submit();"><i class="fa fa-times" aria-hidden="true"></i> Delete</a>
+                                                <a href="{{ route('experience.destroy', ['id' => $experience->id ]) }}" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $experience->id }}').submit();" title="Remove your experience">
+                                                    <i class="fa fa-times" aria-hidden="true"></i> Delete
+                                                </a>
                                                 <form action="{{ route('experience.destroy', ['id' => $experience->id ])}}"  method="POST" id="delete-form-{{ $experience->id }}" style="display: none">
                                                     {{ csrf_field() }}
                                                 </form>

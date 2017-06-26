@@ -17,32 +17,32 @@ class GuitarTypesTableSeeder extends Seeder
          * @todo It would be great if this would be possible, someday...
          */
         DB::table('guitar_types')->insert([
-            'name' => 'Electric guitars',
+            'name' => 'Electric',
             'image_uri' => 'images/electric-guitar.jpg',
         ]);
 
         DB::table('guitar_types')->insert([
-            'name' => 'Acoustic guitars',
+            'name' => 'Acoustic',
             'image_uri' => 'images/acoustic-guitar.jpg',
         ]);
 
         DB::table('guitar_types')->insert([
-            'name' => 'Classical guitars',
+            'name' => 'Classical',
             'image_uri' => 'images/classical-guitar.jpg',
         ]);
 
         DB::table('guitar_types')->insert([
-            'name' => 'Single cut guitars',
+            'name' => 'Single cut',
             'image_uri' => 'images/single-cut-guitar.jpg',
         ]);
 
         DB::table('guitar_types')->insert([
-            'name' => 'Double cut guitars',
+            'name' => 'Double cut',
             'image_uri' => 'images/double-cut-guitar.jpg',
         ]);
 
         DB::table('guitar_types')->insert([
-            'name' => 'Hollow body guitars',
+            'name' => 'Hollow body',
             'image_uri' => 'images/hollow-body-guitar.jpg',
         ]);
 

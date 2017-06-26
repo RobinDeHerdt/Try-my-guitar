@@ -53,6 +53,8 @@ Route::group([
     // Guitar related routes.
     Route::get('guitar/{guitar}', 'GuitarController@show')->name('guitar.show');
     Route::get('guitar/{guitar}/experiences', 'GuitarController@experiences')->name('guitar.show.experiences');
+    Route::get('guitar/{guitar}/image/create', 'GuitarController@createImage')->name('guitar.image.create');
+    Route::post('guitar/{guitar}/image/store', 'GuitarController@storeImage')->name('guitar.image.store');
     Route::get('brand/{brand}', 'BrandController@show')->name('brand.show');
     Route::get('type/{type}', 'TypeController@show')->name('type.show');
 
