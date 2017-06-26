@@ -19,12 +19,14 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     @if(!Auth::user()->guitars->contains('id', $guitar->id))
-                                        <a href="{{ route('collection.store') }}" onclick="event.preventDefault(); document.getElementById('add-to-collection').submit();">
-                                            <div class="guitar-button-container">
-                                                <div class="guitar-button blue" title="Add this guitar to your collection"><i class="fa fa-plus" aria-hidden="true"></i></div>
+                                        <div class="guitar-button-container">
+                                            <div class="guitar-button blue" title="Add this guitar to your collection"><i class="fa fa-plus" aria-hidden="true"></i></div>
+                                            <span>Do you own this guitar?</span>
+                                            <br>
+                                            <a href="{{ route('collection.store') }}" onclick="event.preventDefault(); document.getElementById('add-to-collection').submit();">
                                                 <span>Add to collection</span>
-                                            </div>
-                                        </a>
+                                            </a>
+                                        </div>
                                         <form action="{{ route('collection.store') }}" method="POST" id="add-to-collection">
                                             {{ csrf_field() }}
                                             <input type="hidden" name="guitar" value="{{ $guitar->id }}">
@@ -36,31 +38,38 @@
                                         </div>
                                     @endif
                                 </div>
-
                                 <div class="col-md-4">
                                     @if(!Auth::user()->guitarExperience($guitar))
-                                        <a href="{{ route('experience.create', ['guitar' => $guitar]) }}">
-                                            <div class="guitar-button-container">
-                                                <div class="guitar-button blue" title="Share your experience with this guitar"><i class="fa fa-comment" aria-hidden="true"></i></div>
+                                        <div class="guitar-button-container">
+                                            <div class="guitar-button blue" title="Share your experience with this guitar"><i class="fa fa-comment" aria-hidden="true"></i></div>
+                                            <span>Have you experienced this guitar?</span>
+                                            <br>
+                                            <a href="{{ route('experience.create', ['guitar' => $guitar]) }}">
                                                 <span>Share your experience</span>
-                                            </div>
-                                        </a>
+                                            </a>
+                                        </div>
                                     @else
-                                        <a href="{{ route('guitar.show.experiences', ['guitar' => $guitar]) . '#experience-' . Auth::user()->guitarExperience($guitar)->id }}">
+                                        <div class="guitar-button-container">
                                             <div class="guitar-button blue"><i class="fa fa-check" aria-hidden="true"></i></div>
-                                            <span>You have shared your experience with this guitar!</span>
-                                        </a>
+                                            <span>You have shared your experience!</span>
+                                            <br>
+                                            <a href="{{ route('guitar.show.experiences', ['guitar' => $guitar]) . '#experience-' . Auth::user()->guitarExperience($guitar)->id }}">
+                                                <span>Check it here</span>
+                                            </a>
+                                        </div>
                                     @endif
                                 </div>
 
                                 <div class="col-md-4">
-                                    @if(!Auth::user()->guitarExperience($guitar))
-                                        <a href="{{ route('guitar.image.create', ['guitar' => $guitar]) }}">
-                                            <div class="guitar-button-container">
-                                                <div class="guitar-button blue" title="Add an image for this guitar"><i class="fa fa-image" aria-hidden="true"></i></div>
-                                                <span>Add an image</span>
-                                            </div>
-                                        </a>
+                                    @if(Auth::user())
+                                        <div class="guitar-button-container">
+                                            <div class="guitar-button blue" title="Add an image for this guitar"><i class="fa fa-image" aria-hidden="true"></i></div>
+                                            <span>Do you have an image of this guitar?</span>
+                                            <br>
+                                            <a href="{{ route('guitar.image.create', ['guitar' => $guitar]) }}">
+                                                <span>Upload images</span>
+                                            </a>
+                                        </div>
                                     @endif
                                 </div>
                             </div>

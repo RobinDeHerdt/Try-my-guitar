@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\GuitarImage;
 use App\Guitar;
+use Auth;
 
 /**
  * Class GuitarController
@@ -12,6 +13,29 @@ use App\Guitar;
  */
 class GuitarController extends Controller
 {
+    /**
+     * Contains the authenticated user.
+     *
+     * @var array
+     */
+    private $user;
+
+    /**
+     * Constructor.
+     *
+     * Check if the user has the 'user' role.
+     * Get the authenticated user and save it to the $user variable.
+     */
+    public function __construct()
+    {
+        $this->middleware('role:user')->except('show', 'experiences', 'getLocations');
+        $this->middleware(function ($request, $next) {
+            $this->user = Auth::user();
+
+            return $next($request);
+        });
+    }
+
     /**
      * Show details for the specified guitar.
      *
@@ -73,6 +97,43 @@ class GuitarController extends Controller
             'similar_guitars'       => $similar_guitars,
             'user_coords'           => json_encode($user_coords),
         ]);
+    }
+
+    /**
+     * Show the 'create image' form.
+     *
+     * @param  \App\Guitar  $guitar
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function createImage(Guitar $guitar)
+    {
+        return view('guitar.image.create', [
+            'guitar' => $guitar,
+        ]);
+    }
+
+    /**
+     * Store the guitar image.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Guitar  $guitar
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function storeImage(Request $request, Guitar $guitar)
+    {
+        foreach ($request->images as $upload) {
+            $image = new GuitarImage();
+
+            $image->image_uri   = $upload->store('images', 'public');
+            $image->guitar_id   = $guitar->id;
+            $image->user_id     = $this->user->id;
+
+            $image->save();
+        }
+
+        return redirect(route('guitar.show', [
+            'guitar' => $guitar->id
+        ]));
     }
 
     /**

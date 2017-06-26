@@ -81,12 +81,6 @@
                         {{ $comments->links() }}
                     </div>
                 </div>
-            @else
-                <div class="row padding-top">
-                    <div class="col-md-10 col-md-offset-1">
-                        <h4>@lang('content.no-comments')</h4>
-                    </div>
-                </div>
             @endif
             @if(Auth::check())
                 <div class="row">
