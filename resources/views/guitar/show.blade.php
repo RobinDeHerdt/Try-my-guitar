@@ -108,10 +108,12 @@
                             </div>
                         </div>
                     @else
-                        <div class="col-md-12">
-                            <div class="dashboard-content">
-                                <div class="guitar-button-container">
-                                    <span><a href="{{ route('login') }}">Log in </a> to add this guitar to your collection </span>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="dashboard-content">
+                                    <div class="guitar-button-container">
+                                        <span><a href="{{ route('login') }}">Log in </a> to add this guitar to your collection </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
