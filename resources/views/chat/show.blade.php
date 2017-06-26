@@ -18,22 +18,21 @@
                     <a href="{{ route('chat.leave', ['channel' => $channel->id]) }}" class="icon-text icon-responsive" onclick="event.preventDefault(); document.getElementById('leave-form').submit();"><span class="glyphicon glyphicon-log-out"></span></a>
                     <a href="{{ route('chat.index') }}" class="icon-text icon-full"><span class="glyphicon glyphicon-th-list"></span>Back to conversations</a>
                     <a href="{{ route('chat.index') }}" class="icon-text icon-responsive"><span class="glyphicon glyphicon-th-list"></span></a>
-                    <a href="{{ route('chat.update') }}" class="icon-text icon-full" onclick="event.preventDefault(); document.getElementById('edit-channel-form').style.display = 'inherit'"><span class="glyphicon glyphicon-pencil"></span>Edit conversation name</a>
-                    <a href="{{ route('chat.update') }}" class="icon-text icon-responsive" onclick="event.preventDefault(); document.getElementById('edit-channel-form').style.display = 'inherit'"><span class="glyphicon glyphicon-pencil"></span></a>
+                    <a href="{{ route('chat.update', ['channel' => $channel->id]) }}" class="icon-text icon-full" onclick="event.preventDefault(); showEditForm();"><span class="glyphicon glyphicon-pencil"></span>Edit conversation name</a>
+                    <a href="{{ route('chat.update', ['channel' => $channel->id]) }}" class="icon-text icon-responsive" onclick="event.preventDefault(); showEditForm();"><span class="glyphicon glyphicon-pencil"></span></a>
                     <div class="row edit-channel-form">
-                        <form id="edit-channel-form" action="{{ route('chat.update') }}" method="POST" style="display: none;">
-                            {{ csrf_field() }}
-                            <input type="hidden" name="channel_id" value="{{ $channel->id }}">
+                        <div id="edit-channel-form" style="display: none;">
+                            <input type="hidden" id="channel_id" value="{{ $channel->id }}">
                             <div class="col-md-10">
-                                <input type="text" name="channel_name" class="form-control" value="{{ $channel->name }}">
+                                <input type="text" id="channel_name" class="form-control" value="{{ $channel->name }}">
                             </div>
                             <div class="col-md-2">
-                                <button type="submit" onclick="document.getElementById('edit-channel-form').submit();" class="btn btn-primary">Save</button>
-                                <div class="close-edit-form" onclick="document.getElementById('edit-channel-form').style.display = 'none'">
+                                <button onclick="changeChatName();" class="btn btn-primary">Save</button>
+                                <div class="close-edit-form" onclick="hideEditForm();">
                                     <span>Close </span> <span class="glyphicon glyphicon-remove"></span>
                                 </div>
                             </div>
-                        </form>
+                        </div>
                     </div>
                     <form id="leave-form" action="{{ route('chat.leave', ['channel' => $channel->id]) }}" method="POST" style="display: none;">
                         {{ csrf_field() }}
@@ -65,5 +64,30 @@
 @endsection
 
 @section('scripts')
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        function changeChatName() {
+            var channel_id      = $('#channel_id').val();
+            var channel_name    = $('#channel_name').val();
+
+            $.post("/chat/channel/"+channel_id+"/update", {channel_name: channel_name}, function( data ) {
+                $("#channel-name").text(channel_name);
+                hideEditForm();
+            });
+        }
+
+        function showEditForm() {
+            $("#edit-channel-form").show();
+        }
+
+        function hideEditForm() {
+            $("#edit-channel-form").hide();
+        }
+    </script>
     @include('partials.analytics')
 @endsection

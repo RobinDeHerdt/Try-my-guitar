@@ -75,7 +75,6 @@ Route::group([
     // Chat related routes.
     Route::get('chat/channels', 'ChatController@index')->name('chat.index');
     Route::get('chat/channel/{channel}', 'ChatController@show')->name('chat.show');
-    Route::post('chat/channel/edit', 'ChatController@update')->name('chat.update');
     Route::post('chat/channel/{channel}/leave', 'ChatController@leave')->name('chat.leave');
     Route::post('chat/channel/invite', 'ChatController@sendInvite')->name('invite');
     Route::post('chat/channel/invite/response', 'ChatController@inviteResponse')->name('invite.response');
@@ -87,6 +86,7 @@ Route::get('channel/{channel}', 'ChatController@channel');
 Route::get('channel/{channel}/messages', 'ChatController@messages');
 Route::post('channel/{channel}/messages/send', 'ChatController@store');
 Route::post('channel/{channel}/messages/seen', 'ChatController@seen');
+Route::post('chat/channel/{channel}/update', 'ChatController@update')->name('chat.update');
 
 // Async routes.
 Route::get('explore/map', 'ExploreController@getLocations');

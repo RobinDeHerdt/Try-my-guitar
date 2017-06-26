@@ -62,11 +62,12 @@ class ChatController extends Controller
      * Edit the specified channel name.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Channel  $channel
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, Channel $channel)
     {
-        $channel = Channel::find($request->channel_id);
+        $channel = Channel::find($channel->id);
 
         $channel->name = $request->channel_name;
 
