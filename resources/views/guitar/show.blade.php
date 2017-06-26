@@ -12,8 +12,50 @@
 @section('content')
     <div class="content">
         <div class="container">
-            @if(Auth::check())
-                <div class="row">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="dashboard-content">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="center-content">
+                                    <a href="{{ route('brand.show', ['brand' => str_slug($guitar->guitarBrand->name)]) }}">
+                                        <img src="{{ Storage::disk('public')->url($guitar->guitarBrand->logo_uri) }}" alt="{{ $guitar->guitarBrand->name }} logo" class="guitar-brand-logo">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="center-content">
+                            <h1>{{ $guitar->name }}</h1>
+                            <div class="guitar-type-container">
+                                @foreach($guitar->guitarTypes as $guitarType)
+                                    <a href="{{ route('type.show', ['id' => str_slug($guitarType->name)])}}"><span class="guitar-type">{{ $guitarType->name }}</span></a>
+                                @endforeach
+                            </div>
+                            <div class="guitar-description-container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        {{ $guitar->description }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="dashboard-content">
+                        <div class="slick-main">
+                            @foreach($guitar->guitarImages as $guitarImage)
+                                <div class="slick-item">
+                                    <img src="{{ Storage::disk('public')->url($guitarImage->image_uri) }}">
+                                    <span>By <a href="{{  route('profile.show', ['id' => $guitarImage->user->id]) }}"><strong>{{ $guitarImage->user->fullName() }}</strong></a></span>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                @if(Auth::check())
                     <div class="col-md-12">
                         <div class="dashboard-content">
                             <div class="row">
@@ -54,12 +96,11 @@
                                             <span>You have shared your experience!</span>
                                             <br>
                                             <a href="{{ route('guitar.show.experiences', ['guitar' => $guitar]) . '#experience-' . Auth::user()->guitarExperience($guitar)->id }}">
-                                                <span>Check it here</span>
+                                                <span>View</span>
                                             </a>
                                         </div>
                                     @endif
                                 </div>
-
                                 <div class="col-md-4">
                                     @if(Auth::user())
                                         <div class="guitar-button-container">
@@ -75,37 +116,15 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            @endif
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="dashboard-content">
-                        <a href="{{ route('brand.show', ['brand' => str_slug($guitar->guitarBrand->name)]) }}">
-                            <img src="{{ Storage::disk('public')->url($guitar->guitarBrand->logo_uri) }}" alt="{{ $guitar->guitarBrand->name }} logo" class="guitar-brand-logo">
-                        </a>
-                        <h1>{{ $guitar->name }}</h1>
-                        <div class="guitar-type-container">
-                            @foreach($guitar->guitarTypes as $guitarType)
-                                <a href="{{ route('type.show', ['id' => str_slug($guitarType->name)])}}"><span class="guitar-type">{{ $guitarType->name }}</span></a>
-                            @endforeach
-                        </div>
-                        <div class="guitar-description-container">
-                            {{ $guitar->description }}
+                @else
+                    <div class="col-md-12">
+                        <div class="dashboard-content">
+                            <div class="guitar-button-container">
+                                <span><a href="{{ route('login') }}">Log in </a> to add this guitar to your collection </span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="dashboard-content">
-                        <div class="slick-main">
-                            @foreach($guitar->guitarImages as $guitarImage)
-                                <div class="slick-item">
-                                    <img src="{{ Storage::disk('public')->url($guitarImage->image_uri) }}">
-                                    <span>By <a href="{{  route('profile.show', ['id' => $guitarImage->user->id]) }}"><strong>{{ $guitarImage->user->fullName() }}</strong></a></span>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
+                @endif
             </div>
             <div class="row">
                 <div class="col-md-12">
@@ -151,22 +170,24 @@
                 </div>
             @endif
             @if($brand_guitars->isNotEmpty())
-                <div class="row padding-top">
+                <div class="row">
                     <div class="col-md-12">
                         <h2>More {{ $guitar->guitarBrand->name }} guitars</h2>
-                        <div class="slick-related">
-                            @foreach($brand_guitars as $brand_guitar)
-                                <a href="{{ route('guitar.show', ['guitar' => $brand_guitar->id]) }}">
-                                <div class="slick-item">
-                                    @if($brand_guitar->guitarImages->isNotEmpty())
-                                        <img src="{{ Storage::disk('public')->url($brand_guitar->guitarImages->first()->image_uri) }}">
-                                    @else
-                                        <div class="search-result-image">No image available</div>
-                                    @endif
-                                    <span class="guitar-link">{{ $brand_guitar->name }}</span>
-                                </div>
-                                </a>
-                            @endforeach
+                        <div class="dashboard-content">
+                            <div class="slick-related">
+                                @foreach($brand_guitars as $brand_guitar)
+                                    <a href="{{ route('guitar.show', ['guitar' => $brand_guitar->id]) }}">
+                                    <div class="slick-item">
+                                        @if($brand_guitar->guitarImages->isNotEmpty())
+                                            <img src="{{ Storage::disk('public')->url($brand_guitar->guitarImages->first()->image_uri) }}">
+                                        @else
+                                            <div class="search-result-image">No image available</div>
+                                        @endif
+                                        <span class="guitar-link">{{ $brand_guitar->name }}</span>
+                                    </div>
+                                    </a>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -175,19 +196,21 @@
                 <div class="row">
                     <div class="col-md-12">
                         <h2>Similar guitars</h2>
-                        <div class="slick-related">
-                            @foreach($similar_guitars as $similar_guitar)
-                                <a href="{{ route('guitar.show', ['guitar' => $similar_guitar->id]) }}">
-                                    <div class="slick-item">
-                                        @if($similar_guitar->guitarImages->isNotEmpty())
-                                            <img src="{{ Storage::disk('public')->url($similar_guitar->guitarImages->first()->image_uri) }}">
-                                        @else
-                                            <div class="search-result-image">No image available</div>
-                                        @endif
-                                        <span class="guitar-link">{{ $similar_guitar->name }}</span>
-                                    </div>
-                                </a>
-                            @endforeach
+                        <div class="dashboard-content">
+                            <div class="slick-related">
+                                @foreach($similar_guitars as $similar_guitar)
+                                    <a href="{{ route('guitar.show', ['guitar' => $similar_guitar->id]) }}">
+                                        <div class="slick-item">
+                                            @if($similar_guitar->guitarImages->isNotEmpty())
+                                                <img src="{{ Storage::disk('public')->url($similar_guitar->guitarImages->first()->image_uri) }}">
+                                            @else
+                                                <div class="search-result-image">No image available</div>
+                                            @endif
+                                            <span class="guitar-link">{{ $similar_guitar->name }}</span>
+                                        </div>
+                                    </a>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -247,17 +270,18 @@
     <script>
         $('.slick-main').slick({
             lazyLoad: 'ondemand',
-            infinite: true,
             arrows: false,
             dots: true,
             variableWidth: true,
             centerMode: true,
+            infinite: false,
         });
 
         $('.slick-related').slick({
             arrows: true,
             infinite: false,
             variableWidth: true,
+            dots: true,
         });
     </script>
     @include('partials.analytics')

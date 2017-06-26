@@ -15,7 +15,7 @@
             @endif
             <div class="row heading">
                 <div class="col-md-12">
-                    <h1>Write your experience with "{{ $guitar->name }}"</h1>
+                    <h1>Your "{{ $guitar->name }} ({{ $guitar->guitarBrand->name }})" experience</h1>
                     <a href="{{ route('guitar.show', ['guitar' => $guitar]) }}" class="icon-text icon-full"><span class="glyphicon glyphicon-search"></span>Show guitar</a>
                     <a href="{{ route('guitar.show', ['guitar' => $guitar]) }}" class="icon-text icon-responsive"><span class="glyphicon glyphicon-search"></span></a>
                 </div>

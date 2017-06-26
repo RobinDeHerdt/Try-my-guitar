@@ -30,7 +30,7 @@
                                 </div>
                             </div>
                             <hr>
-                            <div class="col-md-12 feedback-section">
+                            <div class="col-md-12">
                                 <a href="{{ route('experience.vote', ['id' => $experience->id ])}}" class="cta-button" title="Mark this experience as helpful" onclick="event.preventDefault(); vote('{{ $experience->id }}', 1);">
                                     <span>
                                          <i class="fa {{ Auth::check() && $experience->upVotes->contains('user_id', Auth::user()->id) ? 'fa-thumbs-up' : 'fa-thumbs-o-up' }}" aria-hidden="true"></i>

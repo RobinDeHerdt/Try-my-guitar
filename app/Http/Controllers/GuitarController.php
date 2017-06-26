@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\GuitarImage;
 use App\Guitar;
+use Validator;
 use Auth;
 
 /**
@@ -121,19 +122,41 @@ class GuitarController extends Controller
      */
     public function storeImage(Request $request, Guitar $guitar)
     {
-        foreach ($request->images as $upload) {
-            $image = new GuitarImage();
-
-            $image->image_uri   = $upload->store('images', 'public');
-            $image->guitar_id   = $guitar->id;
-            $image->user_id     = $this->user->id;
-
-            $image->save();
+        // Since 'required' doesn't feel like working at all, do this. Clean as fuck.
+        if (!$request->images) {
+            return back();
         }
 
-        return redirect(route('guitar.show', [
-            'guitar' => $guitar->id
-        ]));
+        $validator = Validator::make($request->all(), [
+            'images.*.file' => 'required|filled|file|image|mimes:jpeg,png,bmp,gif|max:1000',
+        ], [
+            'required'  => 'The image field is required.',
+            'filled'    => 'The image field is required.',
+            'file'      => 'The upload must contain a file.',
+            'image'     => 'The file must be an image.',
+            'mimes'     => 'The image must be one of the following types: :mimes',
+            'max'       => 'The upload must be a maximum of :max kB',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect(route('guitar.image.create',
+                ['guitar' => $guitar]
+            ))->withErrors($validator);
+        } else {
+            foreach ($request->images as $upload) {
+                $image = new GuitarImage();
+
+                $image->image_uri   = $upload['file']->store('images/guitar', 'public');
+                $image->guitar_id   = $guitar->id;
+                $image->user_id     = $this->user->id;
+
+                $image->save();
+            }
+
+            return redirect(route('guitar.show', [
+                'guitar' => $guitar->id
+            ]));
+        }
     }
 
     /**

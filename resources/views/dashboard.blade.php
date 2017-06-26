@@ -127,8 +127,7 @@
                         <a href="{{ route('profile.show', ['id' => $user->id]) }}">@lang('dashboard.my-profile')</a>
                         @if(!$user->verified)
                             <hr>
-                            @lang('dashboard.profile-not-verified')
-                            <span>@lang('dashboard.profile-not-verified') <a href="{{ route('verify.resend') }}">@lang('dashboard.click-to-send')</a> to send the verification mail again.</span>
+                            <span>@lang('dashboard.profile-not-verified') <a href="{{ route('verify.resend') }}">@lang('dashboard.click-to-send')</a></span>
                         @endif
                         @if(!$user->location)
                             <hr>

@@ -8,8 +8,8 @@
     }
 
     img {
-      height: 200px;
-      margin: 10px;
+      height: 225px;
+      margin: 10px 25px;
     }
   }
 }
@@ -25,8 +25,6 @@
 
   .slick-item {
     text-align: center;
-    background-color: #fff;
-    box-shadow: $drop-shadow;
     padding: 20px;
     margin: 5px 10px;
 
@@ -36,17 +34,13 @@
 
     img {
       height: 150px;
-      margin: 10px;
+      margin: 10px 50px;
     }
-  }
-
-  .slick-prev:before, .slick-next:before {
-    color: $primary-font-color;
   }
 }
 
-.feedback-section {
-
+.slick-prev:before, .slick-next:before {
+  color: $primary-font-color;
 }
 
 .experience-container {
@@ -92,8 +86,7 @@
 }
 
 .guitar-type-container {
-  width: 80%;
-  line-height: 30px;
+  width: 100%;
   margin-top: 30px;
 
   .guitar-type {
@@ -111,9 +104,7 @@
 
 .guitar-brand-logo {
   width: 15%;
-  float: right;
-  margin-top: 20px;
-  margin-right: 10px;
+  margin: 5px 0;
 }
 
 .brand-logo {

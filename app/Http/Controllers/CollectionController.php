@@ -46,7 +46,7 @@ class CollectionController extends Controller
      */
     public function show(User $user)
     {
-        return view('collection.show', [
+        return view('profile.collection.show', [
             'user' => $user,
         ]);
     }
@@ -58,7 +58,7 @@ class CollectionController extends Controller
      */
     public function create()
     {
-        return view('collection.create', [
+        return view('profile.collection.create', [
             'user' => $this->user,
         ]);
     }
