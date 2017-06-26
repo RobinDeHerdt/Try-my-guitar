@@ -91,6 +91,10 @@ body {
   }
 }
 
+.dashboard-min-height {
+  min-height: 375px;
+}
+
 .col-container {
   background-color: $secondary-bg-color;
   border: solid 1px $border-color;

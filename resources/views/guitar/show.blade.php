@@ -13,8 +13,8 @@
     <div class="content">
         <div class="container">
             <div class="row">
-                <div class="col-md-6">
-                    <div class="dashboard-content">
+                <div class="col-md-5">
+                    <div class="dashboard-content dashboard-min-height">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="center-content">
@@ -41,7 +41,81 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-7">
+                    @if(Auth::check())
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="dashboard-content">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            @if(!Auth::user()->guitars->contains('id', $guitar->id))
+                                                <div class="guitar-button-container">
+                                                    <div class="guitar-button blue" title="Add this guitar to your collection"><i class="fa fa-plus" aria-hidden="true"></i></div>
+                                                    <span>Do you own this guitar?</span>
+                                                    <br>
+                                                    <a href="{{ route('collection.store') }}" onclick="event.preventDefault(); document.getElementById('add-to-collection').submit();">
+                                                        <span>Add to collection</span>
+                                                    </a>
+                                                </div>
+                                                <form action="{{ route('collection.store') }}" method="POST" id="add-to-collection">
+                                                    {{ csrf_field() }}
+                                                    <input type="hidden" name="guitar" value="{{ $guitar->id }}">
+                                                </form>
+                                            @else
+                                                <div class="guitar-button-container">
+                                                    <div class="guitar-button blue" title="Add this guitar to your collection"><i class="fa fa-check" aria-hidden="true"></i></div>
+                                                    <span>This guitar is part of your collection!</span>
+                                                    <br>
+                                                    <a href="{{ route('collection.show', ['user' => Auth::user()->id]) . "#guitar-" . $guitar->id }}">View</a>
+                                                </div>
+                                            @endif
+                                        </div>
+                                        <div class="col-md-4">
+                                            @if(!Auth::user()->guitarExperience($guitar))
+                                                <div class="guitar-button-container">
+                                                    <div class="guitar-button blue" title="Share your experience with this guitar"><i class="fa fa-comment" aria-hidden="true"></i></div>
+                                                    <span>Have you experienced this guitar?</span>
+                                                    <br>
+                                                    <a href="{{ route('experience.create', ['guitar' => $guitar]) }}">
+                                                        <span>Share your experience</span>
+                                                    </a>
+                                                </div>
+                                            @else
+                                                <div class="guitar-button-container">
+                                                    <div class="guitar-button blue"><i class="fa fa-check" aria-hidden="true"></i></div>
+                                                    <span>You have shared your experience!</span>
+                                                    <br>
+                                                    <a href="{{ route('guitar.show.experiences', ['guitar' => $guitar]) . '#experience-' . Auth::user()->guitarExperience($guitar)->id }}">
+                                                        <span>View</span>
+                                                    </a>
+                                                </div>
+                                            @endif
+                                        </div>
+                                        <div class="col-md-4">
+                                            @if(Auth::user())
+                                                <div class="guitar-button-container">
+                                                    <div class="guitar-button blue" title="Add an image for this guitar"><i class="fa fa-image" aria-hidden="true"></i></div>
+                                                    <span>Do you have an image of this guitar?</span>
+                                                    <br>
+                                                    <a href="{{ route('guitar.image.create', ['guitar' => $guitar]) }}">
+                                                        <span>Upload images</span>
+                                                    </a>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @else
+                        <div class="col-md-12">
+                            <div class="dashboard-content">
+                                <div class="guitar-button-container">
+                                    <span><a href="{{ route('login') }}">Log in </a> to add this guitar to your collection </span>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                     <div class="dashboard-content">
                         <div class="slick-main">
                             @foreach($guitar->guitarImages as $guitarImage)
@@ -53,78 +127,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                @if(Auth::check())
-                    <div class="col-md-12">
-                        <div class="dashboard-content">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    @if(!Auth::user()->guitars->contains('id', $guitar->id))
-                                        <div class="guitar-button-container">
-                                            <div class="guitar-button blue" title="Add this guitar to your collection"><i class="fa fa-plus" aria-hidden="true"></i></div>
-                                            <span>Do you own this guitar?</span>
-                                            <br>
-                                            <a href="{{ route('collection.store') }}" onclick="event.preventDefault(); document.getElementById('add-to-collection').submit();">
-                                                <span>Add to collection</span>
-                                            </a>
-                                        </div>
-                                        <form action="{{ route('collection.store') }}" method="POST" id="add-to-collection">
-                                            {{ csrf_field() }}
-                                            <input type="hidden" name="guitar" value="{{ $guitar->id }}">
-                                        </form>
-                                    @else
-                                        <div class="guitar-button-container">
-                                            <div class="guitar-button blue" title="Add this guitar to your collection"><i class="fa fa-check" aria-hidden="true"></i></div>
-                                            <span>This guitar is part of your collection!</span>
-                                        </div>
-                                    @endif
-                                </div>
-                                <div class="col-md-4">
-                                    @if(!Auth::user()->guitarExperience($guitar))
-                                        <div class="guitar-button-container">
-                                            <div class="guitar-button blue" title="Share your experience with this guitar"><i class="fa fa-comment" aria-hidden="true"></i></div>
-                                            <span>Have you experienced this guitar?</span>
-                                            <br>
-                                            <a href="{{ route('experience.create', ['guitar' => $guitar]) }}">
-                                                <span>Share your experience</span>
-                                            </a>
-                                        </div>
-                                    @else
-                                        <div class="guitar-button-container">
-                                            <div class="guitar-button blue"><i class="fa fa-check" aria-hidden="true"></i></div>
-                                            <span>You have shared your experience!</span>
-                                            <br>
-                                            <a href="{{ route('guitar.show.experiences', ['guitar' => $guitar]) . '#experience-' . Auth::user()->guitarExperience($guitar)->id }}">
-                                                <span>View</span>
-                                            </a>
-                                        </div>
-                                    @endif
-                                </div>
-                                <div class="col-md-4">
-                                    @if(Auth::user())
-                                        <div class="guitar-button-container">
-                                            <div class="guitar-button blue" title="Add an image for this guitar"><i class="fa fa-image" aria-hidden="true"></i></div>
-                                            <span>Do you have an image of this guitar?</span>
-                                            <br>
-                                            <a href="{{ route('guitar.image.create', ['guitar' => $guitar]) }}">
-                                                <span>Upload images</span>
-                                            </a>
-                                        </div>
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @else
-                    <div class="col-md-12">
-                        <div class="dashboard-content">
-                            <div class="guitar-button-container">
-                                <span><a href="{{ route('login') }}">Log in </a> to add this guitar to your collection </span>
-                            </div>
-                        </div>
-                    </div>
-                @endif
             </div>
             <div class="row">
                 <div class="col-md-12">

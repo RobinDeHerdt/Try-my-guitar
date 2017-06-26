@@ -27,7 +27,7 @@
             @if($user->guitars->isNotEmpty())
                 <div class="row">
                     @foreach($user->guitars as $guitar)
-                        <div class="col-md-6" id="{{ $user->guitarExperience($guitar) ? 'experience-' . $user->guitarExperience($guitar)->id : '' }}">
+                        <div class="col-md-6" id="guitar-{{$guitar->id }}">
                             <div class="search-result">
                                 <a href="{{ route('guitar.show', ['id' => $guitar->id]) }}">
                                     @if($guitar->guitarImages->isNotEmpty())

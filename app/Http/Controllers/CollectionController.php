@@ -93,11 +93,11 @@ class CollectionController extends Controller
             }
             Session::flash('success-message', $guitar->name . ' (' . $guitar->guitarBrand->name . ')' . ' was added to your collection!');
 
-            return redirect(route('collection.show', ['id' => $this->user->id]));
+            return redirect(route('collection.show', ['id' => $this->user->id]) . "#guitar-" . $guitar->id);
         }
 
         Session::flash('info-message', $guitar->name . ' (' . $guitar->guitarBrand->name . ')' . ' is already a part of your collection!');
-        return back();
+        return redirect();
     }
 
     /**
