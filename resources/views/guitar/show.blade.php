@@ -13,35 +13,7 @@
     <div class="content">
         <div class="container">
             <div class="row">
-                <div class="col-md-5">
-                    <div class="dashboard-content dashboard-min-height">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="center-content">
-                                    <a href="{{ route('brand.show', ['brand' => str_slug($guitar->guitarBrand->name)]) }}">
-                                        <img src="{{ Storage::disk('public')->url($guitar->guitarBrand->logo_uri) }}" alt="{{ $guitar->guitarBrand->name }} logo" class="guitar-brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="center-content">
-                            <h1>{{ $guitar->name }}</h1>
-                            <div class="guitar-type-container">
-                                @foreach($guitar->guitarTypes as $guitarType)
-                                    <a href="{{ route('type.show', ['id' => str_slug($guitarType->name)])}}"><span class="guitar-type">{{ $guitarType->name }}</span></a>
-                                @endforeach
-                            </div>
-                            <div class="guitar-description-container">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        {{ $guitar->description }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-7">
+                <div class="col-md-12">
                     @if(Auth::check())
                         <div class="row">
                             <div class="col-md-12">
@@ -118,6 +90,38 @@
                             </div>
                         </div>
                     @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="dashboard-content">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="center-content">
+                                    <a href="{{ route('brand.show', ['brand' => str_slug($guitar->guitarBrand->name)]) }}">
+                                        <img src="{{ Storage::disk('public')->url($guitar->guitarBrand->logo_uri) }}" alt="{{ $guitar->guitarBrand->name }} logo" class="guitar-brand-logo">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="center-content">
+                            <h1 class="guitar-name">{{ $guitar->name }}</h1>
+                            <div class="guitar-type-container">
+                                @foreach($guitar->guitarTypes as $guitarType)
+                                    <a href="{{ route('type.show', ['id' => str_slug($guitarType->name)])}}"><span class="guitar-type">{{ $guitarType->name }}</span></a>
+                                @endforeach
+                            </div>
+                            <div class="guitar-description-container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        {{ $guitar->description }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7">
                     <div class="dashboard-content">
                         <div class="slick-main">
                             @foreach($guitar->guitarImages as $guitarImage)
@@ -132,8 +136,8 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <h2 class="padding-top">Owners <span class="counter">{{ $guitar_user_count }}</span></h2>
-                    <div class="col-container">
+                    <h2>Owners <span class="counter">{{ $guitar_user_count }}</span></h2>
+                    <div class="dashboard-content">
                         <div id="map"></div>
                     </div>
                 </div>
