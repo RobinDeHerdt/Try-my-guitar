@@ -45,15 +45,23 @@ a.cta-button {
   text-align: center;
   margin-top: 50px;
 
+  a {
+    margin: 0 10px;
+  }
+
   .profile-button {
     display: inline-block;
     width: 75px;
     height: 75px;
-    padding: 21px 0;
     border-radius: 50%;
-    margin: 0 10px 0 10px;
     color: white;
     text-align: center;
+
+    i {
+      position: relative;
+      top: 22px;
+      left: 2px;
+    }
 
     &#edit-profile-button {
       padding: 23px 26px;
@@ -65,6 +73,10 @@ a.cta-button {
 
     &.blue {
       background-color: $primary-component-color;
+    }
+
+    &:hover {
+      opacity: 0.8;
     }
     
     a:link, a:hover, a:visited, a:active{

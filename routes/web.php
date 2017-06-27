@@ -82,6 +82,7 @@ Route::group([
 });
 
 // Async chat routes.
+Route::get('user', 'ChatController@user');
 Route::get('channels', 'ChatController@channels');
 Route::get('channel/{channel}', 'ChatController@channel');
 Route::get('channel/{channel}/messages', 'ChatController@messages');

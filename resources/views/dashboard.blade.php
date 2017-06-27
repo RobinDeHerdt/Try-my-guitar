@@ -51,7 +51,7 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <div class="dashboard-content">
+                    <div class="dashboard-content"  id="invites">
                         <h3>@lang('dashboard.invites')</h3>
                         <hr>
                         @if($received_invites->isNotEmpty())
@@ -152,5 +152,12 @@
 @endsection
 
 @section('scripts')
+    <script>
+        if(location.hash.slice(1)) {
+            $('html,body').animate({
+                scrollTop: $("#" + location.hash.slice(1)).offset().top - 80
+            }, 1000 );
+        }
+    </script>
     @include('partials.analytics')
 @endsection

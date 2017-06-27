@@ -91,6 +91,19 @@
   right: 20px;
 }
 
+#create-channel-container {
+  width: 50%;
+}
+
+#create-channel-form {
+  input[type="text"] {
+    width: 70%;
+    font-size: 16px;
+    padding: 2.5px 7.5px;
+  }
+}
+
+
 .channel-name {
   display: inline-block;
   position: relative;
@@ -104,7 +117,7 @@
 
   }
 
-  a:hover {
+  a:hover, a:link, a:active, a:visited {
     text-decoration: none;
   }
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\ChatJoined;
 use App\Events\ChatLeft;
 use App\Events\ChatNameChanged;
+use App\Events\InviteSent;
 use Illuminate\Http\Request;
 use App\Events\MessageSent;
 use App\Channel;
@@ -35,7 +36,7 @@ class ChatController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('role:user');
+        $this->middleware('role:user')->except('user', 'channels');
         $this->middleware(function ($request, $next) {
             $this->user = Auth::user();
 
@@ -130,6 +131,20 @@ class ChatController extends Controller
     }
 
     /**
+     * Fetch the authenticated user id.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function user()
+    {
+        if ($this->user) {
+            return $this->user->id;
+        }
+
+        return "";
+    }
+
+    /**
      * Fetch all messages for the specified channel.
      *
      * @param  \App\Channel  $channel
@@ -163,13 +178,16 @@ class ChatController extends Controller
     /**
     * Fetch all user channels.
     *
-    * @return Channel
+    * @return \Illuminate\Http\Response
     */
     public function channels()
     {
-        $channels = $this->user->channels()->get();
+        if ($this->user) {
+            $channels = $this->user->channels()->get();
+            return $channels;
+        }
 
-        return $channels;
+        return "";
     }
 
 
@@ -216,7 +234,7 @@ class ChatController extends Controller
             }
         } else {
             $channel = new Channel();
-            $channel->name = $this->user->first_name . "'s chat";
+            $channel->name = $request->name;
             $channel->save();
 
             // The creator of the channel gets the 'accepted' status.
@@ -232,6 +250,8 @@ class ChatController extends Controller
         $invite->channel_id     = $channel->id;
 
         $invite->save();
+
+        broadcast(new InviteSent($channel, $user, $this->user))->toOthers();
 
         // The user invited to the channel gets the 'not accepted' status.
         $user->addUnacceptedUserToChannel($channel->id);

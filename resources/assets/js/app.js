@@ -39,6 +39,8 @@ const app = new Vue({
     },
 
     created() {
+        this.fetchUser();
+
         if(document.getElementById('channel-id')) {
             var channel_id = document.getElementById('channel-id').value;
 
@@ -72,6 +74,28 @@ const app = new Vue({
     },
 
     methods: {
+        fetchUser() {
+            axios.get('/user').then(response => {
+                if(response.data) {
+                    var user_id = response.data;
+
+                    Echo.private(`user-channel.${user_id}`)
+                        .listen('InviteSent', (e) => {
+                            console.log(e);
+                            this.notifications.unshift({
+                                message: " has invited you to chat!",
+                                user: e.sender,
+                                channel: e.channel,
+                                type: 'invite',
+                            });
+
+                            this.checkMaxNotificationsReached(this.notifications, 8);
+                            this.removeNotificationAfterInterval(this.notifications);
+                        });
+                }
+            });
+        },
+
         fetchMessages(channel_id) {
             axios.get(`/channel/${channel_id}/messages`).then(response => {
                 this.messages = response.data;
@@ -94,14 +118,7 @@ const app = new Vue({
         fetchUserChannels() {
             axios.get(`/channels`).then(response => {
                 this.channels = response.data;
-
-                /**
-                 * Extremely hacky way to check if the user is getting the correct data back,
-                 * instead of the login screen because of middleware redirect. (role:user)
-                 * @todo Check if the user is authenticated before the API call is made.
-                 * @todo Don't broadcast chat 'joined chat' event to the current authenticated user.
-                 */
-                if(this.channels && this.channels[0] !== '<') {
+                if(response.data) {
                     this.channels.forEach(channel => {
                         Echo.private(`channel.${channel.id}`)
                             .listen('MessageSent', (e) => {

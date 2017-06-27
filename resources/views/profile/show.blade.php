@@ -25,14 +25,14 @@
                 @if(Auth::check())
                     @if ($user->id === Auth::user()->id)
                         <a href="{{ route('profile.edit') }}">
-                            <div class="profile-button blue" id="edit-profile-button" title="Edit profile">
-                                <i class="fa fa-edit fa-2x" aria-hidden="true"></i>
+                            <div class="profile-button blue" title="Edit profile">
+                                <i class="fa fa-pencil fa-2x" aria-hidden="true"></i>
                             </div>
                         </a>
                     @else
                         <a href="{{ route('profile.invite', ['id' => $user->id]) }}">
                             <div class="profile-button blue" title="Invite to chat">
-                                <i class="fa fa-comments fa-2x" aria-hidden="true"></i>
+                                <i class="fa fa-user-plus fa-2x" aria-hidden="true"></i>
                             </div>
                         </a>
                         <a href="{{ route('report.create', ['id' => $user->id]) }}">

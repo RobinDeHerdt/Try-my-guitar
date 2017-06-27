@@ -47,10 +47,15 @@
                             </div>
                         @endforeach
                         <div class="channel">
-                            <div class="channel-name">
-                                <a href="{{ route('invite') }}" onclick="event.preventDefault(); document.getElementById('invite-form-create-new').submit();"><i class="fa fa-user-plus" aria-hidden="true"></i>Create a new conversation</a>
-                                <form id="invite-form-create-new" action="{{ route('invite') }}" method="POST" style="display: none;">
+                            <div class="channel-name" id="create-channel-link">
+                                <a href="{{ route('invite') }}" onclick="event.preventDefault(); showCreateChannelForm();"><i aria-hidden="true" class="fa fa-user-plus"></i>Create a new conversation</a>
+                            </div>
+                            <div class="channel-name" id="create-channel-container" style="display: none">
+                                <form action="{{ route('invite') }}" method="POST" id="create-channel-form">
                                     {{ csrf_field() }}
+                                    <i aria-hidden="true" class="fa fa-user-plus"></i>
+                                    <input type="text" name="name" placeholder="Choose a channel name">
+                                    <input type="submit" class="btn btn-primary" value="Save">
                                     <input type="hidden" name="user_id" value="{{ $user->id }}">
                                 </form>
                             </div>
@@ -64,4 +69,13 @@
 
 @section('footer')
     @include('partials.footer')
+@endsection
+
+@section('scripts')
+    <script>
+        function showCreateChannelForm() {
+            $("#create-channel-link").hide();
+            $("#create-channel-container").show();
+        }
+    </script>
 @endsection
