@@ -21,19 +21,23 @@
                 </div>
             </div>
             <div class="col-container">
-                @foreach ($errors->all() as $message)
-                    <span>{{ $message }}</span>
-                @endforeach
                 <form method="POST" action="{{ route('guitar.image.store', ['guitar' => $guitar]) }}" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="form-group">
+                            <div class="form-group {{ $errors->all() ? ' has-error' : '' }}">
                                 <label for="experience">Upload one or more images</label>
-                                <input type="file" class="form-control" name="images[][file]" multiple>
-                                @if($errors->has('file'))
-                                    <span>{{ $errors->first('file') }}</span>
+                                <input type="file" class="form-control" name="images[]" multiple>
+                                @if ($errors->has('images'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('images') }}</strong>
+                                    </span>
                                 @endif
+                                @foreach ($errors->get('images.*') as $message)
+                                    <span class="help-block">
+                                        <strong>{{ $message[0] }}</strong>
+                                    </span>
+                                @endforeach
                             </div>
                         </div>
                     </div>

@@ -189,13 +189,9 @@ class GuitarController extends Controller
      */
     public function storeImage(Request $request, Guitar $guitar)
     {
-        // Since 'required' doesn't feel like working at all, do this. Clean as fuck.
-        if (!$request->images) {
-            return back();
-        }
-
         $validator = Validator::make($request->all(), [
-            'images.*.file' => 'required|filled|file|image|mimes:jpeg,png,bmp,gif|max:1000',
+            'images'    => 'required',
+            'images.*'  => 'file|image|mimes:jpeg,png,bmp,gif|max:1000',
         ], [
             'required'  => 'The image field is required.',
             'filled'    => 'The image field is required.',
@@ -213,7 +209,7 @@ class GuitarController extends Controller
             foreach ($request->images as $upload) {
                 $image = new GuitarImage();
 
-                $image->image_uri   = $upload['file']->store('images/guitar', 'public');
+                $image->image_uri   = $upload->store('images/guitar', 'public');
                 $image->guitar_id   = $guitar->id;
                 $image->user_id     = $this->user->id;
 
