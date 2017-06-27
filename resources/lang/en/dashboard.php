@@ -22,4 +22,5 @@ return [
     'click-to-complete'     => 'Click here to complete your profile',
     'profile-not-verified'  => 'You have not yet verified your e-mail address yet.',
     'click-to-send'         => 'Click here to send the verification mail again.',
+    'contribute'            => 'Contribute',
 ];

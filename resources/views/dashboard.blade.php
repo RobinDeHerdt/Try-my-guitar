@@ -135,6 +135,13 @@
                         @endif
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <div class="dashboard-content">
+                        <h3>@lang('dashboard.contribute')</h3>
+                        <hr>
+                        <a href="{{ route('guitar.create') }}">Add a guitar to the website</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

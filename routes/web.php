@@ -51,12 +51,15 @@ Route::group([
     Route::post('profile/appearance/update', 'ProfileController@updateAppearance')->name('profile.appearance.update');
 
     // Guitar related routes.
+    Route::get('guitar/create', 'GuitarController@create')->name('guitar.create');
     Route::get('guitar/{guitar}', 'GuitarController@show')->name('guitar.show');
     Route::get('guitar/{guitar}/experiences', 'GuitarController@experiences')->name('guitar.show.experiences');
+    Route::get('guitar/{guitar}/experience/create', 'ExperienceController@create')->name('experience.create');
     Route::get('guitar/{guitar}/image/create', 'GuitarController@createImage')->name('guitar.image.create');
-    Route::post('guitar/{guitar}/image/store', 'GuitarController@storeImage')->name('guitar.image.store');
     Route::get('brand/{brand}', 'BrandController@show')->name('brand.show');
     Route::get('type/{type}', 'TypeController@show')->name('type.show');
+    Route::post('guitar/{guitar}/image/store', 'GuitarController@storeImage')->name('guitar.image.store');
+    Route::post('guitar/store', 'GuitarController@store')->name('guitar.store');
 
     // Collection related routes.
     Route::get('collection/autocomplete', 'CollectionController@autoComplete')->name('collection.autocomplete');
@@ -65,8 +68,6 @@ Route::group([
     Route::post('collection/store', 'CollectionController@store')->name('collection.store');
     Route::post('collection/{guitar}/remove', 'CollectionController@destroy')->name('collection.destroy');
 
-
-    Route::get('guitar/{guitar}/experience/create', 'ExperienceController@create')->name('experience.create');
     Route::post('collection/{guitar}/experience/add', 'ExperienceController@store')->name('experience.store');
     Route::post('experience/{experience}/destroy', 'ExperienceController@destroy')->name('experience.destroy');
     Route::post('experience/{experience}/update', 'ExperienceController@update')->name('experience.update');

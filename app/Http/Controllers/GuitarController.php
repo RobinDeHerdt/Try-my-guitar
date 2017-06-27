@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\GuitarBrand;
+use App\GuitarType;
 use Illuminate\Http\Request;
 use App\GuitarImage;
 use App\Guitar;
@@ -98,6 +100,71 @@ class GuitarController extends Controller
             'similar_guitars'       => $similar_guitars,
             'user_coords'           => json_encode($user_coords),
         ]);
+    }
+
+    /**
+     * Show the 'create guitar' form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $brands = GuitarBrand::all();
+        $types  = GuitarType::all();
+
+        return view('guitar.create', [
+            'brands'    => $brands,
+            'types'     => $types,
+        ]);
+    }
+
+    /**
+     * Store the guitar image.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function store(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'images'        => 'required',
+            'images.*'      => 'file|image|mimes:jpeg,png,bmp,gif|max:1000',
+            'description'   => 'required',
+            'name'          => 'required',
+            'types'         => 'required',
+            'brand'         => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect(route('guitar.create'))
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+
+            $guitar = new Guitar();
+
+            $guitar->name           = $request->name;
+            $guitar->description    = $request->description;
+            $guitar->brand_id       = $request->brand;
+
+            $guitar->save();
+
+            $guitar->guitarTypes()->attach($request->types);
+
+            foreach ($request->images as $upload) {
+                $image = new GuitarImage();
+
+                $image->image_uri   = $upload->store('images/guitar', 'public');
+                $image->guitar_id   = $guitar->id;
+                $image->user_id     = $this->user->id;
+
+                $image->save();
+            }
+
+            return redirect(route('guitar.show', [
+                'guitar' => $guitar->id
+            ]));
+        }
     }
 
     /**
