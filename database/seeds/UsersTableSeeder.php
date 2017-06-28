@@ -16,6 +16,7 @@ class UsersTableSeeder extends Seeder
             'first_name' => 'Administrator',
             'email' => 'admin@trymyguitar.be',
             'password' => bcrypt('admin'),
+            'exp' => 100000,
         ]);
 
         DB::table('role_user')->insert([
@@ -42,6 +43,7 @@ class UsersTableSeeder extends Seeder
             'verified' => true,
             'header_image_uri' => 'images/electric-guitars.jpg',
             'description' => 'Guitar player and vocalist for a metal band called \'Trivium\'',
+            'exp' => 11650,
         ]);
 
         DB::table('role_user')->insert([
@@ -55,6 +57,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'james@gmail.com',
             'image_uri' => 'images/james.jpg',
             'password' => bcrypt('123456'),
+            'exp' => 24650,
         ]);
 
         DB::table('role_user')->insert([
@@ -67,6 +70,7 @@ class UsersTableSeeder extends Seeder
             'last_name' => 'Roundstone',
             'email' => 'editor@trymyguitar.be',
             'password' => bcrypt('editor'),
+            'exp' => 150,
         ]);
 
         DB::table('role_user')->insert([

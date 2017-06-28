@@ -25,6 +25,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'location_lat' => $faker->latitude($min = -90, $max = 90),
         'location_lng' => $faker->longitude($min = -180, $max = 180),
         'location' => $faker->address,
+        'exp' => $faker->numberBetween($min = 50, $max = 15000),
     ];
 });
 

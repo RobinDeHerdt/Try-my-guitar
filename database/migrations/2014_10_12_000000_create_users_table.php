@@ -28,7 +28,7 @@ class CreateUsersTable extends Migration
             $table->boolean('verified')->default(false);
             $table->string('verification_token')->nullable();
             $table->boolean('active')->default(true);
-            $table->integer('level')->default(1);
+            $table->integer('exp')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use App\Mail\VerifyEmail;
+use App\Traits\Exp;
 use App\User;
 use Auth;
 
@@ -15,6 +16,8 @@ use Auth;
  */
 class ProfileController extends Controller
 {
+    use Exp;
+
     /**
      * Contains the authenticated user.
      *
@@ -48,8 +51,11 @@ class ProfileController extends Controller
     {
         $guitars = $user->profileShowGuitars()->take(3)->get();
 
+        $level = $this->calculateLevel($user->exp);
+
         return view('profile.show', [
             'user'      => $user,
+            'level'     => $level,
             'guitars'   => $guitars,
         ]);
     }
