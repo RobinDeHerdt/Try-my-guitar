@@ -9,11 +9,14 @@
         <div class="header-image profile-header-image" style="background-image: url({{ Storage::disk('public')->url($user->header_image_uri) }})"></div>
         <div class="container profile-container">
             <div class="profile-image" style="background-image: url({{ Storage::disk('public')->url($user->image_uri) }})"></div>
-            @if($user->verified)
-            <span title="Verified e-mail address">
-                <div class="verified-mark"><i class="fa fa-check fa-2x" aria-hidden="true"></i></div>
-            </span>
-            @endif
+            <div class="verified-mark {{ $user->verified ? 'verified' : 'not-verified'}}" title="Verified e-mail address">
+                <i class="fa fa-check fa-2x" aria-hidden="true"></i>
+            </div>
+            <div class="profile-level-container" title="User level {{ $level }}">
+                <div class="profile-level">
+                    <span>{{ $level }}</span>
+                </div>
+            </div>
             <h1 class="profile-name">{{ $user->fullName() }}</h1>
             @if($user->description)
                 <p class="text-center profile-description">{{ $user->description }}</p>
