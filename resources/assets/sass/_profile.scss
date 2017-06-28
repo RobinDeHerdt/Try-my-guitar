@@ -93,16 +93,17 @@
   margin-top: -100px;
   position: relative;
   border: solid 2.5px $primary-bg-color;
-  left: 65px;
+  left: 64px;
   top: -8px;
 
   .profile-level {
     position: relative;
-    top: 1px;
+    top: 26px;
     text-align: center;
     font-size: 30px;
     color: #fff;
     font-weight: 600;
+    line-height: 0;
   }
 }
 
