@@ -7,7 +7,7 @@
                         <div class="profile-picture" v-bind:style="{ backgroundImage: 'url(/storage/' + notification.user.image_uri + ')' }"></div>
                     </div>
                     <div class="notification-content">
-                        <strong>{{ notification.channel.name }}</strong><br/>
+                        <span class="notification-channel-name">{{ notification.channel.name }}</span><br/>
                         <span><strong>{{ notification.user.first_name }} </strong>{{ notification.message }}</span>
                     </div>
                 </a>
@@ -21,7 +21,7 @@
                         <div class="profile-picture" v-bind:style="{ backgroundImage: 'url(/storage/' + notification.user.image_uri + ')' }"></div>
                     </div>
                     <div class="notification-content">
-                        <strong>{{ notification.channel.name }}</strong><br/>
+                        <span class="notification-channel-name">{{ notification.channel.name }}</span><br/>
                         <span><strong>{{ notification.user.first_name }} </strong>{{ notification.message }}</span>
                     </div>
                 </a>

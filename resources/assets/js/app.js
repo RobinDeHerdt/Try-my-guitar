@@ -39,49 +39,26 @@ const app = new Vue({
     },
 
     created() {
-        this.fetchUser();
+        this.listenOnAuthUserChannel();
 
         if(document.getElementById('channel-id')) {
             var channel_id = document.getElementById('channel-id').value;
-
+            this.listenOnCurrentChannel(channel_id);
             this.fetchMessages(channel_id);
             this.fetchChannel(channel_id);
-
-            Echo.private(`channel.${channel_id}`)
-                .listen('MessageSent', (e) => {
-                    this.messages.push({
-                        message: e.message.message,
-                        user: e.user
-                    });
-                    this.messageSeen(channel_id);
-                })
-                .listen('ChatJoined', (e) => {
-                    this.channel.users.push(e.user);
-                })
-                .listen('ChatLeft', (e) => {
-                    for (var i = 0; i < this.channel.users.length; i++) {
-                        if (this.channel.users[i].id === e.user.id) {
-                            this.channel.users.splice(i, 1);
-                        }
-                    }
-                })
-                .listen('ChatNameChanged', (e) => {
-                    this.channelname = e.channel.name;
-                });
         } else {
-            this.fetchUserChannels();
+            this.listenOnUserChannels();
         }
     },
 
     methods: {
-        fetchUser() {
+        listenOnAuthUserChannel() {
             axios.get('/user').then(response => {
                 if(response.data) {
                     var user_id = response.data;
 
                     Echo.private(`user-channel.${user_id}`)
                         .listen('InviteSent', (e) => {
-                            console.log(e);
                             this.notifications.unshift({
                                 message: " has invited you to chat!",
                                 user: e.sender,
@@ -90,7 +67,7 @@ const app = new Vue({
                             });
 
                             this.checkMaxNotificationsReached(this.notifications, 8);
-                            this.removeNotificationAfterInterval(this.notifications);
+                            // this.removeNotificationAfterInterval(this.notifications);
                         });
                 }
             });
@@ -115,7 +92,31 @@ const app = new Vue({
             axios.post(`/channel/${channel_id}/messages/send`, message);
         },
 
-        fetchUserChannels() {
+        listenOnCurrentChannel(channel_id) {
+            Echo.private(`channel.${channel_id}`)
+                .listen('MessageSent', (e) => {
+                    this.messages.push({
+                        message: e.message.message,
+                        user: e.user
+                    });
+                    this.messageSeen(channel_id);
+                })
+                .listen('ChatJoined', (e) => {
+                    this.channel.users.push(e.user);
+                })
+                .listen('ChatLeft', (e) => {
+                    for (var i = 0; i < this.channel.users.length; i++) {
+                        if (this.channel.users[i].id === e.user.id) {
+                            this.channel.users.splice(i, 1);
+                        }
+                    }
+                })
+                .listen('ChatNameChanged', (e) => {
+                    this.channelname = e.channel.name;
+                });
+        },
+
+        listenOnUserChannels() {
             axios.get(`/channels`).then(response => {
                 this.channels = response.data;
                 if(response.data) {
@@ -138,7 +139,7 @@ const app = new Vue({
 
                                 this.messageSeen(channel.id);
                                 this.checkMaxNotificationsReached(this.notifications, 8);
-                                this.removeNotificationAfterInterval(this.notifications);
+                                // this.removeNotificationAfterInterval(this.notifications);
                             })
                             .listen('ChatJoined', (e) => {
                                 this.notifications.unshift({
@@ -148,7 +149,7 @@ const app = new Vue({
                                 });
 
                                 this.checkMaxNotificationsReached(this.notifications, 8);
-                                this.removeNotificationAfterInterval(this.notifications);
+                                // this.removeNotificationAfterInterval(this.notifications);
                             })
                             .listen('ChatLeft', (e) => {
                                 this.notifications.unshift({
@@ -158,7 +159,7 @@ const app = new Vue({
                                 });
 
                                 this.checkMaxNotificationsReached(this.notifications, 8);
-                                this.removeNotificationAfterInterval(this.notifications);
+                                // this.removeNotificationAfterInterval(this.notifications);
                             });
                     });
                 }

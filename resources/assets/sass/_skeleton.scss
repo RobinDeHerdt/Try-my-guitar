@@ -105,8 +105,8 @@ body {
 .notification-close {
   z-index: 999;
   position: absolute;
-  right: 15px;
   top: 10px;
+  right: 10px;
   border-radius: 50%;
   width: 20px;
   height: 20px;
@@ -118,7 +118,7 @@ body {
 
   i {
     position: relative;
-    left: 4.5px;
+    left: 5px;
     top: -1px;
   }
 }
@@ -127,12 +127,12 @@ body {
   position: fixed;
   right: 10px;
   bottom: 0;
-  width: 350px;
+  width: 400px;
   z-index: 998;
 
   .chat-notification {
     position: relative;
-    height: 100px;
+    height: 115px;
     margin-bottom: 15px;
     border-right: solid 5px $primary-component-color;
     background-color: #fff;
@@ -158,15 +158,29 @@ body {
 
     .notification-content {
       float: left;
-      padding: 17.5px;
+      padding: 5px 17.5px;
       margin-top: 5px;
       width: 70%;
 
+      .notification-channel-name {
+        color: #315c88;
+        font-weight: bold;
+      }
+
+      strong:hover {
+        color: inherit;
+      }
+
       span {
         padding-top: 10px;
+        font-size: 14px;
       }
     }
   }
+}
+
+.invite-response {
+  text-align: center;
 }
 
 .contact-container {
@@ -230,8 +244,17 @@ body {
 }
 
 @media (max-width: 992px) {
-  .authentication-block {
+  .message-teaser-container {
+    text-align: center;
 
+    .invite {
+      text-align: left;
+    }
+
+    .invite-response {
+      display: inline-block;
+      margin-top: 20px;
+    }
   }
 
   .social-media-left {
@@ -260,5 +283,11 @@ body {
   h1 {
     font-size: 24px;
     margin-top: 28px;
+  }
+}
+
+@media (max-width: 415px) {
+  .notification {
+    width: 95%;
   }
 }
