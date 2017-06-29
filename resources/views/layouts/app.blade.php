@@ -27,9 +27,6 @@
         @if (Session::has('exp-message'))
             <div class="exp-window" id="exp-window">
                 <span>{{ Session::get('exp-message') }}</span>
-                <div id="close-exp-window">
-                    <i class="fa fa-times" aria-hidden="true"></i>
-                </div>
             </div>
         @endif
         @yield('navigation')
@@ -41,9 +38,9 @@
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
     <script>
-        $("#close-exp-window").click(function(){
+        $("#exp-window").click(function(){
             $("#exp-window").hide();
-        });
+        }).delay(5000).fadeOut();
     </script>
     @yield('scripts')
 </body>
