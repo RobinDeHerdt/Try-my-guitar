@@ -86,24 +86,28 @@
 
 .profile-level-container {
   background-color: $primary-component-color;
-  width: 60px;
-  height: 60px;
+  width: 75px;
+  height: 75px;
   margin: 0 auto;
   border-radius: 50%;
-  margin-top: -100px;
+  margin-top: -96px;
   position: relative;
   border: solid 2.5px $primary-bg-color;
-  left: 64px;
-  top: -8px;
+  left: 0;
+  top: 0;
 
   .profile-level {
     position: relative;
-    top: 26px;
+    top: 31px;
     text-align: center;
-    font-size: 30px;
+    font-size: 36px;
     color: #fff;
     font-weight: 600;
     line-height: 0;
+
+    span:hover {
+      cursor: default;
+    }
   }
 }
 

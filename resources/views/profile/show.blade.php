@@ -12,7 +12,7 @@
             <div class="verified-mark {{ $user->verified ? 'verified' : 'not-verified'}}" title="Verified e-mail address">
                 <i class="fa fa-check fa-2x" aria-hidden="true"></i>
             </div>
-            <div class="profile-level-container" title="User level {{ $level }}">
+            <div class="profile-level-container" title="{{ number_format($user->exp, 0, ',', ' ') }} exp">
                 <div class="profile-level">
                     <span>{{ $level }}</span>
                 </div>
