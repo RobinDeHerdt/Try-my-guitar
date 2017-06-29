@@ -101,6 +101,12 @@ class ProfileController extends Controller
             $send_mail                  = true;
         }
 
+        if (!$user->location && !$user->location_lat && !$user->location_lng) {
+            if ($request->location && $request->location_lat && $request->location_lng) {
+                $this->addExp($user, 100);
+            }
+        }
+
         $user->location     = $request->location;
         $user->location_lat = $request->location_lat;
         $user->location_lng = $request->location_lng;

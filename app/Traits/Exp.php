@@ -2,6 +2,9 @@
 
 namespace App\Traits;
 
+use Illuminate\Support\Facades\Session;
+use \App\User;
+
 /**
  * Trait Exp
  * @package App\Traits
@@ -27,7 +30,7 @@ trait Exp
      * @param integer  $awarded_exp
      * @return integer  $level
      */
-    protected function addExp($user, $awarded_exp)
+    protected function addExp(User $user, $awarded_exp)
     {
         $exp = $user->exp;
 
@@ -35,6 +38,8 @@ trait Exp
 
         $user->exp = $exp;
         $user->save();
+
+        Session::flash('exp-message', '+ ' . $awarded_exp . ' exp');
     }
 
     /**
