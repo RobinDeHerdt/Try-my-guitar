@@ -24,6 +24,7 @@ Route::group([
     // Main navigation routes.
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('about', 'AboutController@index')->name('about');
+    Route::get('experience', 'ExperienceController@index')->name('experience');
     Route::get('explore', 'ExploreController@explore')->name('explore');
     Route::get('disclaimer', 'HomeController@disclaimer')->name('disclaimer');
     Route::get('search', 'SearchController@result')->name('search');

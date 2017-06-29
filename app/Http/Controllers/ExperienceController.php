@@ -31,12 +31,22 @@ class ExperienceController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('role:user');
+        $this->middleware('role:user')->except('index');
         $this->middleware(function ($request, $next) {
             $this->user = Auth::user();
 
             return $next($request);
         });
+    }
+
+    /**
+     * Display the experience page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        return view('experience');
     }
 
     /**

@@ -154,6 +154,14 @@
                         <h3>@lang('dashboard.contribute')</h3>
                         <hr>
                         <a href="{{ route('guitar.create') }}">Add a guitar to the website</a>
+                        <hr>
+                        <div id="progressbar">
+                            <span class="progress-label">{{ $next_level_exp - $user->exp }} exp needed to level {{ $current_level + 1 }}</span>
+                        </div>
+                        <input type="hidden" id="next-level-exp" value="{{ $next_level_exp }}">
+                        <input type="hidden" id="current-level-exp" value="{{ $current_level_exp }}">
+                        <input type="hidden" id="current-level" value="{{ $current_level }}">
+                        <input type="hidden" id="current-exp" value="{{ $user->exp }}">
                     </div>
                 </div>
             </div>
@@ -172,6 +180,29 @@
                 scrollTop: $("#" + location.hash.slice(1)).offset().top - 80
             }, 1000 );
         }
+
+        $( function() {
+            var next_level_exp      = $("#next-level-exp").val();
+            var current_level_exp   = $("#current-level-exp").val();
+            var level               = $("#current-level").val();
+            var exp                 = $("#current-exp").val();
+
+            var total_exp   = next_level_exp - current_level_exp;
+            var progress    = ((exp - current_level_exp) / total_exp) * 100;
+
+            /*
+            Debug
+            console.log('exp ' + exp);
+            console.log('next level exp ' + next_level_exp);
+            console.log('current level exp ' + current_level_exp);
+            console.log('total exp ' + total_exp);
+            console.log('progress ' + progress);
+            */
+
+            $( "#progressbar" ).progressbar({
+                value: progress
+            });
+        });
     </script>
     @include('partials.analytics')
 @endsection

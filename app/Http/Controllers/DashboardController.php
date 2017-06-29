@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 use Session;
+use App\Traits\Exp;
 
 /**
  * Class DashboardController
@@ -11,6 +12,8 @@ use Session;
  */
 class DashboardController extends Controller
 {
+    use Exp;
+
     /**
      * Contains the authenticated user.
      *
@@ -60,11 +63,18 @@ class DashboardController extends Controller
         $received_invites   = $this->user->receivedInvites()->get();
         $sent_invites       = $this->user->sentInvites()->get();
 
+        $current_level      = $this->calculateLevel($this->user->exp);
+        $current_level_exp  = $this->calculateCurrentLevelExp($current_level);
+        $next_level_exp     = $this->calculateNextLevelExp($current_level);
+
         return view('dashboard', [
             'received_invites'  => $received_invites,
             'sent_invites'      => $sent_invites,
             'messages'          => $messages,
             'user'              => $this->user,
+            'current_level'     => $current_level,
+            'current_level_exp' => $current_level_exp,
+            'next_level_exp'    => $next_level_exp,
         ]);
     }
 }

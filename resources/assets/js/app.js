@@ -11,6 +11,7 @@ import $ from 'jquery';
 window.$ = window.jQuery = $;
 
 import 'jquery-ui/ui/widgets/autocomplete.js';
+import 'jquery-ui/ui/widgets/progressbar.js';
 import 'jquery-ui/ui/widgets/slider.js';
 
 window.Vue = require('vue');

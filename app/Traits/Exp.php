@@ -24,6 +24,28 @@ trait Exp
     }
 
     /**
+     * Calculate the amount of experience needed to reach the next level.
+     *
+     * @param integer  $current_level
+     * @return integer  $level
+     */
+    protected function calculateCurrentLevelExp($current_level)
+    {
+        return pow(($current_level / 0.2), 2);
+    }
+
+    /**
+     * Calculate the amount of experience needed to reach the next level.
+     *
+     * @param integer  $current_level
+     * @return integer  $level
+     */
+    protected function calculateNextLevelExp($current_level)
+    {
+        return pow((($current_level + 1) / 0.2), 2);
+    }
+
+    /**
      * Add exp to the specified user.
      *
      * @param \App\User  $user

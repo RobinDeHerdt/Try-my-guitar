@@ -263,6 +263,26 @@ body {
   }
 }
 
+#progressbar .ui-progressbar-value {
+  background-color: #4f7aca;
+}
+
+.ui-progressbar {
+  .ui-progressbar-value {
+    margin: 0;
+  }
+
+  .progress-label {
+    position: absolute;
+    font-weight: bold;
+    text-shadow: 1px 1px 0 #fff;
+    left: 35%;
+  }
+
+  .ui-widget-header {
+    border: 0 solid #dddddd;
+  }
+}
 
 @media (max-width: 992px) {
   .message-teaser-container {
