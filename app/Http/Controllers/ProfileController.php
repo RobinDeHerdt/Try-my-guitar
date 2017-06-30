@@ -49,8 +49,8 @@ class ProfileController extends Controller
      */
     public function show(User $user)
     {
-        // $guitars = $user->profileShowGuitars()->take(3)->get();
         $guitars = $user->guitars()->take(3)->get();
+        
         $level = $this->calculateLevel($user->exp);
 
         return view('profile.show', [
