@@ -50,11 +50,11 @@ trait Exp
      *
      * @param \App\User  $user
      * @param integer  $awarded_exp
-     * @return integer  $level
      */
     protected function addExp(User $user, $awarded_exp)
     {
-        $exp = $user->exp;
+        $exp            = $user->exp;
+        $next_level_exp = $this->calculateNextLevelExp($exp);
 
         $exp += $awarded_exp;
 
@@ -62,6 +62,12 @@ trait Exp
         $user->save();
 
         Session::flash('exp-message', '+ ' . $awarded_exp . ' exp');
+
+        if ($exp >= $next_level_exp) {
+            Session::flash('level-message', 'Congratulations! You\'ve reached level'. $this->calculateLevel($exp) .'!');
+        }
+
+        return;
     }
 
     /**
@@ -69,7 +75,6 @@ trait Exp
      *
      * @param \App\User  $user
      * @param integer  $awarded_exp
-     * @return integer  $level
      */
     protected function subtractExp($user, $awarded_exp)
     {
@@ -79,5 +84,7 @@ trait Exp
 
         $user->exp = $exp;
         $user->save();
+
+        return;
     }
 }

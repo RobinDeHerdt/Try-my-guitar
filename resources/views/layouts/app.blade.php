@@ -24,6 +24,11 @@
 </head>
 <body>
     <div id="app">
+        @if (Session::has('level-message'))
+            <div class="level-window" id="level-window">
+                <span>{{ Session::get('level-message') }}</span>
+            </div>
+        @endif
         @if (Session::has('exp-message'))
             <div class="exp-window" id="exp-window">
                 <span>{{ Session::get('exp-message') }}</span>
@@ -38,9 +43,25 @@
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
     <script>
+        $("#level-window").click(function(){
+            $(this).hide();
+        }).animate({
+            top: $(window).height() / 4,
+        }, 500, function() {
+            $(this).animate({
+                top: "-90px",
+            }, 500)
+        }).delay(3000);
+
         $("#exp-window").click(function(){
-            $("#exp-window").hide();
-        }).delay(5000).fadeOut();
+            $(this).hide();
+        }).animate({
+            top: $(window).height() / 8,
+        }, 500, function() {
+            $(this).animate({
+                top: "-90px",
+            }, 500)
+        }).delay(3000);
     </script>
     @yield('scripts')
 </body>

@@ -14,8 +14,8 @@
             </div>
             <div class="profile-level-container" title="{{ number_format($user->exp, 0, ',', ' ') }} exp">
                 <div class="profile-level">
-                    <span id="level-text">Level</span>
-                    <span>{{ $level }}</span>
+                    <span id="level-text">Level</span><br>
+                    <span id="level-counter">{{ $level }}</span>
                 </div>
             </div>
             <h1 class="profile-name">{{ $user->fullName() }}</h1>

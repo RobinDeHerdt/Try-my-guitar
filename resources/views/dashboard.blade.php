@@ -155,8 +155,12 @@
                         <hr>
                         <a href="{{ route('guitar.create') }}">Add a guitar to the website</a>
                         <hr>
+                        <div class="center-content">
+                            <strong>Current: {{ $user->exp }} exp</strong>
+                        </div>
+                        <br>
                         <div id="progressbar">
-                            <span class="progress-label">{{ $next_level_exp - $user->exp }} exp needed to level {{ $current_level + 1 }}</span>
+                            <span class="progress-label">{{ $next_level_exp - $user->exp }} exp to level {{ $current_level + 1 }}</span>
                         </div>
                         <input type="hidden" id="next-level-exp" value="{{ $next_level_exp }}">
                         <input type="hidden" id="current-level-exp" value="{{ $current_level_exp }}">
