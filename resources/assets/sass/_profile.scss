@@ -98,12 +98,18 @@
 
   .profile-level {
     position: relative;
-    top: 31px;
+    top: 37px;
     text-align: center;
     font-size: 36px;
     color: #fff;
     font-weight: 600;
     line-height: 0;
+
+    #level-text {
+      position: absolute;
+      font-size: 14px;
+      top: -17px;
+    }
 
     span:hover {
       cursor: default;

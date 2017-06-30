@@ -14,6 +14,7 @@
             </div>
             <div class="profile-level-container" title="{{ number_format($user->exp, 0, ',', ' ') }} exp">
                 <div class="profile-level">
+                    <span id="level-text">Level</span>
                     <span>{{ $level }}</span>
                 </div>
             </div>
