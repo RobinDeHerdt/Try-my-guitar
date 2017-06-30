@@ -34,6 +34,12 @@
                 <span>{{ Session::get('exp-message') }}</span>
             </div>
         @endif
+            <div class="level-window" id="level-window">
+                <span>Congratulations! You have reached level 222!</span>
+            </div>
+            <div class="exp-window" id="exp-window">
+                <span>+ 1000 exp</span>
+            </div>
         @yield('navigation')
         @yield('content')
         @yield('footer')
@@ -51,7 +57,7 @@
             $(this).animate({
                 top: "-90px",
             }, 500)
-        }).delay(3000);
+        }).delay(4000);
 
         $("#exp-window").click(function(){
             $(this).hide();
