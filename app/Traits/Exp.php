@@ -54,7 +54,8 @@ trait Exp
     protected function addExp(User $user, $awarded_exp)
     {
         $exp            = $user->exp;
-        $next_level_exp = $this->calculateNextLevelExp($exp);
+        $current_level  = $this->calculateLevel($exp);
+        $next_level_exp = $this->calculateNextLevelExp($current_level);
 
         $exp += $awarded_exp;
 
@@ -64,7 +65,7 @@ trait Exp
         Session::flash('exp-message', '+ ' . $awarded_exp . ' exp');
 
         if ($exp >= $next_level_exp) {
-            Session::flash('level-message', 'Congratulations! You\'ve reached level'. $this->calculateLevel($exp) .'!');
+            Session::flash('level-message', 'Congratulations! You\'ve reached level '.$this->calculateLevel($exp).'!');
         }
 
         return;

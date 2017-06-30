@@ -21,7 +21,7 @@ class ProfileController extends Controller
     /**
      * Contains the authenticated user.
      *
-     * @var array
+     * @var User
      */
     private $user;
 

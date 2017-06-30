@@ -7,6 +7,8 @@ use App\GuitarType;
 use Illuminate\Http\Request;
 use App\GuitarImage;
 use App\Guitar;
+use App\User;
+use App\Traits\Exp;
 use Validator;
 use Auth;
 
@@ -16,10 +18,12 @@ use Auth;
  */
 class GuitarController extends Controller
 {
+    use Exp;
+
     /**
      * Contains the authenticated user.
      *
-     * @var array
+     * @var User
      */
     private $user;
 
@@ -140,7 +144,6 @@ class GuitarController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         } else {
-
             $guitar = new Guitar();
 
             $guitar->name           = $request->name;
@@ -160,6 +163,8 @@ class GuitarController extends Controller
 
                 $image->save();
             }
+
+            $this->addExp($this->user, 100 + (count($request->images) * 25));
 
             return redirect(route('guitar.show', [
                 'guitar' => $guitar->id
@@ -215,6 +220,8 @@ class GuitarController extends Controller
 
                 $image->save();
             }
+
+            $this->addExp($this->user, count($request->images) * 25);
 
             return redirect(route('guitar.show', [
                 'guitar' => $guitar->id
