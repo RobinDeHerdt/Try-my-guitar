@@ -57,12 +57,10 @@
     font-weight: 600;
   }
 
-  li {
+  a {
+    color: #fff;
     display: inline-block;
-    margin: 5px 20px 5px -5px;
-    a {
-      color: #fff;
-    }
+    margin: 5px 20px 5px 0;
   }
 }
 
@@ -98,11 +96,15 @@
   .custom-navbar-top {
     padding: 0;
 
-    li {
+    a {
       width: 100%;
       padding: 10px 0 10px 20px;
       margin: 0;
       border-bottom: solid 1px #fff;
+
+      &:last-child {
+        border: none;
+      }
     }
   }
 }

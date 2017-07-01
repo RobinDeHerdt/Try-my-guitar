@@ -10,12 +10,22 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+
 Route::group([
     'prefix' => LaravelLocalization::setLocale(),
     'middleware' => [ 'localeSessionRedirect', 'localizationRedirect' ]
 ], function () {
     // Authentication related routes.
-    Auth::routes();
+    Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+    Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+    Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+    Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+
+    Route::post('login', 'Auth\LoginController@login');
+    Route::post('register', 'Auth\RegisterController@register');
+    Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+    Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
     // Verification related routes.
     Route::get('/verify/{id}/{token}', 'Auth\VerifyController@verify')->name('verify');

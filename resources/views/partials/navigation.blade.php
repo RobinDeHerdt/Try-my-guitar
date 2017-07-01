@@ -1,15 +1,13 @@
 <nav class="navbar-default">
     @if (Auth::user() && Auth::user()->hasRole('administrator'))
-        <ul class="custom-navbar-top">
+        <div class="custom-navbar-top">
             <div class="container">
-                <div class="row">
-                    <li><a href="{{ route('admin.dashboard') }}">Control panel</a></li>
-                    <li><a href="{{ route('articles.index') }}">Articles</a></li>
-                    <li><a href="{{ route('admin.reports.index') }}">Reports</a></li>
-                    <li><a href="{{ route('admin.messages.index') }}">Contact messages</a></li>
-                </div>
+                <a href="{{ route('admin.dashboard') }}">Control panel</a>
+                <a href="{{ route('articles.index') }}">Articles</a>
+                <a href="{{ route('admin.reports.index') }}">Reports</a>
+                <a href="{{ route('admin.messages.index') }}">Contact messages</a>
             </div>
-        </ul>
+        </div>
     @endif
     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
         <span class="sr-only">Toggle Navigation</span>
