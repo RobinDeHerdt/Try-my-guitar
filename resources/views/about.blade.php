@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div class="content {{ Auth::user() && Auth::user()->hasRole('administrator') ? 'admin-authenticated' : '' }}">
+    <div class="content>
         <div class="header-image" style="background-image: url('/images/about-bg.jpg');"></div>
         <div class="container">
             <div class="row">

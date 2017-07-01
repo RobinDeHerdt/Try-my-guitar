@@ -54,7 +54,7 @@ class ArticleController extends Controller
 
             case 'en':
                 $article_query->where('lang', 'en');
-                break;
+                 break;
         }
 
         $articles = $article_query->paginate(6);

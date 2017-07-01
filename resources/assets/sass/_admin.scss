@@ -24,5 +24,11 @@
 }
 
 .admin-authenticated {
-  padding-top: 75px;
+  padding-top: 32px;
+}
+
+@media (max-width: 767px) {
+  .admin-authenticated {
+    padding-top: 214px;
+  }
 }

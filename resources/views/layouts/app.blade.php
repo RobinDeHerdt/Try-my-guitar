@@ -35,7 +35,9 @@
             </div>
         @endif
         @yield('navigation')
-        @yield('content')
+        <div class="{{ Auth::user() && Auth::user()->hasRole('administrator') ? 'admin-authenticated' : '' }}">
+            @yield('content')
+        </div>
         @yield('footer')
         @if(Auth::check())
             <chat-notifications :notifications="notifications"></chat-notifications>

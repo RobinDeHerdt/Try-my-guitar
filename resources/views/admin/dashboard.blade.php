@@ -7,8 +7,8 @@
 @section('content')
     <div class="content">
         <div class="container">
-            <div class="row">
-                <div class="col-md-12 padding-top">
+            <div class="row heading">
+                <div class="col-md-12">
                     <h1>Control panel</h1>
                 </div>
             </div>
