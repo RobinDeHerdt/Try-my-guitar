@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use App\Console\Commands\RemoveTrashed;
+use App\Console\Commands\UnbanUsers;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -14,7 +15,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-       RemoveTrashed::class,
+        RemoveTrashed::class,
+        UnbanUsers::class,
     ];
 
     /**
@@ -26,6 +28,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('trash:remove articles')->daily();
+        $schedule->command('users:unban')->daily();
     }
 
     /**

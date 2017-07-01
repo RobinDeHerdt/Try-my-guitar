@@ -22,9 +22,13 @@ class CheckRole
             return redirect(route('login'));
         } else {
             if (!$request->user()->active) {
-                Auth::logout();
+                if ($request->user()->inactive_until) {
+                    Session::flash('info-message', 'Your account has temporarily been banned until ' . $request->user()->inactive_until);
+                } else {
+                    Session::flash('info-message', 'Your account has permanently been banned.');
+                }
 
-                Session::flash('info-message', 'Your account has been banned.');
+                Auth::logout();
 
                 return redirect(route('login'));
             }

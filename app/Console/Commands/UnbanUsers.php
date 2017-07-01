@@ -2,25 +2,25 @@
 
 namespace App\Console\Commands;
 
-use Carbon\Carbon;
-use App\Article;
 use Illuminate\Console\Command;
+use Carbon\Carbon;
+use App\User;
 
-class RemoveTrashed extends Command
+class UnbanUsers extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'trash:remove {data_type}';
+    protected $signature = 'users:unban';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Permanently delete items trashed for more than 2 weeks.';
+    protected $description = 'Unban users who received a temporary ban for 14 days.';
 
     /**
      * Create a new command instance.
@@ -38,12 +38,14 @@ class RemoveTrashed extends Command
      */
     public function handle()
     {
-        $date = Carbon::now()->subWeeks(2);
+        $date = Carbon::now();
 
-        switch ($this->argument('data_type')) {
-            case 'articles':
-                Article::onlyTrashed()->where('deleted_at', '<=', $date)->forceDelete();
-                break;
+        $users = User::where('inactive_until', '<=', $date)->get();
+
+        foreach ($users as $user) {
+            $user->inactive_until = null;
+            $user->active = true;
+            $user->save();
         }
     }
 }

@@ -44,7 +44,7 @@
                                         <label><input type="radio" name="action" value="1">Ban this user temporarily (2 week ban)</label>
                                     </div>
                                     <div class="radio">
-                                        <label><input type="radio" name="action" value="1">Ban this user parmanently</label>
+                                        <label><input type="radio" name="action" value="2">Ban this user parmanently</label>
                                     </div>
                                 </div>
                                 <div class="form-group">

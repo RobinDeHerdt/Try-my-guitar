@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Session;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Report;
 use App\User;
@@ -117,17 +118,29 @@ class ReportController extends Controller
      */
     public function reviewed(Request $request, Report $report)
     {
-        if ($request->action == 1) {
-            $report->reported->active = false;
-            $report->reported->save();
+        $date = Carbon::now();
 
-            $report->action = 'Ban';
+        switch ($request->action) {
+            case 1:
+                $report->reported->active = false;
+                $report->reported->inactive_until = $date->addWeeks(2);
+                $report->reported->save();
 
-            Session::flash('success-message', 'The user was banned. Report set as reviewed.');
-        } else {
-            $report->action = 'None';
+                $report->action = 'Temporary ban';
+                Session::flash('success-message', 'The user was temporarily banned. Report set as reviewed.');
+                break;
 
-            Session::flash('success-message', 'No action was taken. Report set as reviewed.');
+            case 2:
+                $report->reported->active = false;
+                $report->reported->save();
+
+                $report->action = 'Permanent ban';
+                Session::flash('success-message', 'The user was permanently banned. Report set as reviewed.');
+                break;
+
+            default:
+                $report->action = 'None';
+                Session::flash('success-message', 'No action was taken. Report set as reviewed.');
         }
 
         $report->reviewed = true;
