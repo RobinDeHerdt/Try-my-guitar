@@ -126,7 +126,7 @@ class CtaItemController extends Controller
 
         $active_items = CtaItem::where('active', true)->count();
 
-        if ($active_items >= 3) {
+        if ($active_items > 3) {
             $cta_item->active = false;
         } else {
             $cta_item->active = true;

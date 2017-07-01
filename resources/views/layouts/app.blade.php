@@ -35,41 +35,6 @@
         @endif
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
-    <script>
-        $("#level-window").click(function(){
-            $(this).hide();
-        }).animate({
-            top: $(window).height() / 4,
-        }, 500, function() {
-            $(this).animate({
-                top: "-90px",
-            }, 500)
-        }).delay(4000);
-
-        $("#exp-window").click(function(){
-            $(this).hide();
-        }).animate({
-            top: $(window).height() / 8,
-        }, 500, function() {
-            $(this).animate({
-                top: "-90px",
-            }, 500)
-        }).delay(3000);
-
-        $("#top-menu-open").click(function() {
-            $(this).hide();
-            $(".top-menu-collapse").show();
-            $("#top-menu-close").show();
-
-            $(".admin-authenticated").addClass("open-top-menu");
-        });
-
-        $("#top-menu-close").click(function() {
-            $(".top-menu-collapse").hide();
-            $("#top-menu-open").show();
-            $(".admin-authenticated").removeClass("open-top-menu");
-        });
-    </script>
     @yield('scripts')
 </body>
 </html>

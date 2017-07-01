@@ -100,12 +100,5 @@
 @endsection
 
 @section('scripts')
-    <script>
-        if(location.hash.slice(1)) {
-            $('html,body').animate({
-                scrollTop: $("#" + location.hash.slice(1)).offset().top - 70
-            }, 1000 );
-        }
-    </script>
     @include('partials.analytics')
 @endsection

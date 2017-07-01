@@ -98,12 +98,6 @@
 
 @section('scripts')
     <script>
-        if(location.hash.slice(1)) {
-            $('html,body').animate({
-                scrollTop: $("#" + location.hash.slice(1)).offset().top - 80
-            }, 1000 );
-        }
-
         function vote(id, value) {
             $('#value-field-' +id).val(value);
             $('#vote-form-' + id).submit();

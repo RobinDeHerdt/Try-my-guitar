@@ -119,13 +119,6 @@
 @endsection
 
 @section('scripts')
-    <script>
-        if(location.hash.slice(1)) {
-            $('html,body').animate({
-                scrollTop: $("#" + location.hash.slice(1)).offset().top - 80
-            }, 1000 );
-        }
-    </script>
     <script>window.twttr = (function(d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0],
                 t = window.twttr || {};

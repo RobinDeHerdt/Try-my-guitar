@@ -178,12 +178,6 @@
 
 @section('scripts')
     <script>
-        if(location.hash.slice(1)) {
-            $('html,body').animate({
-                scrollTop: $("#" + location.hash.slice(1)).offset().top - 80
-            }, 1000 );
-        }
-
         $( function() {
             var next_level_exp      = $("#next-level-exp").val();
             var current_level_exp   = $("#current-level-exp").val();
@@ -192,15 +186,6 @@
 
             var total_exp   = next_level_exp - current_level_exp;
             var progress    = ((exp - current_level_exp) / total_exp) * 100;
-
-            /*
-            Debug
-            console.log('exp ' + exp);
-            console.log('next level exp ' + next_level_exp);
-            console.log('current level exp ' + current_level_exp);
-            console.log('total exp ' + total_exp);
-            console.log('progress ' + progress);
-            */
 
             $( "#progressbar" ).progressbar({
                 value: progress
