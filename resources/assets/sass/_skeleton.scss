@@ -282,7 +282,11 @@ body {
 }
 
 #progressbar .ui-progressbar-value {
-  background-color: #4f7aca;
+  background-color: #82a8ec;
+}
+
+#progressbar {
+  text-align: center;
 }
 
 .ui-progressbar {
@@ -291,10 +295,10 @@ body {
   }
 
   .progress-label {
-    position: absolute;
     font-weight: bold;
-    left: 40%;
-    margin-top: 2px;
+    width: 100%;
+    float: left;
+    line-height: 200%;
   }
 
   .ui-widget-header {
@@ -358,6 +362,12 @@ body {
     font-size: 16px;
     width: 30%;
     left: 35%;
+  }
+
+  .dashboard-content {
+    h3 {
+      font-size: 20px;
+    }
   }
 }
 

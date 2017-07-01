@@ -56,7 +56,7 @@
                                 @foreach($guitars as $guitar)
                                     <div class="collection-item">
                                         <a href="{{ route('guitar.show', ['guitar' => $guitar->id]) }}">
-                                            <div style="background-image: url({{ Storage::disk('public')->url($guitar->guitarImages()->first()->image_uri) }}" class="collection-item-image"></div>
+                                            <div style="background-image: url({{ Storage::disk('public')->url($guitar->guitarImages()->first()->image_uri) }})" class="collection-item-image"></div>
                                             <div class="collection-text">
                                                 <span>{{ $guitar->name }}</span>
                                             </div>

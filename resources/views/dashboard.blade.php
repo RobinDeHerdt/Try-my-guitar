@@ -19,6 +19,39 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="dashboard-content">
+                        <h3>Profile</h3>
+                        <hr>
+                        <div class="center-content">
+                            <strong>Current: {{ number_format($user->exp, 0, ',', '.') }} exp</strong>
+                        </div>
+                        <div id="progressbar">
+                            <span class="progress-label">{{ number_format($next_level_exp - $user->exp, 0,'','.') }} exp to level {{ $current_level + 1 }}</span>
+                        </div>
+                        <input type="hidden" id="next-level-exp" value="{{ $next_level_exp }}">
+                        <input type="hidden" id="current-level-exp" value="{{ $current_level_exp }}">
+                        <input type="hidden" id="current-level" value="{{ $current_level }}">
+                        <input type="hidden" id="current-exp" value="{{ $user->exp }}">
+                        @if(!$user->location)
+                            <hr>
+                            <span>@lang('dashboard.profile-not-complete') <a href="{{ route('profile.edit') }}">@lang('dashboard.click-to-complete')</a></span>
+                        @endif
+                        <hr>
+                        <a href="{{ route('profile.show', ['id' => $user->id]) }}">@lang('dashboard.my-profile')</a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="dashboard-content">
+                        <h3>@lang('dashboard.collection')</h3>
+                        <hr>
+                        <a href="{{ route('collection.show', ['user' => $user->id]) }}">@lang('dashboard.my-collection')</a><br>
+                        <hr>
+                        <a href="{{ route('collection.create') }}">@lang('dashboard.add-to-collection')</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="dashboard-content">
                         <h3>@lang('dashboard.chat')</h3>
                         <hr>
                         @if($messages->isNotEmpty())
@@ -47,17 +80,6 @@
                         <a href="{{ route('chat.index') }}">@lang('dashboard.my-conversations')</a>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="dashboard-content">
-                        <h3>@lang('dashboard.collection')</h3>
-                        <hr>
-                        <a href="{{ route('collection.show', ['user' => $user->id]) }}">@lang('dashboard.my-collection')</a><br>
-                        <hr>
-                        <a href="{{ route('collection.create') }}">@lang('dashboard.add-to-collection')</a>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
                 <div class="col-md-6">
                     <div class="dashboard-content"  id="invites">
                         <h3>@lang('dashboard.invites')</h3>
@@ -96,11 +118,6 @@
                                 <span>@lang('dashboard.no-invites')</span>
                             </div>
                         @endif
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="dashboard-content">
-                        <h3>@lang('dashboard.pending-invites')</h3>
                         <hr>
                         @if($sent_invites->isNotEmpty())
                             @foreach($sent_invites as $invite)
@@ -137,15 +154,9 @@
                         <h3>@lang('dashboard.personal-information')</h3>
                         <hr>
                         <a href="{{ route('profile.edit') }}">@lang('dashboard.personal-information')</a><br>
-                        <hr>
-                        <a href="{{ route('profile.show', ['id' => $user->id]) }}">@lang('dashboard.my-profile')</a>
                         @if(!$user->verified)
                             <hr>
                             <span>@lang('dashboard.profile-not-verified') <a href="{{ route('verify.resend') }}">@lang('dashboard.click-to-send')</a></span>
-                        @endif
-                        @if(!$user->location)
-                            <hr>
-                            <span>@lang('dashboard.profile-not-complete') <a href="{{ route('profile.edit') }}">@lang('dashboard.click-to-complete')</a></span>
                         @endif
                     </div>
                 </div>
@@ -154,18 +165,6 @@
                         <h3>@lang('dashboard.contribute')</h3>
                         <hr>
                         <a href="{{ route('guitar.create') }}">Add a guitar to the website</a>
-                        <hr>
-                        <div class="center-content">
-                            <strong>Current: {{ number_format($user->exp, 0, ',', '.') }} exp</strong>
-                        </div>
-                        <br>
-                        <div id="progressbar">
-                            <span class="progress-label">{{ number_format($next_level_exp - $user->exp, 0,'','.') }} exp to level {{ $current_level + 1 }}</span>
-                        </div>
-                        <input type="hidden" id="next-level-exp" value="{{ $next_level_exp }}">
-                        <input type="hidden" id="current-level-exp" value="{{ $current_level_exp }}">
-                        <input type="hidden" id="current-level" value="{{ $current_level }}">
-                        <input type="hidden" id="current-exp" value="{{ $user->exp }}">
                     </div>
                 </div>
             </div>
