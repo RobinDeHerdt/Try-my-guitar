@@ -31,4 +31,5 @@ return [
     'enter-location'        => 'Geef een locatie in',
     'write-comment'         => 'Schrijf hier jouw reactie',
     'submit'                => 'Verzenden',
+    'subject'               => 'Onderwerp',
 ];

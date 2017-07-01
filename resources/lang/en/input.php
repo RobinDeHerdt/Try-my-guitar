@@ -31,4 +31,5 @@ return [
     'enter-location'        => 'Enter a location',
     'write-comment'         => 'Write your comment here.',
     'submit'                => 'Submit',
+    'subject'               => 'Subject',
 ];

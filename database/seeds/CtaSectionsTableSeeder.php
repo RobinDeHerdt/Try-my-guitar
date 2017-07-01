@@ -24,9 +24,9 @@ class CtaSectionsTableSeeder extends Seeder
         ]);
 
         DB::table('cta_sections')->insert([
-            'title' => 'Crowd sourced',
+            'title' => 'Level up',
             'cta_icon_class' => 'fa-users',
-            'cta_text' => 'Crowd sourced collection of all guitars in existance.',
+            'cta_text' => 'Level up your profile by contributing to the site.',
         ]);
     }
 }

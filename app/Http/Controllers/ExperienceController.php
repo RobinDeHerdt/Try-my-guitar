@@ -40,16 +40,6 @@ class ExperienceController extends Controller
     }
 
     /**
-     * Display the experience page.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return view('experience');
-    }
-
-    /**
      * Show experience create form.
      *
      * @param \App\Guitar  $guitar

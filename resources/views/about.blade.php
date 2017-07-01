@@ -10,20 +10,21 @@
         <div class="container">
             <div class="row">
                 @if (Session::has('success-message'))
-                    <div class="alert alert-success">{{ Session::get('success-message') }}</div>
+                    <div class="alert alert-success alert-margin">{{ Session::get('success-message') }}</div>
                 @endif
                 @if (Session::has('info-message'))
-                    <div class="alert alert-info">{{ Session::get('info-message') }}</div>
+                    <div class="alert alert-info alert-margin">{{ Session::get('info-message') }}</div>
                 @endif
                 @if (Session::has('error-message'))
-                    <div class="alert alert-danger">{{ Session::get('error-message') }}</div>
+                    <div class="alert alert-danger alert-margin">{{ Session::get('error-message') }}</div>
                 @endif
             </div>
             <h2 id="meet">Meet people</h2>
             <div class="row">
                 <div class="col-md-12">
                     <div class="dashboard-content">
-                        <span>Content here</span>
+                        <strong>Do you have a guitar in mind that you have always wanted to play, but it isn't available in the stores anymore?</strong><br>
+                        <span>Look it up here and find owners near you! Invite them to chat and arrange a meet-up in a local practice room. Don't forget to share your experience afterwards!</span>
                     </div>
                 </div>
             </div>
@@ -31,15 +32,27 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="dashboard-content">
-                        <span>Content here</span>
+                        <strong>Not sure which guitar you're interested in?</strong><br>
+                        <span>No problem! Check out the 'explore' section on the site and discover guitars that suit your needs.</span>
+                        <span>If you just want to hang out with people near you, check out the map!</span>
                     </div>
                 </div>
             </div>
-            <h2 id="crowdsourced">Crowd sourced</h2>
+            <h2 id="crowdsourced">Profile level</h2>
             <div class="row">
                 <div class="col-md-12">
                     <div class="dashboard-content">
-                        <span>Content here</span>
+                        <p>You can increase your profile level by earning experience points.
+                            Experience points are awarded for contributing to the site: </p>
+                        <ul>
+                            <li>Verify your e-mail (<strong>+100 exp</strong>)</li>
+                            <li>Complete your profile (<strong>+100 exp</strong>)</li>
+                            <li>Add a guitar to the website (<strong>+100 exp and +25 exp per image</strong>)</li>
+                            <li>Add images to a guitar (<strong>+25 exp per image</strong>)</li>
+                            <li>Share a guitar experience (<strong>+75 exp</strong>)</li>
+                        </ul>
+                        <strong>Warning! Contributions will be monitored by the site administrators.
+                            You will receive an exp penalty or permanent ban in case spam is uploaded.</strong>
                     </div>
                 </div>
             </div>
@@ -54,6 +67,10 @@
                                     <div class="form-group">
                                         <label for="email">@lang('input.email') *</label>
                                         <input type="email" class="form-control" name="email" placeholder="Your e-mail address" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="subject">@lang('input.subject')</label>
+                                        <input type="text" class="form-control" name="subject" placeholder="@lang('input.subject')">
                                     </div>
                                 </div>
                                 <div class="col-md-8">

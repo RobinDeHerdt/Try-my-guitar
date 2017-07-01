@@ -38,6 +38,7 @@ class ContactController extends Controller
 
         $contact_message->email     = $request->email;
         $contact_message->message   = $request->message;
+        $contact_message->subject   = $request->subject;
 
         $contact_message->save();
 
