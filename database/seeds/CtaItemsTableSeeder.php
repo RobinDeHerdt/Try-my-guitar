@@ -11,24 +11,28 @@ class CtaItemsTableSeeder extends Seeder
      */
     public function run()
     {
+        // @todo: fix these shitty NL translations
         DB::table('cta_items')->insert([
             'title' => 'Meet',
             'icon_class' => 'fa-users',
-            'content' => 'Get to know guitar players in your area, and by extension, their guitar! Arrange a meet-up in person and rock out together!',
+            'content_en' => 'Get to know guitar players in your area, and by extension, their guitar! Arrange a meet-up in person and rock out together!',
+            'content_nl' => 'Leer gitaarspelers kennnen uit jouw buurt - en bij gevolg - hun gitaar! Spreek af in het lokale repetitiekot en jam erop los!',
             'active' => true,
         ]);
 
         DB::table('cta_items')->insert([
             'title' => 'Discover',
             'icon_class' => 'fa-search',
-            'content' => 'Discover guitars and read about other people\'s experiences with them.',
+            'content_en' => 'Discover guitars and read about other people\'s experiences with them.',
+            'content_nl' => 'Ontdek nieuwe gitaren en lees de ervaringen van de eigenaars.',
             'active' => true,
         ]);
 
         DB::table('cta_items')->insert([
             'title' => 'Profile level',
             'icon_class' => 'fa-user-plus',
-            'content' => 'Earn experience points and level up your profile by contributing to the site.',
+            'content_en' => 'Earn experience points and level up your profile by contributing to the site.',
+            'content_nl' => 'Verdien exp punten en level je profiel door bij te dragen aan de website.',
             'active' => true,
         ]);
     }

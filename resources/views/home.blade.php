@@ -18,20 +18,18 @@
         </div>
         <div class="header-image" style="background-image: url('/images/frontpage-bg.jpg'); background-position: top"></div>
         <div class="container">
-            @if($cta_items->count() === 3)
-                <h2 class="padding-top">@lang('titles.how-it-works')</h2>
-                <div class="row">
-                    @foreach($cta_items as $cta_item)
-                    <div class="col-md-4">
-                        <div class="cta-item">
-                            <i class="fa {{ $cta_item->icon_class }} fa-4x" aria-hidden="true"></i>
-                            <p>{{ $cta_item->content }}</p>
-                            <a href="about#{{ strtolower(kebab_case($cta_item->title)) }}" class="cta-button text-uppercase">@lang('input.read-more')</a>
-                        </div>
+            <h2 class="padding-top">@lang('titles.how-it-works')</h2>
+            <div class="row">
+                @foreach($cta_items as $cta_item)
+                <div class="col-md-4">
+                    <div class="cta-item">
+                        <i class="fa {{ $cta_item->icon_class }} fa-4x" aria-hidden="true"></i>
+                        <p>{{ $cta_item->{"content_" . LaravelLocalization::getCurrentLocale()} }}</p>
+                        <a href="about#{{ strtolower(kebab_case($cta_item->title)) }}" class="cta-button text-uppercase">@lang('input.read-more')</a>
                     </div>
-                    @endforeach
                 </div>
-            @endif
+                @endforeach
+            </div>
             @if($articles->isNotEmpty())
                 <h2 class="padding-top">@lang('titles.latest-news')</h2>
                 <div class="row">

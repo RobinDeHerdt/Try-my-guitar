@@ -124,8 +124,12 @@ Route::group(['middleware' => ['role:administrator']], function () {
     Route::post('admin/reports/{report}', 'ReportController@reviewed')->name('admin.reports.reviewed');
 
     // Admin call to action related routes.
-    Route::get('admin/cta-sections', 'CtaItemController@index')->name('admin.cta.index');
-    Route::get('admin/cta-sections/{cta_section}', 'CtaItemController@index')->name('admin.cta.show');
-    Route::get('admin/cta-sections/{cta_section}/edit', 'CtaItemController@edit')->name('admin.cta.edit');
-    Route::post('admin/cta-sections/{cta_section}/destroy', 'CtaItemController@destroy')->name('admin.cta.destroy');
+    Route::get('admin/cta-items', 'CtaItemController@index')->name('admin.cta.index');
+    Route::get('admin/cta-items/create', 'CtaItemController@create')->name('admin.cta.create');
+    Route::get('admin/cta-items/{cta_item}', 'CtaItemController@show')->name('admin.cta.show');
+    Route::get('admin/cta-items/{cta_item}/edit', 'CtaItemController@edit')->name('admin.cta.edit');
+    Route::post('admin/cta-items/store', 'CtaItemController@store')->name('admin.cta.store');
+    Route::post('admin/cta-items/{cta_item}/update-status', 'CtaItemController@updateStatus')->name('admin.cta.update-status');
+    Route::post('admin/cta-items/{cta_item}/update', 'CtaItemController@update')->name('admin.cta.update');
+    Route::post('admin/cta-items/{cta_item}/destroy', 'CtaItemController@destroy')->name('admin.cta.destroy');
 });

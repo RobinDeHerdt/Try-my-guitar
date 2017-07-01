@@ -16,7 +16,8 @@ class CreateCtaItemsTable extends Migration
         Schema::create('cta_items', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->text('content');
+            $table->text('content_nl');
+            $table->text('content_en');
             $table->string('icon_class');
             $table->boolean('active');
             $table->timestamps();
