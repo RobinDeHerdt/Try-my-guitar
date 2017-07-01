@@ -2,11 +2,21 @@
     @if (Auth::user() && Auth::user()->hasRole('administrator'))
         <div class="custom-navbar-top">
             <div class="container">
-                <a href="{{ route('admin.dashboard') }}">Control panel</a>
-                <a href="{{ route('articles.index') }}">Articles</a>
-                <a href="{{ route('admin.reports.index') }}">Reports</a>
-                <a href="{{ route('admin.messages.index') }}">Contact messages</a>
-                <a href="{{ route('admin.cta.index') }}">Call to action</a>
+                <div class="top-menu-collapse">
+                    <a href="{{ route('admin.dashboard') }}">Control panel</a>
+                    <a href="{{ route('articles.index') }}">Articles</a>
+                    <a href="{{ route('admin.reports.index') }}">Reports</a>
+                    <a href="{{ route('admin.messages.index') }}">Contact messages</a>
+                    <a href="{{ route('admin.cta.index') }}">Call to action</a>
+                    <a href="#" onclick="event.preventDefault();" id="top-menu-close">
+                        <div class="center-content">
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                        </div>
+                    </a>
+                </div>
+                <div id="top-menu-open">
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                </div>
             </div>
         </div>
     @endif
@@ -28,11 +38,9 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     @if (Auth::guest())
-                        {{-- Not authenticated --}}
                         <li class="nav-highlighted"><a href="{{ route('register') }}">@lang('navigation.register')</a></li>
                         <li><a href="{{ route('login') }}">@lang('navigation.login')</a></li>
                     @else
-                        {{-- Authenticated --}}
                         <li><a href="{{ route('dashboard') }}">@lang('navigation.dashboard')</a></li>
                         <li>
                             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">@lang('navigation.logout')</a>

@@ -10,7 +10,8 @@
             <div class="row heading">
                 <div class="col-md-12">
                     <h1>Create article</h1>
-                    <a href="{{ route('articles.index') }}" class="icon-text"><span class="glyphicon glyphicon-home"></span>Back to overview</a>
+                    <a href="{{ route('articles.index') }}" class="icon-text icon-full"><span class="glyphicon glyphicon-list"></span>Back to overview</a>
+                    <a href="{{ route('articles.index') }}" class="icon-text icon-responsive"><span class="glyphicon glyphicon-list"></span></a>
                 </div>
             </div>
             @if (Session::has('success-message'))
@@ -51,7 +52,7 @@
                     <label for="body">Content</label>
                     <textarea name="body" class="form-control" rows="8"></textarea>
                 </div>
-                <button type="submit" class="btn btn-default">Publish</button>
+                <button type="submit" class="btn btn-primary">Publish</button>
             </form>
         </div>
     </div>

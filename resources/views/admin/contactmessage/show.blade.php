@@ -10,8 +10,8 @@
             <div class="row heading">
                 <div class="col-md-12">
                     <h1>Contact message</h1>
-                    <a href="{{ route('admin.dashboard') }}" class="icon-text"><span class="glyphicon glyphicon-home"></span>Back to control panel</a>
-                    <a href="{{ route('admin.messages.index') }}" class="icon-text"><span class="glyphicon glyphicon-list"></span>Back to overview</a>
+                    <a href="{{ route('admin.messages.index') }}" class="icon-text icon-full"><span class="glyphicon glyphicon-list"></span>Back to overview</a>
+                    <a href="{{ route('admin.messages.index') }}" class="icon-text icon-responsive"><span class="glyphicon glyphicon-list"></span></a>
                 </div>
             </div>
             @if (Session::has('success-message'))

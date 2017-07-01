@@ -24,16 +24,7 @@
 </head>
 <body>
     <div id="app">
-        @if (Session::has('level-message'))
-            <div class="level-window" id="level-window">
-                <span>{{ Session::get('level-message') }}</span>
-            </div>
-        @endif
-        @if (Session::has('exp-message'))
-            <div class="exp-window" id="exp-window">
-                <span>{{ Session::get('exp-message') }}</span>
-            </div>
-        @endif
+        @include('partials.notifications')
         @yield('navigation')
         <div class="{{ Auth::user() && Auth::user()->hasRole('administrator') ? 'admin-authenticated' : '' }}">
             @yield('content')
@@ -64,6 +55,20 @@
                 top: "-90px",
             }, 500)
         }).delay(3000);
+
+        $("#top-menu-open").click(function() {
+            $(this).hide();
+            $(".top-menu-collapse").show();
+            $("#top-menu-close").show();
+
+            $(".admin-authenticated").addClass("open-top-menu");
+        });
+
+        $("#top-menu-close").click(function() {
+            $(".top-menu-collapse").hide();
+            $("#top-menu-open").show();
+            $(".admin-authenticated").removeClass("open-top-menu");
+        });
     </script>
     @yield('scripts')
 </body>

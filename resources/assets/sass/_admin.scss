@@ -29,6 +29,10 @@
 
 @media (max-width: 767px) {
   .admin-authenticated {
-    padding-top: 214px;
+    padding-top: 32px; // 214px full.
+  }
+
+  .open-top-menu {
+    padding-top: 263px;
   }
 }

@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div class="content>
+    <div class="content">
         <div class="header-image" style="background-image: url('/images/about-bg.jpg');"></div>
         <div class="container">
             <div class="row">
