@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use Illuminate\Support\Facades\Session;
 use Closure;
 use Auth;
 
@@ -22,6 +23,9 @@ class CheckRole
         } else {
             if (!$request->user()->active) {
                 Auth::logout();
+
+                Session::flash('info-message', 'Your account has been banned.');
+
                 return redirect(route('login'));
             }
         }
