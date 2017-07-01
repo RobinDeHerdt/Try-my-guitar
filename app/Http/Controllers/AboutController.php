@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\CtaSection;
+use App\CtaItem;
 use Illuminate\Http\Request;
 
 /**

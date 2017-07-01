@@ -24,8 +24,8 @@
                     @foreach($cta_items as $cta_item)
                     <div class="col-md-4">
                         <div class="cta-item">
-                            <i class="fa {{ $cta_item->cta_icon_class }} fa-4x" aria-hidden="true"></i>
-                            <p>{{ $cta_item->cta_text }}</p>
+                            <i class="fa {{ $cta_item->icon_class }} fa-4x" aria-hidden="true"></i>
+                            <p>{{ $cta_item->content }}</p>
                             <a href="about#{{ strtolower(kebab_case($cta_item->title)) }}" class="cta-button text-uppercase">@lang('input.read-more')</a>
                         </div>
                     </div>

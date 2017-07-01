@@ -122,4 +122,10 @@ Route::group(['middleware' => ['role:administrator']], function () {
     Route::get('admin/reports', 'ReportController@index')->name('admin.reports.index');
     Route::get('admin/reports/{report}', 'ReportController@show')->name('admin.reports.show');
     Route::post('admin/reports/{report}', 'ReportController@reviewed')->name('admin.reports.reviewed');
+
+    // Admin call to action related routes.
+    Route::get('admin/cta-sections', 'CtaItemController@index')->name('admin.cta.index');
+    Route::get('admin/cta-sections/{cta_section}', 'CtaItemController@index')->name('admin.cta.show');
+    Route::get('admin/cta-sections/{cta_section}/edit', 'CtaItemController@edit')->name('admin.cta.edit');
+    Route::post('admin/cta-sections/{cta_section}/destroy', 'CtaItemController@destroy')->name('admin.cta.destroy');
 });

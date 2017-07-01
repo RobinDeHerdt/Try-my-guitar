@@ -6,6 +6,7 @@
                 <a href="{{ route('articles.index') }}">Articles</a>
                 <a href="{{ route('admin.reports.index') }}">Reports</a>
                 <a href="{{ route('admin.messages.index') }}">Contact messages</a>
+                <a href="{{ route('admin.cta.index') }}">Call to action</a>
             </div>
         </div>
     @endif

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\CtaSection;
+use App\CtaItem;
 use Illuminate\Http\Request;
 use App\Article;
 Use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -23,7 +23,7 @@ class HomeController extends Controller
         $locale = LaravelLocalization::getCurrentLocale();
 
         $articles  = Article::where('lang', $locale)->take(3)->get();
-        $cta_items = CtaSection::take(3)->get();
+        $cta_items = CtaItem::where('active', true)->take(3)->get();
 
         return view('home', [
             'articles'  => $articles,
