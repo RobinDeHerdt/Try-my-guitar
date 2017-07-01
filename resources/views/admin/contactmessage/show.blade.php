@@ -23,6 +23,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <h4>Sender: <a href="mailto:{{ $contact_message->email }}">{{ $contact_message->email }}</a></h4>
+                    <h4>Subject: {{ $contact_message->subject ? $contact_message->subject : 'No subject' }}</h4>
                     <hr>
                     <p>{!! nl2br(e($contact_message->message)) !!}</p>
                 </div>

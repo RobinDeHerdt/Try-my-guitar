@@ -44,7 +44,7 @@ class ContactController extends Controller
 
         Session::flash('success-message', 'Thanks for your message!');
 
-        return back();
+        return redirect(route('about').'#alert');
     }
 
     /**

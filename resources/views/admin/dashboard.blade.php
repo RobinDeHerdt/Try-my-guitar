@@ -38,8 +38,8 @@
                     <hr>
                     @foreach($contact_messages as $contact_message)
                         <span><strong>From: </strong><a href="mailto:{{ $contact_message->email }}">{{ $contact_message->email }}</a></span><br>
-                        <span><strong>Message: </strong>{{ $contact_message->message }}</span><br><br>
-                        <a href="{{ route('admin.messages.show', ['contact_message' => $contact_message->id]) }}">View full message</a>
+                        <span><strong>Subject: </strong>{{ $contact_message->subject ? $contact_message->subject : 'No subject' }}</span><br>
+                        <a href="{{ route('admin.messages.show', ['contact_message' => $contact_message->id]) }}">View</a>
                         <hr>
                     @endforeach
                 @else

@@ -10,13 +10,13 @@
         <div class="container">
             <div class="row">
                 @if (Session::has('success-message'))
-                    <div class="alert alert-success alert-margin">{{ Session::get('success-message') }}</div>
+                    <div class="alert alert-success alert-margin" id="alert">{{ Session::get('success-message') }}</div>
                 @endif
                 @if (Session::has('info-message'))
-                    <div class="alert alert-info alert-margin">{{ Session::get('info-message') }}</div>
+                    <div class="alert alert-info alert-margin" id="alert">{{ Session::get('info-message') }}</div>
                 @endif
                 @if (Session::has('error-message'))
-                    <div class="alert alert-danger alert-margin">{{ Session::get('error-message') }}</div>
+                    <div class="alert alert-danger alert-margin" id="alert">{{ Session::get('error-message') }}</div>
                 @endif
             </div>
             <h2 id="meet">Meet people</h2>
@@ -38,7 +38,7 @@
                     </div>
                 </div>
             </div>
-            <h2 id="crowdsourced">Profile level</h2>
+            <h2 id="profilelevel">Profile level</h2>
             <div class="row">
                 <div class="col-md-12">
                     <div class="dashboard-content">
@@ -56,7 +56,7 @@
                     </div>
                 </div>
             </div>
-            <h2>Contact</h2>
+            <h2 id="contact">Contact</h2>
             <div class="row">
                 <div class="col-md-12">
                     <div class="dashboard-content">

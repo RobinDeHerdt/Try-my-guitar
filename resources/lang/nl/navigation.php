@@ -15,4 +15,5 @@ return [
     'disclaimer'    => 'Disclaimer',
     'dashboard'     => 'Dashboard',
     'explore'       => 'Verkennen',
+    'contact'       => 'Contact',
 ];

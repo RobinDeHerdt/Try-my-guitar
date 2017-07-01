@@ -13,7 +13,7 @@ class CtaSectionsTableSeeder extends Seeder
     {
         DB::table('cta_sections')->insert([
             'title' => 'Meet',
-            'cta_icon_class' => 'fa-user-plus',
+            'cta_icon_class' => 'fa-users',
             'cta_text' => 'Get to know guitar players in your area, and by extension, their guitar! Arrange a meet-up in person and rock out together!',
         ]);
 
@@ -24,9 +24,9 @@ class CtaSectionsTableSeeder extends Seeder
         ]);
 
         DB::table('cta_sections')->insert([
-            'title' => 'Level up',
-            'cta_icon_class' => 'fa-users',
-            'cta_text' => 'Level up your profile by contributing to the site.',
+            'title' => 'Profile level',
+            'cta_icon_class' => 'fa-user-plus',
+            'cta_text' => 'Earn experience points and level up your profile by contributing to the site.',
         ]);
     }
 }
