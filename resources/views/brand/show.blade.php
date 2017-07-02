@@ -15,15 +15,15 @@
                 </div>
             </div>
             <div class="dashboard-content search-filter">
-                <h3>Filters</h3>
+                <h3>@lang('content.filters')</h3>
                 <div class="row">
                     <div class="col-md-12">
-                        <h4>Types</h4>
+                        <h4>@lang('content.categories')</h4>
                         <form action="{{ route('brand.show', ['brand' => $brand->name]) }}" method="GET">
                             <div class="row">
                                 @foreach($types as $type)
                                     <div class="col-md-2">
-                                        <label class="checkbox-inline"><input type="checkbox" name="types[]" value="{{ $type->id }}" {{ in_array($type->id, $filter_types) ? 'checked' : ''}}>{{ $type->name }}</label>
+                                        <label class="checkbox-inline"><input type="checkbox" name="types[]" value="{{ $type->id }}" {{ in_array($type->id, $filter_types) ? 'checked' : ''}}>{{ $type->{"name_" . LaravelLocalization::getCurrentLocale()} }}</label>
                                     </div>
                                 @endforeach
                             </div>
@@ -43,7 +43,7 @@
                             <div class="search-result">
                                 <a href="{{ route('guitar.show', ['id' => $guitar->id]) }}">
                                     <div class="search-result-overlay">
-                                        <span class="search-result-overlay-text">View details</span>
+                                        <span class="search-result-overlay-text">@lang('content.view-details')</span>
                                     </div>
                                 </a>
                                 <img src="{{ Storage::disk('public')->url($guitar->guitarBrand->logo_uri) }}" alt="{{ $guitar->guitarBrand->name }} logo" class="search-result-logo">
@@ -60,7 +60,7 @@
                 </div>
             @else
                 <div class="no-results">
-                    <h4>No results found.</h4>
+                    <h4>@lang('content.no-results-found')</h4>
                 </div>
             @endif
         </div>

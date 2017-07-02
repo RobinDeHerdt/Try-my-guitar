@@ -27,7 +27,7 @@
                             </div>
                             @foreach($types as $type)
                                 <div class="col-md-2">
-                                    <label class="checkbox-inline"><input type="checkbox" name="types[]" value="{{ $type->id }}" {{ in_array($type->id, $filter_types) ? 'checked' : ''}}>{{ $type->name }}</label>
+                                    <label class="checkbox-inline"><input type="checkbox" name="types[]" value="{{ $type->id }}" {{ in_array($type->id, $filter_types) ? 'checked' : ''}}>{{ $type->{"name_" . LaravelLocalization::getCurrentLocale()} }}</label>
                                 </div>
                             @endforeach
                         </div>
@@ -48,10 +48,10 @@
                                 <h4>@lang('content.location')</h4>
                             </div>
                             <div class="col-md-2">
-                                <label class="checkbox-inline"><input type="checkbox" name="proximity" {{ $filter_proximity ? 'checked' : ''}}>Sort by proximity</label>
+                                <label class="checkbox-inline"><input type="checkbox" name="proximity" {{ $filter_proximity ? 'checked' : ''}}>@lang('content.sort-proximity')</label>
                             </div>
                             <div class="col-md-2">
-                                <label class="checkbox-inline"><input type="checkbox" id="range-toggle" {{ $filter_proximity_range ? 'checked' : ''}}>Filter range</label>
+                                <label class="checkbox-inline"><input type="checkbox" id="range-toggle" {{ $filter_proximity_range ? 'checked' : ''}}>@lang('content.filter-range')</label>
                             </div>
                             <div class="col-md-4">
                                 <div id="range-slider">
@@ -117,7 +117,7 @@
                                 <div class="search-result">
                                     <a href="{{ route('guitar.show', ['id' => $guitar->id]) }}">
                                         <div class="search-result-overlay">
-                                            <span class="search-result-overlay-text">View details</span>
+                                            <span class="search-result-overlay-text">@lang('content.view-details')</span>
                                         </div>
                                     </a>
                                     <img src="{{ Storage::disk('public')->url($guitar->guitarBrand->logo_uri) }}" alt="{{ $guitar->guitarBrand->name }} logo" class="search-result-logo">
@@ -137,7 +137,7 @@
                                 <div class="search-result">
                                     <a href="{{ route('guitar.show', ['id' => $guitar->id]) }}">
                                         <div class="search-result-overlay">
-                                            <span class="search-result-overlay-text">View details</span>
+                                            <span class="search-result-overlay-text">@lang('content.view-details')</span>
                                         </div>
                                     </a>
                                     <img src="{{ Storage::disk('public')->url($guitar->guitarBrand->logo_uri) }}" alt="{{ $guitar->guitarBrand->name }} logo" class="search-result-logo">
@@ -192,7 +192,7 @@
                             <div class="search-result">
                                 <a href="{{ route('profile.show', ['id' => $user->id]) }}">
                                     <div class="search-result-overlay">
-                                        <span class="search-result-overlay-text">View profile</span>
+                                        <span class="search-result-overlay-text">@lang('content.view-profile')</span>
                                     </div>
                                 </a>
                                 <div class="search-result-profile-image" style="background-image: url({{ Storage::disk('public')->url($user->image_uri) }})"></div>
@@ -207,7 +207,7 @@
                             <div class="search-result">
                                 <a href="{{ route('profile.show', ['id' => $user->id]) }}">
                                     <div class="search-result-overlay">
-                                        <span class="search-result-overlay-text">View profile</span>
+                                        <span class="search-result-overlay-text">@lang('content.view-profile')</span>
                                     </div>
                                 </a>
                                 <div class="search-result-profile-image" style="background-image: url({{ Storage::disk('public')->url($user->image_uri) }})"></div>

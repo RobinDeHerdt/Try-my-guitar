@@ -108,7 +108,7 @@
                             <h1 class="guitar-name">{{ $guitar->name }}</h1>
                             <div class="guitar-type-container">
                                 @foreach($guitar->guitarTypes as $guitarType)
-                                    <a href="{{ route('type.show', ['id' => str_slug($guitarType->name)])}}"><span class="guitar-type">{{ $guitarType->name }}</span></a>
+                                    <a href="{{ route('type.show', ['id' => str_slug($guitarType->name)])}}"><span class="guitar-type">{{ $guitarType->{"name_" . LaravelLocalization::getCurrentLocale()} }}</span></a>
                                 @endforeach
                             </div>
                             <div class="guitar-description-container">

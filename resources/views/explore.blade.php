@@ -49,9 +49,9 @@
                         <div class="row">
                             @foreach($types as $type)
                                 <div class="col-md-3 center explore-guitar-type-container">
-                                    <a href="{{ route('type.show', ['brand' => str_slug($type->name)]) }}">
+                                    <a href="{{ route('type.show', ['type' => str_slug($type->name_en)]) }}">
                                         <div style="background-image: url({{  Storage::disk('public')->url($type->image_uri) }})" class="type-image"></div>
-                                        <span>{{ $type->name }}</span>
+                                        <span>{{ $type->{"name_" . LaravelLocalization::getCurrentLocale()} }}</span>
                                     </a>
                                 </div>
                             @endforeach

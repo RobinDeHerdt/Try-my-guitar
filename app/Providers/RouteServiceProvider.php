@@ -30,7 +30,7 @@ class RouteServiceProvider extends ServiceProvider
         });
 
         Route::bind('type', function ($value) {
-            return GuitarType::where('name', str_replace('-', ' ', $value))->first();
+            return GuitarType::where('name_en', str_replace('-', ' ', $value))->first();
         });
 
         parent::boot();

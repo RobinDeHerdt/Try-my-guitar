@@ -17,62 +17,74 @@ class GuitarTypesTableSeeder extends Seeder
          * @todo It would be great if this would be possible, someday...
          */
         DB::table('guitar_types')->insert([
-            'name' => 'Electric',
+            'name_en' => 'Electric',
+            'name_nl' => 'Elektrisch',
             'image_uri' => 'images/electric-guitar.jpg',
         ]);
 
         DB::table('guitar_types')->insert([
-            'name' => 'Acoustic',
+            'name_en' => 'Acoustic',
+            'name_nl' => 'Akoestisch',
             'image_uri' => 'images/acoustic-guitar.jpg',
         ]);
 
         DB::table('guitar_types')->insert([
-            'name' => 'Classical',
+            'name_en' => 'Classical',
+            'name_nl' => 'Klassiek',
             'image_uri' => 'images/classical-guitar.jpg',
         ]);
 
         DB::table('guitar_types')->insert([
-            'name' => 'Single cut',
+            'name_en' => 'Single cut',
+            'name_nl' => 'Single cut',
             'image_uri' => 'images/single-cut-guitar.jpg',
         ]);
 
         DB::table('guitar_types')->insert([
-            'name' => 'Double cut',
+            'name_en' => 'Double cut',
+            'name_nl' => 'Double cut',
             'image_uri' => 'images/double-cut-guitar.jpg',
         ]);
 
         DB::table('guitar_types')->insert([
-            'name' => 'Hollow body',
+            'name_en' => 'Hollow body',
+            'name_nl' => 'Hollow body',
             'image_uri' => 'images/hollow-body-guitar.jpg',
         ]);
 
         DB::table('guitar_types')->insert([
-            'name' => 'Single coil',
+            'name_en' => 'Single coil',
+            'name_nl' => 'Single coil',
             'image_uri' => 'images/single-coil-guitar.jpg',
         ]);
 
         DB::table('guitar_types')->insert([
-            'name' => 'Humbucker',
+            'name_en' => 'Humbucker',
+            'name_nl' => 'Humbucker',
             'image_uri' => 'images/humbucker-guitar.jpg',
         ]);
 
         DB::table('guitar_types')->insert([
-            'name' => '6 string',
+            'name_en' => '6 string',
+            'name_nl' => '6 string',
             'image_uri' => 'images/6-string-guitar.jpg',
         ]);
 
         DB::table('guitar_types')->insert([
-            'name' => '7 string',
+            'name_en' => '7 string',
+            'name_nl' => '7 string',
             'image_uri' => 'images/7-string-guitar.jpg',
         ]);
 
         DB::table('guitar_types')->insert([
-            'name' => '8 string',
+            'name_en' => '8 string',
+            'name_nl' => '8 string',
             'image_uri' => 'images/8-string-guitar.jpg',
         ]);
 
         DB::table('guitar_types')->insert([
-            'name' => 'Signature',
+            'name_en' => 'Signature',
+            'name_nl' => 'Signature',
             'image_uri' => 'images/signature-guitar.jpg',
         ]);
 
