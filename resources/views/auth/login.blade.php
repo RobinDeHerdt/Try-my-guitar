@@ -53,6 +53,9 @@
                             </a>
                         </div>
                     </form>
+                    <a href="/login/twitter" class="btn">
+                        <span class="fa fa-twitter"></span> Login with Twitter
+                    </a>
                 </div>
             </div>
         </div>

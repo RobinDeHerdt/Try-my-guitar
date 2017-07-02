@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('last_name')->nullable();
             $table->string('email')->unique();
             $table->string('image_uri')->default('images/profile.png');
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->double('location_lat')->nullable();
             $table->double('location_lng')->nullable();
             $table->string('location')->nullable();
@@ -30,6 +30,7 @@ class CreateUsersTable extends Migration
             $table->integer('exp')->default(0);
             $table->boolean('active')->default(true);
             $table->date('inactive_until')->nullable();
+            $table->string('twitter_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Auth;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\VerifyEmail;
+use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
 {
@@ -30,10 +36,54 @@ class LoginController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @return void
      */
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    /**
+     * Redirect the user to the Twitter authentication page.
+     *
+     * @return Response
+     */
+    public function redirectToProvider()
+    {
+        return Socialite::driver('twitter')->redirect();
+    }
+
+    /**
+     * Obtain the user information from Twitter.
+     *
+     * @return Response
+     */
+    public function handleProviderCallback()
+    {
+        $twitter_user = Socialite::driver('twitter')->user();
+
+        $existing_user = User::where('twitter_id', $twitter_user->id)->first();
+
+        if (!$existing_user) {
+            $user = new User();
+
+            $user->first_name           = $twitter_user->name;
+            $user->email                = $twitter_user->email;
+            $user->twitter_id           = $twitter_user->id;
+            $user->verification_token   = str_random(12);
+
+            $user->save();
+
+            $user->roles()->attach(3);
+
+            Mail::to($user->email)->send(new VerifyEmail($user));
+
+            Session::flash('success-message', "Thanks for registering! We've sent a verification link to your email address.");
+
+            Auth::login($user);
+        } else {
+            Auth::login($existing_user);
+        }
+
+        return redirect(route('dashboard'));
     }
 }
