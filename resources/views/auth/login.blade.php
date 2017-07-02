@@ -42,20 +42,16 @@
                                 </label>
                             </div>
                         </div>
+                        <a href="/login/twitter"><span class="fa fa-twitter"></span> Login with Twitter</a>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary big-cta-button">
                                 @lang('input.login')
                             </button>
                         </div>
                         <div class="form-group">
-                            <a class="btn-link" href="{{ route('password.request') }}">
-                                @lang('input.forgot-password')
-                            </a>
+                            <a href="{{ route('password.request') }}">@lang('input.forgot-password')</a>
                         </div>
                     </form>
-                    <a href="/login/twitter" class="btn">
-                        <span class="fa fa-twitter"></span> Login with Twitter
-                    </a>
                 </div>
             </div>
         </div>
