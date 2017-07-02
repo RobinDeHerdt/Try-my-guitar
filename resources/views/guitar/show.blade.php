@@ -23,10 +23,10 @@
                                             @if(!Auth::user()->guitars->contains('id', $guitar->id))
                                                 <div class="guitar-button-container">
                                                     <div class="guitar-button blue" title="Add this guitar to your collection"><i class="fa fa-plus" aria-hidden="true"></i></div>
-                                                    <span>Do you own this guitar?</span>
+                                                    <span>@lang('content.own-guitar')</span>
                                                     <br>
                                                     <a href="{{ route('collection.store') }}" onclick="event.preventDefault(); document.getElementById('add-to-collection').submit();">
-                                                        <span>Add to collection</span>
+                                                        <span>@lang('content.add-to-collection')</span>
                                                     </a>
                                                 </div>
                                                 <form action="{{ route('collection.store') }}" method="POST" id="add-to-collection">
@@ -36,9 +36,9 @@
                                             @else
                                                 <div class="guitar-button-container">
                                                     <div class="guitar-button blue" title="Add this guitar to your collection"><i class="fa fa-check" aria-hidden="true"></i></div>
-                                                    <span>This guitar is part of your collection!</span>
+                                                    <span>@lang('content.part-of-collection')</span>
                                                     <br>
-                                                    <a href="{{ route('collection.show', ['user' => Auth::user()->id]) . "#guitar-" . $guitar->id }}">View</a>
+                                                    <a href="{{ route('collection.show', ['user' => Auth::user()->id]) . "#guitar-" . $guitar->id }}">@lang('content.view')</a>
                                                 </div>
                                             @endif
                                         </div>
@@ -46,19 +46,19 @@
                                             @if(!Auth::user()->guitarExperience($guitar))
                                                 <div class="guitar-button-container">
                                                     <div class="guitar-button blue" title="Share your experience with this guitar"><i class="fa fa-comment" aria-hidden="true"></i></div>
-                                                    <span>Have you experienced this guitar?</span>
+                                                    <span>@lang('content.experienced-guitar')</span>
                                                     <br>
                                                     <a href="{{ route('experience.create', ['guitar' => $guitar]) }}">
-                                                        <span>Share your experience</span>
+                                                        <span>@lang('content.share-your-experience')</span>
                                                     </a>
                                                 </div>
                                             @else
                                                 <div class="guitar-button-container">
                                                     <div class="guitar-button blue"><i class="fa fa-check" aria-hidden="true"></i></div>
-                                                    <span>You have shared your experience!</span>
+                                                    <span>@lang('content.shared-experience')</span>
                                                     <br>
                                                     <a href="{{ route('guitar.show.experiences', ['guitar' => $guitar]) . '#experience-' . Auth::user()->guitarExperience($guitar)->id }}">
-                                                        <span>View</span>
+                                                        <span>@lang('content.view')</span>
                                                     </a>
                                                 </div>
                                             @endif
@@ -67,10 +67,10 @@
                                             @if(Auth::user())
                                                 <div class="guitar-button-container">
                                                     <div class="guitar-button blue" title="Add an image for this guitar"><i class="fa fa-image" aria-hidden="true"></i></div>
-                                                    <span>Do you have an image of this guitar?</span>
+                                                    <span>@lang('content.own-guitar-images')</span>
                                                     <br>
                                                     <a href="{{ route('guitar.image.create', ['guitar' => $guitar]) }}">
-                                                        <span>Upload images</span>
+                                                        <span>@lang('content.upload-images')</span>
                                                     </a>
                                                 </div>
                                             @endif
@@ -84,7 +84,7 @@
                             <div class="col-md-12">
                                 <div class="dashboard-content">
                                     <div class="guitar-button-container">
-                                        <span><a href="{{ route('login') }}">Log in </a> to add this guitar to your collection </span>
+                                        <span><a href="{{ route('login') }}">Log in </a>@lang('content.log-in-add-to-collection')</span>
                                     </div>
                                 </div>
                             </div>
@@ -127,7 +127,7 @@
                             @foreach($guitar->guitarImages as $guitarImage)
                                 <div class="slick-item">
                                     <img src="{{ Storage::disk('public')->url($guitarImage->image_uri) }}">
-                                    <span>By <a href="{{  route('profile.show', ['id' => $guitarImage->user->id]) }}"><strong>{{ $guitarImage->user->fullName() }}</strong></a></span>
+                                    <span>@lang('content.by') <a href="{{  route('profile.show', ['id' => $guitarImage->user->id]) }}"><strong>{{ $guitarImage->user->fullName() }}</strong></a></span>
                                 </div>
                             @endforeach
                         </div>
@@ -136,7 +136,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Owners <span class="counter">{{ $guitar_user_count }}</span></h2>
+                    <h2>@lang('content.owners') <span class="counter">{{ $guitar_user_count }}</span></h2>
                     <div class="dashboard-content">
                         <div id="map"></div>
                     </div>
@@ -145,7 +145,7 @@
             <input type="hidden" id="user-location" value="{{ $user_coords }}">
             <input type="hidden" id="guitar-id" value="{{ $guitar->id }}">
             @if($guitar->experiences->isNotEmpty())
-                <h2>Experiences <span class="counter">{{ $guitar->experiences->count() }}</span></h2>
+                <h2>@lang('content.experiences') <span class="counter">{{ $guitar->experiences->count() }}</span></h2>
                 <div class="row">
                     @foreach($guitar->experiences as $experience)
                         <div class="col-md-6">
@@ -172,7 +172,7 @@
                 </div>
                 <div class="row"><div class="col-md-4 col-md-offset-4">
                         <div class="big-cta-button">
-                            <a href="{{ route('guitar.show.experiences', $guitar->id) }}">View all experiences</a>
+                            <a href="{{ route('guitar.show.experiences', $guitar->id) }}">@lang('content.view-all-experiences')</a>
                         </div>
                     </div>
                 </div>
@@ -180,7 +180,7 @@
             @if($brand_guitars->isNotEmpty())
                 <div class="row">
                     <div class="col-md-12">
-                        <h2>More {{ $guitar->guitarBrand->name }} guitars</h2>
+                        <h2>@lang('content.more-brand-guitars', ['brand' => $guitar->guitarBrand->name])</h2>
                         <div class="dashboard-content">
                             <div class="slick-related">
                                 @foreach($brand_guitars as $brand_guitar)
@@ -189,7 +189,7 @@
                                         @if($brand_guitar->guitarImages->isNotEmpty())
                                             <img src="{{ Storage::disk('public')->url($brand_guitar->guitarImages->first()->image_uri) }}">
                                         @else
-                                            <div class="search-result-image">No image available</div>
+                                            <div class="search-result-image">@lang('content.no-image-available')</div>
                                         @endif
                                         <span class="guitar-link">{{ $brand_guitar->name }}</span>
                                     </div>
@@ -203,7 +203,7 @@
             @if($similar_guitars->isNotEmpty())
                 <div class="row">
                     <div class="col-md-12">
-                        <h2>Similar guitars</h2>
+                        <h2>@lang('content.similar-guitars')</h2>
                         <div class="dashboard-content">
                             <div class="slick-related">
                                 @foreach($similar_guitars as $similar_guitar)
@@ -212,7 +212,7 @@
                                             @if($similar_guitar->guitarImages->isNotEmpty())
                                                 <img src="{{ Storage::disk('public')->url($similar_guitar->guitarImages->first()->image_uri) }}">
                                             @else
-                                                <div class="search-result-image">No image available</div>
+                                                <div class="search-result-image">@lang('content.no-image-available')</div>
                                             @endif
                                             <span class="guitar-link">{{ $similar_guitar->name }}</span>
                                         </div>

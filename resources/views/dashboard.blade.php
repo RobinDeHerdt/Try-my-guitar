@@ -19,13 +19,13 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="dashboard-content">
-                        <h3>Profile</h3>
+                        <h3>@lang('dashboard.profile')</h3>
                         <hr>
                         <div class="center-content">
-                            <strong>Current: {{ number_format($user->exp, 0, ',', '.') }} exp</strong>
+                            <strong>@lang('dashboard.current'): {{ number_format($user->exp, 0, ',', '.') }} exp</strong>
                         </div>
                         <div id="progressbar">
-                            <span class="progress-label">{{ number_format($next_level_exp - $user->exp, 0,'','.') }} exp to level {{ $current_level + 1 }}</span>
+                            <span class="progress-label">{{ number_format($next_level_exp - $user->exp, 0,'','.') }} exp @lang('dashboard.to') level {{ $current_level + 1 }}</span>
                         </div>
                         <input type="hidden" id="next-level-exp" value="{{ $next_level_exp }}">
                         <input type="hidden" id="current-level-exp" value="{{ $current_level_exp }}">
@@ -164,7 +164,7 @@
                     <div class="dashboard-content">
                         <h3>@lang('dashboard.contribute')</h3>
                         <hr>
-                        <a href="{{ route('guitar.create') }}">Add a guitar to the website</a>
+                        <a href="{{ route('guitar.create') }}">@lang('dashboard.add-guitar')</a>
                     </div>
                 </div>
             </div>

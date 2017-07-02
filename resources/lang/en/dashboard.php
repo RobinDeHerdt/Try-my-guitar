@@ -11,6 +11,7 @@ return [
     'my-conversations'      => 'View my conversations',
     'collection'            => 'Collection',
     'my-collection'         => 'My collection',
+    'profile'               => 'Profile',
     'add-to-collection'     => 'Add a guitar to my collection',
     'invites'               => 'Chat invites',
     'no-invites'            => 'There are no open invites',
@@ -23,4 +24,7 @@ return [
     'profile-not-verified'  => 'You have not yet verified your e-mail address yet.',
     'click-to-send'         => 'Click here to send the verification mail again.',
     'contribute'            => 'Contribute',
+    'add-guitar'            => 'Add a guitar to the website',
+    'current'               => 'Current',
+    'to'                    => 'to',
 ];
