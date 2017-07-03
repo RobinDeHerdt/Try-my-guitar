@@ -66,7 +66,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="email">@lang('input.email') *</label>
-                                        <input type="email" class="form-control" name="email" placeholder="Your e-mail address" required>
+                                        <input type="email" class="form-control" name="email" placeholder="@lang('input.your-email')" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="subject">@lang('input.subject')</label>
@@ -81,7 +81,7 @@
                                     <div class="row">
                                         <div class="col-md-4 col-md-offset-8">
                                             <div class="form-group">
-                                                <input type="submit" class="btn btn-primary form-control" value="Send">
+                                                <input type="submit" class="btn btn-primary form-control" value="@lang('input.send')">
                                             </div>
                                         </div>
                                     </div>

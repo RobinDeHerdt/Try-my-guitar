@@ -19,7 +19,7 @@
                         {{ csrf_field() }}
                         <input type="hidden" name="token" value="{{ $token }}">
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email">E-Mail Address</label>
+                            <label for="email">@lang('input.email')</label>
                             <input id="email" type="email" class="form-control" name="email" value="{{ $email or old('email') }}" required autofocus>
                             @if ($errors->has('email'))
                                 <span class="help-block">
@@ -28,7 +28,7 @@
                             @endif
                         </div>
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password">Password</label>
+                            <label for="password">@lang('input.password')</label>
                             <input id="password" type="password" class="form-control" name="password" required>
                             @if ($errors->has('password'))
                                 <span class="help-block">
@@ -37,7 +37,7 @@
                             @endif
                         </div>
                         <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                            <label for="password-confirm">Confirm Password</label>
+                            <label for="password-confirm">@lang('input.confirm-password')</label>
                             <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                             @if ($errors->has('password_confirmation'))
                                 <span class="help-block">
@@ -47,7 +47,7 @@
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary big-cta-button">
-                                Reset Password
+                                @lang('input.reset-password')
                             </button>
                         </div>
                     </form>

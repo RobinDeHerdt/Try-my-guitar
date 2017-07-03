@@ -40,4 +40,6 @@ return [
     'view'                      => 'Bekijken',
     'add-to-collection'         => 'Voeg toe aan collectie',
     'no-image-available'        => 'Geen afbeelding beschikbaar',
+    'twitter-login'             => 'Log in met twitter',
+    'or'                        => 'Of',
 ];

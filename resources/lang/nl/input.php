@@ -9,6 +9,7 @@ return [
     */
 
     'email'                 => 'E-mailadres',
+    'your-email'            => 'Jouw e-mailadres',
     'name'                  => 'Naam',
     'first-name'            => 'Voornaam',
     'last-name'             => 'Achternaam',
@@ -32,4 +33,7 @@ return [
     'write-comment'         => 'Schrijf hier jouw reactie',
     'submit'                => 'Verzenden',
     'subject'               => 'Onderwerp',
+    'send-password-reset'   => 'Verstuur wachtwoord reset link',
+    'reset-password'        => 'Reset password',
+    'send'                  => 'Verzend',
 ];

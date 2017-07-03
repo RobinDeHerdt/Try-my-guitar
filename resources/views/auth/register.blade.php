@@ -13,7 +13,7 @@
                     <form method="POST" action="{{ route('register') }}">
                         {{ csrf_field() }}
                         <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
-                            <label for="first_name">First name *</label>
+                            <label for="first_name">@lang('input.first-name') *</label>
                             <input id="first_name" type="text" class="form-control" name="first_name" value="{{ old('first_name') }}" required autofocus>
                             @if ($errors->has('first_name'))
                                 <span class="help-block">
@@ -22,7 +22,7 @@
                             @endif
                         </div>
                         <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
-                            <label for="last_name">Last name</label>
+                            <label for="last_name">@lang('input.last-name')</label>
                             <input id="last_name" type="text" class="form-control" name="last_name" value="{{ old('last_name') }}" required>
                             @if ($errors->has('last_name'))
                                 <span class="help-block">
@@ -31,7 +31,7 @@
                             @endif
                         </div>
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email">@lang('input.email')*</label>
+                            <label for="email">@lang('input.email') *</label>
                             <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
                             @if ($errors->has('email'))
                                 <span class="help-block">
@@ -40,7 +40,7 @@
                             @endif
                         </div>
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password">@lang('input.password')*</label>
+                            <label for="password">@lang('input.password') *</label>
                             <input id="password" type="password" class="form-control" name="password" required>
                             @if ($errors->has('password'))
                                 <span class="help-block">
@@ -49,13 +49,17 @@
                             @endif
                         </div>
                         <div class="form-group">
-                            <label for="password-confirm">@lang('input.confirm-password')*</label>
+                            <label for="password-confirm">@lang('input.confirm-password') *</label>
                             <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary big-cta-button">
                                 @lang('input.register')
                             </button>
+                        </div>
+                        <div class="center-content">
+                            <span>@lang('content.or')</span><br>
+                            <a href="/login/twitter"><span class="fa fa-twitter"></span> @lang('content.twitter-login')</a>
                         </div>
                     </form>
                 </div>

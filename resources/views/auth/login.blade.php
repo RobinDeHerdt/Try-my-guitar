@@ -42,7 +42,7 @@
                                 </label>
                             </div>
                         </div>
-                        <a href="/login/twitter"><span class="fa fa-twitter"></span> Login with Twitter</a>
+                        <a href="/login/twitter"><span class="fa fa-twitter"></span> @lang('content.twitter-login')</a>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary big-cta-button">
                                 @lang('input.login')

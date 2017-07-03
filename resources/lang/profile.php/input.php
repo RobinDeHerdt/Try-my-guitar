@@ -9,7 +9,6 @@ return [
     */
 
     'email'                 => 'E-Mail address',
-    'your-email'            => 'Your e-mail address',
     'name'                  => 'Name',
     'first-name'            => 'First name',
     'last-name'             => 'Last name',
@@ -33,7 +32,4 @@ return [
     'write-comment'         => 'Write your comment here.',
     'submit'                => 'Submit',
     'subject'               => 'Subject',
-    'send-password-reset'   => 'Send password reset link',
-    'reset-password'        => 'Reset wachtwoord',
-    'send'                  => 'Send',
 ];

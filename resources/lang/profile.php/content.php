@@ -41,6 +41,4 @@ return [
     'view'                      => 'View',
     'add-to-collection'         => 'Add to collection',
     'no-image-available'        => 'No image available',
-    'twitter-login'             => 'Login with twitter',
-    'or'                        => 'Or',
 ];
