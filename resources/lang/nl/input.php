@@ -36,4 +36,11 @@ return [
     'send-password-reset'   => 'Verstuur wachtwoord reset link',
     'reset-password'        => 'Reset password',
     'send'                  => 'Verzend',
+    'guitar-name'           => 'Naam gitaar',
+    'upload-images'         => 'Upload één of meerdere afbeeldingen',
+    'brand'                 => 'Merk',
+    'categories'            => 'Categoriën',
+    'save'                  => 'Opslaan',
+    'edit'                  => 'Bewerken',
+    'delete'                => 'Verwijderen',
 ];

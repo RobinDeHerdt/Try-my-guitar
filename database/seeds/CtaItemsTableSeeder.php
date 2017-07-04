@@ -16,7 +16,7 @@ class CtaItemsTableSeeder extends Seeder
             'title' => 'Meet',
             'icon_class' => 'fa-users',
             'content_en' => 'Get to know guitar players in your area, and by extension, their guitar! Arrange a meet-up in person and rock out together!',
-            'content_nl' => 'Leer gitaarspelers kennnen uit jouw buurt - en bij gevolg - hun gitaar! Spreek af in het lokale repetitiekot en jam erop los!',
+            'content_nl' => 'Leer gitaarspelers kennnen uit jouw buurt - en bij gevolg - hun gitaar!',
             'active' => true,
         ]);
 

@@ -66,19 +66,19 @@ class GuitarTypesTableSeeder extends Seeder
 
         DB::table('guitar_types')->insert([
             'name_en' => '6 string',
-            'name_nl' => '6 string',
+            'name_nl' => '6 snarig',
             'image_uri' => 'images/6-string-guitar.jpg',
         ]);
 
         DB::table('guitar_types')->insert([
             'name_en' => '7 string',
-            'name_nl' => '7 string',
+            'name_nl' => '7 snarig',
             'image_uri' => 'images/7-string-guitar.jpg',
         ]);
 
         DB::table('guitar_types')->insert([
             'name_en' => '8 string',
-            'name_nl' => '8 string',
+            'name_nl' => '8 snarig',
             'image_uri' => 'images/8-string-guitar.jpg',
         ]);
 

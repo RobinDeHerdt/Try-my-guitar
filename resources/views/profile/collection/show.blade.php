@@ -15,11 +15,11 @@
             @endif
             <div class="row heading">
                 <div class="col-md-12">
-                    <h1>{{ $user->first_name }}'s collection</h1>
-                    <a href="{{ route('profile.show', ['user' => $user->id]) }}" class="icon-text icon-full"><span class="glyphicon glyphicon-user"></span>View {{ $user->first_name }}'s profile</a>
+                    <h1>{{ $user->first_name }}@lang('content.s-collection')</h1>
+                    <a href="{{ route('profile.show', ['user' => $user->id]) }}" class="icon-text icon-full"><span class="glyphicon glyphicon-user"></span>@lang('content.view-name-profile', ['name' => $user->first_name])</a>
                     <a href="{{ route('profile.show', ['user' => $user->id]) }}" class="icon-text icon-responsive"><span class="glyphicon glyphicon-user"></span></a>
                     @if(Auth::check() && Auth::user()->id === $user->id)
-                        <a href="{{ route('collection.create') }}" class="icon-text icon-full"><span class="glyphicon glyphicon-plus"></span>Add guitar to collection</a>
+                        <a href="{{ route('collection.create') }}" class="icon-text icon-full"><span class="glyphicon glyphicon-plus"></span>@lang('content.add-guitar-to-collection')</a>
                         <a href="{{ route('collection.create') }}" class="icon-text icon-responsive"><span class="glyphicon glyphicon-plus"></span></a>
                     @endif
                 </div>
@@ -33,7 +33,7 @@
                                     @if($guitar->guitarImages->isNotEmpty())
                                         <img src="{{ Storage::disk('public')->url($guitar->guitarImages()->first()->image_uri) }}" class="search-result-image">
                                     @else
-                                        <div class="search-result-image">No image available</div>
+                                        <div class="search-result-image">@lang('content.no-image-available')</div>
                                     @endif
                                 </a>
                                 <h3>{{ $guitar->name }}</h3>
@@ -42,7 +42,7 @@
                                         <hr>
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <a href="{{ route('experience.store', ['guitar' => $guitar->id]) }}"  onclick="event.preventDefault(); showCreateForm({{ $guitar->id }});" id="experience-add-link-{{ $guitar->id }}">Write your experience</a>
+                                                <a href="{{ route('experience.store', ['guitar' => $guitar->id]) }}"  onclick="event.preventDefault(); showCreateForm({{ $guitar->id }});" id="experience-add-link-{{ $guitar->id }}">@lang('content.share-your-experience')</a>
                                                 <form action="{{ route('experience.store', ['guitar' => $guitar->id]) }}" method="POST" id="experience-add-form-{{ $guitar->id }}" style="display: none">
                                                     {{ csrf_field() }}
                                                     <div class="form-group">
@@ -62,7 +62,7 @@
                                     <hr>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <a href="{{ route('collection.destroy', ['guitar' => $guitar->id]) }}"  onclick="event.preventDefault(); document.getElementById('collection-remove-{{ $guitar->id }}').submit();">Remove from collection</a>
+                                            <a href="{{ route('collection.destroy', ['guitar' => $guitar->id]) }}"  onclick="event.preventDefault(); document.getElementById('collection-remove-{{ $guitar->id }}').submit();">@lang('content.remove-from-collection')</a>
                                             <form action="{{ route('collection.destroy', ['guitar' => $guitar->id]) }}" method="POST" id="collection-remove-{{ $guitar->id }}">
                                                 {{ csrf_field() }}
                                             </form>
@@ -73,7 +73,7 @@
                                     <div class="row">
                                         <div class="col-md-10 col-md-offset-1">
                                             <div class="collection-experience">
-                                                <strong>{{ $user->first_name }}'s experience with this guitar:</strong>
+                                                <strong>{{ $user->first_name }}@lang('content.s-experience'):</strong>
                                                 <br><br>
                                                 <form action="{{ route('experience.update', ['id' => $user->guitarExperience($guitar)->id ])}}"  method="POST" id="experience-form-{{ $user->guitarExperience($guitar)->id }}" style="display: none">
                                                     {{ csrf_field() }}
@@ -95,10 +95,10 @@
                                         @if(Auth::check() && Auth::user()->id === $user->id)
                                             <div class="col-md-12">
                                                 <div class="col-md-4 col-md-offset-2">
-                                                    <a href="{{ route('guitar.show', ['id' => $guitar->id]) }}" onclick="event.preventDefault(); showEditForm({{ $user->guitarExperience($guitar)->id }});"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
+                                                    <a href="{{ route('guitar.show', ['id' => $guitar->id]) }}" onclick="event.preventDefault(); showEditForm({{ $user->guitarExperience($guitar)->id }});"><i class="fa fa-pencil" aria-hidden="true"></i> @lang('input.edit')</a>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <a href="{{ route('experience.destroy', ['id' => $user->guitarExperience($guitar)->id ]) }}" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $user->guitarExperience($guitar)->id }}').submit();"><i class="fa fa-times" aria-hidden="true"></i> Delete</a>
+                                                    <a href="{{ route('experience.destroy', ['id' => $user->guitarExperience($guitar)->id ]) }}" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $user->guitarExperience($guitar)->id }}').submit();"><i class="fa fa-times" aria-hidden="true"></i> @lang('input.delete')</a>
                                                     <form action="{{ route('experience.destroy', ['id' => $user->guitarExperience($guitar)->id ])}}"  method="POST" id="delete-form-{{ $user->guitarExperience($guitar)->id }}" style="display: none">
                                                         {{ csrf_field() }}
                                                     </form>

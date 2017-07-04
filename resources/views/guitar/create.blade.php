@@ -24,7 +24,7 @@
                     <div class="row">
                         <div class="col-md-8">
                             <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
-                                <label for="name">Guitar name</label>
+                                <label for="name">@lang('input.guitar-name')</label>
                                 <input type="text" class="form-control" name="name" value="{{ old('name') }}">
                                 @if ($errors->has('name'))
                                     <span class="help-block">
@@ -35,7 +35,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group {{ $errors->has('images') ? ' has-error' : '' }}">
-                                <label for="images">Upload one or more images</label>
+                                <label for="images">@lang('input.upload-images')</label>
                                 <input type="file" class="form-control" name="images[]" multiple>
                                 @if ($errors->has('images'))
                                     <span class="help-block">
@@ -65,7 +65,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="{{ $errors->has('brand') ? ' has-error' : '' }}">
-                                <label for="brand">Brand</label>
+                                <label for="brand">@lang('input.brand')</label>
                                 @if ($errors->has('brand'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('brand') }}</strong>
@@ -85,7 +85,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="{{ $errors->has('types') ? ' has-error' : '' }}">
-                                <label for="types">Categories</label>
+                                <label for="types">@lang('input.categories')</label>
                                 @if ($errors->has('types'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('types') }}</strong>
@@ -95,7 +95,7 @@
                             <div class="form-group">
                                 @foreach($types as $type)
                                     <div class="col-md-2">
-                                        <label class="checkbox-inline"><input type="checkbox" name="types[]" value="{{ $type->id }}" {{ old('types') ? in_array($type->id, old('types')) ? 'checked' : '' : ''}}>{{ $type->name }}</label>
+                                        <label class="checkbox-inline"><input type="checkbox" name="types[]" value="{{ $type->id }}" {{ old('types') ? in_array($type->id, old('types')) ? 'checked' : '' : ''}}>{{ $type->{"name_" . LaravelLocalization::getCurrentLocale()} }}</label>
                                     </div>
                                 @endforeach
                             </div>
@@ -105,7 +105,7 @@
                     <div class="row">
                         <div class="col-md-2">
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary form-control">Save</button>
+                                <button type="submit" class="btn btn-primary form-control">@lang('input.save')</button>
                             </div>
                         </div>
                     </div>

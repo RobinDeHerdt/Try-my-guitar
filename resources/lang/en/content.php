@@ -43,4 +43,9 @@ return [
     'no-image-available'        => 'No image available',
     'twitter-login'             => 'Login with twitter',
     'or'                        => 'Or',
+    's-collection'              => '\'s collection',
+    's-experience'              => '\'s experience with this guitar',
+    'remove-from-collection'    => 'Remove from collection',
+    'add-guitar-to-collection'  => 'Add guitar to collection',
+    'view-name-profile'         => 'View :name\'s profile',
 ];

@@ -42,4 +42,9 @@ return [
     'no-image-available'        => 'Geen afbeelding beschikbaar',
     'twitter-login'             => 'Log in met twitter',
     'or'                        => 'Of',
+    's-collection'              => '\'s collectie',
+    's-experience'              => '\'s ervaring met deze gitaar',
+    'remove-from-collection'    => 'Verwijder uit collectie',
+    'add-guitar-to-collection'  => 'Voeg gitaar toe aan collectie',
+    'view-name-profile'         => 'Bekijk :name\'s profiel',
 ];
