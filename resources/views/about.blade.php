@@ -76,7 +76,7 @@
                                 <div class="col-md-8">
                                     <div class="form-group">
                                         <label for="message">@lang('input.your-message') *</label>
-                                        <textarea name="message" cols="30" rows="10" class="form-control" placeholder="Your message" required></textarea>
+                                        <textarea name="message" cols="30" rows="10" class="form-control" placeholder="@lang('input.your-message')" required></textarea>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4 col-md-offset-8">

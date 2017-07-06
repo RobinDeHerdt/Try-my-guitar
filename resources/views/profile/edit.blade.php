@@ -15,10 +15,10 @@
             @endif
             <div class="row heading">
                 <div class="col-md-12">
-                    <h1>Personal info</h1>
-                    <a href="{{ route('dashboard') }}" class="icon-text icon-full"><span class="glyphicon glyphicon-home"></span>Back to dashboard</a>
+                    <h1>@lang('content.personal-info')</h1>
+                    <a href="{{ route('dashboard') }}" class="icon-text icon-full"><span class="glyphicon glyphicon-home"></span>@lang('content.back-to-dashboard')</a>
                     <a href="{{ route('dashboard') }}" class="icon-text icon-responsive"><span class="glyphicon glyphicon-home"></span></a>
-                    <a href="{{ route('profile.show', ['id' => $user->id]) }}" class="icon-text icon-full"><span class="glyphicon glyphicon-user"></span>View profile</a>
+                    <a href="{{ route('profile.show', ['id' => $user->id]) }}" class="icon-text icon-full"><span class="glyphicon glyphicon-user"></span>@lang('content.view-profile')</a>
                     <a href="{{ route('profile.show', ['id' => $user->id]) }}" class="icon-text icon-responsive"><span class="glyphicon glyphicon-user"></span></a>
                 </div>
             </div>
@@ -40,20 +40,20 @@
                                 <input type="email" class="form-control" name="email" value="{{ $user->email }}" required>
                             </div>
                             <div class="form-group">
-                                <label for="">Your current picture</label>
+                                <label for="">@lang('input.your-current-picture')</label>
                                 <img src="{{ Storage::disk('public')->url($user->image_uri) }}" alt="profile picture" class="edit-profile-picture">
                             </div>
                             <div class="form-group">
-                                <label for="image">Upload a new picture</label>
+                                <label for="image">@lang('input.upload-new-picture')</label>
                                 <input type="file" name="image" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Your preferred meetup spot *</label>
+                                <label>@lang('content.preferred-spot') *</label>
                                 <div class="pac-card" id="pac-card">
                                     <div id="pac-container">
-                                        <input id="pac-input" type="text" name="location" placeholder="Where would you like to meet up?" value="{{ $user->location }}">
+                                        <input id="pac-input" type="text" name="location" placeholder="@lang('content.where-meetup')" value="{{ $user->location }}">
                                     </div>
                                 </div>
                                 <div id="map"></div>
@@ -71,7 +71,7 @@
                     <div class="row">
                         <div class="col-md-2">
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary form-control">Save changes</button>
+                                <button type="submit" class="btn btn-primary form-control">@lang('input.save-changes')</button>
                             </div>
                         </div>
                     </div>
@@ -79,7 +79,7 @@
             </div>
             <div class="row heading">
                 <div class="col-md-12">
-                    <h1>Profile appearance</h1>
+                    <h1>@lang('content.profile-appearance')</h1>
                 </div>
             </div>
             <div class="col-container">
@@ -94,11 +94,11 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Current header image</label>
+                                <label>@lang('input.current-header-image')</label>
                                 <img src="{{ Storage::disk('public')->url($user->header_image_uri) }}" alt="profile header image" class="edit-profile-picture">
                             </div>
                             <div class="form-group">
-                                <label for="image">Upload a new header image</label>
+                                <label for="image">@lang('input.upload-new-header-image')</label>
                                 <input type="file" name="image" class="form-control">
                             </div>
                         </div>
@@ -106,7 +106,7 @@
                     <div class="row">
                         <div class="col-md-2">
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary form-control">Save changes</button>
+                                <button type="submit" class="btn btn-primary form-control">@lang('input.save-changes')</button>
                             </div>
                         </div>
                     </div>

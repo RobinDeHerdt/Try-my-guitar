@@ -133,7 +133,7 @@
             @else
                 <div class="row">
                     <div class="col-md-12">
-                        <h4>Nothing to see here (yet).</h4>
+                        <h4>@lang('content.nothing-to-see-here')</h4>
                     </div>
                 </div>
             @endif

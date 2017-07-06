@@ -15,8 +15,8 @@
             @endif
             <div class="row heading">
                 <div class="col-md-12">
-                    <h1>Add guitar to collection</h1>
-                    <a href="{{ route('collection.show', ['user' => $user->id]) }}" class="icon-text icon-full"><span class="glyphicon glyphicon-list"></span>View collection</a>
+                    <h1>@lang('content.add-to-collection')</h1>
+                    <a href="{{ route('collection.show', ['user' => $user->id]) }}" class="icon-text icon-full"><span class="glyphicon glyphicon-list"></span>@lang('content.view-collection')</a>
                     <a href="{{ route('collection.show', ['user' => $user->id]) }}" class="icon-text icon-responsive"><span class="glyphicon glyphicon-list"></span></a>
                 </div>
             </div>
@@ -39,7 +39,7 @@
                     <div class="row">
                         <div class="col-md-2">
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary form-control">Save</button>
+                                <button type="submit" class="btn btn-primary form-control">@lang('input.save')</button>
                             </div>
                         </div>
                     </div>

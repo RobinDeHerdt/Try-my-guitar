@@ -40,6 +40,7 @@ return [
     'similar-guitars'           => 'Similar guitars',
     'view'                      => 'View',
     'add-to-collection'         => 'Add to collection',
+    'view-collection'           => 'View collection',
     'no-image-available'        => 'No image available',
     'twitter-login'             => 'Login with twitter',
     'or'                        => 'Or',
@@ -48,4 +49,10 @@ return [
     'remove-from-collection'    => 'Remove from collection',
     'add-guitar-to-collection'  => 'Add guitar to collection',
     'view-name-profile'         => 'View :name\'s profile',
+    'nothing-to-see-here'       => 'Nothing to see here! (yet)',
+    'personal-info'             => 'Personal info',
+    'back-to-dashboard'         => 'Back to dashboard',
+    'preferred-spot'            => 'Your favorite meetup spot',
+    'where-meetup'              => 'Where would you like to meet up with others?',
+    'profile-appearance'        => 'Profile appearance',
 ];

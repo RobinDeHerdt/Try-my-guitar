@@ -39,6 +39,7 @@ return [
     'similar-guitars'           => 'Gelijkaardige gitaren',
     'view'                      => 'Bekijken',
     'add-to-collection'         => 'Voeg toe aan collectie',
+    'view-collection'           => 'Bekijk collectie',
     'no-image-available'        => 'Geen afbeelding beschikbaar',
     'twitter-login'             => 'Log in met twitter',
     'or'                        => 'Of',
@@ -47,4 +48,10 @@ return [
     'remove-from-collection'    => 'Verwijder uit collectie',
     'add-guitar-to-collection'  => 'Voeg gitaar toe aan collectie',
     'view-name-profile'         => 'Bekijk :name\'s profiel',
+    'nothing-to-see-here'       => 'Er is (nog) niets te zien hier!',
+    'personal-info'             => 'Persoonlijke informatie',
+    'back-to-dashboard'         => 'Terug naar dashboard',
+    'preferred-spot'            => 'Jouw favoriete ontmoetingsplaats',
+    'where-meetup'              => 'Waar zou jij graag afspreken met anderen?',
+    'profile-appearance'        => 'Profielweergave',
 ];
