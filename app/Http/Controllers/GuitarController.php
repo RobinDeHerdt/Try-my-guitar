@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\GuitarBrand;
 use App\GuitarType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use App\GuitarImage;
 use App\Guitar;
 use App\User;
@@ -149,6 +150,7 @@ class GuitarController extends Controller
             $guitar->name           = $request->name;
             $guitar->description    = $request->description;
             $guitar->brand_id       = $request->brand;
+            $guitar->contributor_id = $this->user->id;
 
             $guitar->save();
 
@@ -256,5 +258,25 @@ class GuitarController extends Controller
         return view('guitar.experiences', [
             'guitar' => $guitar,
         ]);
+    }
+
+    /**
+     * Delete a guitar image.
+     *
+     * @param  \App\GuitarImage  $guitarImage
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function destroy(GuitarImage $guitarImage)
+    {
+        if ($guitarImage->user->id === $this->user->id) {
+            if ($guitarImage->guitar->guitarImages->count() > 1) {
+                $guitarImage->delete();
+                Session::flash('success-message', 'The image was deleted successfully.');
+            } else {
+                Session::flash('error-message', 'The image could not be deleted. There must be at least one image per guitar.');
+            }
+        }
+
+        return back();
     }
 }

@@ -165,6 +165,8 @@
                         <h3>@lang('dashboard.contribute')</h3>
                         <hr>
                         <a href="{{ route('guitar.create') }}">@lang('dashboard.add-guitar')</a>
+                        <hr>
+                        <a href="{{ route('profile.contributions', ['user' => $user->id]) }}">My contributions</a>
                     </div>
                 </div>
             </div>

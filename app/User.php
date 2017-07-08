@@ -75,6 +75,16 @@ class User extends Authenticatable
     }
 
     /**
+     * A user has many contributed guitars.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function contributedGuitars()
+    {
+        return $this->hasMany('App\Guitar', 'contributor_id');
+    }
+
+    /**
      * A user has many messages.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

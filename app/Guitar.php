@@ -55,4 +55,14 @@ class Guitar extends Model
     {
         return $this->hasMany('App\Experience');
     }
+
+    /**
+     * A guitar belongs to a contributor.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+     */
+    public function contributor()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

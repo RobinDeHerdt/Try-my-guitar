@@ -17,6 +17,8 @@ class CreateGuitarsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->text('description');
+            $table->integer('contributor_id')->unsigned();
+            $table->foreign('contributor_id')->references('id')->on('users');
             $table->integer('brand_id')->unsigned();
             $table->foreign('brand_id')->references('id')->on('guitar_brands');
             $table->timestamps();

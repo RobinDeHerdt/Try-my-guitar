@@ -181,4 +181,22 @@ class ProfileController extends Controller
             'channels'  => $channels,
         ]);
     }
+
+    /**
+     * Show the specified user contributions page.
+     *
+     * @param  \App\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function contributions(User $user)
+    {
+        $images = $user->guitarImages()->get();
+        $guitars = $user->contributedGuitars()->get();
+
+        return view('profile.contributions', [
+            'user'      => $user,
+            'images'    => $images,
+            'guitars'   => $guitars,
+        ]);
+    }
 }

@@ -58,6 +58,7 @@ Route::group([
     Route::get('profile/{user}/report', 'ReportController@create')->name('report.create');
     Route::get('profile/{user}/invite', 'ProfileController@invite')->name('profile.invite');
     Route::get('profile/{user}/experiences', 'ProfileController@experiences')->name('profile.experiences');
+    Route::get('profile/{user}/contributions', 'ProfileController@contributions')->name('profile.contributions');
     Route::get('profile/autocomplete', 'ProfileController@autoComplete')->name('profile.autocomplete');
     Route::post('profile/{user}/report', 'ReportController@store')->name('report.store');
     Route::post('profile/update', 'ProfileController@update')->name('profile.update');
@@ -72,6 +73,7 @@ Route::group([
     Route::get('brand/{brand}', 'BrandController@show')->name('brand.show');
     Route::get('type/{type}', 'TypeController@show')->name('type.show');
     Route::post('guitar/{guitar}/image/store', 'GuitarController@storeImage')->name('guitar.image.store');
+    Route::post('guitar/image/{guitarImage}/remove', 'GuitarController@destroy')->name('guitar.image.destroy');
     Route::post('guitar/store', 'GuitarController@store')->name('guitar.store');
 
     // Collection related routes.
