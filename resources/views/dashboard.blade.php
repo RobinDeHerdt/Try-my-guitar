@@ -5,8 +5,8 @@
 @endsection
 
 @section('content')
-    <div class="content {{ Auth::user() && Auth::user()->hasRole('administrator') ? 'admin-authenticated' : '' }}">
-        <div class="container">
+    <div class="content">
+        <div class="container dashboard-container">
             @if (Session::has('success-message'))
                 <div class="alert alert-success alert-margin">{{ Session::get('success-message') }}</div>
             @endif

@@ -49,9 +49,9 @@
             </div>
             @if($guitars->isNotEmpty())
                 <h2>Collection <span class="counter">{{ $user->guitars->count() }}</span></h2>
-                <div class="dashboard-content">
-                    <div class="row">
-                        <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="dashboard-content">
                             <div class="collection">
                                 @foreach($guitars as $guitar)
                                     <div class="collection-item">
@@ -66,11 +66,15 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-2 col-md-offset-5">
-                            <div class="big-cta-button">
-                                <a href="{{ route('collection.show', ['id' => $user]) }}">View collection</a>
-                            </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-4">
+                        <div class="profile-collection-button">
+                            <a href="{{ route('collection.show', ['id' => $user]) }}">
+                                <div class="big-cta-button">
+                                    View collection
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -102,9 +106,13 @@
                     @endforeach
                 </div>
                 <div class="row">
-                    <div class="col-md-2 col-md-offset-5">
-                        <div class="big-cta-button">
-                            <a href="{{ route('profile.experiences', ['id' => $user]) }}">View experiences</a>
+                    <div class="col-md-4 col-md-offset-4">
+                        <div class="profile-collection-button">
+                            <a href="{{ route('profile.experiences', ['id' => $user]) }}">
+                                <div class="big-cta-button">
+                                    View experiences
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>

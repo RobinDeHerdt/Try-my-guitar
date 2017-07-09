@@ -42,18 +42,17 @@
                                         <hr>
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <a href="{{ route('experience.store', ['guitar' => $guitar->id]) }}"  onclick="event.preventDefault(); showCreateForm({{ $guitar->id }});" id="experience-add-link-{{ $guitar->id }}">@lang('content.share-your-experience')</a>
+                                                <a href="{{ route('experience.store', ['guitar' => $guitar->id]) }}"  onclick="event.preventDefault(); showCreateForm({{ $guitar->id }});" id="experience-add-link-{{ $guitar->id }}"><span class="glyphicon glyphicon-plus"></span> @lang('content.share-your-experience')</a>
                                                 <form action="{{ route('experience.store', ['guitar' => $guitar->id]) }}" method="POST" id="experience-add-form-{{ $guitar->id }}" style="display: none">
+                                                    <div class="form-group">
+                                                        <i class="fa fa-times" onclick="closeCreateForm({{ $guitar->id }})"></i>
+                                                    </div>
                                                     {{ csrf_field() }}
                                                     <div class="form-group">
                                                         <textarea name="experience" class="form-control" id="input-experience" rows="5" placeholder="Write your experience here"></textarea>
                                                     </div>
-                                                    <div class="row">
-                                                        <div class="col-md-4 col-md-offset-8">
-                                                            <div class="form-group">
-                                                                <input type="submit" class="btn btn-primary col-md-12" value="Save">
-                                                            </div>
-                                                        </div>
+                                                    <div class="form-group">
+                                                        <input type="submit" class="btn btn-primary" value="Save">
                                                     </div>
                                                 </form>
                                             </div>
@@ -62,7 +61,7 @@
                                     <hr>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <a href="{{ route('collection.destroy', ['guitar' => $guitar->id]) }}"  onclick="event.preventDefault(); document.getElementById('collection-remove-{{ $guitar->id }}').submit();">@lang('content.remove-from-collection')</a>
+                                            <a href="{{ route('collection.destroy', ['guitar' => $guitar->id]) }}"  onclick="event.preventDefault(); document.getElementById('collection-remove-{{ $guitar->id }}').submit();"><span class="glyphicon glyphicon-trash"></span> @lang('content.remove-from-collection')</a>
                                             <form action="{{ route('collection.destroy', ['guitar' => $guitar->id]) }}" method="POST" id="collection-remove-{{ $guitar->id }}">
                                                 {{ csrf_field() }}
                                             </form>
@@ -75,8 +74,11 @@
                                             <div class="collection-experience">
                                                 <strong>{{ $user->first_name }}@lang('content.s-experience'):</strong>
                                                 <br><br>
-                                                <form action="{{ route('experience.update', ['id' => $user->guitarExperience($guitar)->id ])}}"  method="POST" id="experience-form-{{ $user->guitarExperience($guitar)->id }}" style="display: none">
+                                                <form action="{{ route('experience.update', ['id' => $user->guitarExperience($guitar)->id ])}}" method="POST" id="experience-form-{{ $user->guitarExperience($guitar)->id }}" style="display: none">
                                                     {{ csrf_field() }}
+                                                    <div class="form-group">
+                                                        <i class="fa fa-times" onclick="closeEditForm({{ $user->guitarExperience($guitar)->id }})"></i>
+                                                    </div>
                                                     <div class="form-group">
                                                         <textarea name="experience" class="form-control" id="input-experience" rows="5">{{ $user->guitarExperience($guitar)->experience }}</textarea>
                                                     </div>
@@ -95,10 +97,10 @@
                                         @if(Auth::check() && Auth::user()->id === $user->id)
                                             <div class="col-md-12">
                                                 <div class="col-md-4 col-md-offset-2">
-                                                    <a href="{{ route('guitar.show', ['id' => $guitar->id]) }}" onclick="event.preventDefault(); showEditForm({{ $user->guitarExperience($guitar)->id }});"><i class="fa fa-pencil" aria-hidden="true"></i> @lang('input.edit')</a>
+                                                    <a href="{{ route('guitar.show', ['id' => $guitar->id]) }}" onclick="event.preventDefault(); showEditForm({{ $user->guitarExperience($guitar)->id }});"><span class="glyphicon glyphicon-edit"></span> @lang('input.edit')</a>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <a href="{{ route('experience.destroy', ['id' => $user->guitarExperience($guitar)->id ]) }}" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $user->guitarExperience($guitar)->id }}').submit();"><i class="fa fa-times" aria-hidden="true"></i> @lang('input.delete')</a>
+                                                    <a href="{{ route('experience.destroy', ['id' => $user->guitarExperience($guitar)->id ]) }}" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $user->guitarExperience($guitar)->id }}').submit();"><span class="glyphicon glyphicon-trash"></span> @lang('input.delete')</a>
                                                     <form action="{{ route('experience.destroy', ['id' => $user->guitarExperience($guitar)->id ])}}"  method="POST" id="delete-form-{{ $user->guitarExperience($guitar)->id }}" style="display: none">
                                                         {{ csrf_field() }}
                                                     </form>
@@ -157,9 +159,19 @@
             $('#experience-text-' + id).hide();
         }
 
+        function closeEditForm(id) {
+            $('#experience-form-' + id).hide();
+            $('#experience-text-' + id).show();
+        }
+
         function showCreateForm(id) {
             $('#experience-add-form-' + id).show();
             $('#experience-add-link-' + id).hide();
+        }
+
+        function closeCreateForm(id) {
+            $('#experience-add-form-' + id).hide();
+            $('#experience-add-link-' + id).show();
         }
     </script>
     @include('partials.analytics')

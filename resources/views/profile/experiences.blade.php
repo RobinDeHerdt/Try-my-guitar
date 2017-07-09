@@ -31,6 +31,9 @@
                                 <form action="{{ route('experience.update', ['id' => $experience->id ])}}"  method="POST" id="experience-form-{{ $experience->id }}" style="display: none">
                                     {{ csrf_field() }}
                                     <div class="form-group">
+                                        <i class="fa fa-times" onclick="closeEditForm({{ $experience->id }})"></i>
+                                    </div>
+                                    <div class="form-group">
                                         <textarea name="experience" class="form-control" id="input-experience" rows="5">{{ $experience->experience }}</textarea>
                                     </div>
                                     <div class="form-group">
@@ -46,12 +49,12 @@
                                         <div class="col-md-12">
                                             <div class="col-md-4 col-md-offset-2">
                                                 <a href="{{ route('experience.update', ['id' => $experience->id ]) }}" onclick="event.preventDefault(); showEditForm({{ $experience->id }});" title="Update your experience">
-                                                    <i class="fa fa-pencil" aria-hidden="true"></i> Edit
+                                                    <span class="glyphicon glyphicon-edit"></span> Edit
                                                 </a>
                                             </div>
                                             <div class="col-md-4">
                                                 <a href="{{ route('experience.destroy', ['id' => $experience->id ]) }}" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $experience->id }}').submit();" title="Remove your experience">
-                                                    <i class="fa fa-times" aria-hidden="true"></i> Delete
+                                                    <span class="glyphicon glyphicon-trash"></span> Delete
                                                 </a>
                                                 <form action="{{ route('experience.destroy', ['id' => $experience->id ])}}"  method="POST" id="delete-form-{{ $experience->id }}" style="display: none">
                                                     {{ csrf_field() }}
@@ -106,6 +109,11 @@
         function showEditForm(id) {
             $('#experience-form-' + id).show();
             $('#experience-text-' + id).hide();
+        }
+
+        function closeEditForm(id) {
+            $('#experience-form-' + id).hide();
+            $('#experience-text-' + id).show();
         }
     </script>
     @include('partials.analytics')

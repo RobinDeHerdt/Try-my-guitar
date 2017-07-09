@@ -21,6 +21,10 @@ body {
   }
 }
 
+.dashboard-container {
+  padding-top: 30px;
+}
+
 .content {
   // Navigation height
   padding-top: 50px;
@@ -81,7 +85,7 @@ body {
 .dashboard-content {
   background-color: $secondary-bg-color;
   padding: 20px;
-  margin-top: 35px;
+  margin-bottom: 20px;
   box-shadow: $drop-shadow;
 
   h3 {
