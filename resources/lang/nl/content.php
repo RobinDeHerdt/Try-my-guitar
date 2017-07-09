@@ -54,4 +54,5 @@ return [
     'preferred-spot'            => 'Jouw favoriete ontmoetingsplaats',
     'where-meetup'              => 'Waar zou jij graag afspreken met anderen?',
     'profile-appearance'        => 'Profielweergave',
+    'no-image'                  => 'Geen afbeelding beschikbaar',
 ];

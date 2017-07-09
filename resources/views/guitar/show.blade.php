@@ -123,14 +123,20 @@
                 </div>
                 <div class="col-md-7">
                     <div class="dashboard-content">
-                        <div class="slick-main">
-                            @foreach($guitar->guitarImages as $guitarImage)
-                                <div class="slick-item">
-                                    <img src="{{ Storage::disk('public')->url($guitarImage->image_uri) }}">
-                                    <span>@lang('content.by') <a href="{{  route('profile.show', ['id' => $guitarImage->user->id]) }}"><strong>{{ $guitarImage->user->fullName() }}</strong></a></span>
-                                </div>
-                            @endforeach
-                        </div>
+                        @if($guitar->guitarImages->isNotEmpty())
+                            <div class="slick-main">
+                                @foreach($guitar->guitarImages as $guitarImage)
+                                    <div class="slick-item">
+                                        <img src="{{ Storage::disk('public')->url($guitarImage->image_uri) }}">
+                                        <span>@lang('content.by') <a href="{{  route('profile.show', ['id' => $guitarImage->user->id]) }}"><strong>{{ $guitarImage->user->fullName() }}</strong></a></span>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @else
+                            <div class="center-content">
+                                <span>@lang('content.no-image')</span>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

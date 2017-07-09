@@ -21,8 +21,10 @@ body {
   }
 }
 
-.dashboard-container {
-  padding-top: 30px;
+.no-image {
+  position: relative;
+  top: 60px;
+  font-size: 18px;
 }
 
 .content {
@@ -85,7 +87,7 @@ body {
 .dashboard-content {
   background-color: $secondary-bg-color;
   padding: 20px;
-  margin-bottom: 20px;
+  margin-top: 20px;
   box-shadow: $drop-shadow;
 
   h3 {

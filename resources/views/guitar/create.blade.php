@@ -24,7 +24,7 @@
                     <div class="row">
                         <div class="col-md-8">
                             <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
-                                <label for="name">@lang('input.guitar-name')</label>
+                                <label for="name">@lang('input.guitar-name') *</label>
                                 <input type="text" class="form-control" name="name" value="{{ old('name') }}">
                                 @if ($errors->has('name'))
                                     <span class="help-block">
@@ -51,7 +51,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group {{ $errors->has('description') ? ' has-error' : '' }}">
-                                <label for="description">@lang('input.description')</label>
+                                <label for="description">@lang('input.description') *</label>
                                 <textarea name="description" cols="30" rows="5" class="form-control">{{  old('description') }}</textarea>
                                 @if ($errors->has('description'))
                                     <span class="help-block">
@@ -65,7 +65,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="{{ $errors->has('brand') ? ' has-error' : '' }}">
-                                <label for="brand">@lang('input.brand')</label>
+                                <label for="brand">@lang('input.brand') *</label>
                                 @if ($errors->has('brand'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('brand') }}</strong>
@@ -85,7 +85,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="{{ $errors->has('types') ? ' has-error' : '' }}">
-                                <label for="types">@lang('input.categories')</label>
+                                <label for="types">@lang('input.categories') *</label>
                                 @if ($errors->has('types'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('types') }}</strong>

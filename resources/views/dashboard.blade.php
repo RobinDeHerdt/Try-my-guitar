@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="content">
-        <div class="container dashboard-container">
+        <div class="container">
             @if (Session::has('success-message'))
                 <div class="alert alert-success alert-margin">{{ Session::get('success-message') }}</div>
             @endif

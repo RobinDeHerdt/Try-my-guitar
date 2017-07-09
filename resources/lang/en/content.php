@@ -55,4 +55,5 @@ return [
     'preferred-spot'            => 'Your favorite meetup spot',
     'where-meetup'              => 'Where would you like to meet up with others?',
     'profile-appearance'        => 'Profile appearance',
+    'no-image'                  => 'No image available',
 ];

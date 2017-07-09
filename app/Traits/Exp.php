@@ -75,13 +75,13 @@ trait Exp
      * Subtract exp from the specified user.
      *
      * @param \App\User  $user
-     * @param integer  $awarded_exp
+     * @param integer  $subtracted_exp
      */
-    protected function subtractExp($user, $awarded_exp)
+    protected function subtractExp($user, $subtracted_exp)
     {
         $exp = $user->exp;
 
-        $exp -= $awarded_exp;
+        $exp -= $subtracted_exp;
 
         $user->exp = $exp;
         $user->save();

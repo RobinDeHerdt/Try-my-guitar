@@ -30,18 +30,25 @@
                         @foreach($guitars as $guitar)
                             <div class="col-md-6">
                                 <div class="search-result">
-                                    <a href="{{ route('guitar.show', ['id' => $guitar->id]) }}">
-                                        <div class="search-result-overlay">
-                                            <span class="search-result-overlay-text">@lang('content.view-details')</span>
-                                        </div>
-                                    </a>
-                                    <img src="{{ Storage::disk('public')->url($guitar->guitarBrand->logo_uri) }}" alt="{{ $guitar->guitarBrand->name }} logo" class="search-result-logo">
                                     @if($guitar->guitarImages->isNotEmpty())
-                                        <img src="{{ Storage::disk('public')->url($guitar->guitarImages()->first()->image_uri) }}" class="search-result-image">
+                                        <a href="{{ route('guitar.show', ['id' => $guitar->id]) }}">
+                                            <img src="{{ Storage::disk('public')->url($guitar->guitarImages()->first()->image_uri) }}" class="search-result-image">
+                                        </a>
                                     @else
-                                        <div class="search-result-image">No image available</div>
+                                        <div class="search-result-image no-image"><span>@lang('content.no-image')</span></div>
                                     @endif
-                                    <h3>{{ $guitar->name }}</h3>
+                                    <a href="{{ route('guitar.show', ['id' => $guitar->id]) }}" class="no-decoration on-top">
+                                        <h3>{{ $guitar->name }}</h3>
+                                    </a>
+                                    @if(Auth::check() && Auth::user()->id === $user->id)
+                                        <hr>
+                                        <div class="center-content">
+                                            <a href="{{ route('guitar.destroy', ['guitar' => $guitar->id]) }}" onclick="event.preventDefault(); document.getElementById('guitar-{{ $guitar->id }}').submit();">Remove</a>
+                                        </div>
+                                        <form action="{{ route('guitar.destroy', ['guitar' => $guitar->id]) }}" method="POST" id="guitar-{{ $guitar->id }}">
+                                            {{ csrf_field() }}
+                                        </form>
+                                    @endif
                                 </div>
                             </div>
                         @endforeach

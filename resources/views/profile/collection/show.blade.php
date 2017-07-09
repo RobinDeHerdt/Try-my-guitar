@@ -41,7 +41,7 @@
                                     @if(!$user->guitarExperience($guitar))
                                         <hr>
                                         <div class="row">
-                                            <div class="col-md-12">
+                                            <div class="col-md-10 col-md-offset-1">
                                                 <a href="{{ route('experience.store', ['guitar' => $guitar->id]) }}"  onclick="event.preventDefault(); showCreateForm({{ $guitar->id }});" id="experience-add-link-{{ $guitar->id }}"><span class="glyphicon glyphicon-plus"></span> @lang('content.share-your-experience')</a>
                                                 <form action="{{ route('experience.store', ['guitar' => $guitar->id]) }}" method="POST" id="experience-add-form-{{ $guitar->id }}" style="display: none">
                                                     <div class="form-group">

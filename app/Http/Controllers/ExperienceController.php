@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
 use App\Experience;
 use App\Guitar;
 use Auth;
+use App\Traits\Exp;
 use App\Vote;
 use Illuminate\Http\Request;
 
@@ -16,10 +18,12 @@ use Illuminate\Http\Request;
  */
 class ExperienceController extends Controller
 {
+    use Exp;
+
     /**
      * Contains the authenticated user.
      *
-     * @var array
+     * @var \App\User
      */
     private $user;
 
@@ -63,10 +67,14 @@ class ExperienceController extends Controller
     {
         if (!Experience::where('user_id', $this->user->id)->where('guitar_id', $guitar->id)->exists()) {
             $experience = new Experience();
+
             $experience->experience = $request->experience;
             $experience->user_id    = $this->user->id;
             $experience->guitar_id  = $guitar->id;
+
             $experience->save();
+
+            $this->addExp($this->user, 75);
 
             return redirect(route('profile.experiences', ['user' => $this->user->id]) . "#experience-" . $experience->id);
         } else {
@@ -102,6 +110,10 @@ class ExperienceController extends Controller
         if ($experience->user->id === $this->user->id) {
             Vote::where('experience_id', $experience->id)->delete();
             $experience->delete();
+
+            $this->subtractExp($this->user, 75);
+
+            Session::flash('success-message', 'Experience removed successfully.');
         }
 
         return back();

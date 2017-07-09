@@ -132,10 +132,9 @@ class GuitarController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'images'        => 'required',
             'images.*'      => 'file|image|mimes:jpeg,png,bmp,gif|max:1000',
-            'description'   => 'required',
             'name'          => 'required',
+            'description'   => 'required',
             'types'         => 'required',
             'brand'         => 'required',
         ]);
@@ -156,14 +155,16 @@ class GuitarController extends Controller
 
             $guitar->guitarTypes()->attach($request->types);
 
-            foreach ($request->images as $upload) {
-                $image = new GuitarImage();
+            if ($request->images) {
+                foreach ($request->images as $upload) {
+                    $image = new GuitarImage();
 
-                $image->image_uri   = $upload->store('images/guitar', 'public');
-                $image->guitar_id   = $guitar->id;
-                $image->user_id     = $this->user->id;
+                    $image->image_uri = $upload->store('images/guitar', 'public');
+                    $image->guitar_id = $guitar->id;
+                    $image->user_id = $this->user->id;
 
-                $image->save();
+                    $image->save();
+                }
             }
 
             $this->addExp($this->user, 100 + (count($request->images) * 25));
@@ -261,20 +262,43 @@ class GuitarController extends Controller
     }
 
     /**
+     * Delete a guitar.
+     *
+     * @param  \App\Guitar  $guitar
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function destroy(Guitar $guitar)
+    {
+        if ($guitar->contributor->id === $this->user->id) {
+            if ($guitar->users->count() < 1) {
+                $guitar->guitarTypes()->detach();
+                $guitar->delete();
+                $this->subtractExp($this->user, 100);
+                Session::flash('success-message', 'The guitar was deleted successfully.');
+            } else {
+                Session::flash('error-message', 'This guitar is part of someone\'s collection. It could not be deleted.');
+            }
+        } else {
+            Session::flash('error-message', 'Something went wrong. The guitar was not deleted.');
+        }
+
+        return back();
+    }
+
+    /**
      * Delete a guitar image.
      *
      * @param  \App\GuitarImage  $guitarImage
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function destroy(GuitarImage $guitarImage)
+    public function destroyImage(GuitarImage $guitarImage)
     {
         if ($guitarImage->user->id === $this->user->id) {
-            if ($guitarImage->guitar->guitarImages->count() > 1) {
-                $guitarImage->delete();
-                Session::flash('success-message', 'The image was deleted successfully.');
-            } else {
-                Session::flash('error-message', 'The image could not be deleted. There must be at least one image per guitar.');
-            }
+            $guitarImage->delete();
+            $this->subtractExp($this->user, 25);
+            Session::flash('success-message', 'The image was deleted successfully.');
+        } else {
+            Session::flash('error-message', 'Something went wrong. The image was not deleted.');
         }
 
         return back();

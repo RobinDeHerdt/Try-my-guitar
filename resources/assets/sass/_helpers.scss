@@ -34,3 +34,9 @@ h2 {
 .center-content {
   text-align: center;
 }
+
+a.no-decoration {
+  &:hover, &:link, &:active, &:visited {
+    text-decoration: none;
+  }
+}
