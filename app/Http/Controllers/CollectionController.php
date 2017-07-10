@@ -97,7 +97,7 @@ class CollectionController extends Controller
         }
 
         Session::flash('info-message', $guitar->name . ' (' . $guitar->guitarBrand->name . ')' . ' is already a part of your collection!');
-        return redirect();
+        return back();
     }
 
     /**
