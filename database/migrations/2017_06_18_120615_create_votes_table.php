@@ -19,7 +19,7 @@ class CreateVotesTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('experience_id')->unsigned();
-            $table->foreign('experience_id')->references('id')->on('experiences');
+            $table->foreign('experience_id')->references('id')->on('experiences')->onDelete('cascade');
             $table->timestamps();
         });
     }

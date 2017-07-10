@@ -19,7 +19,7 @@ class CreateGuitarImagesTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('guitar_id')->unsigned();
-            $table->foreign('guitar_id')->references('id')->on('guitars');
+            $table->foreign('guitar_id')->references('id')->on('guitars')->onDelete('cascade');
             $table->timestamps();
         });
     }
