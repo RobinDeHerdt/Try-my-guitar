@@ -272,8 +272,10 @@ class GuitarController extends Controller
         if ($guitar->contributor->id === $this->user->id) {
             if ($guitar->users->count() < 1) {
                 $guitar->guitarTypes()->detach();
+                $image_amount = $guitar->guitarImages()->count();
+                $guitar->guitarImages()->delete();
                 $guitar->delete();
-                $this->subtractExp($this->user, 100);
+                $this->subtractExp($this->user, 100 + ($image_amount * 25));
                 Session::flash('success-message', 'The guitar was deleted successfully.');
             } else {
                 Session::flash('error-message', 'This guitar is part of someone\'s collection. It could not be deleted.');
