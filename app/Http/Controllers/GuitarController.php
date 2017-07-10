@@ -274,6 +274,7 @@ class GuitarController extends Controller
                 $guitar->guitarTypes()->detach();
                 $image_amount = $guitar->guitarImages()->count();
                 $guitar->guitarImages()->delete();
+                $guitar->experiences()->delete();
                 $guitar->delete();
                 $this->subtractExp($this->user, 100 + ($image_amount * 25));
                 Session::flash('success-message', 'The guitar was deleted successfully.');
