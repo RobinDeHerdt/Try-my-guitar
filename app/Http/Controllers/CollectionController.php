@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Experience;
+use App\Traits\Exp;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Guitar;
@@ -15,10 +16,12 @@ use Auth;
  */
 class CollectionController extends Controller
 {
+    use Exp;
+
     /**
      * Contains the authenticated user.
      *
-     * @var array
+     * @var User
      */
     private $user;
 
@@ -90,6 +93,8 @@ class CollectionController extends Controller
                 $experience->guitar_id  = $guitar->id;
 
                 $experience->save();
+
+                $this->addExp($this->user, 75);
             }
             Session::flash('success-message', $guitar->name . ' (' . $guitar->guitarBrand->name . ')' . ' was added to your collection!');
 
@@ -97,6 +102,7 @@ class CollectionController extends Controller
         }
 
         Session::flash('info-message', $guitar->name . ' (' . $guitar->guitarBrand->name . ')' . ' is already a part of your collection!');
+
         return back();
     }
 

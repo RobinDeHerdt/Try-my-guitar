@@ -269,7 +269,7 @@
                         infowindow.setContent(
                             "<div class='center-content'>" +
                             "<a href='/profile/" + this.user.id + "'><img src='/storage/" + this.user.image_uri + "' width='100'>" +
-                            "<br><br><strong>" + this.user.first_name + ' ' + this.user.last_name + "</strong></a>" +
+                            "<br><br><strong>" + this.user.first_name + ' ' + (this.user.last_name ? this.user.last_name : '') + "</strong></a>" +
                             "<br><span>" + this.user.location + "</span>" +
                             "</div>"
                         );

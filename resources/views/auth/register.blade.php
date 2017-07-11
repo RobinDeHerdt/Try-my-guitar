@@ -23,7 +23,7 @@
                         </div>
                         <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
                             <label for="last_name">@lang('input.last-name')</label>
-                            <input id="last_name" type="text" class="form-control" name="last_name" value="{{ old('last_name') }}" required>
+                            <input id="last_name" type="text" class="form-control" name="last_name" value="{{ old('last_name') }}">
                             @if ($errors->has('last_name'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('last_name') }}</strong>
