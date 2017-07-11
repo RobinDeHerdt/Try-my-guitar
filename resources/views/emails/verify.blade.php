@@ -350,9 +350,6 @@
         <td align="center" valign="top" id="bodyCell">
             <table border="0" cellpadding="0" cellspacing="0" width="100%">
                 <tr>
-                    <td align="center" valign="top" id="templateHeader" style="background-image: url({{ Storage::disk('public')->url('images/electric-guitars.jpg') }}); background-repeat:no-repeat; background-position:top; background-size:cover; border-top:0; border-bottom:0; padding-top:150px; padding-bottom:200px;"></td>
-                </tr>
-                <tr>
                     <td align="center" valign="top" id="templateBody">
                         <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" class="templateContainer">
                             <tr>
@@ -431,9 +428,7 @@
                                         <tbody>
                                         <tr>
                                             <td valign="top" class="mcnTextContent" style="padding-top:0; padding-right:18px; padding-bottom:9px; padding-left:18px; text-align: center;">
-                                                <em>Copyright © {{ date("Y") }} trymyguitar, All rights reserved.</em><br>
-                                                <br>
-                                                If you didn't register to our website, please ignore this email.
+                                                If you didn't register to our website, you can ignore this email.
                                             </td>
                                         </tr>
                                         </tbody>
