@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Article;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Input;
@@ -119,6 +121,8 @@ class ArticleController extends Controller
         $article->save();
 
         $comments = $article->comments()->paginate(8);
+
+        Carbon::setLocale(LaravelLocalization::getCurrentLocale());
 
         return view('article.show', [
             'article'   => $article,

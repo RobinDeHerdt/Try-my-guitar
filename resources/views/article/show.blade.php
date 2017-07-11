@@ -19,7 +19,7 @@
             </div>
             <div class="row heading">
                 <div class="col-md-10 col-md-offset-1">
-                    <a href="{{ route('article.public.index') }}" class="icon-text icon-full"><span class="glyphicon glyphicon-list"></span>Article overview</a>
+                    <a href="{{ route('article.public.index') }}" class="icon-text icon-full"><span class="glyphicon glyphicon-list"></span>@lang('content.article-overview')</a>
                     <a href="{{ route('article.public.index') }}" class="icon-text icon-responsive"><span class="glyphicon glyphicon-list"></span></a>
                 </div>
             </div>
@@ -28,7 +28,11 @@
                     <div class="dashboard-content">
                         <h2>{{ $article->title }}</h2>
                         <div class="article-author">
-                            <span><i>{{ $article->user->fullName() }} - {{ $article->created_at ? $article->created_at->formatLocalized('%A %d %B %Y') : 'A long time ago' }}</i></span>
+                            @if($article->created_at)
+                                <span><i>{{ $article->user->fullName() . '-' . $article->created_at->formatLocalized('%A %d %B %Y') }}</i></span>
+                            @else
+                                <span><i>{{ $article->user->fullName() }} - @lang('content.long-time-ago')</i></span>
+                            @endif
                         </div>
                         <br><br>
                         <div style="background-image: url({{ Storage::disk('public')->url($article->image_uri) }})" class="article-image"></div>
@@ -39,7 +43,7 @@
                             <div class="col-md-6">
                                 <div class="social-media-left">
                                     @lang('content.views', ['view-amount' => $article->views]) ·
-                                    {{ $comments->total() }} @lang('titles.comments')
+                                    {{ $comments->total() }} @lang('content.comments')
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -58,10 +62,14 @@
                         <div class="dashboard-content">
                             @foreach($comments as $comment)
                                 <div id="comment-{{ $comment->id }}">
-                                    <span>{{ $comment->user->fullName() }}</span>
-                                    &middot; <span class="time-ago">{{ $comment->created_at ? $comment->created_at->diffForHumans() : 'A long time ago' }}</span>
+                                    <a href="{{ route('profile.show', ['user' => $comment->user->id]) }}"><span>{{ $comment->user->fullName() }}</span></a>
+                                    @if($comment->created_at)
+                                        &middot; <span class="time-ago">{{ $comment->created_at->diffForHumans() }}</span>
+                                    @else
+                                        &middot; <span class="time-ago">@lang('content.long-time-ago')</span>
+                                    @endif
                                     @if(Auth::check() && Auth::user()->id === $comment->user->id)
-                                        &middot; <span><a href="{{ route('comment.destroy', ['comment' => $comment->id]) }}" onclick="event.preventDefault(); document.getElementById('delete-comment-{{ $comment->id }}').submit();">Remove</a></span>
+                                        &middot; <span><a href="{{ route('comment.destroy', ['comment' => $comment->id]) }}" onclick="event.preventDefault(); document.getElementById('delete-comment-{{ $comment->id }}').submit();">@lang('content.remove')</a></span>
                                         <form action="{{ route('comment.destroy', ['comment' => $comment->id]) }}" method="POST" id="delete-comment-{{ $comment->id }}" style="display: none">
                                             {{ csrf_field() }}
                                         </form>
