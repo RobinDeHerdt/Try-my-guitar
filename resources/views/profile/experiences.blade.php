@@ -15,8 +15,8 @@
             @endif
             <div class="row heading">
                 <div class="col-md-12">
-                    <h1>{{ $user->first_name }}'s experiences</h1>
-                    <a href="{{ route('profile.show', ['user' => $user->id]) }}" class="icon-text icon-full"><span class="glyphicon glyphicon-user"></span>View {{ $user->first_name }}'s profile</a>
+                    <h1>@lang('content.s-experiences', ['name' => $user->first_name])</h1>
+                    <a href="{{ route('profile.show', ['user' => $user->id]) }}" class="icon-text icon-full"><span class="glyphicon glyphicon-user"></span>@lang('content.view-name-profile', ['name' => $user->first_name])</a>
                     <a href="{{ route('profile.show', ['user' => $user->id]) }}" class="icon-text icon-responsive"><span class="glyphicon glyphicon-user"></span></a>
                 </div>
             </div>
@@ -29,7 +29,7 @@
                                     @if($experience->guitar->guitarImages->isNotEmpty())
                                         <img src="{{ Storage::disk('public')->url($experience->guitar->guitarImages()->first()->image_uri) }}" class="search-result-image">
                                     @else
-                                        <div class="search-result-image">No image available</div>
+                                        <div class="search-result-image no-image">@lang('content.no-image-available')</div>
                                     @endif
                                 </a>
                                 <h3>{{ $experience->guitar->name }}</h3>
@@ -55,12 +55,12 @@
                                         <div class="col-md-12">
                                             <div class="col-md-4 col-md-offset-2">
                                                 <a href="{{ route('experience.update', ['id' => $experience->id ]) }}" onclick="event.preventDefault(); showEditForm({{ $experience->id }});" title="Update your experience">
-                                                    <span class="glyphicon glyphicon-edit"></span> Edit
+                                                    <span class="glyphicon glyphicon-edit"></span> @lang('input.edit')
                                                 </a>
                                             </div>
                                             <div class="col-md-4">
                                                 <a href="{{ route('experience.destroy', ['id' => $experience->id ]) }}" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $experience->id }}').submit();" title="Remove your experience">
-                                                    <span class="glyphicon glyphicon-trash"></span> Delete
+                                                    <span class="glyphicon glyphicon-trash"></span> @lang('input.delete')
                                                 </a>
                                                 <form action="{{ route('experience.destroy', ['id' => $experience->id ])}}"  method="POST" id="delete-form-{{ $experience->id }}" style="display: none">
                                                     {{ csrf_field() }}
@@ -72,13 +72,13 @@
                                 <hr>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <a href="{{ route('experience.vote', ['id' => $experience->id ])}}" class="cta-button" title="Mark this experience as helpful" onclick="event.preventDefault(); vote('{{ $experience->id }}', 1);">
+                                        <a href="{{ route('experience.vote', ['id' => $experience->id ])}}" class="cta-button" title="@lang('content.mark-as-helpful')" onclick="event.preventDefault(); vote('{{ $experience->id }}', 1);">
                                             <span>
                                                 <i class="fa {{ Auth::check() && $experience->upVotes->contains('user_id', Auth::user()->id) ? 'fa-thumbs-up' : 'fa-thumbs-o-up' }}" aria-hidden="true"></i>
                                                 {{ $experience->upVotes->count() }}
                                             </span>
                                         </a>
-                                        <a href="{{ route('experience.vote', ['id' => $experience->id ])}}" class="cta-button" title="Mark this experience as not helpful" onclick="event.preventDefault(); vote('{{ $experience->id }}', 0);">
+                                        <a href="{{ route('experience.vote', ['id' => $experience->id ])}}" class="cta-button" title="@lang('content.mark-as--not-helpful')" onclick="event.preventDefault(); vote('{{ $experience->id }}', 0);">
                                              <span>
                                                  <i class="fa {{ Auth::check() && $experience->downVotes->contains('user_id', Auth::user()->id) ? 'fa-thumbs-down' : 'fa-thumbs-o-down' }}" aria-hidden="true"></i>
                                                  {{ $experience->downVotes->count() }}
@@ -95,7 +95,7 @@
                     @endforeach
                 </div>
             @else
-                <h4>Nothing to see here (yet).</h4>
+                <h4>@lang('content.')</h4>
             @endif
         </div>
     </div>

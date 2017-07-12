@@ -14,4 +14,8 @@ return [
     'article-overview'      => 'Article overview',
     'comments'              => 'Comments',
     'leave-comment'         => 'Leave a comment',
+    'images'                => 'Images',
+    'guitars'               => 'Guitars',
+    'experiences'           => 'Experiences',
+    'collection'            => 'Collection',
 ];

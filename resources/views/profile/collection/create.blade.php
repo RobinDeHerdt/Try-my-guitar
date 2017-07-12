@@ -32,7 +32,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="experience">@lang('input.experience')</label>
-                                <textarea name="experience" cols="30" rows="5" class="form-control"></textarea>
+                                <textarea name="experience" cols="30" rows="5" class="form-control" placeholder="@lang('input.describe-experience')"></textarea>
                             </div>
                         </div>
                     </div>

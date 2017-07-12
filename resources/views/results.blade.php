@@ -124,7 +124,7 @@
                                     @if($guitar->guitarImages->isNotEmpty())
                                         <img src="{{ Storage::disk('public')->url($guitar->guitarImages()->first()->image_uri) }}" class="search-result-image">
                                     @else
-                                        <div class="search-result-image no-image"><span>@lang('content.no-image')</span></div>
+                                        <div class="search-result-image no-image"><span>@lang('content.no-image-available')</span></div>
                                     @endif
                                     <h3>{{ $guitar->name }}</h3>
                                 </div>
@@ -144,7 +144,7 @@
                                     @if($guitar->guitarImages->isNotEmpty())
                                         <img src="{{ Storage::disk('public')->url($guitar->guitarImages()->first()->image_uri) }}" class="search-result-image">
                                     @else
-                                        <div class="search-result-image">No image available</div>
+                                        <div class="search-result-image no-image">@lang('content.no-image-available')</div>
                                     @endif
                                     <h3>{{ $guitar->name }}</h3>
                                 </div>

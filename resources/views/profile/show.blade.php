@@ -29,7 +29,7 @@
                 @if(Auth::check())
                     @if ($user->id === Auth::user()->id)
                         <a href="{{ route('profile.edit') }}">
-                            <div class="profile-button blue" title="Edit profile">
+                            <div class="profile-button blue" title="@lang('content.edit-profile')">
                                 <i class="fa fa-pencil fa-2x" aria-hidden="true"></i>
                             </div>
                         </a>
@@ -48,7 +48,7 @@
                 @endif
             </div>
             @if($guitars->isNotEmpty())
-                <h2>Collection <span class="counter">{{ $user->guitars->count() }}</span></h2>
+                <h2>@lang('titles.collection') <span class="counter">{{ $user->guitars->count() }}</span></h2>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="dashboard-content">
@@ -56,7 +56,11 @@
                                 @foreach($guitars as $guitar)
                                     <div class="collection-item">
                                         <a href="{{ route('guitar.show', ['guitar' => $guitar->id]) }}">
-                                            <div style="background-image: url({{ Storage::disk('public')->url($guitar->guitarImages()->first()->image_uri) }})" class="collection-item-image"></div>
+                                            @if($guitar->guitarImages->isNotEmpty())
+                                                <div style="background-image: url({{ Storage::disk('public')->url($guitar->guitarImages()->first()->image_uri) }})" class="collection-item-image"></div>
+                                            @else
+                                                <div class="collection-item-image"><span>@lang('content.no-image-available')</span></div>
+                                            @endif
                                             <div class="collection-text">
                                                 <span>{{ $guitar->name }}</span>
                                             </div>
@@ -72,7 +76,7 @@
                         <div class="profile-collection-button">
                             <a href="{{ route('collection.show', ['id' => $user]) }}">
                                 <div class="big-cta-button">
-                                    View collection
+                                    @lang('content.view-collection')
                                 </div>
                             </a>
                         </div>
@@ -80,7 +84,7 @@
                 </div>
             @endif
             @if($user->experiences->isNotEmpty())
-                <h2>Experiences <span class="counter">{{ $user->experiences->count() }}</span></h2>
+                <h2>@lang('titles.experiences') <span class="counter">{{ $user->experiences->count() }}</span></h2>
                 <div class="row">
                     @foreach($user->experiences as $experience)
                         <div class="col-md-6">
@@ -89,7 +93,11 @@
                                     <div class="col-md-4">
                                         <div class="experience-user">
                                             <a href="{{ route('guitar.show', ['guitar' => $experience->guitar->id]) }}" title="{{ $experience->guitar->name }}">
-                                                <div class="experience-guitar-image" style="background-image: url({{ Storage::disk('public')->url($experience->guitar->guitarImages()->first()->image_uri) }})"></div>
+                                                @if($experience->guitar->guitarImages->isNotEmpty())
+                                                    <div class="experience-guitar-image" style="background-image: url({{ Storage::disk('public')->url($experience->guitar->guitarImages()->first()->image_uri) }})"></div>
+                                                @else
+                                                    <div class="experience-guitar-image no-image"><span>@lang('content.no-image-available')</span></div>
+                                                @endif
                                             </a>
                                         </div>
                                     </div>
@@ -110,7 +118,7 @@
                         <div class="profile-collection-button">
                             <a href="{{ route('profile.experiences', ['id' => $user]) }}">
                                 <div class="big-cta-button">
-                                    View experiences
+                                    @lang('content.view-experiences')
                                 </div>
                             </a>
                         </div>

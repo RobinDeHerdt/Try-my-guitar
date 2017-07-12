@@ -14,4 +14,8 @@ return [
     'article-overview'      => 'Overzicht van alle artikels',
     'comments'              => 'Reacties',
     'leave-comment'         => 'Laat een reactie achter',
+    'images'                => 'Afbeeldingen',
+    'guitars'               => 'Gitaren',
+    'experiences'           => 'Ervaringen',
+    'collection'            => 'Collectie',
 ];

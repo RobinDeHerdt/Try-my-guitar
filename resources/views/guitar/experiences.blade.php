@@ -9,8 +9,8 @@
         <div class="container">
             <div class="row heading">
                 <div class="col-md-12">
-                    <h1>"{{ $guitar->name }}" experiences</h1>
-                    <a href="{{ route('guitar.show', $guitar->id) }}" class="icon-text icon-full"><span class="glyphicon glyphicon-search"></span>View guitar</a>
+                    <h1>@lang('content.guitar-experiences', ['guitar' => $guitar->name, 'brand' => $guitar->guitarBrand->name])</h1>
+                    <a href="{{ route('guitar.show', $guitar->id) }}" class="icon-text icon-full"><span class="glyphicon glyphicon-search"></span>@lang('content.view-guitar')</a>
                     <a href="{{ route('guitar.show', $guitar->id) }}" class="icon-text icon-responsive"><span class="glyphicon glyphicon-search"></span></a>
                 </div>
             </div>
@@ -31,13 +31,13 @@
                             </div>
                             <hr>
                             <div class="col-md-12">
-                                <a href="{{ route('experience.vote', ['id' => $experience->id ])}}" class="cta-button" title="Mark this experience as helpful" onclick="event.preventDefault(); vote('{{ $experience->id }}', 1);">
+                                <a href="{{ route('experience.vote', ['id' => $experience->id ])}}" class="cta-button" title="@lang('content.mark-as-helpful')" onclick="event.preventDefault(); vote('{{ $experience->id }}', 1);">
                                     <span>
                                          <i class="fa {{ Auth::check() && $experience->upVotes->contains('user_id', Auth::user()->id) ? 'fa-thumbs-up' : 'fa-thumbs-o-up' }}" aria-hidden="true"></i>
                                           {{ $experience->upVotes->count() }}
                                     </span>
                                 </a>
-                                <a href="{{ route('experience.vote', ['id' => $experience->id ])}}" class="cta-button" title="Mark this experience as not helpful" onclick="event.preventDefault(); vote('{{ $experience->id }}', 0);">
+                                <a href="{{ route('experience.vote', ['id' => $experience->id ])}}" class="cta-button" title="@lang('content.mark-as-not-helpful')" onclick="event.preventDefault(); vote('{{ $experience->id }}', 0);">
                                     <span>
                                          <i class="fa {{ Auth::check() && $experience->downVotes->contains('user_id', Auth::user()->id) ? 'fa-thumbs-down' : 'fa-thumbs-o-down' }}" aria-hidden="true"></i>
                                         {{ $experience->downVotes->count() }}

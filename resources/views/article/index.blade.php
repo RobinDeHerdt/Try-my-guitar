@@ -14,15 +14,15 @@
                         <div class="icon-text">
                             <div class="form-group">
                                 <select class="form-control" id="sort-selector" name="sort">
-                                    <option value="newest" {{ $sort_filter === 'newest' ? 'selected' : '' }}>Newest first</option>
-                                    <option value="oldest" {{ $sort_filter === 'oldest' ? 'selected' : '' }}>Oldest first</option>
+                                    <option value="newest" {{ $sort_filter === 'newest' ? 'selected' : '' }}>@lang('input.newest-first')</option>
+                                    <option value="oldest" {{ $sort_filter === 'oldest' ? 'selected' : '' }}>@lang('input.oldest-first')</option>
                                 </select>
                             </div>
                         </div>
                         <div class="icon-text">
                             <div class="form-group">
                                 <select class="form-control" id="lang-selector"name="lang">
-                                    <option value="all" {{ $lang_filter === 'all' ? 'selected' : '' }}>All languages</option>
+                                    <option value="all" {{ $lang_filter === 'all' ? 'selected' : '' }}>@lang('input.all-languages')</option>
                                     @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                                         <option value="{{ $localeCode }}" {{ $lang_filter === $localeCode ? 'selected' : '' }}>{{ $properties['native'] }}</option>
                                     @endforeach

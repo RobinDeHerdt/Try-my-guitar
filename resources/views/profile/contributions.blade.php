@@ -18,14 +18,14 @@
             @endif
             <div class="row heading">
                 <div class="col-md-12">
-                    <h1>{{ $user->first_name }}'s contributions</h1>
-                    <a href="{{ route('profile.show', ['user' => $user->id]) }}" class="icon-text icon-full"><span class="glyphicon glyphicon-user"></span>View {{ $user->first_name }}'s profile</a>
+                    <h1>@lang('content.s-contributions', ['name' => $user->first_name])</h1>
+                    <a href="{{ route('profile.show', ['user' => $user->id]) }}" class="icon-text icon-full"><span class="glyphicon glyphicon-user"></span>@lang('content.view-name-profile', ['name' => $user->first_name])</a>
                     <a href="{{ route('profile.show', ['user' => $user->id]) }}" class="icon-text icon-responsive"><span class="glyphicon glyphicon-user"></span></a>
                 </div>
             </div>
             @if($guitars->isNotEmpty() || $images->isNotEmpty())
                 @if($guitars->isNotEmpty())
-                    <h3>Guitars</h3>
+                    <h3>@lang('titles.guitars')</h3>
                     <div class="row">
                         @foreach($guitars as $guitar)
                             <div class="col-md-6">
@@ -43,7 +43,7 @@
                                     @if(Auth::check() && Auth::user()->id === $user->id)
                                         <hr>
                                         <div class="center-content">
-                                            <a href="{{ route('guitar.destroy', ['guitar' => $guitar->id]) }}" onclick="event.preventDefault(); document.getElementById('guitar-{{ $guitar->id }}').submit();">Remove</a>
+                                            <a href="{{ route('guitar.destroy', ['guitar' => $guitar->id]) }}" onclick="event.preventDefault(); document.getElementById('guitar-{{ $guitar->id }}').submit();">@lang('content.remove')</a>
                                         </div>
                                         <form action="{{ route('guitar.destroy', ['guitar' => $guitar->id]) }}" method="POST" id="guitar-{{ $guitar->id }}">
                                             {{ csrf_field() }}
@@ -55,7 +55,7 @@
                     </div>
                 @endif
                 @if($images->isNotEmpty())
-                    <h3 class="padding-top">Images</h3>
+                    <h3 class="padding-top">@lang('titles.images')</h3>
                     <div class="row">
                         @foreach($images as $image)
                             <div class="col-md-6">
@@ -64,7 +64,7 @@
                                     @if(Auth::check() && Auth::user()->id === $user->id)
                                         <hr>
                                         <div class="center-content">
-                                            <a href="{{ route('guitar.image.destroy', ['guitarImage' => $image->id]) }}" onclick="event.preventDefault(); document.getElementById('guitar-image-{{ $guitar->id }}').submit();">Remove</a>
+                                            <a href="{{ route('guitar.image.destroy', ['guitarImage' => $image->id]) }}" onclick="event.preventDefault(); document.getElementById('guitar-image-{{ $guitar->id }}').submit();">@lang('content.remove')</a>
                                         </div>
                                         <form action="{{ route('guitar.image.destroy', ['guitarImage' => $image->id]) }}" method="POST" id="guitar-image-{{ $guitar->id }}">
                                             {{ csrf_field() }}
@@ -78,7 +78,7 @@
 
                 @endif
             @else
-                <h4>Nothing to see here (yet).</h4>
+                <h4>@lang('content.nothing-to-see-here')</h4>
             @endif
         </div>
     </div>

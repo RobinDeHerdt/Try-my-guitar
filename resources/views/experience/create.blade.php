@@ -15,8 +15,8 @@
             @endif
             <div class="row heading">
                 <div class="col-md-12">
-                    <h1>Your "{{ $guitar->name }} ({{ $guitar->guitarBrand->name }})" experience</h1>
-                    <a href="{{ route('guitar.show', ['guitar' => $guitar]) }}" class="icon-text icon-full"><span class="glyphicon glyphicon-search"></span>Show guitar</a>
+                    <h1>@lang('content.your-guitar-experience', ['guitar' => $guitar->name, 'brand' => $guitar->guitarBrand->name])</h1>
+                    <a href="{{ route('guitar.show', ['guitar' => $guitar]) }}" class="icon-text icon-full"><span class="glyphicon glyphicon-search"></span>@lang('content.view-guitar')</a>
                     <a href="{{ route('guitar.show', ['guitar' => $guitar]) }}" class="icon-text icon-responsive"><span class="glyphicon glyphicon-search"></span></a>
                 </div>
             </div>
@@ -28,14 +28,14 @@
                             <input type="hidden" name="guitar" value="{{ $guitar->id }}">
                             <div class="form-group">
                                 <label for="experience">@lang('input.experience')</label>
-                                <textarea name="experience" cols="30" rows="5" class="form-control"></textarea>
+                                <textarea name="experience" cols="30" rows="5" class="form-control" placeholder="@lang('input.describe-experience')"></textarea>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-2">
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary form-control">Save</button>
+                                <button type="submit" class="btn btn-primary form-control">@lang('input.save')</button>
                             </div>
                         </div>
                     </div>

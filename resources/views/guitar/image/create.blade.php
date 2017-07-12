@@ -15,8 +15,8 @@
             @endif
             <div class="row heading">
                 <div class="col-md-12">
-                    <h1>Upload image(s) for "{{ $guitar->name }} ({{ $guitar->guitarBrand->name }})"</h1>
-                    <a href="{{ route('guitar.show', ['guitar' => $guitar]) }}" class="icon-text icon-full"><span class="glyphicon glyphicon-search"></span>Show guitar</a>
+                    <h1>@lang('input.upload-guitar-images', ['guitar' => $guitar->name, 'brand' => $guitar->guitarBrand->name])</h1>
+                    <a href="{{ route('guitar.show', ['guitar' => $guitar]) }}" class="icon-text icon-full"><span class="glyphicon glyphicon-search"></span>@lang('content.view-guitar')</a>
                     <a href="{{ route('guitar.show', ['guitar' => $guitar]) }}" class="icon-text icon-responsive"><span class="glyphicon glyphicon-search"></span></a>
                 </div>
             </div>
@@ -26,7 +26,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group {{ $errors->all() ? ' has-error' : '' }}">
-                                <label for="experience">Upload one or more images</label>
+                                <label for="experience">@lang('input.upload-images')</label>
                                 <input type="file" class="form-control" name="images[]" multiple>
                                 @if ($errors->has('images'))
                                     <span class="help-block">
@@ -44,7 +44,7 @@
                     <div class="row">
                         <div class="col-md-2">
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary form-control">Save</button>
+                                <button type="submit" class="btn btn-primary form-control">@lang('input.save')</button>
                             </div>
                         </div>
                     </div>
