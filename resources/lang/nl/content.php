@@ -75,4 +75,8 @@ return [
     'view-guitar'               => 'Bekijk gitaar',
     'mark-as-helpful'           => 'Markeer deze ervaring als \'behulpzaam\'',
     'mark-as-not-helpful'       => 'Markeer deze ervaring als \'niet behulpzaam\'',
+    'no-open-conversations'     => 'Je hebt momenteel geen actieve gesprekken.',
+    'edit-conversation-name'    => 'Verander de naam van dit gesprek',
+    'back-to-conversations'     => 'Terug naar gesprekken',
+    'leave-conversation'        => 'Verlaat dit gesprek',
 ];

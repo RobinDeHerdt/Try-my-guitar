@@ -64,9 +64,9 @@
                                     @if(Auth::check() && Auth::user()->id === $user->id)
                                         <hr>
                                         <div class="center-content">
-                                            <a href="{{ route('guitar.image.destroy', ['guitarImage' => $image->id]) }}" onclick="event.preventDefault(); document.getElementById('guitar-image-{{ $guitar->id }}').submit();">@lang('content.remove')</a>
+                                            <a href="{{ route('guitar.image.destroy', ['guitarImage' => $image->id]) }}" onclick="event.preventDefault(); document.getElementById('guitar-image-{{ $image->id }}').submit();">@lang('content.remove')</a>
                                         </div>
-                                        <form action="{{ route('guitar.image.destroy', ['guitarImage' => $image->id]) }}" method="POST" id="guitar-image-{{ $guitar->id }}">
+                                        <form action="{{ route('guitar.image.destroy', ['guitarImage' => $image->id]) }}" method="POST" id="guitar-image-{{ $image->id }}">
                                             {{ csrf_field() }}
                                         </form>
                                     @endif

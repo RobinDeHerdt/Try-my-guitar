@@ -76,4 +76,8 @@ return [
     'view-guitar'               => 'View guitar',
     'mark-as-helpful'           => 'Mark this experience as \'helpful\'',
     'mark-as-not-helpful'       => 'Mark this experience as \'not helpful\'',
+    'no-open-conversations'     => 'You don\'t have open conversations at the moment.',
+    'edit-conversation-name'    => 'Edit conversation name',
+    'back-to-conversations'     => 'Back to conversations',
+    'leave-conversation'        => 'Leave this conversation',
 ];

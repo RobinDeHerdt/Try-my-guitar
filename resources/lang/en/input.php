@@ -53,4 +53,5 @@ return [
     'all-languages'             => 'All languages',
     'newest-first'              => 'Newest first',
     'oldest-first'              => 'Oldest first',
+    'close'                     => 'Close',
 ];

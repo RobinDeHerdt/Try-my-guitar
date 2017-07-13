@@ -14,11 +14,11 @@
             </div>
             <div class="row heading">
                 <div class="col-md-12">
-                    <a href="{{ route('chat.leave', ['channel' => $channel->id]) }}" class="icon-text icon-full" onclick="event.preventDefault(); document.getElementById('leave-form').submit();"><span class="glyphicon glyphicon-log-out"></span>Leave this conversation</a>
+                    <a href="{{ route('chat.leave', ['channel' => $channel->id]) }}" class="icon-text icon-full" onclick="event.preventDefault(); document.getElementById('leave-form').submit();"><span class="glyphicon glyphicon-log-out"></span>@lang('content.leave-conversation')</a>
                     <a href="{{ route('chat.leave', ['channel' => $channel->id]) }}" class="icon-text icon-responsive" onclick="event.preventDefault(); document.getElementById('leave-form').submit();"><span class="glyphicon glyphicon-log-out"></span></a>
-                    <a href="{{ route('chat.index') }}" class="icon-text icon-full"><span class="glyphicon glyphicon-th-list"></span>Back to conversations</a>
+                    <a href="{{ route('chat.index') }}" class="icon-text icon-full"><span class="glyphicon glyphicon-th-list"></span>@lang('content.back-to-conversations')</a>
                     <a href="{{ route('chat.index') }}" class="icon-text icon-responsive"><span class="glyphicon glyphicon-th-list"></span></a>
-                    <a href="{{ route('chat.update', ['channel' => $channel->id]) }}" class="icon-text icon-full" onclick="event.preventDefault(); showEditForm();"><span class="glyphicon glyphicon-pencil"></span>Edit conversation name</a>
+                    <a href="{{ route('chat.update', ['channel' => $channel->id]) }}" class="icon-text icon-full" onclick="event.preventDefault(); showEditForm();"><span class="glyphicon glyphicon-pencil"></span>@lang('content.edit-conversation-name')</a>
                     <a href="{{ route('chat.update', ['channel' => $channel->id]) }}" class="icon-text icon-responsive" onclick="event.preventDefault(); showEditForm();"><span class="glyphicon glyphicon-pencil"></span></a>
                     <div class="row edit-channel-form">
                         <div id="edit-channel-form" style="display: none;">
@@ -27,9 +27,9 @@
                                 <input type="text" id="channel_name" class="form-control" value="{{ $channel->name }}">
                             </div>
                             <div class="col-md-2">
-                                <button onclick="changeChatName();" class="btn btn-primary">Save</button>
+                                <button onclick="changeChatName();" class="btn btn-primary">@lang('input.save')</button>
                                 <div class="close-edit-form" onclick="hideEditForm();">
-                                    <span>Close </span> <span class="glyphicon glyphicon-remove"></span>
+                                    <span>@lang('input.close') </span> <span class="glyphicon glyphicon-remove"></span>
                                 </div>
                             </div>
                         </div>

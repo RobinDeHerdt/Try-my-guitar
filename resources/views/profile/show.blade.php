@@ -59,7 +59,7 @@
                                             @if($guitar->guitarImages->isNotEmpty())
                                                 <div style="background-image: url({{ Storage::disk('public')->url($guitar->guitarImages()->first()->image_uri) }})" class="collection-item-image"></div>
                                             @else
-                                                <div class="collection-item-image"><span>@lang('content.no-image-available')</span></div>
+                                                <div class="collection-item-image no-collection-image"><span>@lang('content.no-image-available')</span></div>
                                             @endif
                                             <div class="collection-text">
                                                 <span>{{ $guitar->name }}</span>
@@ -73,7 +73,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-4 col-md-offset-4">
-                        <div class="profile-collection-button">
+                        <div class="profile-collection-button" id="margin">
                             <a href="{{ route('collection.show', ['id' => $user]) }}">
                                 <div class="big-cta-button">
                                     @lang('content.view-collection')
@@ -96,7 +96,7 @@
                                                 @if($experience->guitar->guitarImages->isNotEmpty())
                                                     <div class="experience-guitar-image" style="background-image: url({{ Storage::disk('public')->url($experience->guitar->guitarImages()->first()->image_uri) }})"></div>
                                                 @else
-                                                    <div class="experience-guitar-image no-image"><span>@lang('content.no-image-available')</span></div>
+                                                    <div class="experience-guitar-image no-experience-image"><span>@lang('content.no-image-available')</span></div>
                                                 @endif
                                             </a>
                                         </div>

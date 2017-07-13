@@ -53,4 +53,5 @@ return [
     'all-languages'             => 'Alle talen',
     'newest-first'              => 'Nieuwste eerst',
     'oldest-first'              => 'Oudste eerst',
+    'close'                     => 'Sluiten',
 ];

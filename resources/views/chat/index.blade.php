@@ -37,7 +37,7 @@
                         </div>
                     @else
                         <div class="no-results">
-                            <h4>You don't have open conversations at the moment.</h4>
+                            <h4>@lang('content.no-open-conversations')</h4>
                         </div>
                     @endif
                 </div>

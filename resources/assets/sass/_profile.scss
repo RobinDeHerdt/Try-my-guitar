@@ -85,6 +85,10 @@
 }
 
 .profile-collection-button {
+  &#margin {
+    margin-top: 50px;
+  }
+
   a:link, a:visited, a:hover, a:active {
     color: #fff;
     font-size: 18px;
@@ -191,6 +195,7 @@
     }
 
     .collection-item-image {
+      text-align: center;
       height: 250px;
       width: 250px;
       background-size: contain;
@@ -199,6 +204,10 @@
       margin: 0 auto;
       background-color: white;
       padding: 100px;
+
+      &.no-collection-image {
+        padding: 200px 0 0 0;
+      }
     }
 
     .collection-item-color {
