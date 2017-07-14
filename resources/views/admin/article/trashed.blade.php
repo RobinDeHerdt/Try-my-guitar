@@ -7,6 +7,7 @@
 @section('content')
     <div class="content">
         <div class="container">
+            @include('partials.messages')
             <div class="row heading">
                 <div class="col-md-12">
                     <h1>Trashed articles</h1>
@@ -14,12 +15,6 @@
                     <a href="{{ route('articles.index') }}" class="icon-text icon-responsive"><span class="glyphicon glyphicon-list"></span></a>
                 </div>
             </div>
-            @if (Session::has('success-message'))
-                <div class="alert alert-success">{{ Session::get('success-message') }}</div>
-            @endif
-            @if (Session::has('info-message'))
-                <div class="alert alert-info">{{ Session::get('info-message') }}</div>
-            @endif
             @if($articles->isNotEmpty())
                 <div class="table-responsive">
                     <table class="table table-striped">

@@ -7,6 +7,7 @@
 @section('content')
     <div class="content">
         <div class="container">
+            @include('partials.messages')
             <div class="row heading">
                 <div class="col-md-12">
                     <h1>@lang('content.invite-to-conversation', ['name' => $user->first_name])</h1>
@@ -18,12 +19,6 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    @if (Session::has('success-message'))
-                        <div class="alert alert-success">{{ Session::get('success-message') }}</div>
-                    @endif
-                    @if (Session::has('info-message'))
-                        <div class="alert alert-info">{{ Session::get('info-message') }}</div>
-                    @endif
                     <div class="chats-overview">
                         @foreach($channels as $channel)
                             <div class="channel">

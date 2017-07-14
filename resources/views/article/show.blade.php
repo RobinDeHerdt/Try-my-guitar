@@ -9,12 +9,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-10 col-md-offset-1 no-padding">
-                    @if (Session::has('success-message'))
-                        <div class="alert alert-success alert-margin">{{ Session::get('success-message') }}</div>
-                    @endif
-                    @if (Session::has('info-message'))
-                        <div class="alert alert-info alert-margin">{{ Session::get('info-message') }}</div>
-                    @endif
+                    @include('partials.messages')
                 </div>
             </div>
             <div class="row heading">

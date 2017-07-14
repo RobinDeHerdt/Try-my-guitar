@@ -12,6 +12,7 @@
 @section('content')
     <div class="content">
         <div class="container">
+            @include('partials.messages')
             <div class="row">
                 <div class="col-md-12">
                     @if(Auth::check())

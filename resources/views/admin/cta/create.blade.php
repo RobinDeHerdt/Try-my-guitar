@@ -7,6 +7,7 @@
 @section('content')
     <div class="content">
         <div class="container">
+            @include('partials.messages')
             <div class="row heading">
                 <div class="col-md-12">
                     <h1>Create call to action</h1>
@@ -14,12 +15,6 @@
                     <a href="{{ route('admin.cta.index') }}" class="icon-text icon-responsive"><span class="glyphicon glyphicon-list"></span></a>
                 </div>
             </div>
-            @if (Session::has('success-message'))
-                <div class="alert alert-success">{{ Session::get('success-message') }}</div>
-            @endif
-            @if (Session::has('info-message'))
-                <div class="alert alert-info">{{ Session::get('info-message') }}</div>
-            @endif
             <form action="{{ route('admin.cta.store') }}" method="POST" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="row">

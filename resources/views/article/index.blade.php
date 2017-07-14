@@ -7,6 +7,7 @@
 @section('content')
     <div class="content">
         <div class="container">
+            @include('partials.messages')
             <div class="row heading">
                 <div class="col-md-12">
                     <h1>@lang('titles.article-overview')</h1>

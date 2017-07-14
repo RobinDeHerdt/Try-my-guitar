@@ -7,12 +7,7 @@
 @section('content')
     <div class="content">
         <div class="container">
-            @if (Session::has('success-message'))
-                <div class="alert alert-success alert-margin">{{ Session::get('success-message') }}</div>
-            @endif
-            @if (Session::has('info-message'))
-                <div class="alert alert-info alert-margin">{{ Session::get('info-message') }}</div>
-            @endif
+            @include('partials.messages')
             <div class="row heading">
                 <div class="col-md-12">
                     <h1>@lang('dashboard.chat')</h1>

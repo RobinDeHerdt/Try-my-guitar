@@ -9,15 +9,7 @@
         <div class="header-image" style="background-image: url('/images/about-bg.jpg');"></div>
         <div class="container">
             <div class="row">
-                @if (Session::has('success-message'))
-                    <div class="alert alert-success alert-margin" id="alert">{{ Session::get('success-message') }}</div>
-                @endif
-                @if (Session::has('info-message'))
-                    <div class="alert alert-info alert-margin" id="alert">{{ Session::get('info-message') }}</div>
-                @endif
-                @if (Session::has('error-message'))
-                    <div class="alert alert-danger alert-margin" id="alert">{{ Session::get('error-message') }}</div>
-                @endif
+                @include('partials.messages')
             </div>
             <h2 id="meet">Meet people</h2>
             <div class="row">
