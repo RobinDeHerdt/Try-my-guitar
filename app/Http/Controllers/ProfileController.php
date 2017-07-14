@@ -119,9 +119,9 @@ class ProfileController extends Controller
 
         if ($send_mail) {
             Mail::to($user->email)->send(new VerifyEmail($user));
-            Session::flash('success-message', 'Personal information updated successfully. We\'ve sent a verification link to your new email address.');
+            Session::flash('success-message', __('flash.new-email'));
         } else {
-            Session::flash('success-message', 'Personal information updated successfully.');
+            Session::flash('success-message', __('flash.personal-info-updated'));
         }
 
         return back();
@@ -161,7 +161,7 @@ class ProfileController extends Controller
 
         $user->save();
 
-        Session::flash('success-message', 'Profile appearance updated successfully.');
+        Session::flash('success-message', __('flash.profile-appearace-updated'));
 
         return back();
     }

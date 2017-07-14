@@ -42,7 +42,7 @@ class ContactController extends Controller
 
         $contact_message->save();
 
-        Session::flash('success-message', 'Thanks for your message!');
+        Session::flash('success-message', __('flash.contact-message'));
 
         return redirect(route('about').'#alert');
     }

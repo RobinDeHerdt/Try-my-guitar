@@ -88,9 +88,9 @@ class ReportController extends Controller
 
             $report->save();
 
-            Session::flash('success-message', 'Thanks for your report. The admin team will review this report as soon as possible.');
+            Session::flash('success-message', __('flash.report-sent'));
         } else {
-            Session::flash('info-message', 'You have already reported this person. Please await the review of the admin team.');
+            Session::flash('info-message', __('flash.report-already-sent'));
         }
 
         return redirect(route('dashboard'));

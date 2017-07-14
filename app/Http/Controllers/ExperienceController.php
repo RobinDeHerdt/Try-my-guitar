@@ -76,7 +76,9 @@ class ExperienceController extends Controller
 
             $this->addExp($this->user, 75);
 
-            return redirect(route('profile.experiences', ['user' => $this->user->id]) . "#experience-" . $experience->id);
+            return redirect(route('profile.experiences', [
+                'user' => $this->user->id
+            ]) . "#experience-" . $experience->id);
         } else {
             return back();
         }
@@ -113,7 +115,7 @@ class ExperienceController extends Controller
 
             $this->subtractExp($this->user, 75);
 
-            Session::flash('success-message', 'Experience removed successfully.');
+            Session::flash('success-message', __('flash.experience-removed'));
         }
 
         return back();

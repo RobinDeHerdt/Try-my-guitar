@@ -70,7 +70,7 @@ class CommentController extends Controller
         if ($comment->user->id === $this->user->id) {
             $comment->delete();
 
-            Session::flash('success-message', 'Your comment has been removed.');
+            Session::flash('success-message', __('flash.comment-removed'));
 
             return back();
         } else {

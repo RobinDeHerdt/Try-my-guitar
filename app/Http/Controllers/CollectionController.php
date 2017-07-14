@@ -116,7 +116,7 @@ class CollectionController extends Controller
     {
         $this->user->guitars()->detach($guitar->id);
 
-        Session::flash('success-message', 'The guitar was removed from your collection.');
+        Session::flash('success-message', __('flash.removed-from-collection'));
 
         return back();
     }

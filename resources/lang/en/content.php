@@ -80,4 +80,10 @@ return [
     'edit-conversation-name'    => 'Edit conversation name',
     'back-to-conversations'     => 'Back to conversations',
     'leave-conversation'        => 'Leave this conversation',
+    'invite-to-conversation'    => 'Invite :name to a conversation',
+    'conversations'             => 'Conversations',
+    'create-conversation'       => 'Create a new conversation',
+    'choose-channel-name'       => 'Choose a conversation name',
+    'valid-reason'              => 'Please enter a valid reason for reporting this user',
+    'report-fullname'           => 'Report :fullname',
 ];

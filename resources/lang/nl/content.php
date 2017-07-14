@@ -79,4 +79,10 @@ return [
     'edit-conversation-name'    => 'Verander de naam van dit gesprek',
     'back-to-conversations'     => 'Terug naar gesprekken',
     'leave-conversation'        => 'Verlaat dit gesprek',
+    'invite-to-conversation'    => 'Nodig :name uit tot een gesprek',
+    'conversations'             => 'Gesprekken',
+    'create-conversation'       => 'Maak een nieuw gesprek aan',
+    'choose-channel-name'       => 'Kies een gespreksnaam',
+    'valid-reason'              => 'Geef een goede reden in om deze persoon te rapporteren',
+    'report-fullname'           => 'Rapporteer :fullname',
 ];

@@ -124,7 +124,7 @@ class GuitarController extends Controller
     }
 
     /**
-     * Store the guitar image.
+     * Store the guitar.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Database\Eloquent\Collection
@@ -275,12 +275,12 @@ class GuitarController extends Controller
                 $image_amount = $guitar->guitarImages()->count();
                 $guitar->delete();
                 $this->subtractExp($this->user, 100 + ($image_amount * 25));
-                Session::flash('success-message', 'The guitar was deleted successfully.');
+                Session::flash('success-message', __('flash.guitar-deleted'));
             } else {
-                Session::flash('error-message', 'This guitar is part of someone\'s collection. It could not be deleted.');
+                Session::flash('error-message', __('flash.part-of-collection'));
             }
         } else {
-            Session::flash('error-message', 'Something went wrong. The guitar was not deleted.');
+            Session::flash('error-message', __('flash.error-guitar-not-deleted'));
         }
 
         return back();
@@ -297,9 +297,9 @@ class GuitarController extends Controller
         if ($guitarImage->user->id === $this->user->id) {
             $guitarImage->delete();
             $this->subtractExp($this->user, 25);
-            Session::flash('success-message', 'The image was deleted successfully.');
+            Session::flash('success-message', __('flash.image-deleted'));
         } else {
-            Session::flash('error-message', 'Something went wrong. The image was not deleted.');
+            Session::flash('error-message', __('flash-error-image-not-deleted'));
         }
 
         return back();

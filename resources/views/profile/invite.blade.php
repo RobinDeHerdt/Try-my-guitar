@@ -9,10 +9,10 @@
         <div class="container">
             <div class="row heading">
                 <div class="col-md-12">
-                    <h1>Invite {{ $user->first_name }} to a conversation</h1>
-                    <a href="{{ route('chat.index') }}" class="icon-text icon-full"><span class="glyphicon glyphicon-list"></span>Conversation overview</a>
+                    <h1>@lang('content.invite-to-conversation', ['name' => $user->first_name])</h1>
+                    <a href="{{ route('chat.index') }}" class="icon-text icon-full"><span class="glyphicon glyphicon-list"></span>@lang('content.conversations')</a>
                     <a href="{{ route('chat.index') }}" class="icon-text icon-responsive"><span class="glyphicon glyphicon-list"></span></a>
-                    <a href="{{ route('dashboard') }}" class="icon-text icon-full"><span class="glyphicon glyphicon-home"></span>Back to dashboard</a>
+                    <a href="{{ route('dashboard') }}" class="icon-text icon-full"><span class="glyphicon glyphicon-home"></span>Dashboard</a>
                     <a href="{{ route('dashboard') }}" class="icon-text icon-responsive"><span class="glyphicon glyphicon-home"></span></a>
                 </div>
             </div>
@@ -48,14 +48,14 @@
                         @endforeach
                         <div class="channel">
                             <div class="channel-name" id="create-channel-link">
-                                <a href="{{ route('invite') }}" onclick="event.preventDefault(); showCreateChannelForm();"><i aria-hidden="true" class="fa fa-user-plus"></i>Create a new conversation</a>
+                                <a href="{{ route('invite') }}" onclick="event.preventDefault(); showCreateChannelForm();"><i aria-hidden="true" class="fa fa-user-plus"></i>@lang('content.create-conversation')</a>
                             </div>
                             <div class="channel-name" id="create-channel-container" style="display: none">
                                 <form action="{{ route('invite') }}" method="POST" id="create-channel-form">
                                     {{ csrf_field() }}
                                     <i aria-hidden="true" class="fa fa-user-plus"></i>
-                                    <input type="text" name="name" placeholder="Choose a channel name">
-                                    <input type="submit" class="btn btn-primary" value="Save">
+                                    <input type="text" name="name" placeholder="@lang('content.choose-channel-name')">
+                                    <input type="submit" class="btn btn-primary" value="@lang('input.save')">
                                     <input type="hidden" name="user_id" value="{{ $user->id }}">
                                 </form>
                             </div>

@@ -226,9 +226,9 @@ class ChatController extends Controller
 
             // Check if the user already has an invite for the specified channel.
             if (!$user->channels()->where('channel_id', $channel->id)->exists()) {
-                Session::flash('success-message', 'Invite sent!');
+                Session::flash('success-message', __('flash.invite-sent'));
             } else {
-                Session::flash('info-message', 'This invite was already sent. Please wait for the persons answer.');
+                Session::flash('info-message', __('flash.invite-already-sent'));
 
                 return back();
             }
@@ -240,7 +240,7 @@ class ChatController extends Controller
             // The creator of the channel gets the 'accepted' status.
             $this->user->addAcceptedUserToChannel($channel->id);
 
-            Session::flash('success-message', 'Chat created and invite sent!');
+            Session::flash('success-message', __('flash.chat-created-invite-sent'));
         }
 
         $invite = new Invite();
@@ -272,7 +272,7 @@ class ChatController extends Controller
 
         if (!isset($invite->channel)) {
             if ($response) {
-                Session::flash('error-message', 'Oops! We can\'t add you to the chat. The invite was either cancelled or expired.');
+                Session::flash('error-message', __('flash.cant-add-to-chat'));
             }
 
             return back();
@@ -310,7 +310,7 @@ class ChatController extends Controller
 
         broadcast(new ChatLeft($channel, $this->user))->toOthers();
 
-        Session::flash('success-message', 'You have left the chat.');
+        Session::flash('success-message', __('flash.left-chat'));
 
         return redirect(route('chat.index'));
     }
