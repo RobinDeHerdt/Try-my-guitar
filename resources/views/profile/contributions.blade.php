@@ -74,8 +74,10 @@
             @endif
         </div>
     </div>
-    <div id="dialog" title="Delete confirmation">
-        <p>Are you sure you want to delete this?</p>
+    <div id="dialog" title="@lang('titles.delete-confirmation')">
+        <p>@lang('content.delete-confirmation')</p>
+        <input type="hidden" id="btn-cancel" value="@lang('input.cancel')">
+        <input type="hidden" id="btn-delete" value="@lang('input.confirm-delete')">
     </div>
 @endsection
 
@@ -85,20 +87,25 @@
 
 @section('scripts')
     <script>
+        var cancel_string = $("#btn-cancel").val();
+        var delete_string = $("#btn-delete").val();
+
         function deleteGuitar(id) {
             event.preventDefault();
             $( "#dialog" ).dialog({
                 buttons: [
                     {
-                        text: "Confirm delete",
+                        text: cancel_string,
+                        class: "btn btn-primary",
                         click: function() {
-                            $('#guitar-'+id).submit();
+                            $(this).dialog("close");
                         }
                     },
                     {
-                        text: "Cancel",
+                        text: delete_string,
+                        class: "btn btn-primary red",
                         click: function() {
-                            $(this).dialog("close");
+                            $('#guitar-'+id).submit();
                         }
                     }
                 ]

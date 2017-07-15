@@ -85,4 +85,5 @@ return [
     'choose-channel-name'       => 'Kies een gespreksnaam',
     'valid-reason'              => 'Geef een goede reden in om deze persoon te rapporteren',
     'report-fullname'           => 'Rapporteer :fullname',
+    'delete-confirmation'       => 'Ben je zeker dat je dit item wilt verwijderen?',
 ];

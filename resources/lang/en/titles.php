@@ -18,4 +18,5 @@ return [
     'guitars'               => 'Guitars',
     'experiences'           => 'Experiences',
     'collection'            => 'Collection',
+    'delete-confirmation'   => 'Delete confirmation',
 ];

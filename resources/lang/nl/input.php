@@ -54,4 +54,6 @@ return [
     'newest-first'              => 'Nieuwste eerst',
     'oldest-first'              => 'Oudste eerst',
     'close'                     => 'Sluiten',
+    'cancel'                    => 'Annuleren',
+    'confirm-delete'            => 'Verwijderen',
 ];

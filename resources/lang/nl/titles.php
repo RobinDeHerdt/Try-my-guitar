@@ -18,4 +18,5 @@ return [
     'guitars'               => 'Gitaren',
     'experiences'           => 'Ervaringen',
     'collection'            => 'Collectie',
+    'delete-confirmation'   => 'Bevestig verwijderen',
 ];

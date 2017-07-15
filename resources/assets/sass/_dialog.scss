@@ -1,5 +1,6 @@
 .ui-dialog {
   position: fixed;
+  width: 320px !important;
 }
 
 .ui-dialog-titlebar-close {
@@ -23,6 +24,7 @@
 
 .ui-dialog-content {
   text-align: center;
+  margin: 0;
 
   p {
     padding-top: 15px;

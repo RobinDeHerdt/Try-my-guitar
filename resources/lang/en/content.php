@@ -86,4 +86,5 @@ return [
     'choose-channel-name'       => 'Choose a conversation name',
     'valid-reason'              => 'Please enter a valid reason for reporting this user',
     'report-fullname'           => 'Report :fullname',
+    'delete-confirmation'       => 'Are you sure you want to delete this item?',
 ];

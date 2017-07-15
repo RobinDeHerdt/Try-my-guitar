@@ -54,4 +54,6 @@ return [
     'newest-first'              => 'Newest first',
     'oldest-first'              => 'Oldest first',
     'close'                     => 'Close',
+    'cancel'                    => 'Cancel',
+    'confirm-delete'            => 'Confirm delete',
 ];

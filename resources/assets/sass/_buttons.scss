@@ -41,6 +41,16 @@ a.cta-button {
   }
 }
 
+.btn-primary {
+  &.red {
+    background-color: #d64242;
+
+    &:hover {
+      background-color: #d64242;
+    }
+  }
+}
+
 .profile-button-container {
   text-align: center;
   margin-top: 50px;
