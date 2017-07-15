@@ -22,25 +22,45 @@
                     {{ csrf_field() }}
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="form-group">
+                            <div class="form-group {{ $errors->has('first_name') ? ' has-error' : '' }}">
                                 <label for="first_name">@lang('input.first-name') *</label>
                                 <input type="text" class="form-control" name="first_name" value="{{ $user->first_name }}" required>
+                                @if ($errors->has('first_name'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('first_name') }}</strong>
+                                    </span>
+                                @endif
                             </div>
-                            <div class="form-group">
+                            <div class="form-group {{ $errors->has('last_name') ? ' has-error' : '' }}">
                                 <label for="last_name">@lang('input.last-name') *</label>
                                 <input type="text" class="form-control" name="last_name" value="{{ $user->last_name }}">
+                                @if ($errors->has('last_name'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('last_name') }}</strong>
+                                    </span>
+                                @endif
                             </div>
-                            <div class="form-group">
+                            <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
                                 <label for="email">@lang('input.email') * </label>
                                 <input type="email" class="form-control" name="email" value="{{ $user->email }}" required>
+                                @if ($errors->has('email'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                             <div class="form-group">
                                 <label for="">@lang('input.your-current-picture')</label>
                                 <img src="{{ Storage::disk('public')->url($user->image_uri) }}" alt="profile picture" class="edit-profile-picture">
                             </div>
-                            <div class="form-group">
+                            <div class="form-group {{ $errors->has('image') ? ' has-error' : '' }}">
                                 <label for="image">@lang('input.upload-new-picture')</label>
                                 <input type="file" name="image" class="form-control">
+                                @if ($errors->has('image'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('image') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
                         <div class="col-md-6">

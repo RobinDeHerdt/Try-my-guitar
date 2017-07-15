@@ -131,48 +131,42 @@ class GuitarController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $this->validate($request, [
             'images.*'      => 'file|image|mimes:jpeg,png,bmp,gif|max:1000',
-            'name'          => 'required',
-            'description'   => 'required',
+            'name'          => 'required|max:255',
+            'description'   => 'required|max:1024',
             'types'         => 'required',
             'brand'         => 'required',
         ]);
 
-        if ($validator->fails()) {
-            return redirect(route('guitar.create'))
-                ->withErrors($validator)
-                ->withInput();
-        } else {
-            $guitar = new Guitar();
+        $guitar = new Guitar();
 
-            $guitar->name           = $request->name;
-            $guitar->description    = $request->description;
-            $guitar->brand_id       = $request->brand;
-            $guitar->contributor_id = $this->user->id;
+        $guitar->name           = $request->name;
+        $guitar->description    = $request->description;
+        $guitar->brand_id       = $request->brand;
+        $guitar->contributor_id = $this->user->id;
 
-            $guitar->save();
+        $guitar->save();
 
-            $guitar->guitarTypes()->attach($request->types);
+        $guitar->guitarTypes()->attach($request->types);
 
-            if ($request->images) {
-                foreach ($request->images as $upload) {
-                    $image = new GuitarImage();
+        if ($request->images) {
+            foreach ($request->images as $upload) {
+                $image = new GuitarImage();
 
-                    $image->image_uri = $upload->store('images/guitar', 'public');
-                    $image->guitar_id = $guitar->id;
-                    $image->user_id = $this->user->id;
+                $image->image_uri = $upload->store('images/guitar', 'public');
+                $image->guitar_id = $guitar->id;
+                $image->user_id = $this->user->id;
 
-                    $image->save();
-                }
+                $image->save();
             }
-
-            $this->addExp($this->user, 100 + (count($request->images) * 25));
-
-            return redirect(route('guitar.show', [
-                'guitar' => $guitar->id
-            ]));
         }
+
+        $this->addExp($this->user, 100 + (count($request->images) * 25));
+
+        return redirect(route('guitar.show', [
+            'guitar' => $guitar->id
+        ]));
     }
 
     /**
@@ -197,39 +191,26 @@ class GuitarController extends Controller
      */
     public function storeImage(Request $request, Guitar $guitar)
     {
-        $validator = Validator::make($request->all(), [
+        $this->validate($request, [
             'images'    => 'required',
             'images.*'  => 'file|image|mimes:jpeg,png,bmp,gif|max:1000',
-        ], [
-            'required'  => 'The image field is required.',
-            'filled'    => 'The image field is required.',
-            'file'      => 'The upload must contain a file.',
-            'image'     => 'The file must be an image.',
-            'mimes'     => 'The image must be one of the following types: :mimes',
-            'max'       => 'The upload must be a maximum of :max kB',
         ]);
 
-        if ($validator->fails()) {
-            return redirect(route('guitar.image.create',
-                ['guitar' => $guitar]
-            ))->withErrors($validator);
-        } else {
-            foreach ($request->images as $upload) {
-                $image = new GuitarImage();
+        foreach ($request->images as $upload) {
+            $image = new GuitarImage();
 
-                $image->image_uri   = $upload->store('images/guitar', 'public');
-                $image->guitar_id   = $guitar->id;
-                $image->user_id     = $this->user->id;
+            $image->image_uri   = $upload->store('images/guitar', 'public');
+            $image->guitar_id   = $guitar->id;
+            $image->user_id     = $this->user->id;
 
-                $image->save();
-            }
-
-            $this->addExp($this->user, count($request->images) * 25);
-
-            return redirect(route('guitar.show', [
-                'guitar' => $guitar->id
-            ]));
+            $image->save();
         }
+
+        $this->addExp($this->user, count($request->images) * 25);
+
+        return redirect(route('guitar.show', [
+            'guitar' => $guitar->id
+        ]));
     }
 
     /**
@@ -272,9 +253,10 @@ class GuitarController extends Controller
         if ($guitar->contributor->id === $this->user->id) {
             if ($guitar->users->count() < 1) {
                 $guitar->guitarTypes()->detach();
-                $image_amount = $guitar->guitarImages()->count();
                 $guitar->delete();
-                $this->subtractExp($this->user, 100 + ($image_amount * 25));
+
+                $this->subtractExp($this->user, 100 + ($guitar->guitarImages()->count() * 25));
+
                 Session::flash('success-message', __('flash.guitar-deleted'));
             } else {
                 Session::flash('error-message', __('flash.part-of-collection'));

@@ -20,14 +20,24 @@
                     {{ csrf_field() }}
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="form-group">
+                            <div class="form-group {{ $errors->has('guitar') ? ' has-error' : '' }}">
                                 <label for="guitar">@lang('input.guitar') *</label>
                                 <input type="text" class="form-control" name="guitar-ac" value="" required id="guitar-autocomplete" placeholder="@lang('input.guitar-autocomplete')">
                                 <input type="hidden" class="form-control" name="guitar" required id="guitar-id">
+                                @if ($errors->has('guitar'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('guitar') }}</strong>
+                                    </span>
+                                @endif
                             </div>
-                            <div class="form-group">
+                            <div class="form-group {{ $errors->has('experience') ? ' has-error' : '' }}">
                                 <label for="experience">@lang('input.experience')</label>
-                                <textarea name="experience" cols="30" rows="5" class="form-control" placeholder="@lang('input.describe-experience')"></textarea>
+                                <textarea name="experience" cols="30" rows="5" class="form-control" placeholder="@lang('input.describe-experience')">{{  old('experience') }}</textarea>
+                                @if ($errors->has('experience'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('experience') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
                     </div>

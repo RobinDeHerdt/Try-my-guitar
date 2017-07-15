@@ -88,6 +88,10 @@ class ChatController extends Controller
      */
     public function store(Request $request, Channel $channel)
     {
+        $this->validate($request, [
+            'message' => 'required|max:1024',
+        ]);
+
         $message    = new Message();
 
         $message->message       = $request->message;

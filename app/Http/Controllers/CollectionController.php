@@ -76,6 +76,7 @@ class CollectionController extends Controller
     {
         $this->validate($request, [
             'guitar' => 'required',
+            'experience' => 'max:1024'
         ]);
 
         $guitar = Guitar::find($request->guitar);
@@ -83,7 +84,9 @@ class CollectionController extends Controller
         if (!$this->user->guitars->contains($guitar->id)) {
             $this->user->guitars()->attach($guitar->id);
 
-            $experience_exists = Experience::where('user_id', $this->user->id)->where('guitar_id', $guitar->id)->exists();
+            $experience_exists = Experience::where('user_id', $this->user->id)
+                ->where('guitar_id', $guitar->id)
+                ->exists();
 
             if ($request->experience && !$experience_exists) {
                 $experience = new Experience();

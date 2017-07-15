@@ -88,6 +88,13 @@ class ProfileController extends Controller
      */
     public function update(Request $request)
     {
+        $this->validate($request, [
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'string|max:255',
+            'email' => 'required|string|email|max:255',
+            'image' => 'file|image|mimes:jpeg,png,gif|max:1000',
+        ]);
+
         $send_mail  = false;
         $user       = $this->user;
 

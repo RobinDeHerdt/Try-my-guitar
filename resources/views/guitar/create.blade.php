@@ -20,7 +20,7 @@
                         <div class="col-md-8">
                             <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
                                 <label for="name">@lang('input.guitar-name') *</label>
-                                <input type="text" class="form-control" name="name" value="{{ old('name') }}">
+                                <input type="text" class="form-control" name="name" value="{{ old('name') }}" required>
                                 @if ($errors->has('name'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('name') }}</strong>
@@ -47,7 +47,7 @@
                         <div class="col-md-12">
                             <div class="form-group {{ $errors->has('description') ? ' has-error' : '' }}">
                                 <label for="description">@lang('input.description') *</label>
-                                <textarea name="description" cols="30" rows="5" class="form-control">{{  old('description') }}</textarea>
+                                <textarea name="description" cols="30" rows="5" class="form-control" required>{{  old('description') }}</textarea>
                                 @if ($errors->has('description'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('description') }}</strong>
