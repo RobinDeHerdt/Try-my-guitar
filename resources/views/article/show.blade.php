@@ -64,7 +64,7 @@
                                         &middot; <span class="time-ago">@lang('content.long-time-ago')</span>
                                     @endif
                                     @if(Auth::check() && Auth::user()->id === $comment->user->id)
-                                        &middot; <span><a href="{{ route('comment.destroy', ['comment' => $comment->id]) }}" onclick="event.preventDefault(); document.getElementById('delete-comment-{{ $comment->id }}').submit();">@lang('content.remove')</a></span>
+                                        &middot; <span><a href="{{ route('comment.destroy', ['comment' => $comment->id]) }}" onclick="deleteItem({{ $comment->id }}, 'delete-comment');">@lang('content.remove')</a></span>
                                         <form action="{{ route('comment.destroy', ['comment' => $comment->id]) }}" method="POST" id="delete-comment-{{ $comment->id }}" style="display: none">
                                             {{ csrf_field() }}
                                         </form>
@@ -115,6 +115,7 @@
             @endif
         </div>
     </div>
+    @include('partials.dialog')
 @endsection
 
 @section('footer')
@@ -140,4 +141,5 @@
         }(document, "script", "twitter-wjs"));
     </script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
+    @include('partials.dialog-js')
 @endsection

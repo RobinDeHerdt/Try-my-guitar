@@ -48,8 +48,8 @@
                                         <td class="center">{{ $cta_item->updated_at ? $cta_item->updated_at : 'n/a' }}</td>
                                         <td class="center"><a href="{{ route('admin.cta.show', ['id' => $cta_item->id]) }}"><span class="glyphicon glyphicon-search"></span></a></td>
                                         <td class="center"><a href="{{ route('admin.cta.edit', ['id' => $cta_item->id]) }}"><span class="glyphicon glyphicon-pencil"></span></a></td>
-                                        <td class="center"><a href="{{ route('admin.cta.destroy', ['id' => $cta_item->id]) }}" onclick="event.preventDefault(); document.getElementById('delete-cta-{{ $cta_item->id }}-form').submit();"><span class="glyphicon glyphicon-trash"></span></a>
-                                            <form id="delete-cta-{{ $cta_item->id }}-form" action="{{ route('admin.cta.destroy', ['id' => $cta_item->id]) }}" method="POST" style="display: none;">
+                                        <td class="center"><a href="{{ route('admin.cta.destroy', ['id' => $cta_item->id]) }}" onclick="deleteItem({{ $cta_item->id }},'delete-cta');"><span class="glyphicon glyphicon-trash"></span></a>
+                                            <form id="delete-cta-{{ $cta_item->id }}" action="{{ route('admin.cta.destroy', ['id' => $cta_item->id]) }}" method="POST" style="display: none;">
                                                 {{ csrf_field() }}
                                             </form>
                                         </td>
@@ -66,6 +66,7 @@
             @endif
         </div>
     </div>
+    @include('partials.dialog')
 @endsection
 
 @section('scripts')
@@ -74,4 +75,5 @@
             $("#status-form-"+id).submit();
         }
     </script>
+    @include('partials.dialog-js')
 @endsection

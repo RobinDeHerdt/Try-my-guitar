@@ -219,7 +219,7 @@
                                             @if($similar_guitar->guitarImages->isNotEmpty())
                                                 <img src="{{ Storage::disk('public')->url($similar_guitar->guitarImages->first()->image_uri) }}">
                                             @else
-                                                <div class="search-result-image no-image">@lang('content.no-image-available')</div>
+                                                <div class="search-result-image">@lang('content.no-image-available')</div>
                                             @endif
                                             <span class="guitar-link">{{ $similar_guitar->name }}</span>
                                         </div>

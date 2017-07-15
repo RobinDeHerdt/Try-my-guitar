@@ -56,4 +56,5 @@ return [
     'close'                     => 'Sluiten',
     'cancel'                    => 'Annuleren',
     'confirm-delete'            => 'Verwijderen',
+    'leave-chat'                => 'Chat verlaten',
 ];

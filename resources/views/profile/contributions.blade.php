@@ -37,7 +37,7 @@
                                     @if(Auth::check() && Auth::user()->id === $user->id)
                                         <hr>
                                         <div class="center-content">
-                                            <a href="{{ route('guitar.destroy', ['guitar' => $guitar->id]) }}" onclick="deleteGuitar({{ $guitar->id }});">@lang('content.remove')</a>
+                                            <a href="{{ route('guitar.destroy', ['guitar' => $guitar->id]) }}" onclick="deleteItem({{ $guitar->id }}, 'guitar');">@lang('content.remove')</a>
                                         </div>
                                         <form action="{{ route('guitar.destroy', ['guitar' => $guitar->id]) }}" method="POST" id="guitar-{{ $guitar->id }}">
                                             {{ csrf_field() }}
@@ -58,7 +58,7 @@
                                     @if(Auth::check() && Auth::user()->id === $user->id)
                                         <hr>
                                         <div class="center-content">
-                                            <a href="{{ route('guitar.image.destroy', ['guitarImage' => $image->id]) }}" onclick="event.preventDefault(); document.getElementById('guitar-image-{{ $image->id }}').submit();">@lang('content.remove')</a>
+                                            <a href="{{ route('guitar.image.destroy', ['guitarImage' => $image->id]) }}" onclick="deleteItem({{ $image->id }}, 'guitar-image')">@lang('content.remove')</a>
                                         </div>
                                         <form action="{{ route('guitar.image.destroy', ['guitarImage' => $image->id]) }}" method="POST" id="guitar-image-{{ $image->id }}">
                                             {{ csrf_field() }}
@@ -74,11 +74,7 @@
             @endif
         </div>
     </div>
-    <div id="dialog" title="@lang('titles.delete-confirmation')">
-        <p>@lang('content.delete-confirmation')</p>
-        <input type="hidden" id="btn-cancel" value="@lang('input.cancel')">
-        <input type="hidden" id="btn-delete" value="@lang('input.confirm-delete')">
-    </div>
+    @include('partials.dialog')
 @endsection
 
 @section('footer')
@@ -86,31 +82,6 @@
 @endsection
 
 @section('scripts')
-    <script>
-        var cancel_string = $("#btn-cancel").val();
-        var delete_string = $("#btn-delete").val();
-
-        function deleteGuitar(id) {
-            event.preventDefault();
-            $( "#dialog" ).dialog({
-                buttons: [
-                    {
-                        text: cancel_string,
-                        class: "btn btn-primary",
-                        click: function() {
-                            $(this).dialog("close");
-                        }
-                    },
-                    {
-                        text: delete_string,
-                        class: "btn btn-primary red",
-                        click: function() {
-                            $('#guitar-'+id).submit();
-                        }
-                    }
-                ]
-            });
-        }
-    </script>
+    @include('partials.dialog-js')
     @include('partials.analytics')
 @endsection

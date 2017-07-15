@@ -14,7 +14,7 @@
             </div>
             <div class="row heading">
                 <div class="col-md-12">
-                    <a href="{{ route('chat.leave', ['channel' => $channel->id]) }}" class="icon-text icon-full" onclick="event.preventDefault(); document.getElementById('leave-form').submit();"><span class="glyphicon glyphicon-log-out"></span>@lang('content.leave-conversation')</a>
+                    <a href="{{ route('chat.leave', ['channel' => $channel->id]) }}" class="icon-text icon-full" onclick="leaveChat();"><span class="glyphicon glyphicon-log-out"></span>@lang('content.leave-conversation')</a>
                     <a href="{{ route('chat.leave', ['channel' => $channel->id]) }}" class="icon-text icon-responsive" onclick="event.preventDefault(); document.getElementById('leave-form').submit();"><span class="glyphicon glyphicon-log-out"></span></a>
                     <a href="{{ route('chat.index') }}" class="icon-text icon-full"><span class="glyphicon glyphicon-th-list"></span>@lang('content.back-to-conversations')</a>
                     <a href="{{ route('chat.index') }}" class="icon-text icon-responsive"><span class="glyphicon glyphicon-th-list"></span></a>
@@ -57,6 +57,11 @@
             </div>
         </div>
     </div>
+    <div id="dialog" title="@lang('input.leave-chat')">
+        <p>@lang('content.leave-confirmation')</p>
+        <input type="hidden" id="btn-cancel" value="@lang('input.cancel')">
+        <input type="hidden" id="btn-leave" value="@lang('input.leave-chat')">
+    </div>
 @endsection
 
 @section('footer')
@@ -87,6 +92,31 @@
 
         function hideEditForm() {
             $("#edit-channel-form").hide();
+        }
+
+        var cancel_string = $("#btn-cancel").val();
+        var leave_string  = $("#btn-leave").val();
+
+        function leaveChat() {
+            event.preventDefault();
+            $("#dialog").dialog({
+                buttons: [
+                    {
+                        text: cancel_string,
+                        class: "btn btn-primary",
+                        click: function() {
+                            $(this).dialog("close");
+                        }
+                    },
+                    {
+                        text: leave_string,
+                        class: "btn btn-primary red",
+                        click: function() {
+                            $("#leave-form").submit();
+                        }
+                    }
+                ]
+            });
         }
     </script>
     @include('partials.analytics')

@@ -86,4 +86,5 @@ return [
     'valid-reason'              => 'Geef een goede reden in om deze persoon te rapporteren',
     'report-fullname'           => 'Rapporteer :fullname',
     'delete-confirmation'       => 'Ben je zeker dat je dit item wilt verwijderen?',
+    'leave-confirmation'        => 'Ben je zeker dat je dit gesprek wil verlaten? Je zal niet kunnen terugkeren tenzij je opnieuw uitgenodigd wordt.',
 ];

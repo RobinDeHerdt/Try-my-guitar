@@ -54,10 +54,10 @@
                                                 </a>
                                             </div>
                                             <div class="col-md-4">
-                                                <a href="{{ route('experience.destroy', ['id' => $experience->id ]) }}" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $experience->id }}').submit();" title="Remove your experience">
+                                                <a href="{{ route('experience.destroy', ['id' => $experience->id ]) }}" onclick="deleteItem({{ $experience->id }}, 'delete-experience');" title="Remove your experience">
                                                     <span class="glyphicon glyphicon-trash"></span> @lang('input.delete')
                                                 </a>
-                                                <form action="{{ route('experience.destroy', ['id' => $experience->id ])}}"  method="POST" id="delete-form-{{ $experience->id }}" style="display: none">
+                                                <form action="{{ route('experience.destroy', ['id' => $experience->id ])}}"  method="POST" id="delete-experience-{{ $experience->id }}" style="display: none">
                                                     {{ csrf_field() }}
                                                 </form>
                                             </div>
@@ -90,10 +90,11 @@
                     @endforeach
                 </div>
             @else
-                <h4>@lang('content.')</h4>
+                <h4>@lang('content.nothing-to-see-here')</h4>
             @endif
         </div>
     </div>
+    @include('partials.dialog')
 @endsection
 
 @section('footer')
@@ -117,5 +118,6 @@
             $('#experience-text-' + id).show();
         }
     </script>
+    @include('partials.dialog-js')
     @include('partials.analytics')
 @endsection

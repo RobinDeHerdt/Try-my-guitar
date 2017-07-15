@@ -56,7 +56,7 @@
                                     <hr>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <a href="{{ route('collection.destroy', ['guitar' => $guitar->id]) }}"  onclick="event.preventDefault(); document.getElementById('collection-remove-{{ $guitar->id }}').submit();"><span class="glyphicon glyphicon-trash"></span> @lang('content.remove-from-collection')</a>
+                                            <a href="{{ route('collection.destroy', ['guitar' => $guitar->id]) }}"  onclick="deleteItem({{ $guitar->id }}, 'collection-remove');"><span class="glyphicon glyphicon-trash"></span> @lang('content.remove-from-collection')</a>
                                             <form action="{{ route('collection.destroy', ['guitar' => $guitar->id]) }}" method="POST" id="collection-remove-{{ $guitar->id }}">
                                                 {{ csrf_field() }}
                                             </form>
@@ -95,8 +95,8 @@
                                                     <a href="{{ route('guitar.show', ['id' => $guitar->id]) }}" onclick="event.preventDefault(); showEditForm({{ $user->guitarExperience($guitar)->id }});"><span class="glyphicon glyphicon-edit"></span> @lang('input.edit')</a>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <a href="{{ route('experience.destroy', ['id' => $user->guitarExperience($guitar)->id ]) }}" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $user->guitarExperience($guitar)->id }}').submit();"><span class="glyphicon glyphicon-trash"></span> @lang('input.delete')</a>
-                                                    <form action="{{ route('experience.destroy', ['id' => $user->guitarExperience($guitar)->id ])}}"  method="POST" id="delete-form-{{ $user->guitarExperience($guitar)->id }}" style="display: none">
+                                                    <a href="{{ route('experience.destroy', ['id' => $user->guitarExperience($guitar)->id ]) }}" onclick="deleteItem({{ $user->guitarExperience($guitar)->id }}, 'delete-experience')"><span class="glyphicon glyphicon-trash"></span> @lang('input.delete')</a>
+                                                    <form action="{{ route('experience.destroy', ['id' => $user->guitarExperience($guitar)->id ])}}"  method="POST" id="delete-experience-{{ $user->guitarExperience($guitar)->id }}" style="display: none">
                                                         {{ csrf_field() }}
                                                     </form>
                                                 </div>
@@ -136,6 +136,7 @@
             @endif
         </div>
     </div>
+    @include('partials.dialog')
 @endsection
 
 @section('footer')
@@ -169,5 +170,6 @@
             $('#experience-add-link-' + id).show();
         }
     </script>
+    @include('partials.dialog-js')
     @include('partials.analytics')
 @endsection

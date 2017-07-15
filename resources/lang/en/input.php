@@ -56,4 +56,5 @@ return [
     'close'                     => 'Close',
     'cancel'                    => 'Cancel',
     'confirm-delete'            => 'Confirm delete',
+    'leave-chat'                => 'Leave chat',
 ];
