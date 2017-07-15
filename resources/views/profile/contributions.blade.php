@@ -13,6 +13,8 @@
                     <h1>@lang('content.s-contributions', ['name' => $user->first_name])</h1>
                     <a href="{{ route('profile.show', ['user' => $user->id]) }}" class="icon-text icon-full"><span class="glyphicon glyphicon-user"></span>@lang('content.view-name-profile', ['name' => $user->first_name])</a>
                     <a href="{{ route('profile.show', ['user' => $user->id]) }}" class="icon-text icon-responsive"><span class="glyphicon glyphicon-user"></span></a>
+                    <a href="{{ route('guitar.create') }}" class="icon-text icon-full"><span class="glyphicon glyphicon-plus"></span>@lang('dashboard.add-guitar')</a>
+                    <a href="{{ route('guitar.create') }}" class="icon-text icon-responsive"><span class="glyphicon glyphicon-user"></span></a>
                 </div>
             </div>
             @if($guitars->isNotEmpty() || $images->isNotEmpty())
@@ -35,7 +37,7 @@
                                     @if(Auth::check() && Auth::user()->id === $user->id)
                                         <hr>
                                         <div class="center-content">
-                                            <a href="{{ route('guitar.destroy', ['guitar' => $guitar->id]) }}" onclick="event.preventDefault(); document.getElementById('guitar-{{ $guitar->id }}').submit();">@lang('content.remove')</a>
+                                            <a href="{{ route('guitar.destroy', ['guitar' => $guitar->id]) }}" onclick="deleteGuitar({{ $guitar->id }});">@lang('content.remove')</a>
                                         </div>
                                         <form action="{{ route('guitar.destroy', ['guitar' => $guitar->id]) }}" method="POST" id="guitar-{{ $guitar->id }}">
                                             {{ csrf_field() }}
@@ -66,13 +68,14 @@
                             </div>
                         @endforeach
                     </div>
-                @else
-
                 @endif
             @else
                 <h4>@lang('content.nothing-to-see-here')</h4>
             @endif
         </div>
+    </div>
+    <div id="dialog" title="Delete confirmation">
+        <p>Are you sure you want to delete this?</p>
     </div>
 @endsection
 
@@ -82,5 +85,25 @@
 
 @section('scripts')
     <script>
+        function deleteGuitar(id) {
+            event.preventDefault();
+            $( "#dialog" ).dialog({
+                buttons: [
+                    {
+                        text: "Confirm delete",
+                        click: function() {
+                            $('#guitar-'+id).submit();
+                        }
+                    },
+                    {
+                        text: "Cancel",
+                        click: function() {
+                            $(this).dialog("close");
+                        }
+                    }
+                ]
+            });
+        }
+    </script>
     @include('partials.analytics')
 @endsection

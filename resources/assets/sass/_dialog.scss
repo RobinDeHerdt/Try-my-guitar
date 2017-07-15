@@ -1,0 +1,36 @@
+.ui-dialog {
+  position: fixed;
+}
+
+.ui-dialog-titlebar-close {
+  display: none;
+}
+
+.ui-dialog-buttonset {
+  float: none !important;
+  padding: 0;
+  text-align: center;
+
+  button {
+    width: 46.5%;
+    margin: 5px !important;
+  }
+}
+
+.ui-dialog .ui-dialog-buttonpane {
+  padding: 0;
+}
+
+.ui-dialog-content {
+  text-align: center;
+
+  p {
+    padding-top: 15px;
+  }
+}
+
+
+
+#dialog {
+  display: none;
+}

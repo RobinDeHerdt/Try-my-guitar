@@ -97,7 +97,7 @@ class CollectionController extends Controller
                 $this->addExp($this->user, 75);
             }
 
-            Session::flash('success-message', __('flash.guitar-add-to-collection', [
+            Session::flash('success-message', __('flash.guitar-added-to-collection', [
                 'guitar' => $guitar->name,
                 'brand' => $guitar->guitarBrand->name
             ]));
