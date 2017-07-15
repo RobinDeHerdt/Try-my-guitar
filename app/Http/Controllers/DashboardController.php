@@ -17,7 +17,7 @@ class DashboardController extends Controller
     /**
      * Contains the authenticated user.
      *
-     * @var array
+     * @var \App\User
      */
     private $user;
 
@@ -38,7 +38,7 @@ class DashboardController extends Controller
     }
 
     /**
-     * Display the authenticated user dashboard.
+     * Display the authenticated user's dashboard.
      *
      * @return \Illuminate\Http\Response
      */

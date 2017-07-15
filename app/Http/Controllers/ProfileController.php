@@ -21,7 +21,7 @@ class ProfileController extends Controller
     /**
      * Contains the authenticated user.
      *
-     * @var User
+     * @var \App\User
      */
     private $user;
 
@@ -42,7 +42,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * Show the specified user profile.
+     * Show the specified user's profile.
      *
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
@@ -61,7 +61,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * Show the edit form for the specified user profile.
+     * Show the 'edit profile' form for the authenticated user.
      *
      * @return \Illuminate\Http\Response
      */
@@ -128,7 +128,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * Show the specified user profile.
+     * Show the specified user's experiences.
      *
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
@@ -144,7 +144,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * Update the specified user profile appearance.
+     * Update the specified user's profile appearance.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -167,7 +167,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * Show the specified user invite page.
+     * Show the specified user's invite page.
      *
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
@@ -183,7 +183,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * Show the specified user contributions page.
+     * Show the specified user's contributions page.
      *
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response

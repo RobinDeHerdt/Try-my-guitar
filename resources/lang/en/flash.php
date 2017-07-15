@@ -25,4 +25,10 @@ return [
     'profile-appearance-updated' => 'Your profile appearance was updated',
     'report-sent' => 'Thanks for your report. We will review this as soon as possible.',
     'report-already-sent' => 'Your previous report was not reviewed yet. Please wait a while before reporting this person again.',
+    'guitar-added-to-collection' => ':guitar (:brand) was added to your collection!',
+    'guitar-already-in-collection' => ':guitar (:brand) is already part of your collection!',
+    'already-verified' => 'Your account was already verified.',
+    'verified' => 'Your account is now verified',
+    'verification-failed' => 'Verification failed. Please contact the site administrator if the problem persists.',
+    'verification-sent' => 'A verification link was sent at :email',
 ];

@@ -14,7 +14,7 @@ Use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 class HomeController extends Controller
 {
     /**
-     * Show the application homepage.
+     * Show the 'home' page.
      *
      * @return \Illuminate\Http\Response
      */
@@ -32,7 +32,7 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the application disclaimer.
+     * Show the 'disclaimer' page.
      *
      * @return \Illuminate\Http\Response
      */

@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 class ContactController extends Controller
 {
     /**
-     * Display a listing of contact messages.
+     * Display a listing of contact messages (admin).
      *
      * @return \Illuminate\Http\Response
      */
@@ -27,7 +27,7 @@ class ContactController extends Controller
     }
 
     /**
-     * Store the contact message.
+     * Store the created contact message.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response

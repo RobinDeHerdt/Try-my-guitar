@@ -24,7 +24,7 @@ class GuitarController extends Controller
     /**
      * Contains the authenticated user.
      *
-     * @var User
+     * @var \App\User
      */
     private $user;
 
@@ -45,7 +45,7 @@ class GuitarController extends Controller
     }
 
     /**
-     * Show details for the specified guitar.
+     * Show the specified guitar.
      *
      * @param \App\Guitar $guitar
      * @return \Illuminate\Http\Response
@@ -124,7 +124,7 @@ class GuitarController extends Controller
     }
 
     /**
-     * Store the guitar.
+     * Store the created guitar.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Database\Eloquent\Collection
@@ -189,7 +189,7 @@ class GuitarController extends Controller
     }
 
     /**
-     * Store the guitar image.
+     * Store the created guitar image.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Guitar  $guitar
@@ -249,7 +249,7 @@ class GuitarController extends Controller
     }
 
     /**
-     * Get all experiences listed for this guitar.
+     * Fetch all experiences for the specified guitar.
      *
      * @param  \App\Guitar  $guitar
      * @return \Illuminate\Database\Eloquent\Collection
@@ -262,7 +262,7 @@ class GuitarController extends Controller
     }
 
     /**
-     * Delete a guitar.
+     * Delete the specified guitar.
      *
      * @param  \App\Guitar  $guitar
      * @return \Illuminate\Database\Eloquent\Collection
@@ -287,7 +287,7 @@ class GuitarController extends Controller
     }
 
     /**
-     * Delete a guitar image.
+     * Delete the specified guitar image.
      *
      * @param  \App\GuitarImage  $guitarImage
      * @return \Illuminate\Database\Eloquent\Collection

@@ -7,12 +7,16 @@ use App\CtaItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
+/**
+ * Class CtaItemController
+ * @package App\Http\Controllers
+ */
 class CtaItemController extends Controller
 {
     /**
      * Contains the authenticated user.
      *
-     * @var array
+     * @var \App\User
      */
     private $user;
 
@@ -31,7 +35,7 @@ class CtaItemController extends Controller
     }
 
     /**
-    * Display call to action items.
+    * Display a listing of call to action items (admin).
     *
     * @return \Illuminate\Http\Response
     */
@@ -45,7 +49,7 @@ class CtaItemController extends Controller
     }
 
     /**
-     * Display the spcecified call to action item.
+     * Display the specified call to action item.
      *
      * @param \App\CtaItem  $cta_item
      * @return \Illuminate\Http\Response
@@ -58,7 +62,7 @@ class CtaItemController extends Controller
     }
 
     /**
-     * Display call to action items.
+     * Show the 'create call to action' form.
      *
      * @return \Illuminate\Http\Response
      */
@@ -68,7 +72,7 @@ class CtaItemController extends Controller
     }
 
     /**
-     * Store call to action item.
+     * Store the created call to action item.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -98,7 +102,7 @@ class CtaItemController extends Controller
     }
 
     /**
-     * Display the edit form for the specified call to action item.
+     * Display the 'edit call to action' form.
      *
      * @param \App\CtaItem  $cta_item
      * @return \Illuminate\Http\Response
@@ -111,7 +115,7 @@ class CtaItemController extends Controller
     }
 
     /**
-     * Store call to action item.
+     * Update the specified call to action item.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param \App\CtaItem  $cta_item
@@ -155,7 +159,7 @@ class CtaItemController extends Controller
     }
 
     /**
-     * Delete the specified call to action item.
+     * Update the specified call to action item's status.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param \App\CtaItem  $cta_item

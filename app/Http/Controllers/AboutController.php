@@ -20,14 +20,4 @@ class AboutController extends Controller
     {
         return view('about');
     }
-
-    /**
-     * Show the form for creating a new about section.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('admin.about.create');
-    }
 }

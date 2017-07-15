@@ -25,4 +25,10 @@ return [
     'profile-appearance-updated' => 'Je profielweergave werd bijgewerkt',
     'report-sent' => 'Bedankt voor jouw melding. We zullen dit zo snel mogelijk behandelen.',
     'report-already-sent' => 'Je vorige melding werd nog niet behandeld. Wacht aub even om deze persoon opnieuw te rapporteren.',
+    'guitar-added-to-collection' => ':guitar (:brand) werd toegevoegd aan jouw collectie!',
+    'guitar-already-in-collection' => ':guitar (:brand) maakt al deel uit van jouw collectie!',
+    'already-verified' => 'Je account werd al geverifiëerd',
+    'verified' => 'Je account werd geverifiëerd',
+    'verification-failed' => 'Je account kon niet geverifiëerd worden. Neem aub contact op met de administrators indien het probleem zich opnieuw voordoet.',
+    'verification-sent' => 'Er werd een verificatie e-mail gestuurd naar :email',
 ];

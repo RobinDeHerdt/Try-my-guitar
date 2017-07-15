@@ -23,7 +23,7 @@ class TypeController extends Controller
     private $filter_types    = [];
 
     /**
-     * Display page for the specified guitar type.
+     * Display the specified type's page.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  GuitarType  $type

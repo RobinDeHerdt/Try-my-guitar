@@ -21,7 +21,7 @@ class CollectionController extends Controller
     /**
      * Contains the authenticated user.
      *
-     * @var User
+     * @var \App\User
      */
     private $user;
 
@@ -55,7 +55,7 @@ class CollectionController extends Controller
     }
 
     /**
-     * Show the form to add a guitar to the collection.
+     * Show the 'add guitar to collection' form.
      *
      * @return \Illuminate\Http\Response
      */
@@ -67,7 +67,7 @@ class CollectionController extends Controller
     }
 
     /**
-     * Save the guitar and experience to the collection.
+     * Save the guitar and/or experience to the collection.
      *
      * @param \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -96,12 +96,21 @@ class CollectionController extends Controller
 
                 $this->addExp($this->user, 75);
             }
-            Session::flash('success-message', $guitar->name . ' (' . $guitar->guitarBrand->name . ')' . ' was added to your collection!');
 
-            return redirect(route('collection.show', ['id' => $this->user->id]) . "#guitar-" . $guitar->id);
+            Session::flash('success-message', __('flash.guitar-add-to-collection', [
+                'guitar' => $guitar->name,
+                'brand' => $guitar->guitarBrand->name
+            ]));
+
+            return redirect(route('collection.show', [
+                'id' => $this->user->id
+            ]) . "#guitar-" . $guitar->id);
         }
 
-        Session::flash('info-message', $guitar->name . ' (' . $guitar->guitarBrand->name . ')' . ' is already a part of your collection!');
+        Session::flash('info-message', __('flash.guitar-already-in-collection', [
+            'guitar' => $guitar->name,
+            'brand' => $guitar->guitarBrand->name,
+        ]));
 
         return back();
     }

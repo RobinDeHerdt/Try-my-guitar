@@ -23,7 +23,7 @@ class BrandController extends Controller
     private $filter_brands  = [];
 
     /**
-     * Display page for the specified brand.
+     * Display the specified brand's page.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  GuitarBrand  $brand

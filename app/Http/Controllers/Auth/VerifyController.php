@@ -27,7 +27,7 @@ class VerifyController extends Controller
         $user = User::find($id);
 
         if ($user->verified === true) {
-            Session::flash('info-message', 'Your account was already verified. Thanks for the confirmation anyway!');
+            Session::flash('info-message', __('flash.already-verified'));
         } else {
             if ($user->verification_token === $token) {
                 $user->verified = true;
@@ -35,13 +35,13 @@ class VerifyController extends Controller
 
                 $this->addExp($user, 100);
 
-                Session::flash('success-message', 'Your account is now verified!');
+                Session::flash('success-message', __('flash.verified'));
 
                 if (!Auth::check()) {
                     Auth::login($user);
                 }
             } else {
-                Session::flash('error-message', 'Verification failed. Please request another email from the dashboard.');
+                Session::flash('error-message', __('flash.verification-failed'));
             }
         }
 
@@ -49,7 +49,7 @@ class VerifyController extends Controller
     }
 
     /**
-     * Sends the verification mail once again.
+     * Send the verification mail again.
      *
      * @return \Illuminate\Http\Response
      */
@@ -59,7 +59,7 @@ class VerifyController extends Controller
 
         Mail::to($user->email)->send(new VerifyEmail($user));
 
-        Session::flash('success-message', "We've sent you a verification link at '" . $user->email . "''.");
+        Session::flash('success-message', __('flash.verification-sent', ['email' => $user->email]));
 
         return redirect(route('dashboard'));
     }

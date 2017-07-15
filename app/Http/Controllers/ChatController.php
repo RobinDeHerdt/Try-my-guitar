@@ -24,7 +24,7 @@ class ChatController extends Controller
     /**
      * Contains the authenticated user.
      *
-     * @var array
+     * @var \App\User
      */
     private $user;
 
@@ -60,7 +60,7 @@ class ChatController extends Controller
     }
 
     /**
-     * Edit the specified channel name.
+     * Edit the specified channel's name.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Channel  $channel
@@ -80,7 +80,7 @@ class ChatController extends Controller
     }
 
     /**
-     * Store a message in database and broadcast it to the current channel.
+     * Store a message and broadcast it to the specified channel.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Channel  $channel
@@ -96,7 +96,6 @@ class ChatController extends Controller
 
         $participants = $channel->users()->get();
 
-        // Set channel to unseen for every participant.
         foreach ($participants as $participant) {
             if ($participant->id !== $this->user->id) {
                 $participant->setChannelNotSeen($channel->id);
@@ -111,7 +110,7 @@ class ChatController extends Controller
     }
 
     /**
-     * Show the initial chat channel and its messages.
+     * Show the chat window with its messages.
      *
      * @param  \App\Channel  $channel
      * @return \Illuminate\Http\Response
@@ -133,7 +132,7 @@ class ChatController extends Controller
     /**
      * Fetch the authenticated user id.
      *
-     * @return \Illuminate\Http\Response
+     * @return integer
      */
     public function user()
     {
@@ -141,7 +140,7 @@ class ChatController extends Controller
             return $this->user->id;
         }
 
-        return "";
+        return;
     }
 
     /**
@@ -160,14 +159,13 @@ class ChatController extends Controller
     }
 
     /**
-     * Fetch all channel information.
+     * Fetch the specified channel.
      *
      * @param  integer $id
      * @return Channel
      */
     public function channel($id)
     {
-        // Get the channel with all of its accepted users.
         $channel = Channel::where('id', $id)->with(['users' => function ($query) {
             $query->where('accepted', true);
         }])->get();
@@ -176,9 +174,9 @@ class ChatController extends Controller
     }
 
     /**
-    * Fetch all user channels.
+    * Fetch the authenticated user's channels.
     *
-    * @return \Illuminate\Http\Response
+    * @return \App\Channel
     */
     public function channels()
     {
@@ -187,7 +185,7 @@ class ChatController extends Controller
             return $channels;
         }
 
-        return "";
+        return;
     }
 
 
@@ -205,7 +203,7 @@ class ChatController extends Controller
     }
 
     /**
-     * Set up a chat invite for the specified user.
+     * Send an invite to the specified user.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response

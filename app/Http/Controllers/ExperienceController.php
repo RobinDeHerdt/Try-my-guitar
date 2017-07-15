@@ -44,7 +44,7 @@ class ExperienceController extends Controller
     }
 
     /**
-     * Show experience create form.
+     * Show 'create experience' form.
      *
      * @param \App\Guitar  $guitar
      * @return \Illuminate\Http\Response
@@ -57,7 +57,7 @@ class ExperienceController extends Controller
     }
 
     /**
-     * Store an experience.
+     * Store the created experience.
      *
      * @param \Illuminate\Http\Request  $request
      * @param \App\Guitar  $guitar
@@ -85,7 +85,7 @@ class ExperienceController extends Controller
     }
 
     /**
-     * Update an experience.
+     * Update the specified experience.
      *
      * @param \Illuminate\Http\Request  $request
      * @param \App\Experience  $experience
@@ -102,7 +102,7 @@ class ExperienceController extends Controller
     }
 
     /**
-     * Remove an experience.
+     * Remove the specified experience.
      *
      * @param \App\Experience  $experience
      * @return \Illuminate\Http\Response
@@ -122,7 +122,7 @@ class ExperienceController extends Controller
     }
 
     /**
-     * Submit a vote .
+     * Store a vote for the specified experience.
      *
      * @param \Illuminate\Http\Request  $request
      * @param \App\Experience  $experience

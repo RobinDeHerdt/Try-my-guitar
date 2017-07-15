@@ -8,12 +8,16 @@ use App\Comment;
 use App\Article;
 use Auth;
 
+/**
+ * Class CommentController
+ * @package App\Http\Controllers
+ */
 class CommentController extends Controller
 {
     /**
      * Contains the authenticated user.
      *
-     * @var array
+     * @var \App\User
      */
     private $user;
 
@@ -34,7 +38,7 @@ class CommentController extends Controller
     }
 
     /**
-     * Store a newly created comment.
+     * Store the created comment.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -51,16 +55,21 @@ class CommentController extends Controller
             $comment->article_id    = $request->article_id;
 
             $comment->save();
+
+            return redirect(route('article.public.show', [
+                    'article' => $article,
+                    'title' => str_slug($article->title)
+                ]). "#comment-" . $comment->id);
         }
 
         return redirect(route('article.public.show', [
-            'article'   => $article,
-            'title'     => str_slug($article->title)
-        ]). "#comment-" . $comment->id);
+                'article'   => $article,
+                'title'     => str_slug($article->title)
+        ]));
     }
 
     /**
-     * Store a newly created comment.
+     * Remove the specified comment.
      *
      * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response

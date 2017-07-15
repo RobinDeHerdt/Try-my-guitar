@@ -18,7 +18,7 @@ class ReportController extends Controller
     /**
      * Contains the authenticated user.
      *
-     * @var array
+     * @var \App\User
      */
     private $user;
 
@@ -53,7 +53,7 @@ class ReportController extends Controller
     }
 
     /**
-     * Show the form for creating a report.
+     * Show the 'create report' form.
      *
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
@@ -66,7 +66,7 @@ class ReportController extends Controller
     }
 
     /**
-     * Store the report.
+     * Store the created report.
      *
      * @param  \App\User  $user
      * @param  \Illuminate\Http\Request  $request
@@ -110,7 +110,7 @@ class ReportController extends Controller
     }
 
     /**
-     * Take specified action and set specified report as reviewed.
+     * Handle report review action.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param \App\Report  $report

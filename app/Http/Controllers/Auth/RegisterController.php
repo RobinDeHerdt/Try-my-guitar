@@ -35,8 +35,6 @@ class RegisterController extends Controller
 
     /**
      * Create a new controller instance.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -80,7 +78,7 @@ class RegisterController extends Controller
 
         Mail::to($user->email)->send(new VerifyEmail($user));
 
-        Session::flash('success-message', "Thanks for registering! We've sent a verification link to your email address.");
+        Session::flash('success-message', __('flash.verification-sent', ['email' => $user->email]));
 
         return $user;
     }

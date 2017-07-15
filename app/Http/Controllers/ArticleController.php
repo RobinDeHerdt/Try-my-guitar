@@ -56,7 +56,7 @@ class ArticleController extends Controller
 
             case 'en':
                 $article_query->where('lang', 'en');
-                 break;
+                break;
         }
 
         $articles = $article_query->paginate(6);
@@ -74,7 +74,7 @@ class ArticleController extends Controller
     }
 
     /**
-     * Show the form for creating a new article.
+     * Show the 'create article' form.
      *
      * @return \Illuminate\Http\Response
      */
@@ -84,7 +84,7 @@ class ArticleController extends Controller
     }
 
     /**
-     * Store a newly created article.
+     * Store the created article.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -144,7 +144,7 @@ class ArticleController extends Controller
     }
 
     /**
-     * Show the form for editing the specified article.
+     * Show the 'edit article' form for the specified article.
      *
      * @param  \App\Article  $article
      * @return \Illuminate\Http\Response
@@ -197,7 +197,7 @@ class ArticleController extends Controller
     }
 
     /**
-     * Restore a specified trashed article.
+     * Restore the specified trashed article.
      *
      * @param  integer  $id
      * @return \Illuminate\Http\Response
@@ -212,7 +212,7 @@ class ArticleController extends Controller
     }
 
     /**
-     * Move specified article to trash.
+     * Move the specified article to the trash.
      *
      * @param  \App\Article  $article
      * @return \Illuminate\Http\Response
