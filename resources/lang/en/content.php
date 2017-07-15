@@ -88,4 +88,5 @@ return [
     'report-fullname'           => 'Report :fullname',
     'delete-confirmation'       => 'Are you sure you want to delete this item?',
     'leave-confirmation'        => 'Are you sure you want to leave this chat? You won\'t be able to come back unless you get another invite.',
+    'add-guitar'                => 'Add a guitar',
 ];

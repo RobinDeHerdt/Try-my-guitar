@@ -10,7 +10,7 @@
             @include('partials.messages')
             <div class="row heading">
                 <div class="col-md-12">
-                    <h1>Add a guitar</h1>
+                    <h1>@lang('content.add-guitar')</h1>
                 </div>
             </div>
             <div class="dashboard-content">
