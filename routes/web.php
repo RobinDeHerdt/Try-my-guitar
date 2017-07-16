@@ -110,6 +110,9 @@ Route::post('chat/channel/{channel}/update', 'ChatController@update')->name('cha
 Route::get('explore/map', 'ExploreController@getLocations');
 Route::get('guitar/{guitar}/map', 'GuitarController@getLocations');
 
+// Cookie routes.
+Route::post('cookie', 'CookieController@store');
+
 // Admin related routes.
 Route::group(['middleware' => ['role:administrator']], function () {
     Route::get('admin/dashboard', 'AdminController@index')->name('admin.dashboard');

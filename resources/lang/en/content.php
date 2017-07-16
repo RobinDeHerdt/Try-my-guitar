@@ -90,4 +90,5 @@ return [
     'leave-confirmation'        => 'Are you sure you want to leave this chat? You won\'t be able to come back unless you get another invite.',
     'add-guitar'                => 'Add a guitar',
     'tell-about-yourself'       => 'Tell something about yourself',
+    'cookie-text'               => 'We use cookies to improve your experience',
 ];

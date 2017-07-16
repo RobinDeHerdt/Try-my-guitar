@@ -30,11 +30,33 @@
             @yield('content')
         </div>
         @yield('footer')
+        @if (!Cookie::get('cookie-popup'))
+            <div class="cookie-popup" id="cookie-window">
+                <span>@lang('content.cookie-text')</span>
+                <a href="#" onclick="closeCookieWindow()">I agree</a>
+            </div>
+        @endif
         @if(Auth::check())
             <chat-notifications :notifications="notifications"></chat-notifications>
         @endif
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
     @yield('scripts')
+    @if (!Cookie::get('cookie-popup'))
+        <script>
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            function closeCookieWindow() {
+                event.preventDefault();
+                $.post("/cookie").done(function() {
+                    $("#cookie-window").hide();
+                });
+            }
+        </script>
+    @endif
 </body>
 </html>

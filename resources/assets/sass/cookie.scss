@@ -1,0 +1,32 @@
+.cookie-popup {
+  background-color: $primary-component-color;
+  height: 40px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+
+  span {
+    position: relative;
+    color: #fff;
+    font-size: 16px;
+    top: 6.5px;
+  }
+
+  a {
+    position: relative;
+    top: 7.5px;
+    background-color: #fff;
+    padding: 5px 7.5px;
+    border-radius: 2.5px;
+    margin-left: 10px;
+    font-size: 16px;
+    font-weight: 600;
+
+    &:link, &:hover, &:visited, &:active {
+      color: $primary-component-color;
+      text-decoration: none;
+    }
+  }
+}

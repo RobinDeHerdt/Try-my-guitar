@@ -89,4 +89,5 @@ return [
     'leave-confirmation'        => 'Ben je zeker dat je dit gesprek wil verlaten? Je zal niet kunnen terugkeren tenzij je opnieuw uitgenodigd wordt.',
     'add-guitar'                => 'Voeg een gitaar toe',
     'tell-about-yourself'       => 'Vertel iets over jezelf',
+    'cookie-text'               => 'Wij gebruiken cookies om uw gebruikerservaring te verbeteren',
 ];
