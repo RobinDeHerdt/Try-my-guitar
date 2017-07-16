@@ -10,7 +10,7 @@ return [
     'latest-news'           => 'Nieuws',
     'find-people'           => 'Vind mensen',
     'guitar-brands'         => 'Merken',
-    'guitar-categories'     => 'Categoriën',
+    'guitar-categories'     => 'Categorieën',
     'article-overview'      => 'Overzicht van alle artikels',
     'comments'              => 'Reacties',
     'leave-comment'         => 'Laat een reactie achter',

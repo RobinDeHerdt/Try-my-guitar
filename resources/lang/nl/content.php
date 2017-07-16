@@ -7,7 +7,7 @@ return [
     */
 
     'distance'                  => 'op ± :distance km afstand',
-    'categories'                => 'Categoriën',
+    'categories'                => 'Categorieën',
     'filters'                   => 'Filters',
     'brands'                    => 'Merken',
     'location'                  => 'Locatie',
@@ -88,4 +88,5 @@ return [
     'delete-confirmation'       => 'Ben je zeker dat je dit item wilt verwijderen?',
     'leave-confirmation'        => 'Ben je zeker dat je dit gesprek wil verlaten? Je zal niet kunnen terugkeren tenzij je opnieuw uitgenodigd wordt.',
     'add-guitar'                => 'Voeg een gitaar toe',
+    'tell-about-yourself'       => 'Vertel iets over jezelf',
 ];

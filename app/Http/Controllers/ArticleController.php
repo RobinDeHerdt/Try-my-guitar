@@ -91,6 +91,13 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'title' => 'required',
+            'body' => 'required',
+            'language' => 'required',
+            'image' => 'required|file|image|mimes:jpeg,png,gif|max:1500',
+        ]);
+
         $article = new Article();
 
         $article->user_id   = Auth::user()->id;

@@ -148,6 +148,9 @@ return [
         'title'                 => 'titel',
         'username'              => 'gebruikersnaam',
         'year'                  => 'jaar',
+        'reason'                => 'reden',
+        'brand'                 => 'merk',
+        'types'                 => 'categorieën'
     ],
 
 ];

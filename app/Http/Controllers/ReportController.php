@@ -74,6 +74,10 @@ class ReportController extends Controller
      */
     public function store(User $user, Request $request)
     {
+        $this->validate($request, [
+            'reason' => 'required|max:2048',
+        ]);
+
         $report_exists = Report::where('reporter_id', $this->user->id)
             ->where('reported_id', $user->id)
             ->where('reviewed', false)

@@ -170,20 +170,20 @@ class ProfileController extends Controller
     {
         $this->validate($request, [
             'description' => 'max:1024',
-            'image' => 'file|image|mimes:jpeg,png,gif|max:1500',
+            'header_image' => 'file|image|mimes:jpeg,png,gif|max:1500',
         ]);
 
         $user = $this->user;
 
         $user->description = $request->description;
 
-        if (isset($request->image)) {
-            $user->header_image_uri = $request->image->store('images', 'public');
+        if (isset($request->header_image)) {
+            $user->header_image_uri = $request->header_image->store('images', 'public');
         }
 
         $user->save();
 
-        Session::flash('success-message', __('flash.profile-appearace-updated'));
+        Session::flash('success-message', __('flash.profile-appearance-updated'));
 
         return back();
     }

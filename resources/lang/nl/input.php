@@ -41,7 +41,7 @@ return [
     'upload-images'             => 'Upload één of meerdere afbeeldingen',
     'upload-guitar-images'      => 'Upload ":guitar (:brand)" afbeeldingen',
     'brand'                     => 'Merk',
-    'categories'                => 'Categoriën',
+    'categories'                => 'Categorieën',
     'save'                      => 'Opslaan',
     'edit'                      => 'Bewerken',
     'delete'                    => 'Verwijderen',

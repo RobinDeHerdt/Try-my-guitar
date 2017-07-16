@@ -22,7 +22,7 @@
                         <div class="col-md-12">
                             <div class="form-group {{ $errors->has('guitar') ? ' has-error' : '' }}">
                                 <label for="guitar">@lang('input.guitar') *</label>
-                                <input type="text" class="form-control" name="guitar-ac" value="" required id="guitar-autocomplete" placeholder="@lang('input.guitar-autocomplete')">
+                                <input type="text" class="form-control" name="guitar-ac" value="{{ old('guitar-ac') }}" required id="guitar-autocomplete" placeholder="@lang('input.guitar-autocomplete')">
                                 <input type="hidden" class="form-control" name="guitar" required id="guitar-id">
                                 @if ($errors->has('guitar'))
                                     <span class="help-block">

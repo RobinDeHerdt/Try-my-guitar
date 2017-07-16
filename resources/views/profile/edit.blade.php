@@ -104,7 +104,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="description">@lang('input.description')</label>
-                                <textarea name="description" cols="30" rows="5" class="form-control">{{ $user->description }}</textarea>
+                                <textarea name="description" cols="30" rows="5" class="form-control" placeholder="@lang('content.tell-about-yourself')">{{ $user->description }}</textarea>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -112,9 +112,14 @@
                                 <label>@lang('input.current-header-image')</label>
                                 <img src="{{ Storage::disk('public')->url($user->header_image_uri) }}" alt="profile header image" class="edit-profile-picture">
                             </div>
-                            <div class="form-group">
-                                <label for="image">@lang('input.upload-new-header-image')</label>
-                                <input type="file" name="image" class="form-control">
+                            <div class="form-group {{ $errors->has('header_image') ? ' has-error' : '' }}">
+                                <label for="header_image">@lang('input.upload-new-header-image')</label>
+                                <input type="file" name="header_image" class="form-control">
+                                @if ($errors->has('header_image'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('header_image') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -138,7 +143,7 @@
 @section('scripts')
     <script>
         var input           = document.getElementById('pac-input');
-        var card            = document.getElementById('pac-card');
+        var card            = document.getElementById('pac-card' );
         var location_lat    = document.getElementById('location-lat');
         var location_lng    = document.getElementById('location-lng');
         var user_coords     = document.getElementById('user-coords');

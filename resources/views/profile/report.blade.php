@@ -20,9 +20,14 @@
                     {{ csrf_field() }}
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="form-group">
+                            <div class="form-group {{ $errors->has('reason') ? ' has-error' : '' }}">
                                 <label for="reason">@lang('input.reason')</label>
                                 <textarea name="reason" cols="30" rows="5" class="form-control" placeholder="@lang('content.valid-reason')"></textarea>
+                                @if ($errors->has('reason'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('reason') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
                     </div>
