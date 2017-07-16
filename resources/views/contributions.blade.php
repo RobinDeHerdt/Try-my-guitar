@@ -10,9 +10,9 @@
             @include('partials.messages')
             <div class="row heading">
                 <div class="col-md-12">
-                    <h1>@lang('content.s-contributions', ['name' => $user->first_name])</h1>
-                    <a href="{{ route('profile.show', ['user' => $user->id]) }}" class="icon-text icon-full"><span class="glyphicon glyphicon-user"></span>@lang('content.view-name-profile', ['name' => $user->first_name])</a>
-                    <a href="{{ route('profile.show', ['user' => $user->id]) }}" class="icon-text icon-responsive"><span class="glyphicon glyphicon-user"></span></a>
+                    <h1>@lang('content.my-contributions')</h1>
+                    <a href="{{ route('dashboard') }}" class="icon-text icon-full"><span class="glyphicon glyphicon-home"></span>Dashboard</a>
+                    <a href="{{ route('dashboard') }}" class="icon-text icon-responsive"><span class="glyphicon glyphicon-home"></span></a>
                     <a href="{{ route('guitar.create') }}" class="icon-text icon-full"><span class="glyphicon glyphicon-plus"></span>@lang('dashboard.add-guitar')</a>
                     <a href="{{ route('guitar.create') }}" class="icon-text icon-responsive"><span class="glyphicon glyphicon-user"></span></a>
                 </div>

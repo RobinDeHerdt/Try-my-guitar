@@ -205,18 +205,17 @@ class ProfileController extends Controller
     }
 
     /**
-     * Show the specified user's contributions page.
+     * Show the authenticated user's contributions page.
      *
-     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function contributions(User $user)
+    public function contributions()
     {
-        $images = $user->guitarImages()->get();
-        $guitars = $user->contributedGuitars()->get();
+        $images = $this->user->guitarImages()->get();
+        $guitars = $this->user->contributedGuitars()->get();
 
-        return view('profile.contributions', [
-            'user'      => $user,
+        return view('contributions', [
+            'user'      => $this->user,
             'images'    => $images,
             'guitars'   => $guitars,
         ]);

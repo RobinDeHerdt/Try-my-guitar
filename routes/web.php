@@ -42,6 +42,7 @@ Route::group([
     Route::get('search', 'SearchController@result')->name('search');
     Route::get('search/autocomplete', 'SearchController@autoComplete')->name('search.autocomplete');
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+    Route::get('contributions', 'ProfileController@contributions')->name('contributions');
 
     // Article related routes.
     Route::get('article/{article}/{title}', 'ArticleController@showPublic')->name('article.public.show');
@@ -58,7 +59,6 @@ Route::group([
     Route::get('profile/{user}/report', 'ReportController@create')->name('report.create');
     Route::get('profile/{user}/invite', 'ProfileController@invite')->name('profile.invite');
     Route::get('profile/{user}/experiences', 'ProfileController@experiences')->name('profile.experiences');
-    Route::get('profile/{user}/contributions', 'ProfileController@contributions')->name('profile.contributions');
     Route::get('profile/autocomplete', 'ProfileController@autoComplete')->name('profile.autocomplete');
     Route::post('profile/{user}/report', 'ReportController@store')->name('report.store');
     Route::post('profile/update', 'ProfileController@update')->name('profile.update');
