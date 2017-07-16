@@ -60,7 +60,7 @@ return [
     'remove'                    => 'verwijderen',
     'long-time-ago'             => 'Een hele tijd geleden',
     'comments'                  => 'reacties',
-    'my-contributions'          => 'Mijn contributies',
+    'my-contributions'          => 'Mijn bijdragen',
     's-contributions'           => ':name\'s contributies',
     'accept'                    => 'Accepteren',
     'decline'                   => 'Weigeren',
@@ -91,5 +91,5 @@ return [
     'tell-about-yourself'       => 'Vertel iets over jezelf',
     'cookie-text'               => 'Wij gebruiken cookies om uw gebruikerservaring te verbeteren',
     'cookie-confirm'            => 'Oké',
-    'verify-contribute'         => 'You need to verify your e-mail address in order to contribute.',
+    'verify-contribute'         => 'Je moet je e-mailadres verifiëren om content toe te voegen aan de website',
 ];

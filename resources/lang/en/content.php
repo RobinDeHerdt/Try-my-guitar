@@ -92,6 +92,6 @@ return [
     'tell-about-yourself'       => 'Tell something about yourself',
     'cookie-text'               => 'We use cookies to improve your experience',
     'cookie-confirm'            => 'Ok',
-    'verify-contribute'         => 'Je moet je e-mailadres verifiëren om bij te kunnen dragen',
+    'verify-contribute'         => 'You need to verify your e-mail address in order to contribute',
 
 ];
