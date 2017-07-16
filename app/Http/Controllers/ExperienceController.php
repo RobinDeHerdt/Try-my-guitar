@@ -134,10 +134,6 @@ class ExperienceController extends Controller
      */
     public function vote(Request $request, Experience $experience)
     {
-        $this->validate($request, [
-            'value' => 'required',
-        ]);
-
         $vote_query = $experience->votes()
             ->where('experience_id', $experience->id)
             ->where('user_id', $this->user->id);
@@ -148,13 +144,19 @@ class ExperienceController extends Controller
             $vote->value            = $request->value;
             $vote->experience_id    = $experience->id;
             $vote->user_id          = $this->user->id;
+
+            $vote->save();
         } else {
             $vote = $vote_query->first();
-            $vote->value            = $request->value;
+
+            if ($vote->value === (int)$request->value) {
+                $vote->delete();
+            } else {
+                $vote->value = $request->value;
+                $vote->save();
+            }
         }
 
-        $vote->save();
-
-        return Redirect::to(URL::previous() . "#experience-" . $experience->id);
+        return response(200);
     }
 }

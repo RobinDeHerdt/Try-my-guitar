@@ -87,7 +87,6 @@ Route::group([
     Route::post('collection/{guitar}/experience/add', 'ExperienceController@store')->name('experience.store');
     Route::post('experience/{experience}/destroy', 'ExperienceController@destroy')->name('experience.destroy');
     Route::post('experience/{experience}/update', 'ExperienceController@update')->name('experience.update');
-    Route::post('experience/{experience}/vote', 'ExperienceController@vote')->name('experience.vote');
 
     // Chat related routes.
     Route::get('chat/channels', 'ChatController@index')->name('chat.index');
@@ -109,6 +108,7 @@ Route::post('chat/channel/{channel}/update', 'ChatController@update')->name('cha
 // Async routes.
 Route::get('explore/map', 'ExploreController@getLocations');
 Route::get('guitar/{guitar}/map', 'GuitarController@getLocations');
+Route::post('experience/{experience}/vote', 'ExperienceController@vote')->name('experience.vote');
 
 // Cookie routes.
 Route::post('cookie', 'CookieController@store');

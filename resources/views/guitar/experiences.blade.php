@@ -60,8 +60,12 @@
 
 @section('scripts')
     <script>
-        // Look away while you still can...
-        // :todo This might need some work
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
         function vote(id, value) {
             var class_list;
 
@@ -74,7 +78,7 @@
             switch(value) {
                 case 0:
                     selected = "downvote";
-                    opposite = "upvote"
+                    opposite = "upvote";
                     break;
 
                 case 1:
@@ -99,34 +103,34 @@
             for(var i = 0; i < class_list.length; i++) {
                 switch(class_list[i]) {
                     case "fa-thumbs-o-up":
-                        upvote(selected_icon_selector);
-                        selected_vote_count++;
-
                         if($(opposite_icon_selector).hasClass("fa-thumbs-down")) {
-                            cancelDownvote(opposite_icon_selector);
+                            cancelDownvote(opposite_icon_selector, id, false);
                             opposite_vote_count--;
                         }
+
+                        upvote(selected_icon_selector, id);
+                        selected_vote_count++;
 
                         break;
 
                     case "fa-thumbs-up":
-                        cancelUpvote(selected_icon_selector);
+                        cancelUpvote(selected_icon_selector, id);
                         selected_vote_count--;
                         break;
 
                     case "fa-thumbs-o-down":
-                        downvote(selected_icon_selector);
-                        selected_vote_count++;
-
                         if($(opposite_icon_selector).hasClass("fa-thumbs-up")) {
-                            cancelUpvote(opposite_icon_selector);
+                            cancelUpvote(opposite_icon_selector, id, false);
                             opposite_vote_count--;
                         }
+
+                        downvote(selected_icon_selector, id);
+                        selected_vote_count++;
 
                         break;
 
                     case "fa-thumbs-down":
-                        cancelDownvote(selected_icon_selector);
+                        cancelDownvote(selected_icon_selector, id);
                         selected_vote_count--;
                         break;
                 }
@@ -136,20 +140,30 @@
             $(opposite_count_selector).text(opposite_vote_count);
         }
 
-        function upvote(selector) {
+        function upvote(selector, id) {
             $(selector).removeClass("fa-thumbs-o-up").addClass("fa-thumbs-up");
+            $.post("/experience/" + id + "/vote", { value: 1 });
         }
 
-        function cancelUpvote(selector) {
+        function cancelUpvote(selector, id, send = true) {
             $(selector).removeClass("fa-thumbs-up").addClass("fa-thumbs-o-up");
+
+            if (send) {
+                $.post("/experience/" + id + "/vote", {value: 1});
+            }
         }
 
-        function downvote(selector) {
+        function downvote(selector, id) {
             $(selector).removeClass("fa-thumbs-o-down").addClass("fa-thumbs-down");
+            $.post("/experience/" + id + "/vote", {value: 0});
         }
 
-        function cancelDownvote(selector) {
+        function cancelDownvote(selector, id, send = true) {
             $(selector).removeClass("fa-thumbs-down").addClass("fa-thumbs-o-down");
+
+            if (send) {
+                $.post("/experience/" + id + "/vote", {value: 0});
+            }
         }
     </script>
     @include('partials.analytics')
