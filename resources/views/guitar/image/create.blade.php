@@ -15,7 +15,8 @@
                     <a href="{{ route('guitar.show', ['guitar' => $guitar]) }}" class="icon-text icon-responsive"><span class="glyphicon glyphicon-search"></span></a>
                 </div>
             </div>
-            <div class="col-container">
+            <div class="dashboard-content">
+                @if(Auth::user()->verified)
                 <form method="POST" action="{{ route('guitar.image.store', ['guitar' => $guitar]) }}" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="row">
@@ -44,6 +45,9 @@
                         </div>
                     </div>
                 </form>
+                @else
+                    <span><a href="{{ route('dashboard') . "#verify" }}">@lang('content.verify-contribute')</a></span>
+                @endif
             </div>
         </div>
     </div>

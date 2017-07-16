@@ -30,3 +30,26 @@
     }
   }
 }
+
+@media (max-width: 560px) {
+  .cookie-popup {
+    text-align: left;
+    height: 70px;
+    word-break: keep-all;
+    padding: 0 5px;
+    padding-left: 20px;
+
+    span {
+      float: left;
+      width: 75%;
+    }
+
+    a {
+      top: 15px;
+      right: 10px;
+      float: right;
+      width: 20%;
+      text-align: center;
+    }
+  }
+}

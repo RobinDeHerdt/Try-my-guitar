@@ -33,7 +33,7 @@
         @if (!Cookie::get('cookie-popup'))
             <div class="cookie-popup" id="cookie-window">
                 <span>@lang('content.cookie-text')</span>
-                <a href="#" onclick="closeCookieWindow()">I agree</a>
+                <a href="#" onclick="closeCookieWindow()">@lang('content.cookie-confirm')</a>
             </div>
         @endif
         @if(Auth::check())

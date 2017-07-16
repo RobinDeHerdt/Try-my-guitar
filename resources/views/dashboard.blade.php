@@ -73,7 +73,7 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="dashboard-content"  id="invites">
+                    <div class="dashboard-content" id="invites">
                         <h3>@lang('dashboard.invites')</h3>
                         <hr>
                         @if($received_invites->isNotEmpty())
@@ -148,7 +148,7 @@
                         <a href="{{ route('profile.edit') }}">@lang('dashboard.personal-information')</a><br>
                         @if(!$user->verified)
                             <hr>
-                            <span>@lang('dashboard.profile-not-verified') <a href="{{ route('verify.resend') }}">@lang('dashboard.click-to-send')</a></span>
+                            <span id="verify">@lang('dashboard.profile-not-verified') <a href="{{ route('verify.resend') }}">@lang('dashboard.click-to-send')</a></span>
                         @endif
                     </div>
                 </div>

@@ -139,6 +139,10 @@ class GuitarController extends Controller
             'brand'         => 'required',
         ]);
 
+        if (!$this->user->verified) {
+            abort(403);
+        }
+
         $guitar = new Guitar();
 
         $guitar->name           = $request->name;
@@ -195,6 +199,10 @@ class GuitarController extends Controller
             'images'    => 'required',
             'images.*'  => 'file|image|mimes:jpeg,png,bmp,gif|max:1000',
         ]);
+
+        if (!$this->user->verified) {
+            abort(403);
+        }
 
         foreach ($request->images as $upload) {
             $image = new GuitarImage();

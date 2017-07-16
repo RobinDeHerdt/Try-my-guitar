@@ -14,6 +14,7 @@
                 </div>
             </div>
             <div class="dashboard-content">
+                @if(Auth::user()->verified)
                 <form method="POST" action="{{ route('guitar.store') }}" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="row">
@@ -105,6 +106,9 @@
                         </div>
                     </div>
                 </form>
+                @else
+                    <span><a href="{{ route('dashboard') . "#verify" }}">@lang('content.verify-contribute')</a></span>
+                @endif
             </div>
         </div>
     </div>

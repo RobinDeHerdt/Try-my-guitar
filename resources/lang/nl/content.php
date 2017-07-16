@@ -90,4 +90,6 @@ return [
     'add-guitar'                => 'Voeg een gitaar toe',
     'tell-about-yourself'       => 'Vertel iets over jezelf',
     'cookie-text'               => 'Wij gebruiken cookies om uw gebruikerservaring te verbeteren',
+    'cookie-confirm'            => 'Oké',
+    'verify-contribute'         => 'You need to verify your e-mail address in order to contribute.',
 ];
