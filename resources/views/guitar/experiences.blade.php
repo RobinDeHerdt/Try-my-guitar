@@ -34,20 +34,16 @@
                             <div class="col-md-12">
                                 <a href="{{ route('experience.vote', ['id' => $experience->id ])}}" class="cta-button" title="@lang('content.mark-as-helpful')" onclick="event.preventDefault(); vote('{{ $experience->id }}', 1);">
                                     <span>
-                                         <i class="fa {{ Auth::check() && $experience->upVotes->contains('user_id', Auth::user()->id) ? 'fa-thumbs-up' : 'fa-thumbs-o-up' }}" aria-hidden="true"></i>
-                                          {{ $experience->upVotes->count() }}
+                                         <i class="fa {{ Auth::check() && $experience->upVotes->contains('user_id', Auth::user()->id) ? 'fa-thumbs-up' : 'fa-thumbs-o-up' }}" aria-hidden="true" id="upvote-{{ $experience->id }}"></i>
+                                          <span id="upvote-count-{{ $experience->id }}">{{ $experience->upVotes->count() }}</span>
                                     </span>
                                 </a>
                                 <a href="{{ route('experience.vote', ['id' => $experience->id ])}}" class="cta-button" title="@lang('content.mark-as-not-helpful')" onclick="event.preventDefault(); vote('{{ $experience->id }}', 0);">
                                     <span>
-                                         <i class="fa {{ Auth::check() && $experience->downVotes->contains('user_id', Auth::user()->id) ? 'fa-thumbs-down' : 'fa-thumbs-o-down' }}" aria-hidden="true"></i>
-                                        {{ $experience->downVotes->count() }}
+                                         <i class="fa {{ Auth::check() && $experience->downVotes->contains('user_id', Auth::user()->id) ? 'fa-thumbs-down' : 'fa-thumbs-o-down' }}" aria-hidden="true" id="downvote-{{ $experience->id }}"></i>
+                                        <span id="downvote-count-{{ $experience->id }}">{{ $experience->downVotes->count() }}</span>
                                     </span>
                                 </a>
-                                <form action="{{ route('experience.vote', ['id' => $experience->id ])}}"  method="POST" id="vote-form-{{ $experience->id }}">
-                                    {{ csrf_field() }}
-                                    <input type="hidden" name="value" id="value-field-{{ $experience->id }}">
-                                </form>
                             </div>
                             <br>
                         </div>
@@ -64,9 +60,96 @@
 
 @section('scripts')
     <script>
+        // Look away while you still can...
+        // :todo This might need some work
         function vote(id, value) {
-            $('#value-field-' +id).val(value);
-            $('#vote-form-' + id).submit();
+            var class_list;
+
+            var selected;
+            var opposite;
+
+            var selected_vote_count;
+            var opposite_vote_count;
+
+            switch(value) {
+                case 0:
+                    selected = "downvote";
+                    opposite = "upvote"
+                    break;
+
+                case 1:
+                    selected = "upvote";
+                    opposite = "downvote";
+                    break;
+
+                default:
+                    return;
+            }
+
+            var selected_count_selector = "#" + selected + "-count-" + id;
+            var selected_icon_selector  = "#" + selected + "-" + id;
+            var opposite_count_selector = "#" + opposite + "-count-" + id;
+            var opposite_icon_selector  = "#" + opposite + "-" + id;
+
+            selected_vote_count = $(selected_count_selector).text();
+            opposite_vote_count = $(opposite_count_selector).text();
+
+            class_list  = $(selected_icon_selector).attr("class").split(' ');
+
+            for(var i = 0; i < class_list.length; i++) {
+                switch(class_list[i]) {
+                    case "fa-thumbs-o-up":
+                        upvote(selected_icon_selector);
+                        selected_vote_count++;
+
+                        if($(opposite_icon_selector).hasClass("fa-thumbs-down")) {
+                            cancelDownvote(opposite_icon_selector);
+                            opposite_vote_count--;
+                        }
+
+                        break;
+
+                    case "fa-thumbs-up":
+                        cancelUpvote(selected_icon_selector);
+                        selected_vote_count--;
+                        break;
+
+                    case "fa-thumbs-o-down":
+                        downvote(selected_icon_selector);
+                        selected_vote_count++;
+
+                        if($(opposite_icon_selector).hasClass("fa-thumbs-up")) {
+                            cancelUpvote(opposite_icon_selector);
+                            opposite_vote_count--;
+                        }
+
+                        break;
+
+                    case "fa-thumbs-down":
+                        cancelDownvote(selected_icon_selector);
+                        selected_vote_count--;
+                        break;
+                }
+            }
+
+            $(selected_count_selector).text(selected_vote_count);
+            $(opposite_count_selector).text(opposite_vote_count);
+        }
+
+        function upvote(selector) {
+            $(selector).removeClass("fa-thumbs-o-up").addClass("fa-thumbs-up");
+        }
+
+        function cancelUpvote(selector) {
+            $(selector).removeClass("fa-thumbs-up").addClass("fa-thumbs-o-up");
+        }
+
+        function downvote(selector) {
+            $(selector).removeClass("fa-thumbs-o-down").addClass("fa-thumbs-down");
+        }
+
+        function cancelDownvote(selector) {
+            $(selector).removeClass("fa-thumbs-down").addClass("fa-thumbs-o-down");
         }
     </script>
     @include('partials.analytics')
