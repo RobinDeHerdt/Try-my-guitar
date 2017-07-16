@@ -90,9 +90,10 @@ class ProfileController extends Controller
     {
         $this->validate($request, [
             'first_name' => 'required|string|max:255',
-            'last_name' => 'string|max:255',
+            'last_name' => 'max:255',
             'email' => 'required|string|email|max:255',
             'image' => 'file|image|mimes:jpeg,png,gif|max:1000',
+            'location' => 'max:1024',
         ]);
 
         $send_mail  = false;
@@ -108,15 +109,24 @@ class ProfileController extends Controller
             $send_mail                  = true;
         }
 
+        // If the user didn't have a location set initially, award exp for setting it.
         if (!$user->location && !$user->location_lat && !$user->location_lng) {
             if ($request->location && $request->location_lat && $request->location_lng) {
                 $this->addExp($user, 100);
             }
         }
 
+        // If the user did have a location set initially, subtract exp for removing it.
+        if ($user->location && $user->location_lat && $user->location_lng) {
+            if (!$request->location && !$request->location_lat && !$request->location_lng) {
+                $this->subtractExp($user, 100);
+            }
+        }
+
         $user->location     = $request->location;
         $user->location_lat = $request->location_lat;
         $user->location_lng = $request->location_lng;
+
 
         if (isset($request->image)) {
             $user->image_uri = $request->image->store('images', 'public');
@@ -158,9 +168,14 @@ class ProfileController extends Controller
      */
     public function updateAppearance(Request $request)
     {
+        $this->validate($request, [
+            'description' => 'max:1024',
+            'image' => 'file|image|mimes:jpeg,png,gif|max:1500',
+        ]);
+
         $user = $this->user;
 
-        $user->description      = $request->description;
+        $user->description = $request->description;
 
         if (isset($request->image)) {
             $user->header_image_uri = $request->image->store('images', 'public');

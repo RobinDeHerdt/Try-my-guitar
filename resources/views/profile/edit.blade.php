@@ -24,7 +24,7 @@
                         <div class="col-md-6">
                             <div class="form-group {{ $errors->has('first_name') ? ' has-error' : '' }}">
                                 <label for="first_name">@lang('input.first-name') *</label>
-                                <input type="text" class="form-control" name="first_name" value="{{ $user->first_name }}" required>
+                                <input type="text" class="form-control" name="first_name" value="{{ old('first_name') ? old('first_name') : $user->first_name }}" required>
                                 @if ($errors->has('first_name'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('first_name') }}</strong>
@@ -32,8 +32,8 @@
                                 @endif
                             </div>
                             <div class="form-group {{ $errors->has('last_name') ? ' has-error' : '' }}">
-                                <label for="last_name">@lang('input.last-name') *</label>
-                                <input type="text" class="form-control" name="last_name" value="{{ $user->last_name }}">
+                                <label for="last_name">@lang('input.last-name')</label>
+                                <input type="text" class="form-control" name="last_name" value="{{ old('last_name') ? old('last_name') : $user->last_name }}">
                                 @if ($errors->has('last_name'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('last_name') }}</strong>
@@ -42,7 +42,7 @@
                             </div>
                             <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
                                 <label for="email">@lang('input.email') * </label>
-                                <input type="email" class="form-control" name="email" value="{{ $user->email }}" required>
+                                <input type="email" class="form-control" name="email" value="{{ old('email') ? old('email') : $user->email }}" required>
                                 @if ($errors->has('email'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
@@ -65,10 +65,10 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>@lang('content.preferred-spot') *</label>
+                                <label>@lang('content.preferred-spot')</label>
                                 <div class="pac-card" id="pac-card">
                                     <div id="pac-container">
-                                        <input id="pac-input" type="text" name="location" placeholder="@lang('content.where-meetup')" value="{{ $user->location }}">
+                                        <input id="pac-input" type="text" name="location" placeholder="@lang('content.where-meetup')" value="{{ old('location') ? old('location') : $user->location }}" onchange="inputChanged();">
                                     </div>
                                 </div>
                                 <div id="map"></div>
@@ -77,8 +77,8 @@
                                     <span id="place-name"  class="title"></span><br>
                                     <span id="place-address"></span>
                                 </div>
-                                <input type="hidden" class="form-control" name="location_lat" id="location-lat" value="{{ $user->location_lat }}">
-                                <input type="hidden" class="form-control" name="location_lng" id="location-lng" value="{{ $user->location_lng }}">
+                                <input type="hidden" class="form-control" name="location_lat" id="location-lat" value="{{ old('location_lat') ? old('location_lat') : $user->location_lat }}">
+                                <input type="hidden" class="form-control" name="location_lng" id="location-lng" value="{{ old('location_lng') ? old('location_lng') : $user->location_lng }}">
                                 <input type="hidden" class="form-control" id="user-coords" value="{{ $user_coords }}">
                             </div>
                         </div>
@@ -137,20 +137,26 @@
 
 @section('scripts')
     <script>
-        function initMap() {
-            var card            = document.getElementById('pac-card');
-            var input           = document.getElementById('pac-input');
-            var location_lat    = document.getElementById('location-lat');
-            var location_lng    = document.getElementById('location-lng');
-            var user_coords     = document.getElementById('user-coords');
+        var input           = document.getElementById('pac-input');
+        var card            = document.getElementById('pac-card');
+        var location_lat    = document.getElementById('location-lat');
+        var location_lng    = document.getElementById('location-lng');
+        var user_coords     = document.getElementById('user-coords');
 
+        function inputChanged() {
+            if(!input.value) {
+                location_lat.value = "";
+                location_lng.value = "";
+            }
+        }
+
+        function initMap() {
             if(location_lat.value && location_lng.value) {
                 var map = new google.maps.Map(document.getElementById('map'), {
                     center: {lat: parseFloat(location_lat.value), lng: parseFloat(location_lng.value)},
                     zoom: 17
                 });
             } else {
-                console.log(user_coords.value);
                 var map = new google.maps.Map(document.getElementById('map'), {
                     center: JSON.parse(user_coords.value),
                     zoom: 7
