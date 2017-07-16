@@ -65,6 +65,10 @@ class ExperienceController extends Controller
      */
     public function store(Request $request, Guitar $guitar)
     {
+        $this->validate($request, [
+            'experience' => 'required|max:2048',
+        ]);
+
         if (!Experience::where('user_id', $this->user->id)->where('guitar_id', $guitar->id)->exists()) {
             $experience = new Experience();
 

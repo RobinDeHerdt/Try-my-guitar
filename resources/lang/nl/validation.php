@@ -150,7 +150,9 @@ return [
         'year'                  => 'jaar',
         'reason'                => 'reden',
         'brand'                 => 'merk',
-        'types'                 => 'categorieën'
+        'types'                 => 'categorieën',
+        'experience'            => 'ervaring',
+        'images'                => 'afbeelding'
     ],
 
 ];

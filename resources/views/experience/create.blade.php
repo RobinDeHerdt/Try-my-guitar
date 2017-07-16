@@ -21,9 +21,14 @@
                     <div class="row">
                         <div class="col-md-12">
                             <input type="hidden" name="guitar" value="{{ $guitar->id }}">
-                            <div class="form-group">
+                            <div class="form-group {{ $errors->has('experience') ? ' has-error' : '' }}">
                                 <label for="experience">@lang('input.experience')</label>
                                 <textarea name="experience" cols="30" rows="5" class="form-control" placeholder="@lang('input.describe-experience')"></textarea>
+                                @if ($errors->has('experience'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('experience') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
                     </div>

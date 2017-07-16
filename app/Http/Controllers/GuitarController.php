@@ -134,7 +134,7 @@ class GuitarController extends Controller
         $this->validate($request, [
             'images.*'      => 'file|image|mimes:jpeg,png,bmp,gif|max:1000',
             'name'          => 'required|max:255',
-            'description'   => 'required|max:1024',
+            'description'   => 'required|max:2048',
             'types'         => 'required',
             'brand'         => 'required',
         ]);
