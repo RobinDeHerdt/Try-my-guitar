@@ -35,7 +35,7 @@ class ExperienceController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('role:user')->except('index');
+        $this->middleware('role:user')->except('index', 'vote');
         $this->middleware(function ($request, $next) {
             $this->user = Auth::user();
 
@@ -134,6 +134,10 @@ class ExperienceController extends Controller
      */
     public function vote(Request $request, Experience $experience)
     {
+        if (!$this->user) {
+            return response(304);
+        }
+
         $vote_query = $experience->votes()
             ->where('experience_id', $experience->id)
             ->where('user_id', $this->user->id);
@@ -157,6 +161,6 @@ class ExperienceController extends Controller
             }
         }
 
-        return response(200);
+        return response()->json(['status' => 304]);
     }
 }

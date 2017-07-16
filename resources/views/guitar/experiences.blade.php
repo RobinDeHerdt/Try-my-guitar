@@ -142,27 +142,43 @@
 
         function upvote(selector, id) {
             $(selector).removeClass("fa-thumbs-o-up").addClass("fa-thumbs-up");
-            $.post("/experience/" + id + "/vote", { value: 1 });
+            $.post("/experience/" + id + "/vote", { value: 1 }).done(function(data) {
+                if(data == 304) {
+                    window.location = '/login';
+                }
+            });
         }
 
         function cancelUpvote(selector, id, send = true) {
             $(selector).removeClass("fa-thumbs-up").addClass("fa-thumbs-o-up");
 
             if (send) {
-                $.post("/experience/" + id + "/vote", {value: 1});
+                $.post("/experience/" + id + "/vote", {value: 1}).done(function(data) {
+                    if(data == 304) {
+                        window.location = '/login';
+                    }
+                });
             }
         }
 
         function downvote(selector, id) {
             $(selector).removeClass("fa-thumbs-o-down").addClass("fa-thumbs-down");
-            $.post("/experience/" + id + "/vote", {value: 0});
+            $.post("/experience/" + id + "/vote", {value: 0}).done(function(data) {
+                if(data == 304) {
+                    window.location = '/login';
+                }
+            });
         }
 
         function cancelDownvote(selector, id, send = true) {
             $(selector).removeClass("fa-thumbs-down").addClass("fa-thumbs-o-down");
 
             if (send) {
-                $.post("/experience/" + id + "/vote", {value: 0});
+                $.post("/experience/" + id + "/vote", {value: 0}).done(function(data) {
+                    if(data == 304) {
+                        window.location = '/login';
+                    }
+                });
             }
         }
     </script>

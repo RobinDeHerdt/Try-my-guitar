@@ -77,7 +77,7 @@ class LoginController extends Controller
 
             Mail::to($user->email)->send(new VerifyEmail($user));
 
-            Session::flash('success-message', "Thanks for registering! We've sent a verification link to your email address.");
+            Session::flash('success-message', __('flash.verification-sent', ['email' => $user->email]));
 
             Auth::login($user);
         } else {
