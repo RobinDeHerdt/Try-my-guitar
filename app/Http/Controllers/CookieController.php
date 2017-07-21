@@ -9,12 +9,16 @@ namespace App\Http\Controllers;
 class CookieController extends Controller
 {
     /**
-     * Set cookie.
+     * Set cookie. Expires after 1 year.
      *
      * @return \Illuminate\Http\Response
      */
     public function store()
     {
-        return response('200')->cookie('cookie-popup', 'checked');
+        return response('200')->cookie(
+            'cookie-popup',
+            'checked',
+            time() + (365 * 24 * 60 * 60)
+        );
     }
 }
