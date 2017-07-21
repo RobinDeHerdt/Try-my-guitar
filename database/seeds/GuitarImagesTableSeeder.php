@@ -18,6 +18,24 @@ class GuitarImagesTableSeeder extends Seeder
         ]);
 
         DB::table('guitar_images')->insert([
+            'image_uri' => 'images/ec-1000-side.png',
+            'guitar_id' => 1,
+            'user_id'   => 503,
+        ]);
+
+        DB::table('guitar_images')->insert([
+            'image_uri' => 'images/ec-1000-3.jpg',
+            'guitar_id' => 1,
+            'user_id'   => 755,
+        ]);
+
+        DB::table('guitar_images')->insert([
+            'image_uri' => 'images/ec-1000-2.jpg',
+            'guitar_id' => 1,
+            'user_id'   => 755,
+        ]);
+
+        DB::table('guitar_images')->insert([
             'image_uri' => 'images/iron-cross.jpg',
             'guitar_id' => 2,
             'user_id'   => 3,
