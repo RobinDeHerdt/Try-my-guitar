@@ -22,8 +22,8 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'image_uri' => 'images/profile.png',
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
-        'location_lat' => $faker->latitude($min = -90, $max = 90),
-        'location_lng' => $faker->longitude($min = -180, $max = 180),
+        'location_lat' => $faker->latitude($min = -35, $max = 65),
+        'location_lng' => $faker->longitude($min = -120, $max = 140),
         'location' => $faker->address,
         'exp' => $faker->numberBetween($min = 50, $max = 15000),
     ];
