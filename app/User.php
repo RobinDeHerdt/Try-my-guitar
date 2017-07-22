@@ -144,6 +144,16 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Channel');
     }
 
+    /**
+     * A user belongs to many channels.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
+     */
+    public function acceptedChannels()
+    {
+        return $this->belongsToMany('App\Channel')->wherePivot('accepted', true);
+    }
+
 
     /**
      * A user has many guitar images.

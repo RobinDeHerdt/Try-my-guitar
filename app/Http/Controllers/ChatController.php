@@ -185,7 +185,7 @@ class ChatController extends Controller
     public function channels()
     {
         if ($this->user) {
-            $channels = $this->user->channels()->get();
+            $channels = $this->user->acceptedChannels()->get();
             return $channels;
         }
 
