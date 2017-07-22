@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Guitar;
+use App\User;
 
 class GuitarsTableSeeder extends Seeder
 {
@@ -113,6 +114,19 @@ class GuitarsTableSeeder extends Seeder
          * Add some guitars to random users' collection.
          */
         $guitars = Guitar::all();
+        $guitar_count = $guitars->count();
+
+        // Loop over all 'Belgian' user id's.
+        for ($i = 5; $i < 14; $i++) {
+            $guitars_array = [];
+            // Amount of guitars to add to every users' collection.
+            for ($j = 0; $j < 3; $j++) {
+                array_push($guitars_array, rand(1, $guitar_count));
+            }
+
+            $user = User::find($i);
+            $user->guitars()->attach($guitars_array);
+        }
 
         foreach ($guitars as $guitar) {
             $users = [];
