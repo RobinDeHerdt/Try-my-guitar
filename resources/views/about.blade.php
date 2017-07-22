@@ -11,22 +11,21 @@
             <div class="row">
                 @include('partials.messages')
             </div>
-            <h2 id="meet">Meet people</h2>
+            <h2 id="meet">@lang('about.meet-people')</h2>
             <div class="row">
                 <div class="col-md-12">
                     <div class="dashboard-content">
-                        <strong>Do you have a guitar in mind that you have always wanted to play, but it isn't available in the stores anymore?</strong><br>
-                        <span>Look it up here and find owners near you! Invite them to chat and arrange a meet-up in a local practice room. Don't forget to share your experience afterwards!</span>
+                        <strong>@lang('about.about-1-strong')</strong><br>
+                        <span>@lang('about.about-1-text')</span>
                     </div>
                 </div>
             </div>
-            <h2 id="discover">Discover</h2>
+            <h2 id="discover">@lang('about.discover')</h2>
             <div class="row">
                 <div class="col-md-12">
                     <div class="dashboard-content">
-                        <strong>Not sure which guitar you're interested in?</strong><br>
-                        <span>No problem! Check out the 'explore' section on the site and discover guitars that suit your needs.</span>
-                        <span>If you just want to hang out with people near you, check out the map!</span>
+                        <strong>@lang('about.about-2-strong')</strong><br>
+                        <span>@lang('about.about-2-text')</span>
                     </div>
                 </div>
             </div>
@@ -34,17 +33,15 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="dashboard-content">
-                        <p>You can increase your profile level by earning experience points.
-                            Experience points are awarded for contributing to the site: </p>
+                        <p>@lang('about.about-3-text')</p>
                         <ul>
-                            <li>Verify your e-mail (<strong>+100 exp</strong>)</li>
-                            <li>Complete your profile (<strong>+100 exp</strong>)</li>
-                            <li>Add a guitar to the website (<strong>+100 exp and +25 exp per image</strong>)</li>
-                            <li>Add images to a guitar (<strong>+25 exp per image</strong>)</li>
-                            <li>Share a guitar experience (<strong>+75 exp</strong>)</li>
+                            <li>@lang('about.about-3-point-1') (<strong>+100 exp</strong>)</li>
+                            <li>@lang('about.about-3-point-2') (<strong>+100 exp</strong>)</li>
+                            <li>@lang('about.about-3-point-3') (<strong>@lang('about.about-3-point-3-text')</strong>)</li>
+                            <li>@lang('about.about-3-point-4') (<strong>@lang('about.about-3-point-4-text')</strong>)</li>
+                            <li>@lang('about.about-3-point-5') (<strong>+75 exp</strong>)</li>
                         </ul>
-                        <strong>Warning! Contributions will be monitored by the site administrators.
-                            You will receive an exp penalty or permanent ban in case spam is uploaded.</strong>
+                        <strong>@lang('about.about-3-strong')</strong>
                     </div>
                 </div>
             </div>

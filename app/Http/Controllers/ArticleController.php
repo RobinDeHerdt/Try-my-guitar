@@ -118,10 +118,15 @@ class ArticleController extends Controller
      * Display the specified article.
      *
      * @param  \App\Article  $article
+     * @param  string  $title
      * @return \Illuminate\Http\Response
      */
-    public function showPublic(Article $article)
+    public function showPublic(Article $article, $title)
     {
+        if (str_slug($article->title) !== $title) {
+            abort(404);
+        }
+
         $viewed_articles = [];
 
         if (session('viewed-articles')) {
