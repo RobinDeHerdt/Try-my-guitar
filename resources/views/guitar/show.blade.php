@@ -249,7 +249,7 @@
 
             var map = new google.maps.Map(document.getElementById('map'), {
                 center: user_location,
-                zoom: 5
+                zoom: 8
             });
 
             var infowindow = new google.maps.InfoWindow();

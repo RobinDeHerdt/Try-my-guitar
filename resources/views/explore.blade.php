@@ -80,7 +80,7 @@
 
             var map = new google.maps.Map(document.getElementById('map'), {
                 center: user_location,
-                zoom: 3,
+                zoom: 7,
                 minZoom: 5,
             });
 
