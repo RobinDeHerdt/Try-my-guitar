@@ -69,16 +69,16 @@ class LoginController extends Controller
      */
     public function handleGoogleCallback()
     {
-        $google_user = Socialite::driver('twitter')->user();
+        $google_user = Socialite::driver('google')->user();
 
-        $existing_user = User::where('twitter_id', $google_user->id)->first();
+        $existing_user = User::where('google_id', $google_user->id)->first();
 
         if (!$existing_user) {
             $user = new User();
 
             $user->first_name           = $google_user->name;
             $user->email                = $google_user->email;
-            $user->twitter_id           = $google_user->id;
+            $user->google_id            = $google_user->id;
             $user->verification_token   = str_random(12);
 
             $user->save();

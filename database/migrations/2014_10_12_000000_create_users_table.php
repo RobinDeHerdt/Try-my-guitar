@@ -31,6 +31,7 @@ class CreateUsersTable extends Migration
             $table->boolean('active')->default(true);
             $table->date('inactive_until')->nullable();
             $table->string('twitter_id')->nullable();
+            $table->string('google_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
