@@ -1,0 +1,82 @@
+.authentication-block {
+  margin-top: 15vh;
+  background: white;
+  padding: 25px;
+  box-shadow: $strong-drop-shadow;
+  border-radius: 5px;
+  margin-bottom: 120px;
+}
+
+.divider{
+  background: #ddd;
+  height: 2px;
+  display: block;
+  position: relative;
+  width: 100%;
+  margin: 30px auto;
+
+  span {
+    width: 30px;
+    height: 20px;
+    background: #fff;
+    position: absolute;
+    left: 50%;
+    margin-left: -10px;
+    top: -12px;
+    text-align: center;
+    color: #999;
+  }
+}
+
+.social {
+  display: block;
+  margin: 0 auto;
+  overflow: hidden;
+  width: 100%;
+
+  h4 {
+    color: $primary-font-color;
+    font-weight: normal;
+    margin: 0 0 20px;
+    text-align: center;
+  }
+}
+
+.social ul{
+  display: block;
+  padding: 0;
+
+  li{
+    list-style: none;
+    float: left;
+    width: 31.33%;
+    margin: 0 1%;
+
+    a {
+      font-size: 24px;
+      text-decoration: none;
+      color: #fff;
+      padding: 0;
+      display: block;
+      text-align: center;
+      border-radius: 4px;
+      transition: all 0.4s ease-in-out;
+
+      &:hover {
+        opacity: .8;
+      }
+
+      &.facebook {
+        background: #3a589a;
+      }
+
+      &.twitter {
+        background: #4099ff;
+      }
+
+      &.google {
+        background: #e9544f;
+      }
+    }
+  }
+}

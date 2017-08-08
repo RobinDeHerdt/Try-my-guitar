@@ -15,6 +15,17 @@
                             {{ session('info-message') }}
                         </div>
                     @endif
+                    <div class="social">
+                        <h4>Connect with</h4>
+                        <ul>
+                            <li><a href="/login/facebook" class="facebook"><span class="fa fa-facebook"></span></a></li>
+                            <li><a href="/login/twitter" class="twitter"><span class="fa fa-twitter"></span></a></li>
+                            <li><a href="/login/google" class="google"><span class="fa fa-google"></span></a></li>
+                        </ul>
+                    </div>
+                    <div class="divider">
+                        <span>or</span>
+                    </div>
                     <form method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
@@ -42,16 +53,12 @@
                                 </label>
                             </div>
                         </div>
-                        <a href="/login/twitter" class="float-left"><span class="fa fa-twitter"></span> @lang('content.twitter-login')</a>
-                        <a href="/login/google" class="float-right"><span class="fa fa-google"></span> @lang('content.google-login')</a>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary big-cta-button">
                                 @lang('input.login')
                             </button>
                         </div>
-                        <div class="form-group">
-                            <a href="{{ route('password.request') }}">@lang('input.forgot-password')</a>
-                        </div>
+                        <a href="{{ route('password.request') }}">@lang('input.forgot-password')</a>
                     </form>
                 </div>
             </div>
