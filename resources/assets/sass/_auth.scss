@@ -46,11 +46,14 @@
   display: block;
   padding: 0;
 
-  li{
+  li {
     list-style: none;
     float: left;
-    width: 31.33%;
-    margin: 0 1%;
+    width: 20%;
+
+    &:nth-child(1) {
+      margin: 0 10% 0 25%;
+    }
 
     a {
       font-size: 24px;
@@ -64,10 +67,6 @@
 
       &:hover {
         opacity: .8;
-      }
-
-      &.facebook {
-        background: #3a589a;
       }
 
       &.twitter {

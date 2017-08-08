@@ -13,7 +13,6 @@
                     <div class="social">
                         <h4>Connect with</h4>
                         <ul>
-                            <li><a href="/login/facebook" class="facebook"><span class="fa fa-facebook"></span></a></li>
                             <li><a href="/login/twitter" class="twitter"><span class="fa fa-twitter"></span></a></li>
                             <li><a href="/login/google" class="google"><span class="fa fa-google"></span></a></li>
                         </ul>
