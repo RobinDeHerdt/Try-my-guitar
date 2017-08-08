@@ -47,9 +47,54 @@ class LoginController extends Controller
      *
      * @return Response
      */
-    public function redirectToProvider()
+    public function redirectToGoogle()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    /**
+     * Redirect the user to the Twitter authentication page.
+     *
+     * @return Response
+     */
+    public function redirectToTwitter()
     {
         return Socialite::driver('twitter')->redirect();
+    }
+
+    /**
+     * Obtain the user information from Google.
+     *
+     * @return Response
+     */
+    public function handleGoogleCallback()
+    {
+        $google_user = Socialite::driver('twitter')->user();
+
+        $existing_user = User::where('twitter_id', $google_user->id)->first();
+
+        if (!$existing_user) {
+            $user = new User();
+
+            $user->first_name           = $google_user->name;
+            $user->email                = $google_user->email;
+            $user->twitter_id           = $google_user->id;
+            $user->verification_token   = str_random(12);
+
+            $user->save();
+
+            $user->roles()->attach(3);
+
+            Mail::to($user->email)->send(new VerifyEmail($user));
+
+            Session::flash('success-message', __('flash.verification-sent', ['email' => $user->email]));
+
+            Auth::login($user);
+        } else {
+            Auth::login($existing_user);
+        }
+
+        return redirect(route('dashboard'));
     }
 
     /**
@@ -57,7 +102,7 @@ class LoginController extends Controller
      *
      * @return Response
      */
-    public function handleProviderCallback()
+    public function handleTwitterCallback()
     {
         $twitter_user = Socialite::driver('twitter')->user();
 

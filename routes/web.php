@@ -11,8 +11,10 @@
 |
 */
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
-Route::get('login/twitter', 'Auth\LoginController@redirectToProvider');
-Route::get('login/twitter/callback', 'Auth\LoginController@handleProviderCallback');
+Route::get('login/twitter', 'Auth\LoginController@redirectToTwitter');
+Route::get('login/twitter/callback', 'Auth\LoginController@handleTwitterCallback');
+Route::get('login/google', 'Auth\LoginController@redirectToGoogle');
+Route::get('login/google/callback', 'Auth\LoginController@handleGoogleCallback');
 
 Route::group([
     'prefix' => LaravelLocalization::setLocale(),

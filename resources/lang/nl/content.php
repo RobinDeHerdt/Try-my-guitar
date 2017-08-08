@@ -42,6 +42,7 @@ return [
     'view-collection'           => 'Bekijk collectie',
     'no-image-available'        => 'Geen afbeelding beschikbaar',
     'twitter-login'             => 'Log in met twitter',
+    'google-login'              => 'Log in met google',
     'or'                        => 'Of',
     's-collection'              => '\'s collectie',
     's-experience'              => '\'s ervaring met deze gitaar',

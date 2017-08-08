@@ -59,7 +59,8 @@
                         </div>
                         <div class="center-content">
                             <span>@lang('content.or')</span><br>
-                            <a href="/login/twitter"><span class="fa fa-twitter"></span> @lang('content.twitter-login')</a>
+                            <a href="/login/twitter" class="float-left"><span class="fa fa-twitter"></span> @lang('content.twitter-login')</a>
+                            <a href="/login/google" class="float-right"><span class="fa fa-google"></span> @lang('content.google-login')</a>
                         </div>
                     </form>
                 </div>
