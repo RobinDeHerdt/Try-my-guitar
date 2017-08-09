@@ -93,4 +93,7 @@ return [
     'cookie-text'               => 'Wij gebruiken cookies om uw gebruikerservaring te verbeteren',
     'cookie-confirm'            => 'Oké',
     'verify-contribute'         => 'Je moet je e-mailadres verifiëren om content toe te voegen aan de website',
+    'connect-with'              => 'Log in met',
+    'not-found'                 => 'Pagina niet gevonden',
+    'unauthorized'              => 'Geen toegang',
 ];

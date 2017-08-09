@@ -94,5 +94,7 @@ return [
     'cookie-text'               => 'We use cookies to improve your experience',
     'cookie-confirm'            => 'Ok',
     'verify-contribute'         => 'You need to verify your e-mail address in order to contribute',
-
+    'connect-with'              => 'Connect with',
+    'not-found'                 => 'Page not found',
+    'unauthorized'              => 'Unauthorized',
 ];

@@ -16,14 +16,14 @@
                         </div>
                     @endif
                     <div class="social">
-                        <h4>Connect with</h4>
+                        <h4>@lang('content.connect-with')</h4>
                         <ul>
                             <li><a href="/login/twitter" class="twitter"><span class="fa fa-twitter"></span></a></li>
                             <li><a href="/login/google" class="google"><span class="fa fa-google"></span></a></li>
                         </ul>
                     </div>
                     <div class="divider">
-                        <span>or</span>
+                        <span>@lang('content.or')</span>
                     </div>
                     <form method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}

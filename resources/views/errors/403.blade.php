@@ -5,11 +5,12 @@
 @endsection
 
 @section('content')
-    <div class="content">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h1>Unauthorized</h1>
+    <div class="full-page-bg" style="background-image: url('/images/auth-bg.jpg')"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="authentication-block">
+                    <h4 class="center">@lang('content.unauthorized')</h4>
                 </div>
             </div>
         </div>
