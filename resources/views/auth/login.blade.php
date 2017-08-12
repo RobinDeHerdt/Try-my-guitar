@@ -10,11 +10,6 @@
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
                 <div class="authentication-block">
-                    @if (session('info-message'))
-                        <div class="alert alert-info">
-                            {{ session('info-message') }}
-                        </div>
-                    @endif
                     <div class="social">
                         <h4>@lang('content.connect-with')</h4>
                         <ul>
@@ -25,6 +20,11 @@
                     <div class="divider">
                         <span>@lang('content.or')</span>
                     </div>
+                    @if (session('info-message'))
+                        <div class="alert alert-info">
+                            {{ session('info-message') }}
+                        </div>
+                    @endif
                     <form method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
