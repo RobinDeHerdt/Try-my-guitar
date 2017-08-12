@@ -31,4 +31,5 @@ return [
     'verified' => 'Your account is now verified',
     'verification-failed' => 'Verification failed. Please contact the site administrator if the problem persists.',
     'verification-sent' => 'A verification link was sent at :email',
+    'email-exists' => 'This email has already been taken. Please log in using the form below.',
 ];

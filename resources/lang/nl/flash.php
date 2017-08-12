@@ -31,4 +31,6 @@ return [
     'verified' => 'Je account werd geverifiëerd',
     'verification-failed' => 'Je account kon niet geverifiëerd worden. Neem aub contact op met de administrators indien het probleem zich opnieuw voordoet.',
     'verification-sent' => 'Er werd een verificatie e-mail gestuurd naar :email',
+    'email-exists' => 'Dit mailadres is al in gebruik. Log in via het formulier onderaan.',
+
 ];

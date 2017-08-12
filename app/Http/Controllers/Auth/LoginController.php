@@ -104,6 +104,11 @@ class LoginController extends Controller
         $existing_user = User::where('google_id', $google_user->id)->first();
 
         if (!$existing_user) {
+            if (User::where('email', $google_user->email)->exists()) {
+                Session::flash('info-message', __('flash.email-exists'));
+                return redirect(route('login'));
+            }
+
             $user = new User();
 
             $user->first_name           = $google_user->name;
@@ -139,6 +144,11 @@ class LoginController extends Controller
         $existing_user = User::where('twitter_id', $twitter_user->id)->first();
 
         if (!$existing_user) {
+            if (User::where('email', $twitter_user->email)->exists()) {
+                Session::flash('info-message', __('flash.email-exists'));
+                return redirect(route('login'));
+            }
+
             $user = new User();
 
             $user->first_name           = $twitter_user->name;
