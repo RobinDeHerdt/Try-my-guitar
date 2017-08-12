@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Support\Facades\URL;
 use Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Mail;
@@ -43,9 +44,38 @@ class LoginController extends Controller
     }
 
     /**
-     * Redirect the user to the Twitter authentication page.
+     * Show the application's login form.
+     * Store the user's intended url so we can redirect back after login.
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
+     */
+    public function showLoginForm()
+    {
+        if (Url::previous()) {
+            session(['intended_url' => Url::previous()]);
+        }
+
+        return view('auth.login');
+    }
+
+    /**
+     * The user has been authenticated.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    protected function authenticated()
+    {
+        if (session('intended_url')) {
+            return redirect(session('intended_url'));
+        }
+
+        return redirect(route('dashboard'));
+    }
+
+    /**
+     * Redirect the user to the Google authentication page.
+     *
+     * @return Socialite
      */
     public function redirectToGoogle()
     {
@@ -55,7 +85,7 @@ class LoginController extends Controller
     /**
      * Redirect the user to the Twitter authentication page.
      *
-     * @return Response
+     * @return Socialite
      */
     public function redirectToTwitter()
     {
@@ -65,7 +95,7 @@ class LoginController extends Controller
     /**
      * Obtain the user information from Google.
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function handleGoogleCallback()
     {
@@ -100,7 +130,7 @@ class LoginController extends Controller
     /**
      * Obtain the user information from Twitter.
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function handleTwitterCallback()
     {
