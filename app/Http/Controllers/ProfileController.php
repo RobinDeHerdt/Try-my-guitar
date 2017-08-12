@@ -196,6 +196,10 @@ class ProfileController extends Controller
      */
     public function invite(User $user)
     {
+        if ($user->id === $this->user->id) {
+            abort(404);
+        }
+
         $channels = $this->user->channels()->where('accepted', true)->get();
 
         return view('profile.invite', [

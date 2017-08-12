@@ -216,6 +216,10 @@ class ChatController extends Controller
     {
         $user = User::find($request->user_id);
 
+        if ($user->id === $this->user->id) {
+            abort(404);
+        }
+
         /**
          * If the channel id is sent with the request,
          * add the specified user this channel.
