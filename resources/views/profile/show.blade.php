@@ -26,26 +26,23 @@
                 <span class="profile-location"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ $user->location }}</span>
             @endif
             <div class="profile-button-container">
-                @if(Auth::check())
-                    @if ($user->id === Auth::user()->id)
-                        <a href="{{ route('profile.edit') }}">
-                            <div class="profile-button blue" title="@lang('content.edit-profile')">
-                                <i class="fa fa-pencil fa-2x" aria-hidden="true"></i>
-                            </div>
-                        </a>
-                    @else
-                        <a href="{{ route('profile.invite', ['id' => $user->id]) }}">
-                            <div class="profile-button blue" title="Invite to chat">
-                                <i class="fa fa-user-plus fa-2x" aria-hidden="true"></i>
-                            </div>
-                        </a>
-                        <a href="{{ route('report.create', ['id' => $user->id]) }}">
-                            <div class="profile-button red" title="Report">
-                                <i class="fa fa-flag fa-2x" aria-hidden="true"></i>
-                            </div>
-                        </a>
-                    @endif
+                @if (Auth::check() && $user->id === Auth::user()->id)
+                    <a href="{{ route('profile.edit') }}">
+                        <div class="profile-button blue" title="@lang('content.edit-profile')">
+                            <i class="fa fa-pencil fa-2x" aria-hidden="true"></i>
+                        </div>
+                    </a>
                 @endif
+                <a href="{{ route('profile.invite', ['id' => $user->id]) }}">
+                    <div class="profile-button blue" title="Invite to chat">
+                        <i class="fa fa-user-plus fa-2x" aria-hidden="true"></i>
+                    </div>
+                </a>
+                <a href="{{ route('report.create', ['id' => $user->id]) }}">
+                    <div class="profile-button red" title="Report">
+                        <i class="fa fa-flag fa-2x" aria-hidden="true"></i>
+                    </div>
+                </a>
             </div>
             @if($guitars->isNotEmpty())
                 <h2>@lang('titles.collection') <span class="counter">{{ $user->guitars->count() }}</span></h2>
