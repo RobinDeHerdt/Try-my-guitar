@@ -5,6 +5,9 @@
                 <div class="top-menu-collapse">
                     <a href="{{ route('admin.dashboard') }}">Control panel</a>
                     <a href="{{ route('articles.index') }}">Articles</a>
+                    <a href="{{ route('admin.users.index') }}">Users</a>
+                    <a href="{{ route('admin.guitars.index') }}">Guitars</a>
+                    <a href="{{ route('admin.guitarimages.index') }}">Images</a>
                     <a href="{{ route('admin.reports.index') }}">Reports</a>
                     <a href="{{ route('admin.messages.index') }}">Contact messages</a>
                     <a href="{{ route('admin.cta.index') }}">Call to action</a>

@@ -174,7 +174,7 @@ class UsersTableSeeder extends Seeder
             'exp' => 250,
         ]);
 
-        factory(App\User::class, 1500)->create()->each(function ($u) {
+        factory(App\User::class, 200)->create()->each(function ($u) {
             // Assign 'user' role to every user.
             $u->roles()->attach(3);
 

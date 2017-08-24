@@ -30,13 +30,13 @@ class ArticlesTableSeeder extends Seeder
         DB::table('comments')->insert([
             'body' => "I'm so looking forward to trying this guitar.",
             'article_id' => 1,
-            'user_id' => 1024,
+            'user_id' => 43,
         ]);
 
         DB::table('comments')->insert([
             'body' => "Matt Heafy is such a cool guy.",
             'article_id' => 1,
-            'user_id' => 512,
+            'user_id' => 58,
         ]);
     }
 }

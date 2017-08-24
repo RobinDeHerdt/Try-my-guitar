@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\CtaItem;
 use Illuminate\Http\Request;
 use App\Article;
-Use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /**
  * Class HomeController

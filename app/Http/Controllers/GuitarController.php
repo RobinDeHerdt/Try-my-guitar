@@ -45,6 +45,20 @@ class GuitarController extends Controller
     }
 
     /**
+    * Display a listing of guitars (admin).
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function index()
+    {
+        $guitars = Guitar::orderBy('created_at', 'desc')->paginate(20);
+
+        return view('admin.guitar.index', [
+            'guitars' => $guitars,
+        ]);
+    }
+
+    /**
      * Show the specified guitar.
      *
      * @param \App\Guitar $guitar
@@ -272,6 +286,25 @@ class GuitarController extends Controller
         } else {
             Session::flash('error-message', __('flash.error-guitar-not-deleted'));
         }
+
+        return back();
+    }
+
+    /**
+     * Delete the specified guitar.
+     *
+     * @param  \App\Guitar  $guitar
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function adminDestroy(Guitar $guitar)
+    {
+        $this->subtractExp($guitar->contributor, 100);
+
+        $guitar->users()->detach();
+        $guitar->guitarTypes()->detach();
+        $guitar->delete();
+
+        Session::flash('success-message', '100 exp was subtracted from ' . $guitar->contributor->fullName());
 
         return back();
     }

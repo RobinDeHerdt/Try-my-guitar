@@ -45,7 +45,7 @@
                                         <td>{{ str_limit($cta_item->title) }}</td>
                                         <td>{{ str_limit($cta_item->content_en, 85) }}</td>
                                         <td class="center"><i class="fa {{ $cta_item->icon_class }}" aria-hidden="true"></i></td>
-                                        <td class="center">{{ $cta_item->updated_at ? $cta_item->updated_at : 'n/a' }}</td>
+                                        <td class="center">{{ $cta_item->updated_at ? $cta_item->updated_at->diffForHumans() : 'n/a' }}</td>
                                         <td class="center"><a href="{{ route('admin.cta.show', ['id' => $cta_item->id]) }}"><span class="glyphicon glyphicon-search"></span></a></td>
                                         <td class="center"><a href="{{ route('admin.cta.edit', ['id' => $cta_item->id]) }}"><span class="glyphicon glyphicon-pencil"></span></a></td>
                                         <td class="center"><a href="{{ route('admin.cta.destroy', ['id' => $cta_item->id]) }}" onclick="deleteItem({{ $cta_item->id }},'delete-cta');"><span class="glyphicon glyphicon-trash"></span></a>

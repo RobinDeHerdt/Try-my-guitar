@@ -133,6 +133,17 @@ Route::group(['middleware' => ['role:administrator']], function () {
     Route::get('admin/reports/{report}', 'ReportController@show')->name('admin.reports.show');
     Route::post('admin/reports/{report}', 'ReportController@reviewed')->name('admin.reports.reviewed');
 
+    // Admin user related routes.
+    Route::get('admin/users', 'UserController@index')->name('admin.users.index');
+
+    // Admin guitar related routes.
+    Route::get('admin/guitars', 'GuitarController@index')->name('admin.guitars.index');
+    Route::post('admin/guitars/{guitar}/destroy', 'GuitarController@adminDestroy')->name('admin.guitars.destroy');
+
+    // Admin guitarimage related routes.
+    Route::get('admin/guitarimages', 'GuitarimageController@index')->name('admin.guitarimages.index');
+    Route::post('admin/guitarimages/{guitarimage}/destroy', 'GuitarimageController@destroy')->name('admin.guitarimages.destroy');
+
     // Admin call to action related routes.
     Route::get('admin/cta-items', 'CtaItemController@index')->name('admin.cta.index');
     Route::get('admin/cta-items/create', 'CtaItemController@create')->name('admin.cta.create');

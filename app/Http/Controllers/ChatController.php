@@ -296,7 +296,7 @@ class ChatController extends Controller
             return redirect(route('chat.show', ['id' => $channel_id]));
         } else {
             $receiver = $invite->receiver;
-            
+
             $receiver->removeUserFromChannel($channel_id);
             $receiver->removeChannelInvites($channel_id);
 
