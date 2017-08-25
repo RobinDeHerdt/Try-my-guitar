@@ -87,7 +87,7 @@
                     <div class="row">
                         <div class="col-md-2">
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary red form-control">@lang('input.save-changes')</button>
+                                <button type="submit" class="btn btn-primary form-control">@lang('input.save-changes')</button>
                             </div>
                         </div>
                     </div>
@@ -128,7 +128,7 @@
                     <div class="row">
                         <div class="col-md-2">
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary red form-control">@lang('input.save-changes')</button>
+                                <button type="submit" class="btn btn-primary form-control">@lang('input.save-changes')</button>
                             </div>
                         </div>
                     </div>
