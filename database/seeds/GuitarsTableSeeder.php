@@ -128,9 +128,11 @@ class GuitarsTableSeeder extends Seeder
         // Loop over all 'Belgian' user id's.
         for ($i = 5; $i < 14; $i++) {
             $guitars_array = [];
-            // Amount of guitars to add to every users' collection.
-            for ($j = 0; $j < 3; $j++) {
-                array_push($guitars_array, rand(1, $guitar_count));
+
+            for ($j = 1; $j < $guitar_count; $j++) {
+                if (rand(1, $guitar_count) > ($guitar_count / 1.2)) {
+                    array_push($guitars_array, $j);
+                }
             }
 
             $user = User::find($i);
