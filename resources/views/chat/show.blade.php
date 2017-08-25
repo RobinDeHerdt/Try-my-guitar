@@ -12,7 +12,7 @@
             <div class="conversation-participants">
                 <chat-participants :channel="channel"></chat-participants>
             </div>
-            <div class="row heading">
+            <div class="row heading no-margin-top">
                 <div class="col-md-12">
                     <a href="{{ route('chat.leave', ['channel' => $channel->id]) }}" class="icon-text icon-full" onclick="leaveChat();"><span class="glyphicon glyphicon-log-out"></span>@lang('content.leave-conversation')</a>
                     <a href="{{ route('chat.leave', ['channel' => $channel->id]) }}" class="icon-text icon-responsive" onclick="event.preventDefault(); document.getElementById('leave-form').submit();"><span class="glyphicon glyphicon-log-out"></span></a>

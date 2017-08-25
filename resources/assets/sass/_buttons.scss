@@ -40,11 +40,13 @@ a.cta-button {
 }
 
 .btn-primary {
+  font-weight: 600;
+
   &.red {
-    background-color: #d64242;
+    background-color: $secondary-component-color;
 
     &:hover {
-      background-color: #d64242;
+      background-color: $secondary-component-color;
     }
   }
 }
@@ -86,7 +88,7 @@ a.cta-button {
     &:hover {
       opacity: 0.8;
     }
-    
+
     a:link, a:hover, a:visited, a:active{
       color: white;
       text-decoration: none;

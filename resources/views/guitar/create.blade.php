@@ -13,7 +13,7 @@
                     <h1>@lang('content.add-guitar')</h1>
                 </div>
             </div>
-            <div class="dashboard-content">
+            <div class="dashboard-content dashboard-border-bottom">
                 @if(Auth::user()->verified)
                 <form method="POST" action="{{ route('guitar.store') }}" enctype="multipart/form-data">
                     {{ csrf_field() }}
@@ -57,7 +57,7 @@
                             </div>
                         </div>
                     </div>
-                    <br>
+                    <hr>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="{{ $errors->has('brand') ? ' has-error' : '' }}">
@@ -97,11 +97,11 @@
                             </div>
                         </div>
                     </div>
-                    <br>
+                    <hr>
                     <div class="row">
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary form-control">@lang('input.save')</button>
+                                <button type="submit" class="btn btn-primary red form-control">@lang('input.save')</button>
                             </div>
                         </div>
                     </div>
@@ -121,4 +121,3 @@
 @section('scripts')
     @include('partials.analytics')
 @endsection
-

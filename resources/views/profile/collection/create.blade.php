@@ -15,7 +15,7 @@
                     <a href="{{ route('collection.show', ['user' => $user->id]) }}" class="icon-text icon-responsive"><span class="glyphicon glyphicon-list"></span></a>
                 </div>
             </div>
-            <div class="col-container">
+            <div class="dashboard-content dashboard-border-bottom">
                 <form method="POST" action="{{ route('collection.store') }}">
                     {{ csrf_field() }}
                     <div class="row">
@@ -42,9 +42,9 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary form-control">@lang('input.save')</button>
+                                <button type="submit" class="btn btn-primary red form-control">@lang('input.save')</button>
                             </div>
                         </div>
                     </div>
@@ -72,4 +72,3 @@
     </script>
     @include('partials.analytics')
 @endsection
-

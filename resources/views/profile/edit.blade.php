@@ -17,7 +17,7 @@
                     <a href="{{ route('profile.show', ['id' => $user->id]) }}" class="icon-text icon-responsive"><span class="glyphicon glyphicon-user"></span></a>
                 </div>
             </div>
-            <div class="col-container">
+            <div class="dashboard-content dashboard-border-bottom">
                 <form role="form" method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="row">
@@ -83,10 +83,11 @@
                             </div>
                         </div>
                     </div>
+                    <hr>
                     <div class="row">
                         <div class="col-md-2">
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary form-control">@lang('input.save-changes')</button>
+                                <button type="submit" class="btn btn-primary red form-control">@lang('input.save-changes')</button>
                             </div>
                         </div>
                     </div>
@@ -97,7 +98,7 @@
                     <h1>@lang('content.profile-appearance')</h1>
                 </div>
             </div>
-            <div class="col-container">
+            <div class="dashboard-content dashboard-border-bottom">
                 <form role="form" method="POST" action="{{ route('profile.appearance.update') }}" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="row">
@@ -123,10 +124,11 @@
                             </div>
                         </div>
                     </div>
+                    <hr>
                     <div class="row">
                         <div class="col-md-2">
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary form-control">@lang('input.save-changes')</button>
+                                <button type="submit" class="btn btn-primary red form-control">@lang('input.save-changes')</button>
                             </div>
                         </div>
                     </div>

@@ -27,8 +27,8 @@
                                     </div>
                                 @endforeach
                             </div>
-                            <div class="row">
-                                <div class="col-md-3 col-md-offset-9">
+                            <div class="row margin-top">
+                                <div class="col-md-2">
                                     <input type="submit" class="btn btn-primary big-cta-button" value="Filter">
                                 </div>
                             </div>

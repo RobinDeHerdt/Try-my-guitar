@@ -86,6 +86,22 @@ body {
     margin-top: 0;
     margin-bottom: 10px;
   }
+
+  &.dashboard-border-top {
+    border-top: solid 7.5px $secondary-component-color;
+  }
+
+  &.dashboard-border-right {
+    border-right: solid 7.5px $secondary-component-color;
+  }
+
+  &.dashboard-border-left {
+    border-left: solid 7.5px $secondary-component-color;
+  }
+
+  &.dashboard-border-bottom {
+    border-bottom: solid 7.5px $secondary-component-color;
+  }
 }
 
 .dashboard-min-height {
@@ -215,8 +231,8 @@ body {
   padding-bottom: 2.5px;
   padding-left: 5px;
   padding-right: 5px;
-  background-color: #d64242;
-  color: #fff;
+  background-color: $secondary-component-color;
+  color: $secondary-font-color;
   border-radius: 2.5px;
 }
 
@@ -279,7 +295,7 @@ body {
 }
 
 #progressbar .ui-progressbar-value {
-  background-color: #82a8ec;
+  background-color: $secondary-component-color;
 }
 
 #progressbar {

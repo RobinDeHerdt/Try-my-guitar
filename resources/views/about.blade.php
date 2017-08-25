@@ -14,7 +14,7 @@
             <h2 id="meet">@lang('about.meet-people')</h2>
             <div class="row">
                 <div class="col-md-12">
-                    <div class="dashboard-content">
+                    <div class="dashboard-content dashboard-border-left">
                         <strong>@lang('about.about-1-strong')</strong><br>
                         <span>@lang('about.about-1-text')</span>
                     </div>
@@ -23,7 +23,7 @@
             <h2 id="discover">@lang('about.discover')</h2>
             <div class="row">
                 <div class="col-md-12">
-                    <div class="dashboard-content">
+                    <div class="dashboard-content dashboard-border-left">
                         <strong>@lang('about.about-2-strong')</strong><br>
                         <span>@lang('about.about-2-text')</span>
                     </div>
@@ -32,7 +32,7 @@
             <h2 id="profilelevel">Profile level</h2>
             <div class="row">
                 <div class="col-md-12">
-                    <div class="dashboard-content">
+                    <div class="dashboard-content dashboard-border-left">
                         <p>@lang('about.about-3-text')</p>
                         <ul>
                             <li>@lang('about.about-3-point-1') (<strong>+100 exp</strong>)</li>
@@ -48,7 +48,7 @@
             <h2 id="contact">Contact</h2>
             <div class="row">
                 <div class="col-md-12">
-                    <div class="dashboard-content">
+                    <div class="dashboard-content dashboard-border-left">
                         <form action="{{ route('contact') }}" method="POST">
                             {{ csrf_field() }}
                             <div class="row">
@@ -65,13 +65,11 @@
                                 <div class="col-md-8">
                                     <div class="form-group">
                                         <label for="message">@lang('input.your-message') *</label>
-                                        <textarea name="message" cols="30" rows="10" class="form-control" placeholder="@lang('input.your-message')" required></textarea>
+                                        <textarea name="message" cols="30" rows="5" class="form-control" placeholder="@lang('input.your-message')" required></textarea>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4 col-md-offset-8">
-                                            <div class="form-group">
-                                                <input type="submit" class="btn btn-primary form-control" value="@lang('input.send')">
-                                            </div>
+                                              <input type="submit" class="btn btn-primary red form-control" value="@lang('input.send')">
                                         </div>
                                     </div>
                                 </div>
