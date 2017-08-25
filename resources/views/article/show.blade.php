@@ -88,16 +88,21 @@
             @if(Auth::check())
                 <div class="row">
                     <div class="col-md-10 col-md-offset-1">
-                        <div class="dashboard-content dashboard-border-bottom">
+                        <div class="dashboard-content">
                             <form action="{{ route('comment.store') }}" method="POST">
                                 {{ csrf_field() }}
                                 <input type="hidden" name="article_id" value="{{ $article->id }}">
-                                <div class="form-group">
+                                <div class="form-group {{ $errors->has('comment') ? ' has-error' : '' }}">
+                                    @if ($errors->has('comment'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('comment') }}</strong>
+                                        </span>
+                                    @endif
                                     <textarea name="comment" cols="30" rows="5" class="form-control" placeholder="@lang('input.write-comment')"></textarea>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <input type="submit" class="btn btn-primary red col-md-3" value="@lang('input.submit')">
+                                        <input type="submit" class="btn btn-primary col-md-3" value="@lang('input.submit')">
                                     </div>
                                 </div>
                             </form>
