@@ -92,12 +92,7 @@
                             <form action="{{ route('comment.store') }}" method="POST">
                                 {{ csrf_field() }}
                                 <input type="hidden" name="article_id" value="{{ $article->id }}">
-                                <div class="form-group {{ $errors->has('comment') ? ' has-error' : '' }}">
-                                    @if ($errors->has('comment'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('comment') }}</strong>
-                                        </span>
-                                    @endif
+                                <div class="form-group">
                                     <textarea name="comment" cols="30" rows="5" class="form-control" placeholder="@lang('input.write-comment')"></textarea>
                                 </div>
                                 <div class="row">
