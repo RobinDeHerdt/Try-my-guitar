@@ -88,7 +88,7 @@
             @if(Auth::check())
                 <div class="row">
                     <div class="col-md-10 col-md-offset-1">
-                        <div class="dashboard-content">
+                        <div class="dashboard-content dashboard-border-bottom">
                             <form action="{{ route('comment.store') }}" method="POST">
                                 {{ csrf_field() }}
                                 <input type="hidden" name="article_id" value="{{ $article->id }}">
@@ -102,7 +102,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <input type="submit" class="btn btn-primary col-md-3" value="@lang('input.submit')">
+                                        <input type="submit" class="btn btn-primary red col-md-3" value="@lang('input.submit')">
                                     </div>
                                 </div>
                             </form>
