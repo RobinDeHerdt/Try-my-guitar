@@ -88,19 +88,19 @@ body {
   }
 
   &.dashboard-border-top {
-    border-top: solid 7.5px $secondary-component-color;
+    border-top: solid 7.5px $primary-component-color;
   }
 
   &.dashboard-border-right {
-    border-right: solid 7.5px $secondary-component-color;
+    border-right: solid 7.5px $primary-component-color;
   }
 
   &.dashboard-border-left {
-    border-left: solid 7.5px $secondary-component-color;
+    border-left: solid 7.5px $primary-component-color;
   }
 
   &.dashboard-border-bottom {
-    border-bottom: solid 7.5px $secondary-component-color;
+    border-bottom: solid 7.5px $primary-component-color;
   }
 }
 
@@ -295,7 +295,7 @@ body {
 }
 
 #progressbar .ui-progressbar-value {
-  background-color: #f5d45c;
+  background-color: #4771d2;
 }
 
 #progressbar {

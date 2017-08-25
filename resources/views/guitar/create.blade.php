@@ -101,7 +101,7 @@
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary red form-control">@lang('input.save')</button>
+                                <button type="submit" class="btn btn-primary form-control">@lang('input.save')</button>
                             </div>
                         </div>
                     </div>
