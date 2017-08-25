@@ -304,7 +304,7 @@ class GuitarController extends Controller
         $guitar->guitarTypes()->detach();
         $guitar->delete();
 
-        Session::flash('success-message', '100 exp was subtracted from ' . $guitar->contributor->fullName());
+        Session::flash('success-message', 'Guitar deleted. 100 exp was subtracted from ' . $guitar->contributor->fullName());
 
         return back();
     }

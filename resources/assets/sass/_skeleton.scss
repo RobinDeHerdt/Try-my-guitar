@@ -295,7 +295,7 @@ body {
 }
 
 #progressbar .ui-progressbar-value {
-  background-color: $secondary-component-color;
+  background-color: #f5d45c;
 }
 
 #progressbar {
@@ -385,6 +385,8 @@ body {
     h3 {
       font-size: 20px;
     }
+
+    border: none !important;
   }
 }
 
