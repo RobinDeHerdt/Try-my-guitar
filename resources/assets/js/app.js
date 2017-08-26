@@ -15,6 +15,8 @@ import 'jquery-ui/ui/widgets/progressbar.js';
 import 'jquery-ui/ui/widgets/slider.js';
 import 'jquery-ui/ui/widgets/dialog.js';
 
+import moment from 'moment';
+
 window.Vue = require('vue');
 window.VueChatScroll = require('vue-chat-scroll');
 
@@ -70,7 +72,6 @@ const app = new Vue({
                             });
 
                             this.checkMaxNotificationsReached(this.notifications, 8);
-                            // this.removeNotificationAfterInterval(this.notifications);
                         });
                 }
             });
@@ -90,6 +91,7 @@ const app = new Vue({
         },
 
         addMessage(message) {
+            message.created_at = moment();
             this.messages.push(message);
             var channel_id = document.getElementById('channel-id').value;
             axios.post(`/channel/${channel_id}/messages/send`, message);
