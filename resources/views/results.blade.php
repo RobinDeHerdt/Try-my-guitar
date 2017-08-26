@@ -234,7 +234,6 @@
 @section('scripts')
     <script>
         if(!getUrlParam('range')) {
-            console.log(getUrlParam('range'));
             // Set max value as default value.
             $('#proximity-range').val(1000);
         }
