@@ -102,6 +102,7 @@ const app = new Vue({
                 .listen('MessageSent', (e) => {
                     this.messages.push({
                         message: e.message.message,
+                        created_at: e.message.created_at,
                         user: e.user
                     });
                     this.messageSeen(channel_id);
