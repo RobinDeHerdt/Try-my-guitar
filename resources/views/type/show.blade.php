@@ -64,7 +64,9 @@
                             </div>
                         </div>
                     @endforeach
-                    {{ $guitars->links() }}
+                    <div class="col-md-12">
+                      {{ $guitars->links() }}
+                    </div>
                 </div>
             @else
                 <div class="no-results">
