@@ -42,7 +42,12 @@ class RemoveTrashed extends Command
 
         switch ($this->argument('data_type')) {
             case 'articles':
-                Article::onlyTrashed()->where('deleted_at', '<=', $date)->forceDelete();
+                $articles = Article::onlyTrashed()->where('deleted_at', '<=', $date)->get();
+
+                foreach ($articles as $article) {
+                    $article->comments()->forceDelete();
+                    $article->forceDelete();
+                }
                 break;
         }
     }

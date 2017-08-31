@@ -31,7 +31,7 @@
                         @foreach($contact_messages as $contact_message)
                             <tr>
                                 <td><a href="mailto:{{ $contact_message->email }}">{{ $contact_message->email }}</a></td>
-                                <td>{{ $contact_message->subject ? str_limit($contact_message->message, 75) : 'n/a' }}</td>
+                                <td>{{ $contact_message->subject ? str_limit($contact_message->subject, 75) : 'n/a' }}</td>
                                 <td>{{ str_limit($contact_message->message, 75) }}</td>
                                 <td class="center">{{ $contact_message->created_at }}</td>
                                 <td class="center"><a href="{{ route('admin.messages.show', ['id' => $contact_message->id]) }}"><span class="glyphicon glyphicon-search"></span></a></td>

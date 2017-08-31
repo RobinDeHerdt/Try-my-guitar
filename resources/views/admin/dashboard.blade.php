@@ -27,7 +27,7 @@
                         <hr>
                     @endforeach
                 @else
-                    <span>There are no new contact messages.</span>
+                    <span>There are no new reports.</span>
                 @endif
                 <a href="{{ route('admin.reports.index') }}">View all reports</a>
             </div>
@@ -38,7 +38,7 @@
                     @foreach($contact_messages as $contact_message)
                         <span><a href="mailto:{{ $contact_message->email }}">{{ $contact_message->email }}:</a> </span>
                         <span>{{ $contact_message->subject ? $contact_message->subject : 'No subject' }}</span> &middot;
-                        <a href="{{ route('admin.messages.show', ['contact_message' => $contact_message->id]) }}">View</a>
+                        <a href="{{ route('admin.messages.show', ['contact_message' => $contact_message->id]) }}">View</a><br>
                     @endforeach
                 @else
                     <span>There are no new contact messages.</span>
